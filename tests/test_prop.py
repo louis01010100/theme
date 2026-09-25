@@ -1,15 +1,21 @@
-"""V-PROP: one palette change propagates to Neovim, tmux, and GNOME."""
+"""V-5: one palette change reaches GNOME, tmux, and Neovim."""
 
-import json
+import os
 import unittest
 
+import gnome_harness as harness
 import support
+from nvim_live import NvimServer
+from test_cli import blue_copy
 from test_nvim import NeovimRun, nvim_dump
 
 OLD_BLUE = 0x8BA4B0
 NEW_BLUE = 0x123456
 COLOUR_ATTRIBUTES = ("fg", "bg", "sp")
 UUID = "5a1c0e9b-7d3f-4b6a-8e2d-4f0a9c6b1e37"
+PROFILE = f"{harness.PROFILE_SCHEMA}:{harness.PROFILE_ROOT}:{UUID}/"
+RENDERED = ["lua/ukiyo_e/palette.lua", "tmux/colors.conf",
+            "tmux/status-plain.conf", "tmux/status.conf"]
 
 
 def setUpModule():
@@ -36,53 +42,83 @@ def uses_old_blue(spec) -> bool:
         spec.get(k) == OLD_BLUE for k in COLOUR_ATTRIBUTES)
 
 
+def fresh_dump(install):
+    return nvim_dump(NeovimRun("ukiyo_e", str(install),
+                               "{ transparent = false }"))
+
+
 class PropagationTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.root = support.copy_repo()
-        support.set_ansi_entry(cls.root, 1, "#ff0000")
-        support.replace_line(cls.root / "palette.toml", "dragonBlue2 ",
-                             'dragonBlue2 = "#123456"')
-        result = support.generate(cls.root)
-        if result.code != 0:
-            raise AssertionError(result.stderr)
+        env = support.scratch_env(cls)
+        session = harness.start_session(cls, env)
+        cls.server = support.TmuxServer.start(cls, env)
+        cls.env = cls.server.attach(session)
+        support.configure_ok(cls.env, "all")
+        cls.pid = cls.server.pid()
+        cls.old_dir = cls.env.install.resolve()
+        cls.old_tree = support.tree_snapshot(cls.old_dir)
+        cls.base = fresh_dump(cls.env.install)
+        cls.nvim = cls.start_nvim()
+        cls.group = next(n for n, s in sorted(cls.base["groups"].items())
+                         if isinstance(s, dict) and s.get("fg") == OLD_BLUE)
+        cls.before_fg = cls.nvim.group_fg(cls.group)
+        cls.result = support.configure_ok(cls.env, "all",
+                                          root=blue_copy(cls))
 
     @classmethod
-    def tearDownClass(cls):
-        support.remove_tree(cls.root)
+    def start_nvim(cls):
+        home = cls.env.root / "nvim-home"
+        home.mkdir()
+        env = dict(support.base_vars(), HOME=str(home),
+                   XDG_STATE_HOME=str(home / "state"))
+        return NvimServer.start(cls, cls.env.install,
+                                cls.env.vars["TMUX_TMPDIR"], env)
 
-    def test_neovim(self):
-        opts = "{ transparent = false }"
-        base = nvim_dump(NeovimRun("ukiyo_e", str(support.REPO), opts))
-        new = nvim_dump(NeovimRun("ukiyo_e", str(self.root), opts))
-        self.assertEqual(new["terminal"][1].lower(), "#ff0000")
-        self.assertEqual(new["terminal"][4].lower(), "#123456")
-        changed = [n for n, s in base["groups"].items() if uses_old_blue(s)]
-        self.assertGreater(len(changed), 10)
-        self.assertEqual(new["groups"], recoloured(base["groups"]))
-
-    def test_tmux(self):
-        server = support.TmuxServer.start(self)
-        self.assertEqual(server.run_theme(self.root).code, 0)
-        self.assertEqual(server.value("clock-mode-colour"), "#123456")
-        self.assertEqual(server.value("pane-active-border-style"),
-                         "fg=#123456")
-        for option in ("status-left", "status-right"):
-            self.assertIn("bg=#123456", server.value(option))
+    def test_report(self):
+        lines = self.result.stdout.splitlines()
+        self.assertEqual([ln for ln in lines if not ln.startswith(" ")],
+                         ["gnome: updated", "tmux: updated",
+                          "nvim: updated"])
 
     def test_gnome(self):
-        result = support.run_gnome_harness("install_only", self.root)
-        report = json.loads(result.stdout)
-        self.assertEqual(report["guard"], "ok")
-        step = report["steps"][0]
-        self.assertEqual(step["code"], 0, step["stderr"])
-        section = support.parse_dump(step["dump"])[
-            f"legacy/profiles:/:{UUID}"]
-        palette = [c.strip(" '") for c in
-                   section["palette"].strip("[]").split(",")]
-        self.assertEqual(palette[1], "#ff0000")
+        text = harness.gsettings(self.env.vars, "get", PROFILE, "palette")
+        palette = [c.strip(" '") for c in text.strip("[]").split(",")]
         self.assertEqual(palette[4], "#123456")
-        self.assertEqual(palette, support.resolved_ansi(self.root))
+
+    def test_tmux_live(self):
+        self.assertEqual(self.server.pid(), self.pid)
+        self.assertEqual(self.server.value("clock-mode-colour"), "#123456")
+        self.assertEqual(self.server.value("pane-active-border-style"),
+                         "fg=#123456")
+        for option in ("status-left", "status-right"):
+            self.assertIn("bg=#123456", self.server.value(option))
+
+    def test_fresh_neovim(self):
+        new = fresh_dump(self.env.install)
+        self.assertEqual(new["terminal"][4].lower(), "#123456")
+        changed = [n for n, s in self.base["groups"].items()
+                   if uses_old_blue(s)]
+        self.assertGreater(len(changed), 10)
+        self.assertEqual(new["groups"], recoloured(self.base["groups"]))
+
+    def test_version_diff(self):
+        new_dir = self.env.install.resolve()
+        self.assertNotEqual(new_dir, self.old_dir)
+        self.assertFalse(os.path.lexists(self.old_dir))
+        new_tree = support.tree_snapshot(new_dir)
+        self.assertEqual(sorted(new_tree), sorted(self.old_tree))
+        differ = sorted(k for k in new_tree
+                        if new_tree[k][3] != self.old_tree[k][3])
+        self.assertEqual(differ, RENDERED)
+        self.assertEqual(os.listdir(self.env.versions), [new_dir.name])
+
+    def test_running_neovim(self):
+        self.assertEqual(self.before_fg, OLD_BLUE)
+        self.nvim.colorscheme()
+        self.assertEqual(self.nvim.group_fg(self.group), NEW_BLUE)
+        self.assertEqual(self.nvim.lua("vim.g.terminal_color_4"),
+                         "#123456")
 
 
 if __name__ == "__main__":

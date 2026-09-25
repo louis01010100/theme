@@ -76,7 +76,7 @@ local function set_groups(groups)
 end
 
 local function set_terminal()
-    local ansi = require("ukiyo_e.palette").terminal.ansi
+    local ansi = require("ukiyo_e.palette").ansi
     for i, colour in ipairs(ansi) do
         vim.g["terminal_color_" .. (i - 1)] = colour
     end
@@ -92,6 +92,8 @@ function M.setup(opts)
 end
 
 function M.load()
+    -- Drop a cached palette so :colorscheme sees a new version.
+    package.loaded["ukiyo_e.palette"] = nil
     if vim.g.colors_name then
         vim.cmd("hi clear")
     end

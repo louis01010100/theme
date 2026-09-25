@@ -8,20 +8,26 @@ import support
 
 MAX_WIDTH = 77
 MAX_FUNCTION_LINES = 49
-GENERATED = set(support.GENERATED_PATHS)
+
+
+SCOPE = ("configure.py", "configurator", "nvim", "tmux/ukiyo_e.tmux",
+         "tests")
 
 
 def hand_written(suffixes):
-    """Hand-written repository files with one of the given suffixes."""
-    root = support.REPO
+    """Files in the STYLE scope with one of the given suffixes.
+
+    Templates (*.tmpl) and install output are not in scope.
+    """
     found = []
-    for path in sorted(root.rglob("*")):
-        rel = str(path.relative_to(root))
-        if rel.startswith(".git") or "__pycache__" in rel:
-            continue
-        if path.is_file() and path.suffix in suffixes:
-            found.append(rel)
-    return [rel for rel in found if rel not in GENERATED]
+    for entry in SCOPE:
+        path = support.REPO / entry
+        paths = sorted(path.rglob("*")) if path.is_dir() else [path]
+        for item in paths:
+            if item.is_file() and item.suffix in suffixes \
+                    and "__pycache__" not in item.parts:
+                found.append(str(item.relative_to(support.REPO)))
+    return found
 
 
 def block_lengths(lines, opener, closer):
@@ -42,7 +48,8 @@ def block_lengths(lines, opener, closer):
 class LineWidthTest(unittest.TestCase):
     def test_lines_fit(self):
         files = hand_written({".py", ".lua", ".sh", ".tmux"})
-        self.assertIn("scripts/generate.py", files)
+        self.assertIn("tmux/ukiyo_e.tmux", files)
+        self.assertIn("configurator/cli.py", files)
         for rel in files:
             text = (support.REPO / rel).read_text()
             for number, line in enumerate(text.splitlines(), 1):
@@ -63,7 +70,7 @@ class FunctionLengthTest(unittest.TestCase):
 
     def test_lua_functions(self):
         files = hand_written({".lua"})
-        self.assertIn("lua/ukiyo_e/init.lua", files)
+        self.assertIn("nvim/lua/ukiyo_e/init.lua", files)
         opener = r"^(\s*)(?:local\s+)?(?:function\b|.*=\s*function\()"
         for rel in files:
             lines = (support.REPO / rel).read_text().splitlines()
@@ -74,7 +81,7 @@ class FunctionLengthTest(unittest.TestCase):
 
     def test_bash_functions(self):
         files = hand_written({".sh", ".tmux"})
-        self.assertIn("gnome-terminal/install.sh", files)
+        self.assertEqual(files, ["tmux/ukiyo_e.tmux"])
         for rel in files:
             lines = (support.REPO / rel).read_text().splitlines()
             lengths = block_lengths(lines, r"^(\s*)\w+\(\)\s*\{",

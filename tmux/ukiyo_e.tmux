@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
-# Ukiyo-e tmux theme, run by TPM. Sets only the global style and format
-# options of the generated tmux/*.conf files plus two private options.
+# Ukiyo-e tmux theme, run by the run-shell line or by configure.py. Sets
+# only the global style and format options of the rendered tmux/*.conf
+# files next to it plus two private options.
 set -u
 
-CURRENT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Resolved physically once, so one load reads one version.
+CURRENT_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
 DEFAULT_DATE_FORMAT="%Y-%m-%d"
 
 die() {
