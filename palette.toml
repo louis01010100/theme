@@ -1,0 +1,106 @@
+# Ukiyo-e colour source: the only hand-edited colour file.
+# After editing, run: python3 scripts/generate.py
+# [palette]: name = "#RRGGBB" (hex only).
+# [terminal], [tmux]: "#RRGGBB" or the name of a [palette] entry.
+
+[palette]
+autumnGreen = "#76946A"
+autumnRed = "#C34043"
+autumnYellow = "#DCA561"
+carpYellow = "#E6C384"
+dragonAqua = "#8ea4a2"
+dragonAsh = "#737c73"
+dragonBlack0 = "#0d0c0c"
+dragonBlack1 = "#12120f"
+dragonBlack2 = "#1D1C19"
+dragonBlack3 = "#181616"
+dragonBlack4 = "#282727"
+dragonBlack5 = "#393836"
+dragonBlack6 = "#625e5a"
+dragonBlue = "#658594"
+dragonBlue2 = "#8ba4b0"
+dragonGray = "#a6a69c"
+dragonGray2 = "#9e9b93"
+dragonGray3 = "#7a8382"
+dragonGreen = "#87a987"
+dragonGreen2 = "#8a9a7b"
+dragonOrange = "#b6927b"
+dragonOrange2 = "#b98d7b"
+dragonPink = "#a292a3"
+dragonRed = "#c4746e"
+dragonTeal = "#949fb5"
+dragonViolet = "#8992a7"
+dragonWhite = "#c5c9c5"
+dragonYellow = "#c4b28a"
+fujiWhite = "#DCD7BA"
+katanaGray = "#717C7C"
+oldWhite = "#C8C093"
+roninYellow = "#FF9E3B"
+samuraiRed = "#E82424"
+springBlue = "#7FB4CA"
+springGreen = "#98BB6C"
+springViolet1 = "#938AA9"
+sumiInk6 = "#54546D"
+waveAqua1 = "#6A9589"
+waveAqua2 = "#7AA89F"
+waveBlue1 = "#223249"
+waveBlue2 = "#2D4F67"
+waveRed = "#E46876"
+winterBlue = "#252535"
+winterGreen = "#2B3328"
+winterRed = "#43242B"
+winterYellow = "#49443C"
+
+[terminal]
+background = "dragonBlack3"
+foreground = "dragonWhite"
+cursor_bg = "oldWhite"
+cursor_fg = "dragonBlack3"
+selection_bg = "waveBlue2"
+selection_fg = "oldWhite"
+ansi = [
+    "dragonBlack0",
+    "dragonRed",
+    "dragonGreen2",
+    "dragonYellow",
+    "dragonBlue2",
+    "dragonPink",
+    "dragonAqua",
+    "oldWhite",
+    "dragonGray",
+    "waveRed",
+    "dragonGreen",
+    "carpYellow",
+    "springBlue",
+    "springViolet1",
+    "waveAqua2",
+    "dragonWhite",
+]
+
+[tmux]
+status_fg = "oldWhite"
+status_bg = "dragonBlack0"
+accent_fg = "dragonBlack0"
+accent_bg = "dragonBlue2"
+status_segment_fg = "oldWhite"
+status_segment_bg = "dragonBlack4"
+window_fg = "dragonGray3"
+window_bg = "dragonBlack0"
+window_current_fg = "dragonWhite"
+window_current_bg = "dragonBlack5"
+window_activity_fg = "roninYellow"
+window_activity_bg = "dragonBlack0"
+window_bell_fg = "samuraiRed"
+window_bell_bg = "dragonBlack0"
+window_separator_fg = "dragonBlack6"
+pane_border_fg = "dragonBlack5"
+pane_active_border_fg = "dragonBlue2"
+message_fg = "oldWhite"
+message_bg = "dragonBlack0"
+command_fg = "dragonWhite"
+command_bg = "dragonBlack0"
+copy_selection_fg = "oldWhite"
+copy_selection_bg = "waveBlue2"
+clock_fg = "dragonBlue2"
+display_panes_fg = "dragonBlack6"
+display_panes_active_fg = "roninYellow"
