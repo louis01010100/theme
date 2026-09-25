@@ -10,6 +10,30 @@ the theme on your running tmux server. Version 1 of the palette
 reproduces Kanagawa Dragon exactly. The repository holds source only;
 nothing is committed, pushed, or fetched to apply a colour change.
 
+## Layout
+
+```text
+palette.toml          # named colours: the only hand-edited colour file
+configure.py          # entry point: python3 configure.py [target] [flags]
+configurator/         # validation, role mappings, install, per-tool apply
+  cli.py              #   argument parsing, run order, exit codes
+  palette.py          #   palette.toml loading and validation
+  terminal_ansi.py    #   ANSI: 16 terminal colours (GNOME and Neovim)
+  gnome.py            #   TERMINAL_ROLES, "Ukiyo-e" profile via gsettings
+  tmux.py             #   TMUX_ROLES, template rendering, server reload
+  nvim.py             #   rendered Neovim palette module
+  install_dir.py      #   $XDG_DATA_HOME/ukiyo_e resolution
+  files.py            #   version build, atomic symlink switch, cleanup
+  report.py           #   per-target report lines
+nvim/                 # Neovim colorscheme source (installed as-is)
+  colors/ukiyo_e.lua
+  lua/ukiyo_e/        #   init.lua, theme.lua, highlights/*.lua
+tmux/                 # tmux theme source
+  ukiyo_e.tmux        #   entry script run by `run-shell`
+  *.conf.tmpl         #   templates rendered with {{role}} colours
+tests/                # unittest suite (isolated; see Tests below)
+```
+
 ## Workflow
 
 1. Edit `palette.toml` (`[palette]`: `name = "#RRGGBB"`). Optionally

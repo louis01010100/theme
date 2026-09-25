@@ -181,7 +181,12 @@ class SafetyTest(unittest.TestCase):
                 self.assertNotRegex(text(rel), r"""["']-[LS]["']""", rel)
 
     def test_no_pycache(self):
-        self.assertEqual(list(support.REPO.rglob("__pycache__")), [])
+        """Bytecode may exist on disk (.gitignore) but is never tracked."""
+        tracked = support.run(["git", "-C", str(support.REPO), "ls-files"])
+        self.assertEqual([f for f in tracked.stdout.splitlines()
+                          if "__pycache__" in f or f.endswith(".pyc")], [])
+        ignore = (support.REPO / ".gitignore").read_text()
+        self.assertIn("__pycache__/", ignore.splitlines())
 
 
 if __name__ == "__main__":
