@@ -36,11 +36,11 @@ STATUS_TEMPLATE = (
     "set -g status-style 'fg={{status_fg}},bg={{status_bg}}'\n"
     'set -g status-left "#[fg={{status_text_fg}},bg={{status_block_bg}}]'
     ' #S #[fg={{status_separator_fg}},bg={{status_segment_bg}}]|"\n'
-    'set -g status-right "#[fg={{status_text_fg}},'
+    'set -g status-right "#[fg={{status_separator_fg}},'
+    'bg={{status_segment_bg}}]|#[fg={{status_text_fg}},'
     'bg={{status_segment_bg}}] #{T:@ukiyo_e_status_date} '
-    "#[fg={{status_text_fg}},bg={{status_segment_bg}}] "
-    "#{T:@ukiyo_e_status_time} "
-    '#[fg={{status_text_fg}},bg={{status_block_bg}}] #H "\n'
+    "#[fg={{status_text_fg}},bg={{status_segment_bg}}]"
+    '#{T:@ukiyo_e_status_time} "\n'
     'set -g window-status-format "#[fg={{status_text_fg}},'
     'bg={{status_segment_bg}}] #I.#W "\n'
     'set -g window-status-current-format "#[fg={{status_current_fg}},'
@@ -52,10 +52,10 @@ STATUS_TEMPLATE = (
 PRD_MINIMUM = """\
 set -g status-style 'fg=#c5c9c5,bg=#282727'
 set -g status-left "#[fg=#7a8382,bg=#393836] #S #[fg=#393836,bg=#282727]|"
-set -g status-right "#[fg=#7a8382,bg=#282727] %Y-%m-%d \
-#[fg=#7a8382,bg=#282727] %H:%M #[fg=#7a8382,bg=#393836] #H "
+set -g status-right "#[fg=#393836,bg=#282727]|#[fg=#7a8382,bg=#282727] \
+%Y-%m-%d #[fg=#7a8382,bg=#282727]%H:%M "
 set -g window-status-format "#[fg=#7a8382,bg=#282727] #I.#W "
-set -g window-status-current-format "#[fg=#c5c9c5,bg=#63322e] #I.#W "
+set -g window-status-current-format "#[fg=#a6a69c,bg=#63322e] #I.#W "
 set -g window-status-separator "#[fg=#393836,bg=#282727]|"
 """
 STATUS_RENDERED = tmux.HEADER + "\n" + GOLDEN_STATUS
@@ -107,14 +107,13 @@ class TmuxTestCase(unittest.TestCase):
         return {n: self.server.value(n) for n in THEME_OPTIONS}
 
     def assert_bar(self, date_format, time_format):
-        """status-right reads ` <date>  <time>  <host> `."""
+        """status-right reads `| <date> <time> `."""
         stamps = [(time.strftime(date_format), time.strftime(time_format))]
         shown = self.server.tmux("display", "-p", "#{T:status-right}")
         stamps.append((time.strftime(date_format),
                        time.strftime(time_format)))
-        host = self.server.display("#H")
         text = DIRECTIVE.sub("", shown.stdout.rstrip("\n"))
-        self.assertIn(text, [f" {d}  {t}  {host} " for d, t in stamps])
+        self.assertIn(text, [f"| {d} {t} " for d, t in stamps])
 
 
 class ConstantsTest(unittest.TestCase):

@@ -33,7 +33,7 @@ SPEC_TMUX = {
     "display_panes_active_fg": "base09",
     "status_text_fg": "base04", "status_segment_bg": "base01",
     "status_block_bg": "base02", "status_separator_fg": "base02",
-    "status_current_fg": "base07", "status_current_bg": "shadowRed",
+    "status_current_fg": "base06", "status_current_bg": "shadowRed",
 }
 NOT_A_NAME = "is not a [palette] name or derived shade"
 ANSI_MODULE = "configurator/terminal_ansi.py"

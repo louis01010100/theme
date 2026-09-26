@@ -39,7 +39,7 @@ TMUX_ROLES = MappingProxyType({
     "status_segment_bg": "base01",
     "status_block_bg": "base02",
     "status_separator_fg": "base02",
-    "status_current_fg": "base07",
+    "status_current_fg": "base06",
     "status_current_bg": "shadowRed",
 })
 ROLE_KEYS = tuple(TMUX_ROLES)

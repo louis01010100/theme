@@ -1,6 +1,6 @@
 set -g status-style 'fg={{status_fg}},bg={{status_bg}}'
 set -g status-left "#[fg={{status_text_fg}},bg={{status_block_bg}}] #S #[fg={{status_separator_fg}},bg={{status_segment_bg}}]|"
-set -g status-right "#[fg={{status_text_fg}},bg={{status_segment_bg}}] #{T:@ukiyo_e_status_date} #[fg={{status_text_fg}},bg={{status_segment_bg}}] #{T:@ukiyo_e_status_time} #[fg={{status_text_fg}},bg={{status_block_bg}}] #H "
+set -g status-right "#[fg={{status_separator_fg}},bg={{status_segment_bg}}]|#[fg={{status_text_fg}},bg={{status_segment_bg}}] #{T:@ukiyo_e_status_date} #[fg={{status_text_fg}},bg={{status_segment_bg}}]#{T:@ukiyo_e_status_time} "
 set -g window-status-format "#[fg={{status_text_fg}},bg={{status_segment_bg}}] #I.#W "
 set -g window-status-current-format "#[fg={{status_current_fg}},bg={{status_current_bg}}] #I.#W "
 set -g window-status-separator "#[fg={{status_separator_fg}},bg={{status_segment_bg}}]|"

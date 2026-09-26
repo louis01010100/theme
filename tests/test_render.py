@@ -37,13 +37,13 @@ GOLDEN_STATUS = (
     "set -g status-style 'fg=#c5c9c5,bg=#282727'\n"
     'set -g status-left "#[fg=#7a8382,bg=#393836] #S '
     '#[fg=#393836,bg=#282727]|"\n'
-    'set -g status-right "#[fg=#7a8382,bg=#282727] '
-    "#{T:@ukiyo_e_status_date} #[fg=#7a8382,bg=#282727] "
-    "#{T:@ukiyo_e_status_time} #[fg=#7a8382,bg=#393836] #H "
-    '"\n'
+    'set -g status-right "#[fg=#393836,bg=#282727]|'
+    '#[fg=#7a8382,bg=#282727] '
+    "#{T:@ukiyo_e_status_date} #[fg=#7a8382,bg=#282727]"
+    '#{T:@ukiyo_e_status_time} "\n'
     'set -g window-status-format "#[fg=#7a8382,bg=#282727] '
     '#I.#W "\n'
-    'set -g window-status-current-format "#[fg=#c5c9c5,'
+    'set -g window-status-current-format "#[fg=#a6a69c,'
     'bg=#63322e] #I.#W "\n'
     'set -g window-status-separator "#[fg=#393836,'
     'bg=#282727]|"\n'
