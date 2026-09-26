@@ -5,7 +5,7 @@ import unittest
 
 import gnome_harness as harness
 import support
-from configurator import gnome
+from configurator import terminal_ansi
 
 UUID = "5a1c0e9b-7d3f-4b6a-8e2d-4f0a9c6b1e37"
 PROFILE_A, PROFILE_B = harness.PROFILE_A, harness.PROFILE_B
@@ -15,16 +15,17 @@ PROFILE = f"{harness.PROFILE_SCHEMA}:{harness.PROFILE_ROOT}:{UUID}/"
 
 
 def setUpModule():
-    support.RealDconfGuard.take()
+    support.RealStateGuard.take()
 
 
 def tearDownModule():
-    support.RealDconfGuard.verify()
+    support.RealStateGuard.verify()
 
 
 def expected_profile(root=support.REPO):
     """The 12 profile keys of REQ-GT-3, as gsettings values."""
-    term = support.resolved_roles(gnome.TERMINAL_ROLES, root)
+    term = support.resolved_roles(terminal_ansi.TERMINAL_ROLES,
+                                  root)
     ansi = ", ".join(f"'{c}'" for c in support.resolved_ansi(root))
     return {
         "visible-name": "'Ukiyo-e'",
@@ -160,8 +161,9 @@ class PrerequisiteTest(unittest.TestCase):
         self.session = self.server.attach(self.session)
 
     def assert_refused(self, session, message):
+        """Named gnome only; `all` skips it (test_ptyxis.NoTerminal)."""
         before = self.server.snapshot()
-        for target in ("gnome", "all"):
+        for target in ("gnome",):
             with self.subTest(target=target):
                 step = harness.run_installer(session, target, target)
                 self.assertEqual(step.code, 3, step.stderr)
@@ -220,6 +222,7 @@ class RollbackTest(unittest.TestCase):
         self.assertEqual(step.code, 4, step.stderr)
         self.assertEqual(step.stdout.splitlines(), [
             "gnome: failed (set palette: wrapper: palette refused)",
+            "ptyxis: not run (earlier target failed)",
             "tmux: not run (earlier target failed)",
             "nvim: not run (earlier target failed)"])
         self.assertEqual(step.dump, before)

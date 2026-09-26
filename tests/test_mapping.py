@@ -1,10 +1,11 @@
 """REQ-MAP: role mappings, templates, and the nvim source tree."""
 
+import ast
 import os
 import unittest
 
 import support
-from configurator import gnome, nvim, palette, terminal_ansi, tmux
+from configurator import nvim, palette, terminal_ansi, tmux
 
 NAMES = frozenset(palette.REQUIRED_NAMES)
 SPEC_ANSI = (
@@ -36,6 +37,9 @@ SPEC_TMUX = {
     "display_panes_active_fg": "roninYellow",
 }
 ANSI_MODULE = "configurator/terminal_ansi.py"
+PTYXIS_MODULE = "configurator/ptyxis.py"
+SPEC_PTYXIS = {"Background": "background", "Foreground": "foreground",
+               "Cursor": "cursor_bg"}
 
 
 def texts(errors):
@@ -45,12 +49,13 @@ def texts(errors):
 class ConstantsTest(unittest.TestCase):
     def test_v1_values(self):
         self.assertEqual(tuple(terminal_ansi.ANSI), SPEC_ANSI)
-        self.assertEqual(dict(gnome.TERMINAL_ROLES), SPEC_TERMINAL)
+        self.assertEqual(dict(terminal_ansi.TERMINAL_ROLES),
+                         SPEC_TERMINAL)
         self.assertEqual(dict(tmux.TMUX_ROLES), SPEC_TMUX)
 
     def test_repository_mappings_are_valid(self):
         errors = (terminal_ansi.validate_ansi(NAMES)
-                  + gnome.validate_roles(NAMES)
+                  + terminal_ansi.validate_roles(NAMES)
                   + tmux.validate_roles(NAMES)
                   + nvim.validate_sources(support.REPO))
         self.assertEqual(texts(errors), [])
@@ -94,11 +99,92 @@ class MappingRulesTest(unittest.TestCase):
         del roles["cursor_fg"]
         roles["background"] = "nope"
         self.assertEqual(
-            sorted(texts(gnome.validate_roles(NAMES, roles))),
-            ['configurator/gnome.py: TERMINAL_ROLES.background: "nope" '
+            sorted(texts(terminal_ansi.validate_roles(NAMES, roles))),
+            [f'{ANSI_MODULE}: TERMINAL_ROLES.background: "nope" '
              'is not a [palette] name',
-             "configurator/gnome.py: TERMINAL_ROLES.cursor_fg: "
+             f"{ANSI_MODULE}: TERMINAL_ROLES.cursor_fg: "
              "missing role"])
+
+
+def assigned_names(rel):
+    """Module-level names assigned in a repository source file."""
+    tree = ast.parse((support.REPO / rel).read_text())
+    return {target.id for node in tree.body
+            if isinstance(node, ast.Assign)
+            for target in node.targets if isinstance(target, ast.Name)}
+
+
+def mutated_run(owner, rel, old, new, *args):
+    """configure.py <args> of a scratch copy with one snippet changed."""
+    root = support.copy_repo()
+    owner.addCleanup(support.remove_tree, root)
+    target = root / rel
+    source = target.read_text()
+    if old not in source:
+        raise AssertionError(f"{rel}: {old!r} not found")
+    target.write_text(source.replace(old, new, 1))
+    env = support.scratch_env(owner)
+    return support.run_configure(env, *args, root=root), env
+
+
+class RolesMovedTest(unittest.TestCase):
+    """REQ-REPO-5: TERMINAL_ROLES lives in terminal_ansi.py."""
+
+    def test_defined_once(self):
+        from configurator.terminal_ansi import TERMINAL_ROLES
+
+        self.assertEqual(dict(TERMINAL_ROLES), SPEC_TERMINAL)
+        self.assertIn("TERMINAL_ROLES",
+                      assigned_names("configurator/terminal_ansi.py"))
+        self.assertNotIn("TERMINAL_ROLES",
+                         assigned_names("configurator/gnome.py"))
+
+    def test_broken_role_names_terminal_ansi(self):
+        result, env = mutated_run(
+            self, "configurator/terminal_ansi.py",
+            '"cursor_bg": "oldWhite"', '"cursor_bg": "oldWhit"', "nvim")
+        self.assertEqual(result.code, 3, result.stderr)
+        self.assertIn(f'{ANSI_MODULE}: TERMINAL_ROLES.cursor_bg: '
+                      f'"oldWhit" is not a [palette] name',
+                      result.stderr.splitlines())
+        self.assertEqual(list(env.data.iterdir()), [])
+
+
+class PtyxisKeysTest(unittest.TestCase):
+    """REQ-MAP-1/3/5 for PTYXIS_KEYS."""
+
+    def test_values(self):
+        from configurator import ptyxis
+
+        self.assertEqual(dict(ptyxis.PTYXIS_KEYS), SPEC_PTYXIS)
+        self.assertEqual(texts(ptyxis.validate_keys()), [])
+
+    def test_unknown_role(self):
+        result, env = mutated_run(
+            self, PTYXIS_MODULE, '"Cursor": "cursor_bg"',
+            '"Cursor": "cursor"', "nvim")
+        self.assertEqual(result.code, 3, result.stderr)
+        self.assertIn(f'{PTYXIS_MODULE}: PTYXIS_KEYS.Cursor: "cursor" '
+                      f'is not a TERMINAL_ROLES role',
+                      result.stderr.splitlines())
+        self.assertEqual(list(env.data.iterdir()), [])
+
+    def test_missing_key(self):
+        result, _env = mutated_run(
+            self, PTYXIS_MODULE, '"Foreground": "foreground",', "",
+            "nvim")
+        self.assertEqual(result.code, 3, result.stderr)
+        self.assertIn(f"{PTYXIS_MODULE}: PTYXIS_KEYS.Foreground: "
+                      f"missing role", result.stderr.splitlines())
+
+    def test_uninstall_ignores_mappings(self):
+        """REQ-CLI-7: a broken mapping never blocks removal."""
+        result, _env = mutated_run(
+            self, PTYXIS_MODULE, '"Cursor": "cursor_bg"',
+            '"Cursor": "cursor"', "nvim", "--uninstall")
+        self.assertEqual(result.code, 0, result.stderr)
+        self.assertEqual(result.stdout,
+                         "nvim: unchanged (not installed)\n")
 
 
 class TemplateRulesTest(unittest.TestCase):
@@ -143,6 +229,14 @@ class SourceTreeTest(unittest.TestCase):
             texts(nvim.validate_sources(self.root)),
             ["nvim/lua/ukiyo_e/alias.lua: symlink in the source tree "
              "(only regular files are installed)"])
+
+
+def setUpModule():
+    support.RealStateGuard.take()
+
+
+def tearDownModule():
+    support.RealStateGuard.verify()
 
 
 if __name__ == "__main__":

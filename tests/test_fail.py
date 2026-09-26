@@ -12,6 +12,7 @@ import support
 from test_cli import blue_copy
 
 LEFTOVER = "19700101T000000Z-1"
+INSTALL_ONLY = ("org.gnome.Ptyxis",)
 TMUX_WRAPPER = """#!/bin/sh
 case "$1" in
   list-sessions) echo "0: 1 windows"; exit 0 ;;
@@ -72,24 +73,28 @@ class BeforeSwitchTest(FailTestCase):
         options = self.server.snapshot()
         os.chmod(self.env.versions, 0o555)
         self.addCleanup(os.chmod, self.env.versions, 0o755)
-        data = support.tree_snapshot(self.env.data)
+        # ptyxis is updated by this run; the file step's paths are not
+        data = support.tree_snapshot(self.env.data, INSTALL_ONLY)
         result = support.run_configure(self.env, "all", root=root)
         self.assertEqual(result.code, 4, result.stderr)
         lines = status_lines(result)
-        self.assertEqual(lines[0], "gnome: updated")
-        self.assertTrue(lines[1].startswith("tmux: failed ("), lines)
-        self.assertTrue(lines[2].startswith("nvim: failed ("), lines)
+        self.assertEqual(lines[:2], ["gnome: updated", "ptyxis: updated"])
+        self.assertTrue(lines[2].startswith("tmux: failed ("), lines)
+        self.assertTrue(lines[3].startswith("nvim: failed ("), lines)
         self.assertEqual(os.readlink(self.env.install), target)
         self.assertEqual(through_install(self.env), tree)
-        self.assertEqual(support.tree_snapshot(self.env.data), data)
+        self.assertEqual(support.tree_snapshot(self.env.data,
+                                               INSTALL_ONLY), data)
         self.assertEqual(self.server.snapshot(), options)
         os.chmod(self.env.versions, 0o755)
         again = support.configure_ok(self.env, "all", root=root)
         self.assertEqual(status_lines(again), [
-            "gnome: unchanged", "tmux: updated", "nvim: updated"])
+            "gnome: unchanged", "ptyxis: unchanged", "tmux: updated",
+            "nvim: updated"])
         last = support.configure_ok(self.env, "all", root=root)
         self.assertEqual(status_lines(last), [
-            "gnome: unchanged", "tmux: unchanged", "nvim: unchanged"])
+            "gnome: unchanged", "ptyxis: unchanged", "tmux: unchanged",
+            "nvim: unchanged"])
 
 
 class LeftoverTest(FailTestCase):
@@ -111,7 +116,8 @@ class LeftoverTest(FailTestCase):
         before = support.tree_snapshot(self.env.root)
         dry = support.configure_ok(self.env, "all", "--dry-run")
         self.assertEqual(status_lines(dry), [
-            "gnome: unchanged", "tmux: unchanged", "nvim: unchanged"])
+            "gnome: unchanged", "ptyxis: unchanged", "tmux: unchanged",
+            "nvim: unchanged"])
         self.assertEqual(support.tree_snapshot(self.env.root), before)
         real = support.configure_ok(self.env, "all")
         self.assertEqual(status_lines(real), status_lines(dry))
@@ -126,6 +132,7 @@ class LeftoverTest(FailTestCase):
         result = support.configure_ok(self.env, "all", "--uninstall")
         self.assertEqual(status_lines(result), [
             "gnome: unchanged (not installed)",
+            "ptyxis: unchanged (not installed)",
             "tmux: unchanged (not installed)",
             "nvim: unchanged (not installed)"])
         self.assertFalse(os.path.lexists(self.env.versions))
@@ -140,11 +147,11 @@ class LiveActionTest(FailTestCase):
         result = support.run_configure(failing, "all", root=blue_copy(self))
         self.assertEqual(result.code, 4, result.stderr)
         lines = status_lines(result)
-        self.assertEqual(lines[0], "gnome: updated")
-        self.assertTrue(lines[1].startswith(
+        self.assertEqual(lines[:2], ["gnome: updated", "ptyxis: updated"])
+        self.assertTrue(lines[2].startswith(
             "tmux: failed (reload: wrapper: tmux source-file refused"),
             lines)
-        self.assertEqual(lines[2], "nvim: updated")
+        self.assertEqual(lines[3], "nvim: updated")
         palette = self.env.install / "lua/ukiyo_e/palette.lua"
         self.assertIn('dragonBlue2 = "#123456"', palette.read_text())
         reset = support.run_configure(failing, "tmux", "--uninstall")
@@ -154,6 +161,70 @@ class LiveActionTest(FailTestCase):
                          "refused)\n")
         self.assertFalse(os.path.lexists(self.env.install / "tmux"))
         self.assertTrue(palette.exists())
+
+
+GSETTINGS_WRAPPER = """#!/bin/sh
+if [ "$1" = set ] && [ "$2" = org.gnome.Ptyxis ] \\
+        && [ "$3" = profile-uuids ]; then
+  echo "wrapper: profile-uuids refused" >&2; exit 1
+fi
+exec /usr/bin/gsettings "$@"
+"""
+
+
+class PtyxisFailTest(FailTestCase):
+    """(d) Ptyxis step failures and (e) Ptyxis leftovers."""
+
+    def ptx_state(self):
+        return (support.tree_snapshot(support.ptx(self.env), skip=()),
+                harness.dump_ptyxis(self.env.vars))
+
+    def test_read_only_palette_directory(self):
+        support.configure_ok(self.env, "all")
+        root = blue_copy(self)
+        folder = support.ptx(self.env)
+        before = self.ptx_state()
+        os.chmod(folder, 0o555)
+        self.addCleanup(os.chmod, folder, 0o755)
+        result = support.run_configure(self.env, "all", root=root)
+        self.assertEqual(result.code, 4, result.stderr)
+        lines = status_lines(result)
+        self.assertEqual(lines[0], "gnome: updated")
+        self.assertTrue(lines[1].startswith("ptyxis: failed ("), lines)
+        self.assertEqual(lines[2:], [
+            "tmux: not run (earlier target failed)",
+            "nvim: not run (earlier target failed)"])
+        self.assertEqual(self.ptx_state(), before)
+        self.assertEqual(list(folder.glob(".Ukiyo-e.palette.new-*")), [])
+
+    def test_key_write_rolled_back(self):
+        folder = self.env.root / "wrap"
+        folder.mkdir()
+        (folder / "gsettings").write_text(GSETTINGS_WRAPPER)
+        (folder / "gsettings").chmod(0o755)
+        failing = self.env.with_vars(
+            PATH=f"{folder}:{self.env.vars['PATH']}")
+        before = harness.dump_ptyxis(self.env.vars)
+        result = support.run_configure(failing, "ptyxis")
+        self.assertEqual(result.code, 4, result.stderr)
+        self.assertEqual(result.stdout, "ptyxis: failed (set profile-uuids"
+                         ": wrapper: profile-uuids refused)\n")
+        self.assertEqual(harness.dump_ptyxis(self.env.vars), before)
+        palette = support.ptx(self.env) / "Ukiyo-e.palette"
+        self.assertFalse(os.path.lexists(palette))
+        again = support.configure_ok(self.env, "ptyxis")
+        self.assertEqual(status_lines(again), ["ptyxis: updated"])
+
+    def test_leftover_temporary_file(self):
+        support.configure_ok(self.env, "ptyxis")
+        leftover = support.ptx(self.env) / ".Ukiyo-e.palette.new-1"
+        leftover.write_text("partial")
+        dry = support.configure_ok(self.env, "ptyxis", "--dry-run")
+        self.assertEqual(dry.stdout, "ptyxis: unchanged\n")
+        self.assertTrue(leftover.exists())
+        real = support.configure_ok(self.env, "ptyxis")
+        self.assertEqual(real.stdout, "ptyxis: unchanged\n")
+        self.assertFalse(os.path.lexists(leftover))
 
 
 class SignalTest(FailTestCase):
@@ -180,6 +251,14 @@ class SignalTest(FailTestCase):
         self.assertEqual(out, "tmux: failed (interrupted)\n")
         colors = self.env.install / "tmux/colors.conf"
         self.assertIn("#123456", colors.read_text())
+
+
+def setUpModule():
+    support.RealStateGuard.take()
+
+
+def tearDownModule():
+    support.RealStateGuard.verify()
 
 
 if __name__ == "__main__":

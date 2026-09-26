@@ -14,7 +14,7 @@ README_ITEMS = (
     LAZY_LINE,
     TMUX_LINE,
     "python3 configure.py",
-    "python3 configure.py [all|gnome|tmux|nvim] [--dry-run] "
+    "python3 configure.py [all|gnome|ptyxis|tmux|nvim] [--dry-run] "
     "[--uninstall] [--set-default] [-h|--help]",
     "--dry-run",
     "| `0` |", "| `2` |", "| `3` |", "| `4` |",
@@ -34,6 +34,15 @@ README_ITEMS = (
     "palette.toml",
     "rebelot/kanagawa.nvim",
     "bb85e4b",
+    "| `ptyxis` |",
+    "skipped (not installed)",
+    "org.gnome.Ptyxis/palettes/Ukiyo-e.palette",
+    "`default-profile-uuid`",
+    "effective default",
+    "open Ptyxis tabs keep",
+    "`opacity`",
+    "  ptyxis.py           #",
+    "  test_ptyxis.py      #",
 )
 README_ABSENT = ("@plugin", '"louis01010100/theme"', "scripts/generate.py",
                  "gnome-terminal/install.sh")

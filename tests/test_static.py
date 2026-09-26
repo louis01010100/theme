@@ -8,8 +8,8 @@ import sys
 import unittest
 
 import support
-from configurator import gnome, palette, tmux
-from configurator.gnome import KeyChange
+from configurator import gnome, palette, ptyxis, terminal_ansi, tmux
+from configurator.settings import KeyChange
 
 RUNTIME_DIRS = ("configurator", "nvim", "tmux")
 FORBIDDEN_WORDS = re.compile(r"\b(sudo|curl|wget|git|pip|apt|npm)\b")
@@ -49,6 +49,37 @@ def imported_modules(rel):
             yield from (a.name for a in node.names)
         elif isinstance(node, ast.ImportFrom):
             yield node.module
+
+
+def constants(node):
+    """String constants anywhere below an ast node."""
+    return {n.value for n in ast.walk(node)
+            if isinstance(n, ast.Constant) and isinstance(n.value, str)}
+
+
+def uses_settings(rel):
+    """settings.py itself or a module importing configurator.settings."""
+    for node in ast.walk(ast.parse(text(rel))):
+        if not isinstance(node, ast.ImportFrom):
+            continue
+        names = {a.name for a in node.names}
+        if node.module == "configurator.settings" or (
+                node.module == "configurator" and "settings" in names):
+            return True
+    return rel == "configurator/settings.py"
+
+
+def assigned(tree):
+    return {t.id for node in ast.walk(tree) if isinstance(node, ast.Assign)
+            for t in node.targets if isinstance(t, ast.Name)}
+
+
+def sixteen_names(node):
+    """A literal list/tuple of 16 string constants."""
+    return (isinstance(node, (ast.List, ast.Tuple))
+            and len(node.elts) == 16
+            and all(isinstance(e, ast.Constant) and isinstance(e.value, str)
+                    for e in node.elts))
 
 
 class RepositoryTest(unittest.TestCase):
@@ -134,7 +165,7 @@ class SafetyTest(unittest.TestCase):
     def test_mapping_shapes(self):
         """INV-3 (values are checked by test_mapping)."""
         self.assertEqual(len(tmux.TMUX_ROLES), 26)
-        self.assertEqual(len(gnome.TERMINAL_ROLES), 6)
+        self.assertEqual(len(terminal_ansi.TERMINAL_ROLES), 6)
 
     def test_file_modes(self):
         """REQ-REPO-3 on disk and, when present, in the git index."""
@@ -149,18 +180,23 @@ class SafetyTest(unittest.TestCase):
             self.assertTrue(line.startswith("100755 "), line)
 
     def test_gsettings_writes_confined(self):
-        """gsettings only in gnome.py; write verbs only in write_args."""
-        users = [r for r in runtime_files() if "gsettings" in text(r)]
-        self.assertEqual(users, ["configurator/gnome.py"])
-        tree = ast.parse(text("configurator/gnome.py"))
-        for func in ast.walk(tree):
-            if not isinstance(func, ast.FunctionDef):
+        """gsettings run only by settings.py; verbs only in write_args."""
+        for rel in runtime_files():
+            if not rel.endswith(".py"):
                 continue
-            verbs = {n.value for n in ast.walk(func)
-                     if isinstance(n, ast.Constant)
-                     and n.value in GSETTINGS_VERBS}
-            if verbs:
-                self.assertEqual(func.name, "write_args", verbs)
+            tree = ast.parse(text(rel))
+            if rel != "configurator/settings.py":
+                self.assertNotIn("gsettings", constants(tree), rel)
+            if not uses_settings(rel):
+                continue
+            for func in ast.walk(tree):
+                if not isinstance(func, ast.FunctionDef):
+                    continue
+                verbs = constants(func) & GSETTINGS_VERBS
+                if verbs:
+                    self.assertEqual((rel, func.name),
+                                     ("configurator/settings.py",
+                                      "write_args"), verbs)
 
     def test_gsettings_write_guard(self):
         ok = (KeyChange(gnome.PROFILE, "palette", None, "x", ""),
@@ -173,6 +209,56 @@ class SafetyTest(unittest.TestCase):
                KeyChange("org.gnome.desktop", "x", None, "x", ""))
         self.assertTrue(all(gnome.allowed(c) for c in ok))
         self.assertFalse(any(gnome.allowed(c) for c in bad))
+
+    def test_ptyxis_write_guard(self):
+        """INV-11: label/palette at its path, the two list keys only."""
+        other = f"{ptyxis.PROFILE_SCHEMA}:{ptyxis.PROFILES_ROOT}{'1' * 32}/"
+        ok = (KeyChange(ptyxis.PROFILE, "label", None, "x", ""),
+              KeyChange(ptyxis.PROFILE, "palette", None, "x", ""),
+              KeyChange(ptyxis.PROFILE, None, None, None, ""),
+              KeyChange(ptyxis.LIST_SCHEMA, "profile-uuids", None, "x",
+                        ""),
+              KeyChange(ptyxis.LIST_SCHEMA, "default-profile-uuid", None,
+                        "x", ""))
+        bad = (KeyChange(ptyxis.PROFILE, "opacity", None, "x", ""),
+               KeyChange(ptyxis.LIST_SCHEMA, "enable-a11y", None, "x", ""),
+               KeyChange(ptyxis.DEFAULTS, "label", None, "x", ""),
+               KeyChange(other, "label", None, "x", ""),
+               KeyChange(gnome.PROFILE, "palette", None, "x", ""),
+               KeyChange("org.gnome.Ptyxis.Shortcuts", "x", None, "x", ""))
+        self.assertTrue(all(ptyxis.allowed(c) for c in ok))
+        self.assertFalse(any(ptyxis.allowed(c) for c in bad))
+        self.assertEqual(ptyxis.write(bad[0], "0.5"),
+                         f"refusing to write {ptyxis.PROFILE} opacity")
+
+    def test_ptyxis_uuid(self):
+        self.assertRegex(ptyxis.UUID, r"^[0-9a-f]{32}$")
+        self.assertNotEqual(ptyxis.UUID, gnome.UUID.replace("-", ""))
+
+    def test_terminal_mappings_defined_once(self):
+        """REQ-MAP-2: TERMINAL_ROLES and a 16-name list only once."""
+        owners = set()
+        for rel in runtime_files():
+            if not rel.endswith(".py"):
+                continue
+            tree = ast.parse(text(rel))
+            if "TERMINAL_ROLES" in assigned(tree) or any(
+                    sixteen_names(n) for n in ast.walk(tree)):
+                owners.add(rel)
+        self.assertEqual(owners, {"configurator/terminal_ansi.py"})
+
+    def test_never_runs_ptyxis(self):
+        """SAF-4: no `ptyxis` argv and no --import-palette."""
+        for rel in runtime_files():
+            self.assertNotIn("--import-palette", text(rel), rel)
+            if not rel.endswith(".py"):
+                continue
+            for node in ast.walk(ast.parse(text(rel))):
+                if isinstance(node, (ast.List, ast.Tuple)) and node.elts:
+                    first = node.elts[0]
+                    self.assertFalse(
+                        isinstance(first, ast.Constant)
+                        and first.value == "ptyxis", f"{rel}:{node.lineno}")
 
     def test_tmux_never_addresses_a_socket(self):
         """SAF-6: no -L/-S in the configurator."""
@@ -187,6 +273,40 @@ class SafetyTest(unittest.TestCase):
                           if "__pycache__" in f or f.endswith(".pyc")], [])
         ignore = (support.REPO / ".gitignore").read_text()
         self.assertIn("__pycache__/", ignore.splitlines())
+
+
+def module_functions(rel):
+    tree = ast.parse(text(rel))
+    return {node.name: ast.get_source_segment(text(rel), node)
+            for node in tree.body if isinstance(node, ast.FunctionDef)}
+
+
+class GuardUsageTest(unittest.TestCase):
+    """SAF-8: modules that run configure.py guard the real state."""
+
+    RUNNERS = ("run_configure(", "configure_ok(", "import gnome_harness",
+               "run_installer(")
+
+    def test_every_runner_module_is_guarded(self):
+        modules = [rel for rel in repository_files()
+                   if rel.startswith("tests/test_")
+                   and any(r in text(rel) for r in self.RUNNERS)]
+        self.assertIn("tests/test_ptyxis.py", modules)
+        for rel in modules:
+            functions = module_functions(rel)
+            for name, call in (("setUpModule", "RealStateGuard.take()"),
+                               ("tearDownModule",
+                                "RealStateGuard.verify()")):
+                with self.subTest(rel=rel, name=name):
+                    self.assertIn(call, functions.get(name, ""))
+
+
+def setUpModule():
+    support.RealStateGuard.take()
+
+
+def tearDownModule():
+    support.RealStateGuard.verify()
 
 
 if __name__ == "__main__":

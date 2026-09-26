@@ -230,5 +230,13 @@ class LocationTest(unittest.TestCase):
                                    f"{version}/tmux/status.conf"])
 
 
+def setUpModule():
+    support.RealStateGuard.take()
+
+
+def tearDownModule():
+    support.RealStateGuard.verify()
+
+
 if __name__ == "__main__":
     unittest.main()

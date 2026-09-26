@@ -212,5 +212,13 @@ class SetupContractTest(InstalledTestCase):
         self.assertEqual(dump["palette"], expected)
 
 
+def setUpModule():
+    support.RealStateGuard.take()
+
+
+def tearDownModule():
+    support.RealStateGuard.verify()
+
+
 if __name__ == "__main__":
     unittest.main()

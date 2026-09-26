@@ -19,11 +19,11 @@ RENDERED = ["lua/ukiyo_e/palette.lua", "tmux/colors.conf",
 
 
 def setUpModule():
-    support.RealDconfGuard.take()
+    support.RealStateGuard.take()
 
 
 def tearDownModule():
-    support.RealDconfGuard.verify()
+    support.RealStateGuard.verify()
 
 
 def recoloured(groups: dict) -> dict:
@@ -63,6 +63,9 @@ class PropagationTest(unittest.TestCase):
         cls.group = next(n for n, s in sorted(cls.base["groups"].items())
                          if isinstance(s, dict) and s.get("fg") == OLD_BLUE)
         cls.before_fg = cls.nvim.group_fg(cls.group)
+        cls.palette_file = support.ptx(cls.env) / "Ukiyo-e.palette"
+        cls.old_palette = cls.palette_file.read_bytes()
+        cls.ptyxis_dump = harness.dump_ptyxis(cls.env.vars)
         cls.result = support.configure_ok(cls.env, "all",
                                           root=blue_copy(cls))
 
@@ -78,8 +81,21 @@ class PropagationTest(unittest.TestCase):
     def test_report(self):
         lines = self.result.stdout.splitlines()
         self.assertEqual([ln for ln in lines if not ln.startswith(" ")],
-                         ["gnome: updated", "tmux: updated",
-                          "nvim: updated"])
+                         ["gnome: updated", "ptyxis: updated",
+                          "tmux: updated", "nvim: updated"])
+        at = lines.index("ptyxis: updated")
+        self.assertEqual(lines[at + 1:at + 3], [
+            "  write palette Ukiyo-e.palette", "tmux: updated"])
+
+    def test_ptyxis_file(self):
+        """V-5: only Color4 changes; no Ptyxis key is written."""
+        old = self.old_palette.split(b"\n")
+        new = self.palette_file.read_bytes().split(b"\n")
+        self.assertEqual(len(old), len(new))
+        self.assertEqual([(a, b) for a, b in zip(old, new) if a != b],
+                         [(b"Color4=#8ba4b0", b"Color4=#123456")])
+        self.assertEqual(harness.dump_ptyxis(self.env.vars),
+                         self.ptyxis_dump)
 
     def test_gnome(self):
         text = harness.gsettings(self.env.vars, "get", PROFILE, "palette")

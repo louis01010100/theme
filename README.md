@@ -1,12 +1,14 @@
 # Ukiyo-e
 
-One palette for GNOME Terminal, tmux, and Neovim.
+One palette for GNOME Terminal, Ptyxis, tmux, and Neovim.
 
 `palette.toml` is the only hand-edited colour file. `configure.py`
 validates it, then applies the theme to this machine: it installs the
 Neovim colorscheme (`ukiyo_e`) and the tmux theme into a local install
-directory, updates the "Ukiyo-e" GNOME Terminal profile, and reloads
-the theme on your running tmux server. Version 1 of the palette
+directory, updates the "Ukiyo-e" GNOME Terminal profile, writes the
+"Ukiyo-e" Ptyxis palette and updates the "Ukiyo-e" Ptyxis profile, and
+reloads the theme on your running tmux server. `all` configures
+whichever of the two terminals is installed and skips the other. Version 1 of the palette
 reproduces Kanagawa Dragon exactly. The repository holds source only;
 nothing is committed, pushed, or fetched to apply a colour change.
 
@@ -18,8 +20,10 @@ configure.py          # entry point: python3 configure.py [target] [flags]
 configurator/         # validation, role mappings, install, per-tool apply
   cli.py              #   argument parsing, run order, exit codes
   palette.py          #   palette.toml loading and validation
-  terminal_ansi.py    #   ANSI: 16 terminal colours (GNOME and Neovim)
-  gnome.py            #   TERMINAL_ROLES, "Ukiyo-e" profile via gsettings
+  terminal_ansi.py    #   ANSI (16 colours), TERMINAL_ROLES (shared)
+  settings.py         #   gsettings access shared by gnome and ptyxis
+  gnome.py            #   "Ukiyo-e" GNOME Terminal profile via gsettings
+  ptyxis.py           #   PTYXIS_KEYS, Ptyxis palette file and profile
   tmux.py             #   TMUX_ROLES, template rendering, server reload
   nvim.py             #   rendered Neovim palette module
   install_dir.py      #   $XDG_DATA_HOME/ukiyo_e resolution
@@ -32,14 +36,15 @@ tmux/                 # tmux theme source
   ukiyo_e.tmux        #   entry script run by `run-shell`
   *.conf.tmpl         #   templates rendered with {{role}} colours
 tests/                # unittest suite (isolated; see Tests below)
+  test_ptyxis.py      #   Ptyxis lifecycle, edges, single-schema runs
 ```
 
 ## Workflow
 
 1. Edit `palette.toml` (`[palette]`: `name = "#RRGGBB"`). Optionally
    edit the role mappings in `configurator/` (`ANSI` in
-   `terminal_ansi.py`, `TERMINAL_ROLES` in `gnome.py`, `TMUX_ROLES` in
-   `tmux.py`), the Lua under `nvim/`, or the templates under `tmux/`.
+   `terminal_ansi.py`, `TERMINAL_ROLES` in `terminal_ansi.py`,
+   `PTYXIS_KEYS` in `ptyxis.py`, `TMUX_ROLES` in `tmux.py`), the Lua under `nvim/`, or the templates under `tmux/`.
 2. Run `python3 configure.py` (Python 3.11 or later, standard library
    only; no root).
 3. Check the report: one line per target (`updated`, `unchanged`, ...)
@@ -62,13 +67,14 @@ python3 configure.py
 ## Command line
 
 ```text
-python3 configure.py [all|gnome|tmux|nvim] [--dry-run] [--uninstall] [--set-default] [-h|--help]
+python3 configure.py [all|gnome|ptyxis|tmux|nvim] [--dry-run] [--uninstall] [--set-default] [-h|--help]
 ```
 
 | Target | Effect |
 |---|---|
-| `all` (default) | `gnome`, then `tmux`, then `nvim` |
+| `all` (default) | `gnome`, then `ptyxis`, then `tmux`, then `nvim` |
 | `gnome` | the "Ukiyo-e" GNOME Terminal profile |
+| `ptyxis` | the "Ukiyo-e" Ptyxis palette file and profile |
 | `tmux` | the tmux theme files, then a reload of the running server |
 | `nvim` | the Neovim colorscheme files |
 
@@ -76,13 +82,19 @@ python3 configure.py [all|gnome|tmux|nvim] [--dry-run] [--uninstall] [--set-defa
 |---|---|
 | `--dry-run` | Report what would change (`would update`, `would remove`) with the same detail lines; change nothing. |
 | `--uninstall` | Remove the target instead (does not read `palette.toml`). |
-| `--set-default` | With `gnome` or `all`: also make "Ukiyo-e" the default profile. Not with `--uninstall`. |
+| `--set-default` | With `gnome`, `ptyxis`, or `all`: also make "Ukiyo-e" the default profile of that terminal (of each installed one under `all`). Not with `--uninstall`. |
+
+Under `all`, a terminal that is not installed (no `gsettings`, or its
+GSettings schemas missing) is reported `skipped (not installed)` with
+the missing item on the next line, and the run continues; `all` still
+exits `0`. A terminal named explicitly (`gnome`, `ptyxis`) is never
+skipped: a missing prerequisite fails the run with exit code `3`.
 
 | Exit code | Meaning |
 |---|---|
-| `0` | Success, including a dry run and an all-`unchanged` run. |
+| `0` | Success, including a dry run, an all-`unchanged` run, and an `all` run that skipped a terminal that is not installed. |
 | `2` | Usage error. |
-| `3` | Validation error, unreadable input, unsupported Python, unresolvable install directory, or missing prerequisite; nothing changed. |
+| `3` | Validation error, unreadable input, unsupported Python, unresolvable install directory, missing prerequisite of a named target, a path not managed by `configure.py`, or an unparseable setting; nothing changed. |
 | `4` | An apply step failed or was interrupted; the report says what remains. |
 
 ## Install directory
@@ -114,6 +126,10 @@ run-shell ~/.local/share/ukiyo_e/ukiyo_e.tmux
 ## Live effect
 
 - GNOME Terminal: open windows change immediately.
+- Ptyxis: profile changes apply immediately, and Ptyxis re-reads the
+  palette file at once, so new tabs and windows use the new colours;
+  open Ptyxis tabs keep their old colours until they are reopened or
+  Ptyxis restarts. `configure.py` never launches or signals Ptyxis.
 - tmux: when the tmux files change, `configure.py` re-runs the installed
   `ukiyo_e.tmux` on the server your `tmux` command would reach; no
   restart. Without a running server (or without `tmux`) the reload is
@@ -171,13 +187,38 @@ Not changed: font, size, transparency, scrolling, keybindings, any
 other setting of the profile, and every other profile. Needs
 `gsettings` and the GNOME Terminal schemas.
 
+## Ptyxis
+
+`python3 configure.py ptyxis` writes the palette file
+`~/.local/share/org.gnome.Ptyxis/palettes/Ukiyo-e.palette` (under
+`$XDG_DATA_HOME` when set), atomically and only when its content
+differs, and creates or updates the "Ukiyo-e" Ptyxis profile (fixed
+UUID, so never a duplicate): its `label` and `palette` settings, plus
+the `profile-uuids` list. The file starts with a `GENERATED by` line;
+a `Ukiyo-e.palette` without it is not ours and stops the run. The
+default profile (`default-profile-uuid`) changes only with
+`--set-default`. If a write fails, the settings and file already
+written are restored.
+
+Note: if Ptyxis has no profiles yet (it was never started), the
+"Ukiyo-e" profile becomes Ptyxis's effective default by Ptyxis's own
+first-profile rule even without `--set-default`, because
+`default-profile-uuid` is not written.
+
+Not changed: fonts, `opacity`, every other setting of the profile,
+every other profile, every other palette file, and Ptyxis's global
+preferences and shortcuts. Needs `gsettings` and the Ptyxis schemas
+(the native `org.gnome.Ptyxis` package; development and Flatpak
+builds are not supported).
+
 ## Transparency
 
 Transparency is configured outside the configurator: in Neovim with
 `setup({ transparent = true })`, and in GNOME Terminal with the
 profile's own transparency setting (Preferences → the profile →
 Colors → "Use transparent background"; author's notes:
-`linux-gnome_terminal_configuration#Transparency`).
+`linux-gnome_terminal_configuration#Transparency`), and in Ptyxis with
+the profile's `opacity` setting (Preferences → the profile).
 
 ## Uninstall
 
@@ -186,7 +227,9 @@ python3 configure.py all --uninstall
 ```
 
 This removes the GNOME profile (making the first remaining profile the
-default if it was the default), the install directory, and resets the
+default if it was the default), the Ptyxis profile and its palette file
+(likewise for `default-profile-uuid`; the palettes directory stays),
+the install directory, and resets the
 theme's tmux options on the running server to tmux defaults. Then remove
 the two one-time lines above by hand.
 
@@ -200,7 +243,8 @@ UKIYO_E_KANAGAWA_SEED=~/.local/share/nvim/lazy/kanagawa.nvim \
 The suite uses scratch home and data directories, headless Neovim, a
 dedicated tmux server, and an isolated D-Bus session with a scratch
 dconf database; it never touches your running tmux server, your real
-install directory, or your real GNOME Terminal settings.
+install directory, your real GNOME Terminal or Ptyxis settings, or
+your real Ptyxis palette directory, and it never launches Ptyxis.
 
 ## Credits
 

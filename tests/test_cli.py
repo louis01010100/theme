@@ -10,6 +10,9 @@ from configurator import cli, report, tmux
 from configurator.report import Status, TargetResult
 
 UUID = "5a1c0e9b-7d3f-4b6a-8e2d-4f0a9c6b1e37"
+PTYXIS_UUID = "9c3e7b1d5a2f4e80b6d4a1c8e7f05b93"
+PTYXIS_INSTALL = ["ptyxis: updated", "  write palette Ukiyo-e.palette",
+                  "  set label", "  set palette", "  list add"]
 VERSION_TREE = sorted([
     "colors/ukiyo_e.lua", "lua/ukiyo_e/init.lua", "lua/ukiyo_e/theme.lua",
     "lua/ukiyo_e/palette.lua", "lua/ukiyo_e/highlights/editor.lua",
@@ -24,6 +27,9 @@ DOTFILES = {".tmux.conf": "set -g mouse on\n",
 
 USAGE_ERRORS = (
     ("gnome", "--set-default", "--uninstall"),
+    ("ptyxis", "--set-default", "--uninstall"),
+    ("ptyxis", "--uninstall", "--set-default", "--dry-run"),
+    ("gnome", "ptyxis"),
     ("all", "--uninstall", "--set-default"),
     ("tmux", "--set-default"),
     ("nvim", "--set-default"),
@@ -47,6 +53,17 @@ class ParseTest(unittest.TestCase):
         opts = cli.parse(["--uninstall", "--dry-run", "nvim"])
         self.assertEqual(opts.targets, (cli.Target.NVIM,))
         self.assertTrue(opts.uninstall and opts.dry_run)
+
+    def test_ptyxis_target(self):
+        opts = cli.parse(["ptyxis", "--set-default", "--dry-run"])
+        self.assertEqual(opts.targets, (cli.Target.PTYXIS,))
+        self.assertTrue(opts.set_default and opts.dry_run)
+        self.assertEqual(cli.parse(["ptyxis", "--uninstall"]).targets,
+                         (cli.Target.PTYXIS,))
+        self.assertEqual(cli.ORDER, (cli.Target.GNOME, cli.Target.PTYXIS,
+                                     cli.Target.TMUX, cli.Target.NVIM))
+        self.assertTrue(cli.parse([]).is_all and cli.parse(["all"]).is_all)
+        self.assertFalse(cli.parse(["ptyxis"]).is_all)
 
     def test_usage_errors(self):
         for argv in USAGE_ERRORS:
@@ -81,9 +98,18 @@ class ReportFormatTest(unittest.TestCase):
                 self.assertEqual(report.format_result(result), text)
 
 
+class ReportSkippedTest(unittest.TestCase):
+    def test_skipped_line(self):
+        result = TargetResult("gnome", Status.SKIPPED, "not installed",
+                              ("gsettings not found on PATH",))
+        self.assertEqual(report.format_result(result),
+                         "gnome: skipped (not installed)\n"
+                         "  gsettings not found on PATH")
+
+
 class UsageTest(unittest.TestCase):
     def test_usage_errors_exit_2(self):
-        env = support.scratch_env(self)
+        env = harness.start_session(self, support.scratch_env(self))
         for argv in USAGE_ERRORS:
             with self.subTest(argv=argv):
                 result = support.run_configure(env, *argv)
@@ -91,6 +117,7 @@ class UsageTest(unittest.TestCase):
                 self.assertIn("usage: configure.py", result.stderr)
                 self.assertEqual(result.stdout, "")
         self.assertEqual(list(env.data.iterdir()), [])
+        self.assertEqual(harness.dump(env.vars, "/"), "")
 
     def test_help_exits_0_on_stdout(self):
         env = support.scratch_env(self)
@@ -98,7 +125,8 @@ class UsageTest(unittest.TestCase):
             result = support.run_configure(env, flag)
             self.assertEqual(result.code, 0, result.stderr)
             self.assertTrue(result.stdout.startswith(
-                "usage: configure.py [all|gnome|tmux|nvim] [--dry-run] "
+                "usage: configure.py [all|gnome|ptyxis|tmux|nvim] "
+                "[--dry-run] "
                 "[--uninstall] [--set-default] [-h|--help]"))
             self.assertEqual(result.stderr, "")
 
@@ -147,7 +175,8 @@ class FullTestCase(unittest.TestCase):
 
     def snapshots(self):
         return (support.tree_snapshot(self.env.root),
-                harness.dump(self.env.vars), self.server.snapshot())
+                harness.snapshot_dconf(self.env.vars),
+                self.server.snapshot())
 
     def assert_snapshots(self, before):
         after = self.snapshots()
@@ -245,16 +274,34 @@ class InstallTest(FullTestCase):
         result = self.run_all()
         self.assertEqual(result.code, 0, result.stderr)
         self.assertEqual(self.status_lines(result), [
-            "gnome: updated", "tmux: updated", "nvim: updated"])
+            "gnome: updated", "ptyxis: updated", "tmux: updated",
+            "nvim: updated"])
         self.assert_tmux_details(self.lines(result))
         self.assert_layout()
         self.assert_live()
+        self.assert_ptyxis(self.lines(result))
         before = self.snapshots()
         again = self.run_all("all")
         self.assertEqual(again.code, 0, again.stderr)
         self.assertEqual(again.stdout, "gnome: unchanged\n"
-                         "tmux: unchanged\nnvim: unchanged\n")
+                         "ptyxis: unchanged\ntmux: unchanged\n"
+                         "nvim: unchanged\n")
         self.assert_snapshots(before)
+
+    def assert_ptyxis(self, lines):
+        """V-3: the palette file, the profile, profile-uuids."""
+        from test_ptyxis import expected_palette
+
+        at = lines.index("ptyxis: updated")
+        self.assertEqual(lines[at:at + 5], PTYXIS_INSTALL)
+        path = support.ptx(self.env) / "Ukiyo-e.palette"
+        self.assertEqual(path.read_bytes(), expected_palette())
+        self.assertEqual(path.stat().st_mode & 0o7777, 0o644)
+        dump = support.parse_dump(harness.dump_ptyxis(self.env.vars))
+        self.assertEqual(dump[f"Profiles/{PTYXIS_UUID}"],
+                         {"label": "'Ukiyo-e'", "palette": "'Ukiyo-e'"})
+        self.assertEqual(dump["/"],
+                         {"profile-uuids": f"['{PTYXIS_UUID}']"})
 
     def assert_tmux_details(self, lines):
         tmux_at = lines.index("tmux: updated")
@@ -339,17 +386,22 @@ class DryRunTest(FullTestCase):
     def test_fresh_home(self):
         result = self.dry()
         self.assertEqual(self.status_lines(result), [
-            "gnome: would update", "tmux: would update",
-            "nvim: would update"])
+            "gnome: would update", "ptyxis: would update",
+            "tmux: would update", "nvim: would update"])
+        at = self.lines(result).index("ptyxis: would update")
+        self.assertEqual(self.lines(result)[at + 1:at + 5],
+                         PTYXIS_INSTALL[1:])
         self.assertIn("  reload tmux server", self.lines(result))
         self.assertFalse(os.path.lexists(self.env.install))
         self.assertFalse(os.path.lexists(self.env.versions))
+        self.assertFalse(os.path.lexists(support.ptx(self.env)))
 
     def test_changed_colour(self):
         support.configure_ok(self.env, "all")
         result = self.dry(root=blue_copy(self))
         self.assertEqual(self.lines(result), [
             "gnome: would update", "  set palette",
+            "ptyxis: would update", "  write palette Ukiyo-e.palette",
             "tmux: would update", "  write tmux/colors.conf",
             "  write tmux/status-plain.conf", "  write tmux/status.conf",
             "  switch install directory", "  reload tmux server",
@@ -359,8 +411,10 @@ class DryRunTest(FullTestCase):
         support.configure_ok(self.env, "all")
         result = self.dry("--uninstall")
         self.assertEqual(self.status_lines(result), [
-            "gnome: would remove", "tmux: would remove",
-            "nvim: would remove"])
+            "gnome: would remove", "ptyxis: would remove",
+            "tmux: would remove", "nvim: would remove"])
+        self.assertIn("  remove palette Ukiyo-e.palette",
+                      self.lines(result))
         self.assertIn("  remove install directory", self.lines(result))
         self.assertIn("  reset tmux options", self.lines(result))
 
@@ -381,9 +435,12 @@ class UninstallTest(FullTestCase):
         return home
 
     def allowed(self, rel):
-        """SAF-3 (a) paths, the harness dconf db, and their parents."""
-        return rel in ("data", "config") or rel.startswith((
-            "data/ukiyo_e", "data/.ukiyo_e.new-", "config/dconf"))
+        """SAF-3 (a)/(e) paths, the harness dconf db, their parents."""
+        ptx = "data/org.gnome.Ptyxis/palettes"
+        return rel in ("data", "config", "data/org.gnome.Ptyxis", ptx) \
+            or rel.startswith(("data/ukiyo_e", "data/.ukiyo_e.new-",
+                               "config/dconf", f"{ptx}/Ukiyo-e.palette",
+                               f"{ptx}/.Ukiyo-e.palette.new-"))
 
     def test_install_then_uninstall(self):
         home = self.write_dotfiles()
@@ -394,7 +451,9 @@ class UninstallTest(FullTestCase):
         files1 = support.tree_snapshot(self.env.root)
         result = support.configure_ok(self.env, "all", "--uninstall")
         self.assertEqual(self.status_lines(result), [
-            "gnome: removed", "tmux: removed", "nvim: removed"])
+            "gnome: removed", "ptyxis: removed", "tmux: removed",
+            "nvim: removed"])
+        self.assert_ptyxis_removed()
         self.assertLess(self.lines(result).index("  reset tmux options"),
                         self.lines(result).index("nvim: removed"))
         self.assertFalse(os.path.lexists(self.env.install))
@@ -410,6 +469,15 @@ class UninstallTest(FullTestCase):
         self.assertEqual([p for p in changed if not self.allowed(p)], [])
         self.assertEqual(self.server.snapshot(), tmux0)
 
+    def assert_ptyxis_removed(self):
+        dump = support.parse_dump(harness.dump_ptyxis(self.env.vars))
+        self.assertNotIn(PTYXIS_UUID, dump.get("/", {}).get(
+            "profile-uuids", ""))
+        self.assertNotIn(f"Profiles/{PTYXIS_UUID}", dump)
+        self.assertFalse(os.path.lexists(support.ptx(self.env)
+                                         / "Ukiyo-e.palette"))
+        self.assertTrue(support.ptx(self.env).is_dir())
+
     def test_broken_palette_never_blocks_removal(self):
         support.configure_ok(self.env, "all")
         root = support.copy_repo()
@@ -418,7 +486,8 @@ class UninstallTest(FullTestCase):
         result = support.configure_ok(self.env, "all", "--uninstall",
                                       root=root)
         self.assertEqual(self.status_lines(result), [
-            "gnome: removed", "tmux: removed", "nvim: removed"])
+            "gnome: removed", "ptyxis: removed", "tmux: removed",
+            "nvim: removed"])
 
     def test_status_content_off(self):
         self.server.tmux("set", "-g", "@ukiyo_e_show_status_content", "off")
@@ -430,6 +499,14 @@ class UninstallTest(FullTestCase):
         fresh = support.TmuxServer.start(self, self.env)
         self.assertEqual(values,
                          {o: fresh.value(o) for o in tmux.STYLE_OPTIONS})
+
+
+def setUpModule():
+    support.RealStateGuard.take()
+
+
+def tearDownModule():
+    support.RealStateGuard.verify()
 
 
 if __name__ == "__main__":

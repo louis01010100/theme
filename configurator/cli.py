@@ -9,16 +9,18 @@ from contextlib import contextmanager
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
+from types import MappingProxyType
 from typing import Mapping
 
-from configurator import files, gnome, install_dir, nvim, palette, tmux
+from configurator import (files, gnome, install_dir, nvim, palette,
+                          ptyxis, tmux)
 from configurator.files import CurrentState, Interrupted, Layout
 from configurator.palette import InputError
 from configurator.report import Status, TargetResult, emit, err, warn
-from configurator.terminal_ansi import validate_ansi
+from configurator.terminal_ansi import validate_ansi, validate_roles
 
 REPO = Path(__file__).resolve().parent.parent
-USAGE = ("usage: configure.py [all|gnome|tmux|nvim] [--dry-run] "
+USAGE = ("usage: configure.py [all|gnome|ptyxis|tmux|nvim] [--dry-run] "
          "[--uninstall] [--set-default] [-h|--help]")
 EXIT_OK, EXIT_USAGE, EXIT_INPUT, EXIT_APPLY = 0, 2, 3, 4
 FLAGS = ("--dry-run", "--uninstall", "--set-default")
@@ -27,11 +29,13 @@ NOT_RUN = "earlier target failed"
 
 class Target(Enum):
     GNOME = "gnome"
+    PTYXIS = "ptyxis"
     TMUX = "tmux"
     NVIM = "nvim"
 
 
-ORDER = (Target.GNOME, Target.TMUX, Target.NVIM)
+ORDER = (Target.GNOME, Target.PTYXIS, Target.TMUX, Target.NVIM)
+TERMINALS = (Target.GNOME, Target.PTYXIS)
 NAMES = ("all",) + tuple(t.value for t in ORDER)
 
 
@@ -63,24 +67,44 @@ class RunOptions:
 
     @property
     def file_targets(self) -> tuple:
-        return tuple(t.value for t in self.targets if t is not Target.GNOME)
+        return tuple(t.value for t in self.targets
+                     if t not in TERMINALS)
+
+    @property
+    def is_all(self) -> bool:
+        """The `all` target (named or by default): skip rule applies."""
+        return self.targets == ORDER
 
 
 @dataclass(frozen=True)
 class Inputs:
-    """Desired file trees per file target and GNOME key values."""
+    """Desired file trees, GNOME key values, Ptyxis file and keys."""
 
     trees: Mapping
     gnome_keys: tuple
+    ptyxis: ptyxis.PtyxisDesired | None = None
 
 
 @dataclass(frozen=True)
 class Context:
-    """Everything known after the read-only preparation states."""
+    """Everything known after the read-only preparation states.
+
+    skipped: terminals of `all` whose prerequisite is missing, with
+    the missing item (REQ-CLI-4).
+    """
 
     opts: RunOptions
     layout: Layout
     inputs: Inputs
+    skipped: Mapping
+
+    @property
+    def ptx(self) -> ptyxis.PtyxisPaths:
+        return ptyxis.paths(self.layout.data)
+
+    def active(self, target: Target) -> bool:
+        """Selected and not skipped."""
+        return target in self.opts.targets and target not in self.skipped
 
 
 @dataclass(frozen=True)
@@ -127,6 +151,7 @@ class Plan:
     """Per-target change sets of one run."""
 
     gnome: gnome.GnomePlan | None
+    ptyxis: ptyxis.PtyxisPlan | None
     files: FilePlan | None
     live: LiveAction | None
 
@@ -139,8 +164,9 @@ def select(names) -> tuple:
 
 
 def check_flags(opts: RunOptions) -> None:
-    if opts.set_default and Target.GNOME not in opts.targets:
-        raise UsageError("--set-default needs the gnome or all target")
+    if opts.set_default and not set(TERMINALS) & set(opts.targets):
+        raise UsageError("--set-default needs the gnome, ptyxis or all "
+                         "target")
     if opts.set_default and opts.uninstall:
         raise UsageError("--set-default and --uninstall are exclusive")
 
@@ -163,7 +189,8 @@ def validation_errors(raw, templates) -> list:
     """Every palette, mapping, template and source-tree error."""
     names = palette.palette_names(raw)
     return (palette.validate_palette(raw) + validate_ansi(names)
-            + gnome.validate_roles(names) + tmux.validate_roles(names)
+            + validate_roles(names) + ptyxis.validate_keys()
+            + tmux.validate_roles(names)
             + tmux.validate_templates(templates)
             + nvim.validate_sources(REPO))
 
@@ -175,10 +202,12 @@ def render(opts: RunOptions, colours, templates) -> Inputs:
         trees["tmux"] = tmux.file_set(REPO, colours, templates)
     if "nvim" in opts.file_targets:
         trees["nvim"] = nvim.file_set(REPO, colours)
-    keys = ()
+    keys, wanted = (), None
     if Target.GNOME in opts.targets:
         keys = gnome.desired_keys(colours)
-    return Inputs(trees, keys)
+    if Target.PTYXIS in opts.targets:
+        wanted = ptyxis.desired(colours)
+    return Inputs(trees, keys, wanted)
 
 
 def load_inputs(opts: RunOptions) -> Inputs:
@@ -193,37 +222,72 @@ def load_inputs(opts: RunOptions) -> Inputs:
     return render(opts, palette.make_palette(raw), templates)
 
 
-def check_prereqs(opts: RunOptions, layout: Layout) -> None:
+MISSING = {Target.GNOME: gnome.missing, Target.PTYXIS: ptyxis.missing}
+
+
+def terminal_prereq(opts: RunOptions, target: Target,
+                    layout) -> str | None:
+    """REQ-GT-2 / REQ-PTX-2; the missing item when `all` skips it."""
+    reason = MISSING[target]()
+    if reason and not opts.is_all:
+        raise InputError(f"{target.value}: {reason}")
+    if not reason and target is Target.PTYXIS:
+        ptyxis.check_owned(ptyxis.paths(layout.data))
+    return reason
+
+
+def check_prereqs(opts: RunOptions, layout: Layout) -> Mapping:
+    """State prereq, in order; returns the skipped terminals."""
+    skipped = {}
     for target in opts.targets:
-        if target is Target.GNOME:
-            gnome.check_prereq()
+        if target in TERMINALS:
+            reason = terminal_prereq(opts, target, layout)
+            if reason:
+                skipped[target] = reason
         else:
             files.check_managed(layout)
+    return MappingProxyType(skipped)
 
 
 def prepare(opts: RunOptions) -> Context:
     """States environment, load, validate, render, prereq."""
     layout = install_dir.resolve(os.environ)
     inputs = load_inputs(opts)
-    check_prereqs(opts, layout)
-    return Context(opts, layout, inputs)
+    skipped = check_prereqs(opts, layout)
+    return Context(opts, layout, inputs, skipped)
 
 
 def collect_garbage(ctx: Context) -> None:
-    if ctx.opts.dry_run or not ctx.opts.file_targets:
+    """State gc: file-step leftovers and Ptyxis temporary files."""
+    if ctx.opts.dry_run:
         return
-    for message in files.gc(ctx.layout):
+    messages = ()
+    if ctx.opts.file_targets:
+        messages += files.gc(ctx.layout)
+    if ctx.active(Target.PTYXIS):
+        messages += ptyxis.gc_leftovers(ctx.ptx)
+    for message in messages:
         warn(message)
 
 
 def plan_gnome(ctx: Context):
-    if Target.GNOME not in ctx.opts.targets:
+    if not ctx.active(Target.GNOME):
         return None
     state = gnome.probe()
     if ctx.opts.uninstall:
         return gnome.plan_uninstall(state)
     return gnome.plan_install(ctx.inputs.gnome_keys, state,
                               ctx.opts.set_default)
+
+
+def plan_ptyxis(ctx: Context):
+    if not ctx.active(Target.PTYXIS):
+        return None
+    state = ptyxis.probe(ctx.ptx)
+    if ctx.opts.uninstall:
+        return ptyxis.plan_uninstall(state)
+    return ptyxis.plan_install(ctx.inputs.ptyxis, state,
+                               ctx.opts.set_default)
 
 
 def plan_files(ctx: Context):
@@ -254,7 +318,8 @@ def make_plan(ctx: Context) -> Plan:
     """States gc, probe, plan."""
     collect_garbage(ctx)
     file_plan = plan_files(ctx)
-    return Plan(plan_gnome(ctx), file_plan, plan_live(ctx, file_plan))
+    return Plan(plan_gnome(ctx), plan_ptyxis(ctx), file_plan,
+                plan_live(ctx, file_plan))
 
 
 def outcome_status(opts, changed: bool, installed: bool) -> Outcome:
@@ -270,11 +335,16 @@ def outcome_status(opts, changed: bool, installed: bool) -> Outcome:
                    else Status.UPDATED)
 
 
-def gnome_result(ctx: Context, plan: Plan) -> TargetResult:
-    gp = plan.gnome
-    outcome = outcome_status(ctx.opts, bool(gp.changes), gp.installed)
-    return TargetResult("gnome", outcome.status, outcome.note,
-                        gp.details)
+def terminal_result(ctx: Context, plan: Plan, target) -> TargetResult:
+    """A settings step's line, or its `skipped (not installed)` line."""
+    if target in ctx.skipped:
+        return TargetResult(target.value, Status.SKIPPED,
+                            "not installed", (ctx.skipped[target],))
+    step = plan.gnome if target is Target.GNOME else plan.ptyxis
+    outcome = outcome_status(ctx.opts, bool(step.changes),
+                             step.installed)
+    return TargetResult(target.value, outcome.status, outcome.note,
+                        step.details)
 
 
 def switch_detail(file_plan: FilePlan, target: str) -> tuple:
@@ -303,8 +373,8 @@ def planned_results(ctx: Context, plan: Plan) -> RunReport:
     """The report of a run in which every step succeeds."""
     results = []
     for target in ctx.opts.targets:
-        if target is Target.GNOME:
-            results.append(gnome_result(ctx, plan))
+        if target in TERMINALS:
+            results.append(terminal_result(ctx, plan, target))
         else:
             results.append(file_result(ctx, plan, target.value))
     return RunReport(tuple(results))
@@ -331,10 +401,19 @@ def interrupts_raised():
             signal.signal(number, previous)
 
 
-def gnome_failed(ctx: Context, reason: str) -> int:
-    emit(TargetResult("gnome", Status.FAILED, reason))
-    for target in ctx.opts.file_targets:
-        emit(TargetResult(target, Status.NOT_RUN, NOT_RUN))
+def terminal_failed(ctx: Context, planned: RunReport, target,
+                    reason: str) -> int:
+    """A settings step failed: later targets are not run.
+
+    A later terminal skipped in prereq keeps its skipped line.
+    """
+    emit(TargetResult(target.value, Status.FAILED, reason))
+    later = ctx.opts.targets[ctx.opts.targets.index(target) + 1:]
+    for other in later:
+        if other in ctx.skipped:
+            emit(planned.result(other.value))
+        else:
+            emit(TargetResult(other.value, Status.NOT_RUN, NOT_RUN))
     return EXIT_APPLY
 
 
@@ -386,14 +465,24 @@ def finish_files(ctx: Context, plan: Plan, planned: RunReport) -> int:
     return EXIT_APPLY if outcome.error or live_error else EXIT_OK
 
 
+def apply_terminal(ctx: Context, plan: Plan, target) -> str | None:
+    """One settings step; a failure reason or None."""
+    if not ctx.active(target):
+        return None
+    if target is Target.GNOME:
+        return gnome.apply(plan.gnome)
+    return ptyxis.apply(plan.ptyxis, ctx.ptx)
+
+
 def apply_steps(ctx: Context, plan: Plan) -> int:
     """State apply, in REQ-CLI-4 order."""
     planned = planned_results(ctx, plan)
-    if plan.gnome is not None:
-        failure = gnome.apply(plan.gnome)
+    for target in TERMINALS:
+        failure = apply_terminal(ctx, plan, target)
         if failure:
-            return gnome_failed(ctx, failure)
-        emit(planned.result("gnome"))
+            return terminal_failed(ctx, planned, target, failure)
+        if target in ctx.opts.targets:
+            emit(planned.result(target.value))
     if plan.files is None:
         return EXIT_OK
     return finish_files(ctx, plan, planned)

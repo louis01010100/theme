@@ -187,9 +187,35 @@ def assert_isolated(env):
         raise AssertionError(f"ISOLATION: {problem}")
 
 
+TERMINAL_TARGETS = ("all", "gnome", "ptyxis")
+
+
+def selects_terminal(args):
+    """Whether configure.py <args> may reach gsettings."""
+    if "-h" in args or "--help" in args:
+        return False
+    targets = [a for a in args if not a.startswith("-")]
+    return not targets or any(a in TERMINAL_TARGETS for a in targets)
+
+
+def bus_problem(env, args):
+    """A terminal run needs a private bus (or no gsettings at all)."""
+    if not selects_terminal(args):
+        return None
+    if shutil.which("gsettings", path=env.get("PATH", "")) is None:
+        return None
+    bus = env.get("DBUS_SESSION_BUS_ADDRESS", "")
+    if not bus or bus == os.environ.get("DBUS_SESSION_BUS_ADDRESS", ""):
+        return f"terminal run without a private bus: {bus!r}"
+    return None
+
+
 def run_configure(env, *args, root=REPO):
     """Run a repository's configure.py in a proven-isolated env."""
     assert_isolated(env.vars)
+    problem = bus_problem(env.vars, args)
+    if problem:
+        raise AssertionError(f"ISOLATION: {problem}")
     argv = [sys.executable, str(Path(root) / "configure.py"), *args]
     return run(argv, cwd=env.root / "cwd", env=env.vars, stdin="")
 
@@ -245,9 +271,48 @@ def changed_paths(before, after):
                   if before.get(k) != after.get(k))
 
 
-def real_dconf_dump():
-    """Read-only dump of the user's real GNOME Terminal settings."""
-    return run(["dconf", "dump", "/org/gnome/terminal/"]).stdout
+def real_dconf_dump(path="/org/gnome/terminal/"):
+    """Read-only dump of the user's real settings under path."""
+    return run(["dconf", "dump", path]).stdout
+
+
+def real_data_dir():
+    """The real $DATA of REQ-INST-1 (outer environment)."""
+    xdg = os.environ.get("XDG_DATA_HOME", "")
+    if xdg and Path(xdg).is_absolute():
+        return Path(xdg)
+    return REAL_DATA
+
+
+def real_ptx():
+    return real_data_dir() / "org.gnome.Ptyxis" / "palettes"
+
+
+def ptx(env):
+    """$PTX of a scratch env."""
+    return env.data / "org.gnome.Ptyxis" / "palettes"
+
+
+def real_entries():
+    """Real ukiyo_e, ukiyo_e.versions, .ukiyo_e.new-* (with links)."""
+    data = real_data_dir()
+    found = {}
+    for pattern in ("ukiyo_e*", ".ukiyo_e.new-*"):
+        for path in sorted(data.glob(pattern)):
+            found[path.name] = entry_snapshot(path)
+    return found
+
+
+def real_state():
+    """SAF-8: real dconf dumps, install entries, and real $PTX."""
+    folder = real_ptx()
+    tree = None
+    if os.path.lexists(folder):
+        tree = tree_snapshot(folder, skip=())
+    return {"terminal": real_dconf_dump(),
+            "ptyxis": real_dconf_dump("/org/gnome/Ptyxis/"),
+            "entries": real_entries(),
+            "ptx": (os.path.lexists(folder), tree)}
 
 
 TMUX_ALLOWLIST = frozenset({
@@ -357,18 +422,18 @@ def parse_dump(text):
     return sections
 
 
-class RealDconfGuard:
-    """Fail loudly if the user's real GNOME Terminal settings change."""
+class RealStateGuard:
+    """Fail loudly if the user's real state changes (SAF-8)."""
 
     before = None
 
     @classmethod
     def take(cls):
-        cls.before = real_dconf_dump()
+        cls.before = real_state()
 
     @classmethod
     def verify(cls):
-        after = real_dconf_dump()
-        if after != cls.before:
-            raise AssertionError("REAL DCONF CHANGED")
-
+        after = real_state()
+        changed = sorted(k for k in after if after[k] != cls.before[k])
+        if changed:
+            raise AssertionError(f"REAL STATE CHANGED: {changed}")

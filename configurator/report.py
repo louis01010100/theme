@@ -17,6 +17,7 @@ class Status(Enum):
     REMOVED = "removed"
     FAILED = "failed"
     NOT_RUN = "not run"
+    SKIPPED = "skipped"
 
 
 @dataclass(frozen=True)
