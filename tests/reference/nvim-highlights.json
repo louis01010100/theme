@@ -1,0 +1,4211 @@
+{
+  "neovim": "NVIM v0.11.2",
+  "opaque": {
+    "@attribute": {
+      "link": "Constant"
+    },
+    "@comment.error": {
+      "bg": "#ae4e47",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#c5c9c5"
+    },
+    "@comment.note": {
+      "bg": "#6d8885",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#3f4e56"
+    },
+    "@comment.warning": {
+      "bg": "#9d7257",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#3f4e56"
+    },
+    "@constructor": {
+      "fg": "#68738b"
+    },
+    "@constructor.lua": {
+      "fg": "#68738b"
+    },
+    "@diff.delta": {
+      "fg": "#ae955e"
+    },
+    "@diff.minus": {
+      "fg": "#ae4e47"
+    },
+    "@diff.plus": {
+      "fg": "#6e7e60"
+    },
+    "@function.macro": {
+      "link": "Macro"
+    },
+    "@keyword.exception": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#ae4e47"
+    },
+    "@keyword.import": {
+      "link": "PreProc"
+    },
+    "@keyword.luap": {
+      "link": "@string.regex"
+    },
+    "@keyword.operator": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#ae4e47"
+    },
+    "@keyword.return": {
+      "cterm": {
+        "italic": true
+      },
+      "fg": "#ae4e47",
+      "italic": true
+    },
+    "@lsp.mod.readonly": {
+      "link": "Constant"
+    },
+    "@lsp.mod.typeHint": {
+      "link": "Type"
+    },
+    "@lsp.type.bitwise": {
+      "link": "Operator"
+    },
+    "@lsp.type.builtinConstant": {
+      "link": "@constant.builtin"
+    },
+    "@lsp.type.comment": {
+      "link": "Comment"
+    },
+    "@lsp.type.comparison": {
+      "link": "Operator"
+    },
+    "@lsp.type.const": {
+      "link": "Constant"
+    },
+    "@lsp.type.decorator.rust": {
+      "link": "PreProc"
+    },
+    "@lsp.type.lifetime": {
+      "link": "Operator"
+    },
+    "@lsp.type.macro": {
+      "link": "Macro"
+    },
+    "@lsp.type.magicFunction": {
+      "link": "@function.builtin"
+    },
+    "@lsp.type.method": {
+      "link": "@function.method"
+    },
+    "@lsp.type.namespace": {
+      "link": "@module"
+    },
+    "@lsp.type.parameter": {
+      "link": "@variable.parameter"
+    },
+    "@lsp.type.punctuation": {
+      "link": "Delimiter"
+    },
+    "@lsp.type.selfParameter": {
+      "link": "@variable.builtin"
+    },
+    "@lsp.type.variable": {},
+    "@lsp.typemod.function.builtin": {
+      "link": "@function.builtin"
+    },
+    "@lsp.typemod.function.defaultLibrary": {
+      "link": "@function.builtin"
+    },
+    "@lsp.typemod.function.readonly": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#668696"
+    },
+    "@lsp.typemod.keyword.documentation": {
+      "link": "Special"
+    },
+    "@lsp.typemod.method.defaultLibrary": {
+      "link": "@function.builtin"
+    },
+    "@lsp.typemod.operator.controlFlow": {
+      "link": "@keyword.exception"
+    },
+    "@lsp.typemod.variable.defaultLibrary": {
+      "link": "Special"
+    },
+    "@lsp.typemod.variable.global": {
+      "link": "Constant"
+    },
+    "@lsp.typemod.variable.injected": {
+      "link": "@variable"
+    },
+    "@lsp.typemod.variable.static": {
+      "link": "Constant"
+    },
+    "@markup.environment": {
+      "link": "Keyword"
+    },
+    "@markup.heading": {
+      "link": "Function"
+    },
+    "@markup.italic": {
+      "cterm": {
+        "italic": true
+      },
+      "italic": true
+    },
+    "@markup.link.url": {
+      "link": "@string.special.url"
+    },
+    "@markup.math": {
+      "link": "Constant"
+    },
+    "@markup.quote": {
+      "link": "@variable.parameter"
+    },
+    "@markup.raw": {
+      "link": "String"
+    },
+    "@markup.strikethrough": {
+      "cterm": {
+        "strikethrough": true
+      },
+      "strikethrough": true
+    },
+    "@markup.strong": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      }
+    },
+    "@markup.underline": {
+      "cterm": {
+        "underline": true
+      },
+      "underline": true
+    },
+    "@operator": {
+      "link": "Operator"
+    },
+    "@punctuation.bracket": {
+      "fg": "#9e9b93"
+    },
+    "@punctuation.delimiter": {
+      "fg": "#9e9b93"
+    },
+    "@punctuation.special": {
+      "fg": "#68738b"
+    },
+    "@string.escape": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#ae4e47"
+    },
+    "@string.regexp": {
+      "fg": "#ae4e47"
+    },
+    "@string.special.symbol": {
+      "fg": "#ae955e"
+    },
+    "@string.special.url": {
+      "cterm": {
+        "undercurl": true
+      },
+      "fg": "#68738b",
+      "undercurl": true
+    },
+    "@tag.attribute": {
+      "fg": "#ae955e"
+    },
+    "@tag.delimiter": {
+      "fg": "#9e9b93"
+    },
+    "@variable": {
+      "fg": "#c5c9c5"
+    },
+    "@variable.builtin": {
+      "cterm": {
+        "italic": true
+      },
+      "fg": "#ae4e47",
+      "italic": true
+    },
+    "@variable.member": {
+      "fg": "#ae955e"
+    },
+    "@variable.parameter": {
+      "fg": "#a6a69c"
+    },
+    "AerialArrayIcon": {
+      "link": "Type"
+    },
+    "AerialBooleanIcon": {
+      "link": "Boolean"
+    },
+    "AerialClassIcon": {
+      "link": "Type"
+    },
+    "AerialConstantIcon": {
+      "link": "Constant"
+    },
+    "AerialConstructorIcon": {
+      "link": "@constructor"
+    },
+    "AerialEnumIcon": {
+      "link": "Type"
+    },
+    "AerialEnumMemberIcon": {
+      "link": "Constant"
+    },
+    "AerialEventIcon": {
+      "link": "Structure"
+    },
+    "AerialFieldIcon": {
+      "link": "@variable.member"
+    },
+    "AerialFileIcon": {
+      "link": "Directory"
+    },
+    "AerialFunctionIcon": {
+      "link": "Function"
+    },
+    "AerialInterfaceIcon": {
+      "link": "Type"
+    },
+    "AerialKeyIcon": {
+      "link": "Identifier"
+    },
+    "AerialMethodIcon": {
+      "link": "@function.method"
+    },
+    "AerialModuleIcon": {
+      "link": "@module"
+    },
+    "AerialNamespaceIcon": {
+      "link": "@module"
+    },
+    "AerialNullIcon": {
+      "link": "Type"
+    },
+    "AerialNumberIcon": {
+      "link": "Number"
+    },
+    "AerialObjectIcon": {
+      "link": "Type"
+    },
+    "AerialOperatorIcon": {
+      "link": "Operator"
+    },
+    "AerialPackageIcon": {
+      "link": "@module"
+    },
+    "AerialPropertyIcon": {
+      "link": "@property"
+    },
+    "AerialStringIcon": {
+      "link": "String"
+    },
+    "AerialStructIcon": {
+      "link": "Structure"
+    },
+    "AerialTypeParameterIcon": {
+      "link": "Type"
+    },
+    "AerialVariableIcon": {
+      "link": "@variable"
+    },
+    "BlinkCmpDoc": {
+      "link": "NormalFloat"
+    },
+    "BlinkCmpDocBorder": {
+      "link": "FloatBorder"
+    },
+    "BlinkCmpDocCursorLine": {
+      "link": "Visual"
+    },
+    "BlinkCmpGhostText": {
+      "fg": "#7a8382"
+    },
+    "BlinkCmpKind": {
+      "fg": "#c5c9c5"
+    },
+    "BlinkCmpKindClass": {
+      "link": "Type"
+    },
+    "BlinkCmpKindColor": {
+      "link": "Special"
+    },
+    "BlinkCmpKindConstant": {
+      "link": "Constant"
+    },
+    "BlinkCmpKindConstructor": {
+      "link": "@constructor"
+    },
+    "BlinkCmpKindCopilot": {
+      "link": "String"
+    },
+    "BlinkCmpKindEnum": {
+      "link": "Type"
+    },
+    "BlinkCmpKindEnumMember": {
+      "link": "Constant"
+    },
+    "BlinkCmpKindEvent": {
+      "link": "Type"
+    },
+    "BlinkCmpKindField": {
+      "link": "@variable.member"
+    },
+    "BlinkCmpKindFile": {
+      "link": "Directory"
+    },
+    "BlinkCmpKindFolder": {
+      "link": "Directory"
+    },
+    "BlinkCmpKindFunction": {
+      "link": "Function"
+    },
+    "BlinkCmpKindInterface": {
+      "link": "Type"
+    },
+    "BlinkCmpKindKeyword": {
+      "link": "Keyword"
+    },
+    "BlinkCmpKindMethod": {
+      "link": "@function.method"
+    },
+    "BlinkCmpKindModule": {
+      "link": "@module"
+    },
+    "BlinkCmpKindOperator": {
+      "link": "Operator"
+    },
+    "BlinkCmpKindProperty": {
+      "link": "@property"
+    },
+    "BlinkCmpKindReference": {
+      "link": "Special"
+    },
+    "BlinkCmpKindSnippet": {
+      "link": "Special"
+    },
+    "BlinkCmpKindStruct": {
+      "link": "Type"
+    },
+    "BlinkCmpKindText": {
+      "fg": "#c5c9c5"
+    },
+    "BlinkCmpKindTypeParameter": {
+      "link": "Type"
+    },
+    "BlinkCmpKindUnit": {
+      "link": "Number"
+    },
+    "BlinkCmpKindValue": {
+      "link": "String"
+    },
+    "BlinkCmpKindVariable": {
+      "fg": "#c5c9c5"
+    },
+    "BlinkCmpLabel": {
+      "fg": "#c5c9c5"
+    },
+    "BlinkCmpLabelDeprecated": {
+      "cterm": {
+        "strikethrough": true
+      },
+      "fg": "#7a8382",
+      "strikethrough": true
+    },
+    "BlinkCmpLabelDetails": {
+      "fg": "#7a8382"
+    },
+    "BlinkCmpLabelMatch": {
+      "fg": "#668696"
+    },
+    "BlinkCmpMenu": {
+      "link": "Pmenu"
+    },
+    "BlinkCmpMenuBorder": {
+      "bg": "#3f4e56",
+      "fg": "#424f4e"
+    },
+    "BlinkCmpMenuSelection": {
+      "link": "PmenuSel"
+    },
+    "BlinkCmpScrollBarGutter": {
+      "link": "PmenuSbar"
+    },
+    "BlinkCmpScrollBarThumb": {
+      "link": "PmenuThumb"
+    },
+    "BlinkCmpSignatureHelp": {
+      "link": "NormalFloat"
+    },
+    "BlinkCmpSignatureHelpActiveParameter": {
+      "link": "LspSignatureActiveParameter"
+    },
+    "BlinkCmpSignatureHelpBorder": {
+      "link": "FloatBorder"
+    },
+    "Bold": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      }
+    },
+    "Boolean": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#9d7257"
+    },
+    "Character": {
+      "link": "String"
+    },
+    "CmpCompletion": {
+      "link": "Pmenu"
+    },
+    "CmpCompletionBorder": {
+      "bg": "#3f4e56",
+      "fg": "#424f4e"
+    },
+    "CmpCompletionSbar": {
+      "link": "PmenuSbar"
+    },
+    "CmpCompletionSel": {
+      "link": "PmenuSel"
+    },
+    "CmpCompletionThumb": {
+      "link": "PmenuThumb"
+    },
+    "CmpDocumentation": {
+      "link": "NormalFloat"
+    },
+    "CmpDocumentationBorder": {
+      "link": "FloatBorder"
+    },
+    "CmpGhostText": {
+      "fg": "#7a8382"
+    },
+    "CmpItemAbbr": {
+      "fg": "#c5c9c5"
+    },
+    "CmpItemAbbrDeprecated": {
+      "cterm": {
+        "strikethrough": true
+      },
+      "fg": "#7a8382",
+      "strikethrough": true
+    },
+    "CmpItemAbbrMatch": {
+      "fg": "#668696"
+    },
+    "CmpItemAbbrMatchFuzzy": {
+      "link": "CmpItemAbbrMatch"
+    },
+    "CmpItemKindClass": {
+      "link": "Type"
+    },
+    "CmpItemKindColor": {
+      "link": "Special"
+    },
+    "CmpItemKindConstant": {
+      "link": "Constant"
+    },
+    "CmpItemKindConstructor": {
+      "link": "@constructor"
+    },
+    "CmpItemKindCopilot": {
+      "link": "String"
+    },
+    "CmpItemKindDefault": {
+      "fg": "#c5c9c5"
+    },
+    "CmpItemKindEnum": {
+      "link": "Type"
+    },
+    "CmpItemKindEnumMember": {
+      "link": "Constant"
+    },
+    "CmpItemKindEvent": {
+      "link": "Type"
+    },
+    "CmpItemKindField": {
+      "link": "@variable.member"
+    },
+    "CmpItemKindFile": {
+      "link": "Directory"
+    },
+    "CmpItemKindFolder": {
+      "link": "Directory"
+    },
+    "CmpItemKindFunction": {
+      "link": "Function"
+    },
+    "CmpItemKindInterface": {
+      "link": "Type"
+    },
+    "CmpItemKindKeyword": {
+      "link": "Keyword"
+    },
+    "CmpItemKindMethod": {
+      "link": "@function.method"
+    },
+    "CmpItemKindModule": {
+      "link": "@module"
+    },
+    "CmpItemKindOperator": {
+      "link": "Operator"
+    },
+    "CmpItemKindProperty": {
+      "link": "@property"
+    },
+    "CmpItemKindReference": {
+      "link": "Special"
+    },
+    "CmpItemKindSnippet": {
+      "link": "Special"
+    },
+    "CmpItemKindStruct": {
+      "link": "Type"
+    },
+    "CmpItemKindText": {
+      "fg": "#c5c9c5"
+    },
+    "CmpItemKindTypeParameter": {
+      "link": "Type"
+    },
+    "CmpItemKindUnit": {
+      "link": "Number"
+    },
+    "CmpItemKindValue": {
+      "link": "String"
+    },
+    "CmpItemKindVariable": {
+      "fg": "#c5c9c5"
+    },
+    "CmpItemMenu": {
+      "fg": "#c5c9c5"
+    },
+    "ColorColumn": {
+      "bg": "#282727"
+    },
+    "Comment": {
+      "cterm": {
+        "italic": true
+      },
+      "fg": "#7a8382",
+      "italic": true
+    },
+    "Conceal": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#7a8382"
+    },
+    "Constant": {
+      "fg": "#9d7257"
+    },
+    "CurSearch": {
+      "bg": "#424f4e",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#c5c9c5"
+    },
+    "Cursor": {
+      "bg": "#c5c9c5",
+      "fg": "#181616"
+    },
+    "CursorColumn": {
+      "link": "CursorLine"
+    },
+    "CursorIM": {
+      "link": "Cursor"
+    },
+    "CursorLine": {
+      "bg": "#393836"
+    },
+    "CursorLineNr": {
+      "bg": "#282727",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#9d7257"
+    },
+    "DapUIBreakpointsCurrentLine": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#ae955e"
+    },
+    "DapUIBreakpointsDisabledLine": {
+      "link": "Comment"
+    },
+    "DapUIBreakpointsInfo": {
+      "fg": "#668696"
+    },
+    "DapUIBreakpointsPath": {
+      "link": "Directory"
+    },
+    "DapUIDecoration": {
+      "fg": "#625e5a"
+    },
+    "DapUIFloatBorder": {
+      "fg": "#625e5a"
+    },
+    "DapUILineNumber": {
+      "fg": "#68738b"
+    },
+    "DapUIModifiedValue": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#68738b"
+    },
+    "DapUIPlayPause": {
+      "fg": "#6e7e60"
+    },
+    "DapUIRestart": {
+      "fg": "#6e7e60"
+    },
+    "DapUIScope": {
+      "link": "Special"
+    },
+    "DapUISource": {
+      "fg": "#ae4e47"
+    },
+    "DapUIStepBack": {
+      "fg": "#68738b"
+    },
+    "DapUIStepInto": {
+      "fg": "#68738b"
+    },
+    "DapUIStepOut": {
+      "fg": "#68738b"
+    },
+    "DapUIStepOver": {
+      "fg": "#68738b"
+    },
+    "DapUIStop": {
+      "fg": "#ae4e47"
+    },
+    "DapUIStoppedThread": {
+      "fg": "#68738b"
+    },
+    "DapUIThread": {
+      "fg": "#ae955e"
+    },
+    "DapUIType": {
+      "link": "Type"
+    },
+    "DapUIUnavailable": {
+      "fg": "#7a8382"
+    },
+    "DapUIWatchesEmpty": {
+      "fg": "#ae4e47"
+    },
+    "DapUIWatchesError": {
+      "fg": "#ae4e47"
+    },
+    "DapUIWatchesValue": {
+      "fg": "#ae955e"
+    },
+    "DashboardCenter": {
+      "fg": "#ae955e"
+    },
+    "DashboardDesc": {
+      "fg": "#ae955e"
+    },
+    "DashboardFooter": {
+      "fg": "#7a8382"
+    },
+    "DashboardHeader": {
+      "fg": "#ae4e47"
+    },
+    "DashboardIcon": {
+      "fg": "#7a8382"
+    },
+    "DashboardKey": {
+      "fg": "#68738b"
+    },
+    "DashboardShortCut": {
+      "fg": "#68738b"
+    },
+    "Delimiter": {
+      "fg": "#9e9b93"
+    },
+    "DiagnosticError": {
+      "fg": "#ae4e47"
+    },
+    "DiagnosticFloatingError": {
+      "fg": "#ae4e47"
+    },
+    "DiagnosticFloatingHint": {
+      "fg": "#6d8885"
+    },
+    "DiagnosticFloatingInfo": {
+      "fg": "#668696"
+    },
+    "DiagnosticFloatingOk": {
+      "fg": "#6e7e60"
+    },
+    "DiagnosticFloatingWarn": {
+      "fg": "#9d7257"
+    },
+    "DiagnosticHint": {
+      "fg": "#6d8885"
+    },
+    "DiagnosticInfo": {
+      "fg": "#668696"
+    },
+    "DiagnosticOk": {
+      "fg": "#6e7e60"
+    },
+    "DiagnosticSignError": {
+      "bg": "#282727",
+      "fg": "#ae4e47"
+    },
+    "DiagnosticSignHint": {
+      "bg": "#282727",
+      "fg": "#6d8885"
+    },
+    "DiagnosticSignInfo": {
+      "bg": "#282727",
+      "fg": "#668696"
+    },
+    "DiagnosticSignWarn": {
+      "bg": "#282727",
+      "fg": "#9d7257"
+    },
+    "DiagnosticUnderlineError": {
+      "cterm": {
+        "undercurl": true
+      },
+      "sp": "#ae4e47",
+      "undercurl": true
+    },
+    "DiagnosticUnderlineHint": {
+      "cterm": {
+        "undercurl": true
+      },
+      "sp": "#6d8885",
+      "undercurl": true
+    },
+    "DiagnosticUnderlineInfo": {
+      "cterm": {
+        "undercurl": true
+      },
+      "sp": "#668696",
+      "undercurl": true
+    },
+    "DiagnosticUnderlineWarn": {
+      "cterm": {
+        "undercurl": true
+      },
+      "sp": "#9d7257",
+      "undercurl": true
+    },
+    "DiagnosticVirtualTextError": {
+      "link": "DiagnosticError"
+    },
+    "DiagnosticVirtualTextHint": {
+      "link": "DiagnosticHint"
+    },
+    "DiagnosticVirtualTextInfo": {
+      "link": "DiagnosticInfo"
+    },
+    "DiagnosticVirtualTextWarn": {
+      "link": "DiagnosticWarn"
+    },
+    "DiagnosticWarn": {
+      "fg": "#9d7257"
+    },
+    "DiffAdd": {
+      "bg": "#434a3b"
+    },
+    "DiffChange": {
+      "bg": "#3f4e56"
+    },
+    "DiffDelete": {
+      "bg": "#63322e",
+      "fg": "#ae4e47"
+    },
+    "DiffText": {
+      "bg": "#63563a"
+    },
+    "Directory": {
+      "fg": "#668696"
+    },
+    "EndOfBuffer": {
+      "fg": "#181616"
+    },
+    "Error": {
+      "fg": "#ae4e47"
+    },
+    "ErrorMsg": {
+      "fg": "#ae4e47"
+    },
+    "Exception": {
+      "fg": "#ae4e47"
+    },
+    "Float": {
+      "link": "Number"
+    },
+    "FloatBorder": {
+      "bg": "#181616",
+      "fg": "#625e5a"
+    },
+    "FloatFooter": {
+      "bg": "#181616",
+      "fg": "#625e5a"
+    },
+    "FloatTitle": {
+      "bg": "#181616",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#7a8382"
+    },
+    "FloatermBorder": {
+      "bg": "#181616",
+      "fg": "#625e5a"
+    },
+    "FoldColumn": {
+      "bg": "#282727",
+      "fg": "#625e5a"
+    },
+    "Folded": {
+      "bg": "#282727",
+      "fg": "#7a8382"
+    },
+    "Function": {
+      "fg": "#668696"
+    },
+    "GitSignsAdd": {
+      "bg": "#282727",
+      "fg": "#6e7e60"
+    },
+    "GitSignsChange": {
+      "bg": "#282727",
+      "fg": "#ae955e"
+    },
+    "GitSignsDelete": {
+      "bg": "#282727",
+      "fg": "#ae4e47"
+    },
+    "IblIndent": {
+      "fg": "#625e5a"
+    },
+    "IblScope": {
+      "fg": "#7a8382"
+    },
+    "IblWhitespace": {
+      "fg": "#625e5a"
+    },
+    "Identifier": {
+      "fg": "#ae955e"
+    },
+    "Ignore": {
+      "link": "NonText"
+    },
+    "IncSearch": {
+      "bg": "#9d7257",
+      "fg": "#3f4e56"
+    },
+    "IndentBlanklineChar": {
+      "fg": "#625e5a"
+    },
+    "IndentBlanklineContextChar": {
+      "fg": "#7a8382"
+    },
+    "IndentBlanklineContextStart": {
+      "cterm": {
+        "underline": true
+      },
+      "sp": "#7a8382",
+      "underline": true
+    },
+    "IndentBlanklineSpaceChar": {
+      "fg": "#625e5a"
+    },
+    "IndentBlanklineSpaceCharBlankline": {
+      "fg": "#625e5a"
+    },
+    "Italic": {
+      "cterm": {
+        "italic": true
+      },
+      "italic": true
+    },
+    "Keyword": {
+      "cterm": {
+        "italic": true
+      },
+      "fg": "#68738b",
+      "italic": true
+    },
+    "LazyProgressTodo": {
+      "fg": "#625e5a"
+    },
+    "LineNr": {
+      "bg": "#282727",
+      "fg": "#625e5a"
+    },
+    "LspCodeLens": {
+      "fg": "#7a8382"
+    },
+    "LspReferenceRead": {
+      "link": "LspReferenceText"
+    },
+    "LspReferenceText": {
+      "bg": "#63563a"
+    },
+    "LspReferenceWrite": {
+      "bg": "#63563a",
+      "cterm": {
+        "underline": true
+      },
+      "underline": true
+    },
+    "LspSignatureActiveParameter": {
+      "fg": "#9d7257"
+    },
+    "MatchParen": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#9d7257"
+    },
+    "MiniAnimateCursor": {
+      "cterm": {
+        "nocombine": true,
+        "reverse": true
+      },
+      "nocombine": true,
+      "reverse": true
+    },
+    "MiniAnimateNormalFloat": {
+      "link": "NormalFloat"
+    },
+    "MiniClueBorder": {
+      "link": "FloatBorder"
+    },
+    "MiniClueDescGroup": {
+      "link": "DiagnosticFloatingWarn"
+    },
+    "MiniClueDescSingle": {
+      "link": "NormalFloat"
+    },
+    "MiniClueNextKey": {
+      "link": "DiagnosticFloatingHint"
+    },
+    "MiniClueNextKeyWithPostkeys": {
+      "link": "DiagnosticFloatingError"
+    },
+    "MiniClueSeparator": {
+      "link": "DiagnosticFloatingInfo"
+    },
+    "MiniClueTitle": {
+      "link": "FloatTitle"
+    },
+    "MiniCompletionActiveParameter": {
+      "cterm": {
+        "underline": true
+      },
+      "underline": true
+    },
+    "MiniCursorword": {
+      "cterm": {
+        "underline": true
+      },
+      "underline": true
+    },
+    "MiniCursorwordCurrent": {
+      "cterm": {
+        "underline": true
+      },
+      "underline": true
+    },
+    "MiniDepsChangeAdded": {
+      "link": "diffAdded"
+    },
+    "MiniDepsChangeRemoved": {
+      "link": "diffRemoved"
+    },
+    "MiniDepsHint": {
+      "fg": "#6d8885"
+    },
+    "MiniDepsInfo": {
+      "fg": "#668696"
+    },
+    "MiniDepsMsgBreaking": {
+      "fg": "#9d7257"
+    },
+    "MiniDepsPlaceholder": {
+      "link": "Comment"
+    },
+    "MiniDepsTitle": {
+      "link": "Title"
+    },
+    "MiniDepsTitleError": {
+      "link": "DiffDelete"
+    },
+    "MiniDepsTitleSame": {
+      "link": "DiffText"
+    },
+    "MiniDepsTitleUpdate": {
+      "link": "DiffAdd"
+    },
+    "MiniDiffOverAdd": {
+      "link": "DiffAdd"
+    },
+    "MiniDiffOverChange": {
+      "link": "DiffText"
+    },
+    "MiniDiffOverContext": {
+      "link": "DiffChange"
+    },
+    "MiniDiffOverDelete": {
+      "link": "DiffDelete"
+    },
+    "MiniDiffSignAdd": {
+      "bg": "#282727",
+      "fg": "#6e7e60"
+    },
+    "MiniDiffSignChange": {
+      "bg": "#282727",
+      "fg": "#ae955e"
+    },
+    "MiniDiffSignDelete": {
+      "bg": "#282727",
+      "fg": "#ae4e47"
+    },
+    "MiniFilesBorder": {
+      "link": "FloatBorder"
+    },
+    "MiniFilesBorderModified": {
+      "link": "DiagnosticFloatingWarn"
+    },
+    "MiniFilesCursorLine": {
+      "link": "CursorLine"
+    },
+    "MiniFilesDirectory": {
+      "link": "Directory"
+    },
+    "MiniFilesFile": {
+      "fg": "#c5c9c5"
+    },
+    "MiniFilesNormal": {
+      "link": "NormalFloat"
+    },
+    "MiniFilesTitle": {
+      "bg": "#181616",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#7a8382"
+    },
+    "MiniFilesTitleFocused": {
+      "bg": "#181616",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#c5c9c5"
+    },
+    "MiniHipatternsFixme": {
+      "bg": "#ae4e47",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#181616"
+    },
+    "MiniHipatternsHack": {
+      "bg": "#9d7257",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#181616"
+    },
+    "MiniHipatternsNote": {
+      "bg": "#668696",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#181616"
+    },
+    "MiniHipatternsTodo": {
+      "bg": "#6d8885",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#181616"
+    },
+    "MiniIconsAzure": {
+      "fg": "#68738b"
+    },
+    "MiniIconsBlue": {
+      "fg": "#668696"
+    },
+    "MiniIconsCyan": {
+      "fg": "#6d8885"
+    },
+    "MiniIconsGreen": {
+      "fg": "#6e7e60"
+    },
+    "MiniIconsGrey": {
+      "fg": "#c5c9c5"
+    },
+    "MiniIconsOrange": {
+      "fg": "#9d7257"
+    },
+    "MiniIconsPurple": {
+      "fg": "#68738b"
+    },
+    "MiniIconsRed": {
+      "fg": "#ae4e47"
+    },
+    "MiniIconsYellow": {
+      "fg": "#ae955e"
+    },
+    "MiniIndentscopePrefix": {
+      "cterm": {
+        "nocombine": true
+      },
+      "nocombine": true
+    },
+    "MiniIndentscopeSymbol": {
+      "fg": "#68738b"
+    },
+    "MiniJump": {
+      "link": "SpellRare"
+    },
+    "MiniJump2dDim": {
+      "link": "Comment"
+    },
+    "MiniJump2dSpot": {
+      "bold": true,
+      "cterm": {
+        "bold": true,
+        "nocombine": true
+      },
+      "fg": "#9d7257",
+      "nocombine": true
+    },
+    "MiniJump2dSpotAhead": {
+      "bg": "#181616",
+      "cterm": {
+        "nocombine": true
+      },
+      "fg": "#6d8885",
+      "nocombine": true
+    },
+    "MiniJump2dSpotUnique": {
+      "bold": true,
+      "cterm": {
+        "bold": true,
+        "nocombine": true
+      },
+      "fg": "#68738b",
+      "nocombine": true
+    },
+    "MiniMapNormal": {
+      "link": "NormalFloat"
+    },
+    "MiniMapSymbolCount": {
+      "link": "Special"
+    },
+    "MiniMapSymbolLine": {
+      "link": "Title"
+    },
+    "MiniMapSymbolView": {
+      "link": "Delimiter"
+    },
+    "MiniNotifyBorder": {
+      "link": "FloatBorder"
+    },
+    "MiniNotifyNormal": {
+      "link": "NormalFloat"
+    },
+    "MiniNotifyTitle": {
+      "link": "FloatTitle"
+    },
+    "MiniOperatorsExchangeFrom": {
+      "link": "IncSearch"
+    },
+    "MiniPickBorder": {
+      "link": "FloatBorder"
+    },
+    "MiniPickBorderBusy": {
+      "link": "DiagnosticFloatingWarn"
+    },
+    "MiniPickBorderText": {
+      "link": "FloatTitle"
+    },
+    "MiniPickHeader": {
+      "link": "DiagnosticFloatingHint"
+    },
+    "MiniPickIconDirectory": {
+      "link": "Directory"
+    },
+    "MiniPickIconFile": {
+      "link": "MiniPickNormal"
+    },
+    "MiniPickMatchCurrent": {
+      "link": "CursorLine"
+    },
+    "MiniPickMatchMarked": {
+      "link": "Visual"
+    },
+    "MiniPickMatchRanges": {
+      "link": "DiagnosticFloatingHint"
+    },
+    "MiniPickNormal": {
+      "link": "NormalFloat"
+    },
+    "MiniPickPreviewLine": {
+      "link": "CursorLine"
+    },
+    "MiniPickPreviewRegion": {
+      "link": "IncSearch"
+    },
+    "MiniPickPrompt": {
+      "bg": "#181616",
+      "fg": "#668696"
+    },
+    "MiniStarterCurrent": {
+      "cterm": {
+        "nocombine": true
+      },
+      "nocombine": true
+    },
+    "MiniStarterFooter": {
+      "fg": "#7a8382"
+    },
+    "MiniStarterHeader": {
+      "link": "Title"
+    },
+    "MiniStarterInactive": {
+      "link": "Comment"
+    },
+    "MiniStarterItem": {
+      "link": "Normal"
+    },
+    "MiniStarterItemBullet": {
+      "link": "Delimiter"
+    },
+    "MiniStarterItemPrefix": {
+      "fg": "#9d7257"
+    },
+    "MiniStarterQuery": {
+      "fg": "#668696"
+    },
+    "MiniStarterSection": {
+      "fg": "#6e7e60"
+    },
+    "MiniStatuslineDevinfo": {
+      "bg": "#282727",
+      "fg": "#c5c9c5"
+    },
+    "MiniStatuslineFileinfo": {
+      "bg": "#282727",
+      "fg": "#c5c9c5"
+    },
+    "MiniStatuslineFilename": {
+      "bg": "#181616",
+      "fg": "#c5c9c5"
+    },
+    "MiniStatuslineInactive": {
+      "link": "StatusLineNC"
+    },
+    "MiniStatuslineModeCommand": {
+      "bg": "#ae4e47",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#181616"
+    },
+    "MiniStatuslineModeInsert": {
+      "bg": "#6e7e60",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#181616"
+    },
+    "MiniStatuslineModeNormal": {
+      "bg": "#668696",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#181616"
+    },
+    "MiniStatuslineModeOther": {
+      "bg": "#6d8885",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#181616"
+    },
+    "MiniStatuslineModeReplace": {
+      "bg": "#9d7257",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#181616"
+    },
+    "MiniStatuslineModeVisual": {
+      "bg": "#68738b",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#181616"
+    },
+    "MiniSurround": {
+      "link": "IncSearch"
+    },
+    "MiniTablineCurrent": {
+      "bg": "#282727",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#c5c9c5"
+    },
+    "MiniTablineFill": {
+      "link": "TabLineFill"
+    },
+    "MiniTablineHidden": {
+      "bg": "#181616",
+      "fg": "#7a8382"
+    },
+    "MiniTablineModifiedCurrent": {
+      "bg": "#c5c9c5",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#282727"
+    },
+    "MiniTablineModifiedHidden": {
+      "bg": "#7a8382",
+      "fg": "#181616"
+    },
+    "MiniTablineModifiedVisible": {
+      "bg": "#7a8382",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#181616"
+    },
+    "MiniTablineTabpagesection": {
+      "bg": "#424f4e",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#c5c9c5"
+    },
+    "MiniTablineVisible": {
+      "bg": "#181616",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#7a8382"
+    },
+    "MiniTestEmphasis": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      }
+    },
+    "MiniTestFail": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#ae4e47"
+    },
+    "MiniTestPass": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#6e7e60"
+    },
+    "MiniTrailspace": {
+      "bg": "#ae4e47"
+    },
+    "ModeMsg": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#9d7257"
+    },
+    "MoreMsg": {
+      "fg": "#668696"
+    },
+    "MsgArea": {
+      "fg": "#c5c9c5"
+    },
+    "MsgSeparator": {
+      "bg": "#181616",
+      "fg": "#181616"
+    },
+    "NavicIconsArray": {
+      "link": "Type"
+    },
+    "NavicIconsBoolean": {
+      "link": "Boolean"
+    },
+    "NavicIconsClass": {
+      "link": "Type"
+    },
+    "NavicIconsConstant": {
+      "link": "Constant"
+    },
+    "NavicIconsConstructor": {
+      "link": "@constructor"
+    },
+    "NavicIconsEnum": {
+      "link": "Type"
+    },
+    "NavicIconsEnumMember": {
+      "link": "Constant"
+    },
+    "NavicIconsEvent": {
+      "link": "Structure"
+    },
+    "NavicIconsField": {
+      "link": "@variable.member"
+    },
+    "NavicIconsFile": {
+      "link": "Directory"
+    },
+    "NavicIconsFunction": {
+      "link": "Function"
+    },
+    "NavicIconsInterface": {
+      "link": "Type"
+    },
+    "NavicIconsKey": {
+      "link": "Identifier"
+    },
+    "NavicIconsMethod": {
+      "link": "@function.method"
+    },
+    "NavicIconsModule": {
+      "link": "@module"
+    },
+    "NavicIconsNamespace": {
+      "link": "@module"
+    },
+    "NavicIconsNull": {
+      "link": "Type"
+    },
+    "NavicIconsNumber": {
+      "link": "Number"
+    },
+    "NavicIconsObject": {
+      "link": "Type"
+    },
+    "NavicIconsOperator": {
+      "link": "Operator"
+    },
+    "NavicIconsPackage": {
+      "link": "@module"
+    },
+    "NavicIconsProperty": {
+      "link": "@property"
+    },
+    "NavicIconsString": {
+      "link": "String"
+    },
+    "NavicIconsStruct": {
+      "link": "Structure"
+    },
+    "NavicIconsTypeParameter": {
+      "link": "Type"
+    },
+    "NavicIconsVariable": {
+      "link": "@variable"
+    },
+    "NavicSeparator": {
+      "fg": "#c5c9c5"
+    },
+    "NavicText": {
+      "fg": "#c5c9c5"
+    },
+    "NeoTreeGitAdded": {
+      "fg": "#6e7e60"
+    },
+    "NeoTreeGitConflict": {
+      "fg": "#ae4e47"
+    },
+    "NeoTreeGitDeleted": {
+      "fg": "#ae4e47"
+    },
+    "NeoTreeGitModified": {
+      "fg": "#ae955e"
+    },
+    "NeoTreeGitStaged": {
+      "fg": "#6e7e60"
+    },
+    "NeoTreeGitUnstaged": {
+      "link": "NeoTreeGitModified"
+    },
+    "NeoTreeGitUntracked": {
+      "link": "NeoTreeGitModified"
+    },
+    "NeoTreeIndentMarker": {
+      "link": "NonText"
+    },
+    "NeoTreeModified": {
+      "link": "String"
+    },
+    "NeoTreeRootName": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#ae955e"
+    },
+    "NeoTreeTabActive": {
+      "link": "TabLineSel"
+    },
+    "NeoTreeTabInactive": {
+      "link": "TabLine"
+    },
+    "NeoTreeTabSeparatorActive": {
+      "link": "NeoTreeTabActive"
+    },
+    "NeoTreeTabSeparatorInactive": {
+      "link": "NeoTreeTabInactive"
+    },
+    "NeogitDiffAddHighlight": {
+      "bg": "#434a3b"
+    },
+    "NeogitDiffContextHighlight": {
+      "bg": "#3f4e56"
+    },
+    "NeogitDiffDeleteHighlight": {
+      "bg": "#63322e"
+    },
+    "NeogitHunkHeader": {
+      "fg": "#668696"
+    },
+    "NeogitHunkHeaderHighlight": {
+      "bg": "#3f4e56",
+      "fg": "#9d7257"
+    },
+    "NeotestAdapterName": {
+      "fg": "#ae4e47"
+    },
+    "NeotestDir": {
+      "fg": "#668696"
+    },
+    "NeotestExpandMarker": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#9e9b93"
+    },
+    "NeotestFailed": {
+      "fg": "#ae4e47"
+    },
+    "NeotestFile": {
+      "fg": "#668696"
+    },
+    "NeotestFocused": {
+      "bold": true,
+      "cterm": {
+        "bold": true,
+        "underline": true
+      },
+      "underline": true
+    },
+    "NeotestIndent": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#7a8382"
+    },
+    "NeotestMarked": {
+      "cterm": {
+        "italic": true
+      },
+      "fg": "#9d7257",
+      "italic": true
+    },
+    "NeotestNamespace": {
+      "fg": "#668696"
+    },
+    "NeotestPassed": {
+      "fg": "#6e7e60"
+    },
+    "NeotestRunning": {
+      "fg": "#ae955e"
+    },
+    "NeotestSkipped": {
+      "fg": "#68738b"
+    },
+    "NeotestTarget": {
+      "fg": "#ae4e47"
+    },
+    "NeotestTest": {
+      "fg": "#c5c9c5"
+    },
+    "NeotestUnknown": {
+      "fg": "#7a8382"
+    },
+    "NeotestWatching": {
+      "fg": "#ae955e"
+    },
+    "NeotestWinSelect": {
+      "fg": "#6d8885"
+    },
+    "NonText": {
+      "fg": "#625e5a"
+    },
+    "Normal": {
+      "bg": "#181616",
+      "fg": "#c5c9c5"
+    },
+    "NormalFloat": {
+      "bg": "#181616",
+      "fg": "#c5c9c5"
+    },
+    "NormalNC": {
+      "link": "Normal"
+    },
+    "NotifyBackground": {
+      "bg": "#181616"
+    },
+    "NotifyDEBUGBorder": {
+      "link": "Debug"
+    },
+    "NotifyDEBUGIcon": {
+      "link": "Debug"
+    },
+    "NotifyDEBUGTitle": {
+      "link": "Debug"
+    },
+    "NotifyERRORBorder": {
+      "link": "DiagnosticError"
+    },
+    "NotifyERRORIcon": {
+      "link": "DiagnosticError"
+    },
+    "NotifyERRORTitle": {
+      "link": "DiagnosticError"
+    },
+    "NotifyHINTBorder": {
+      "link": "DiagnosticHint"
+    },
+    "NotifyHINTIcon": {
+      "link": "DiagnosticHint"
+    },
+    "NotifyHINTTitle": {
+      "link": "DiagnosticHint"
+    },
+    "NotifyINFOBorder": {
+      "link": "DiagnosticInfo"
+    },
+    "NotifyINFOIcon": {
+      "link": "DiagnosticInfo"
+    },
+    "NotifyINFOTitle": {
+      "link": "DiagnosticInfo"
+    },
+    "NotifyTRACEBorder": {
+      "link": "Comment"
+    },
+    "NotifyTRACEIcon": {
+      "link": "Comment"
+    },
+    "NotifyTRACETitle": {
+      "link": "Comment"
+    },
+    "NotifyWARNBorder": {
+      "link": "DiagnosticWarn"
+    },
+    "NotifyWARNIcon": {
+      "link": "DiagnosticWarn"
+    },
+    "NotifyWARNTitle": {
+      "link": "DiagnosticWarn"
+    },
+    "Number": {
+      "fg": "#857186"
+    },
+    "NvimTreeExecFile": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#6e7e60"
+    },
+    "NvimTreeFolderName": {
+      "link": "Directory"
+    },
+    "NvimTreeGitDeleted": {
+      "fg": "#ae4e47"
+    },
+    "NvimTreeGitDirty": {
+      "fg": "#ae955e"
+    },
+    "NvimTreeGitNew": {
+      "fg": "#6e7e60"
+    },
+    "NvimTreeGitStaged": {
+      "fg": "#6e7e60"
+    },
+    "NvimTreeImageFile": {
+      "fg": "#ae4e47"
+    },
+    "NvimTreeNormal": {
+      "link": "Normal"
+    },
+    "NvimTreeNormalNC": {
+      "link": "NvimTreeNormal"
+    },
+    "NvimTreeOpenedFile": {
+      "cterm": {
+        "italic": true
+      },
+      "fg": "#68738b",
+      "italic": true
+    },
+    "NvimTreeRootFolder": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#ae955e"
+    },
+    "NvimTreeSpecialFile": {
+      "fg": "#68738b"
+    },
+    "NvimTreeSymlink": {
+      "link": "Type"
+    },
+    "NvimTreeWinSeparator": {
+      "link": "WinSeparator"
+    },
+    "NvimTreeWindowPicker": {
+      "bg": "#181616",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#68738b"
+    },
+    "Operator": {
+      "fg": "#ae4e47"
+    },
+    "Pmenu": {
+      "bg": "#3f4e56",
+      "fg": "#c5c9c5"
+    },
+    "PmenuBorder": {
+      "link": "FloatBorder"
+    },
+    "PmenuExtra": {
+      "bg": "#3f4e56",
+      "fg": "#7a8382"
+    },
+    "PmenuExtraSel": {
+      "bg": "#424f4e",
+      "fg": "#7a8382"
+    },
+    "PmenuKind": {
+      "bg": "#3f4e56",
+      "fg": "#c5c9c5"
+    },
+    "PmenuKindSel": {
+      "bg": "#424f4e",
+      "fg": "#c5c9c5"
+    },
+    "PmenuSbar": {
+      "bg": "#3f4e56"
+    },
+    "PmenuSel": {
+      "bg": "#424f4e"
+    },
+    "PmenuThumb": {
+      "bg": "#424f4e"
+    },
+    "PreProc": {
+      "fg": "#ae4e47"
+    },
+    "Question": {
+      "link": "MoreMsg"
+    },
+    "QuickFixLine": {
+      "bg": "#282727"
+    },
+    "Search": {
+      "bg": "#424f4e",
+      "fg": "#c5c9c5"
+    },
+    "SignColumn": {
+      "bg": "#282727",
+      "fg": "#7a8382"
+    },
+    "Special": {
+      "fg": "#68738b"
+    },
+    "SpecialKey": {
+      "fg": "#7a8382"
+    },
+    "SpellBad": {
+      "cterm": {
+        "undercurl": true
+      },
+      "sp": "#ae4e47",
+      "undercurl": true
+    },
+    "SpellCap": {
+      "cterm": {
+        "undercurl": true
+      },
+      "sp": "#9d7257",
+      "undercurl": true
+    },
+    "SpellLocal": {
+      "cterm": {
+        "undercurl": true
+      },
+      "sp": "#9d7257",
+      "undercurl": true
+    },
+    "SpellRare": {
+      "cterm": {
+        "undercurl": true
+      },
+      "sp": "#9d7257",
+      "undercurl": true
+    },
+    "Statement": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#68738b"
+    },
+    "StatusLine": {
+      "bg": "#181616",
+      "fg": "#c5c9c5"
+    },
+    "StatusLineNC": {
+      "bg": "#181616",
+      "fg": "#625e5a"
+    },
+    "String": {
+      "fg": "#6e7e60"
+    },
+    "Substitute": {
+      "bg": "#ae4e47",
+      "fg": "#c5c9c5"
+    },
+    "TabLine": {
+      "bg": "#181616",
+      "fg": "#7a8382"
+    },
+    "TabLineFill": {
+      "bg": "#181616"
+    },
+    "TabLineSel": {
+      "bg": "#282727",
+      "fg": "#c5c9c5"
+    },
+    "TelescopeBorder": {
+      "bg": "#181616",
+      "fg": "#625e5a"
+    },
+    "TelescopeResultsClass": {
+      "link": "Structure"
+    },
+    "TelescopeResultsField": {
+      "link": "@field"
+    },
+    "TelescopeResultsMethod": {
+      "link": "Function"
+    },
+    "TelescopeResultsStruct": {
+      "link": "Structure"
+    },
+    "TelescopeResultsVariable": {
+      "link": "@variable"
+    },
+    "TelescopeSelection": {
+      "link": "CursorLine"
+    },
+    "TelescopeSelectionCaret": {
+      "link": "CursorLineNr"
+    },
+    "TelescopeTitle": {
+      "fg": "#7a8382"
+    },
+    "Title": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#668696"
+    },
+    "Todo": {
+      "bg": "#668696",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#3f4e56"
+    },
+    "TreesitterContext": {
+      "link": "Folded"
+    },
+    "TreesitterContextLineNumber": {
+      "bg": "#282727",
+      "fg": "#7a8382"
+    },
+    "TroubleIndent": {
+      "fg": "#625e5a"
+    },
+    "TroublePos": {
+      "fg": "#7a8382"
+    },
+    "Type": {
+      "fg": "#6d8885"
+    },
+    "Underlined": {
+      "cterm": {
+        "underline": true
+      },
+      "fg": "#68738b",
+      "underline": true
+    },
+    "VertSplit": {
+      "link": "WinSeparator"
+    },
+    "Visual": {
+      "bg": "#3f4e56"
+    },
+    "VisualNOS": {
+      "link": "Visual"
+    },
+    "WarningMsg": {
+      "fg": "#9d7257"
+    },
+    "Whitespace": {
+      "fg": "#625e5a"
+    },
+    "WildMenu": {
+      "link": "Pmenu"
+    },
+    "WinBar": {
+      "fg": "#c5c9c5"
+    },
+    "WinBarNC": {
+      "fg": "#c5c9c5"
+    },
+    "WinSeparator": {
+      "fg": "#181616"
+    },
+    "debugBreakpoint": {
+      "bg": "#282727",
+      "fg": "#68738b"
+    },
+    "debugPC": {
+      "bg": "#63322e"
+    },
+    "diffAdded": {
+      "fg": "#6e7e60"
+    },
+    "diffChanged": {
+      "fg": "#ae955e"
+    },
+    "diffDeleted": {
+      "fg": "#ae4e47"
+    },
+    "diffNewFile": {
+      "fg": "#6e7e60"
+    },
+    "diffOldFile": {
+      "fg": "#ae4e47"
+    },
+    "diffRemoved": {
+      "fg": "#ae4e47"
+    },
+    "healthError": {
+      "fg": "#ae4e47"
+    },
+    "healthSuccess": {
+      "fg": "#6e7e60"
+    },
+    "healthWarning": {
+      "fg": "#9d7257"
+    },
+    "lCursor": {
+      "link": "Cursor"
+    },
+    "markdownCode": {
+      "fg": "#6e7e60"
+    },
+    "markdownCodeBlock": {
+      "fg": "#6e7e60"
+    },
+    "markdownEscape": {},
+    "qfFileName": {
+      "link": "Directory"
+    },
+    "qfLineNr": {
+      "link": "LineNr"
+    }
+  },
+  "palette_sha256": "ba47c4de3533e48edf14862b354e52ab467c8a631de05e79e3d57c4b96fe985d",
+  "transparent": {
+    "@attribute": {
+      "link": "Constant"
+    },
+    "@comment.error": {
+      "bg": "#ae4e47",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#c5c9c5"
+    },
+    "@comment.note": {
+      "bg": "#6d8885",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#3f4e56"
+    },
+    "@comment.warning": {
+      "bg": "#9d7257",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#3f4e56"
+    },
+    "@constructor": {
+      "fg": "#68738b"
+    },
+    "@constructor.lua": {
+      "fg": "#68738b"
+    },
+    "@diff.delta": {
+      "fg": "#ae955e"
+    },
+    "@diff.minus": {
+      "fg": "#ae4e47"
+    },
+    "@diff.plus": {
+      "fg": "#6e7e60"
+    },
+    "@function.macro": {
+      "link": "Macro"
+    },
+    "@keyword.exception": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#ae4e47"
+    },
+    "@keyword.import": {
+      "link": "PreProc"
+    },
+    "@keyword.luap": {
+      "link": "@string.regex"
+    },
+    "@keyword.operator": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#ae4e47"
+    },
+    "@keyword.return": {
+      "cterm": {
+        "italic": true
+      },
+      "fg": "#ae4e47",
+      "italic": true
+    },
+    "@lsp.mod.readonly": {
+      "link": "Constant"
+    },
+    "@lsp.mod.typeHint": {
+      "link": "Type"
+    },
+    "@lsp.type.bitwise": {
+      "link": "Operator"
+    },
+    "@lsp.type.builtinConstant": {
+      "link": "@constant.builtin"
+    },
+    "@lsp.type.comment": {
+      "link": "Comment"
+    },
+    "@lsp.type.comparison": {
+      "link": "Operator"
+    },
+    "@lsp.type.const": {
+      "link": "Constant"
+    },
+    "@lsp.type.decorator.rust": {
+      "link": "PreProc"
+    },
+    "@lsp.type.lifetime": {
+      "link": "Operator"
+    },
+    "@lsp.type.macro": {
+      "link": "Macro"
+    },
+    "@lsp.type.magicFunction": {
+      "link": "@function.builtin"
+    },
+    "@lsp.type.method": {
+      "link": "@function.method"
+    },
+    "@lsp.type.namespace": {
+      "link": "@module"
+    },
+    "@lsp.type.parameter": {
+      "link": "@variable.parameter"
+    },
+    "@lsp.type.punctuation": {
+      "link": "Delimiter"
+    },
+    "@lsp.type.selfParameter": {
+      "link": "@variable.builtin"
+    },
+    "@lsp.type.variable": {},
+    "@lsp.typemod.function.builtin": {
+      "link": "@function.builtin"
+    },
+    "@lsp.typemod.function.defaultLibrary": {
+      "link": "@function.builtin"
+    },
+    "@lsp.typemod.function.readonly": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#668696"
+    },
+    "@lsp.typemod.keyword.documentation": {
+      "link": "Special"
+    },
+    "@lsp.typemod.method.defaultLibrary": {
+      "link": "@function.builtin"
+    },
+    "@lsp.typemod.operator.controlFlow": {
+      "link": "@keyword.exception"
+    },
+    "@lsp.typemod.variable.defaultLibrary": {
+      "link": "Special"
+    },
+    "@lsp.typemod.variable.global": {
+      "link": "Constant"
+    },
+    "@lsp.typemod.variable.injected": {
+      "link": "@variable"
+    },
+    "@lsp.typemod.variable.static": {
+      "link": "Constant"
+    },
+    "@markup.environment": {
+      "link": "Keyword"
+    },
+    "@markup.heading": {
+      "link": "Function"
+    },
+    "@markup.italic": {
+      "cterm": {
+        "italic": true
+      },
+      "italic": true
+    },
+    "@markup.link.url": {
+      "link": "@string.special.url"
+    },
+    "@markup.math": {
+      "link": "Constant"
+    },
+    "@markup.quote": {
+      "link": "@variable.parameter"
+    },
+    "@markup.raw": {
+      "link": "String"
+    },
+    "@markup.strikethrough": {
+      "cterm": {
+        "strikethrough": true
+      },
+      "strikethrough": true
+    },
+    "@markup.strong": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      }
+    },
+    "@markup.underline": {
+      "cterm": {
+        "underline": true
+      },
+      "underline": true
+    },
+    "@operator": {
+      "link": "Operator"
+    },
+    "@punctuation.bracket": {
+      "fg": "#9e9b93"
+    },
+    "@punctuation.delimiter": {
+      "fg": "#9e9b93"
+    },
+    "@punctuation.special": {
+      "fg": "#68738b"
+    },
+    "@string.escape": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#ae4e47"
+    },
+    "@string.regexp": {
+      "fg": "#ae4e47"
+    },
+    "@string.special.symbol": {
+      "fg": "#ae955e"
+    },
+    "@string.special.url": {
+      "cterm": {
+        "undercurl": true
+      },
+      "fg": "#68738b",
+      "undercurl": true
+    },
+    "@tag.attribute": {
+      "fg": "#ae955e"
+    },
+    "@tag.delimiter": {
+      "fg": "#9e9b93"
+    },
+    "@variable": {
+      "fg": "#c5c9c5"
+    },
+    "@variable.builtin": {
+      "cterm": {
+        "italic": true
+      },
+      "fg": "#ae4e47",
+      "italic": true
+    },
+    "@variable.member": {
+      "fg": "#ae955e"
+    },
+    "@variable.parameter": {
+      "fg": "#a6a69c"
+    },
+    "AerialArrayIcon": {
+      "link": "Type"
+    },
+    "AerialBooleanIcon": {
+      "link": "Boolean"
+    },
+    "AerialClassIcon": {
+      "link": "Type"
+    },
+    "AerialConstantIcon": {
+      "link": "Constant"
+    },
+    "AerialConstructorIcon": {
+      "link": "@constructor"
+    },
+    "AerialEnumIcon": {
+      "link": "Type"
+    },
+    "AerialEnumMemberIcon": {
+      "link": "Constant"
+    },
+    "AerialEventIcon": {
+      "link": "Structure"
+    },
+    "AerialFieldIcon": {
+      "link": "@variable.member"
+    },
+    "AerialFileIcon": {
+      "link": "Directory"
+    },
+    "AerialFunctionIcon": {
+      "link": "Function"
+    },
+    "AerialInterfaceIcon": {
+      "link": "Type"
+    },
+    "AerialKeyIcon": {
+      "link": "Identifier"
+    },
+    "AerialMethodIcon": {
+      "link": "@function.method"
+    },
+    "AerialModuleIcon": {
+      "link": "@module"
+    },
+    "AerialNamespaceIcon": {
+      "link": "@module"
+    },
+    "AerialNullIcon": {
+      "link": "Type"
+    },
+    "AerialNumberIcon": {
+      "link": "Number"
+    },
+    "AerialObjectIcon": {
+      "link": "Type"
+    },
+    "AerialOperatorIcon": {
+      "link": "Operator"
+    },
+    "AerialPackageIcon": {
+      "link": "@module"
+    },
+    "AerialPropertyIcon": {
+      "link": "@property"
+    },
+    "AerialStringIcon": {
+      "link": "String"
+    },
+    "AerialStructIcon": {
+      "link": "Structure"
+    },
+    "AerialTypeParameterIcon": {
+      "link": "Type"
+    },
+    "AerialVariableIcon": {
+      "link": "@variable"
+    },
+    "BlinkCmpDoc": {
+      "link": "NormalFloat"
+    },
+    "BlinkCmpDocBorder": {
+      "link": "FloatBorder"
+    },
+    "BlinkCmpDocCursorLine": {
+      "link": "Visual"
+    },
+    "BlinkCmpGhostText": {
+      "fg": "#7a8382"
+    },
+    "BlinkCmpKind": {
+      "fg": "#c5c9c5"
+    },
+    "BlinkCmpKindClass": {
+      "link": "Type"
+    },
+    "BlinkCmpKindColor": {
+      "link": "Special"
+    },
+    "BlinkCmpKindConstant": {
+      "link": "Constant"
+    },
+    "BlinkCmpKindConstructor": {
+      "link": "@constructor"
+    },
+    "BlinkCmpKindCopilot": {
+      "link": "String"
+    },
+    "BlinkCmpKindEnum": {
+      "link": "Type"
+    },
+    "BlinkCmpKindEnumMember": {
+      "link": "Constant"
+    },
+    "BlinkCmpKindEvent": {
+      "link": "Type"
+    },
+    "BlinkCmpKindField": {
+      "link": "@variable.member"
+    },
+    "BlinkCmpKindFile": {
+      "link": "Directory"
+    },
+    "BlinkCmpKindFolder": {
+      "link": "Directory"
+    },
+    "BlinkCmpKindFunction": {
+      "link": "Function"
+    },
+    "BlinkCmpKindInterface": {
+      "link": "Type"
+    },
+    "BlinkCmpKindKeyword": {
+      "link": "Keyword"
+    },
+    "BlinkCmpKindMethod": {
+      "link": "@function.method"
+    },
+    "BlinkCmpKindModule": {
+      "link": "@module"
+    },
+    "BlinkCmpKindOperator": {
+      "link": "Operator"
+    },
+    "BlinkCmpKindProperty": {
+      "link": "@property"
+    },
+    "BlinkCmpKindReference": {
+      "link": "Special"
+    },
+    "BlinkCmpKindSnippet": {
+      "link": "Special"
+    },
+    "BlinkCmpKindStruct": {
+      "link": "Type"
+    },
+    "BlinkCmpKindText": {
+      "fg": "#c5c9c5"
+    },
+    "BlinkCmpKindTypeParameter": {
+      "link": "Type"
+    },
+    "BlinkCmpKindUnit": {
+      "link": "Number"
+    },
+    "BlinkCmpKindValue": {
+      "link": "String"
+    },
+    "BlinkCmpKindVariable": {
+      "fg": "#c5c9c5"
+    },
+    "BlinkCmpLabel": {
+      "fg": "#c5c9c5"
+    },
+    "BlinkCmpLabelDeprecated": {
+      "cterm": {
+        "strikethrough": true
+      },
+      "fg": "#7a8382",
+      "strikethrough": true
+    },
+    "BlinkCmpLabelDetails": {
+      "fg": "#7a8382"
+    },
+    "BlinkCmpLabelMatch": {
+      "fg": "#668696"
+    },
+    "BlinkCmpMenu": {
+      "link": "Pmenu"
+    },
+    "BlinkCmpMenuBorder": {
+      "bg": "#3f4e56",
+      "fg": "#424f4e"
+    },
+    "BlinkCmpMenuSelection": {
+      "link": "PmenuSel"
+    },
+    "BlinkCmpScrollBarGutter": {
+      "link": "PmenuSbar"
+    },
+    "BlinkCmpScrollBarThumb": {
+      "link": "PmenuThumb"
+    },
+    "BlinkCmpSignatureHelp": {
+      "link": "NormalFloat"
+    },
+    "BlinkCmpSignatureHelpActiveParameter": {
+      "link": "LspSignatureActiveParameter"
+    },
+    "BlinkCmpSignatureHelpBorder": {
+      "link": "FloatBorder"
+    },
+    "Bold": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      }
+    },
+    "Boolean": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#9d7257"
+    },
+    "Character": {
+      "link": "String"
+    },
+    "CmpCompletion": {
+      "link": "Pmenu"
+    },
+    "CmpCompletionBorder": {
+      "bg": "#3f4e56",
+      "fg": "#424f4e"
+    },
+    "CmpCompletionSbar": {
+      "link": "PmenuSbar"
+    },
+    "CmpCompletionSel": {
+      "link": "PmenuSel"
+    },
+    "CmpCompletionThumb": {
+      "link": "PmenuThumb"
+    },
+    "CmpDocumentation": {
+      "link": "NormalFloat"
+    },
+    "CmpDocumentationBorder": {
+      "link": "FloatBorder"
+    },
+    "CmpGhostText": {
+      "fg": "#7a8382"
+    },
+    "CmpItemAbbr": {
+      "fg": "#c5c9c5"
+    },
+    "CmpItemAbbrDeprecated": {
+      "cterm": {
+        "strikethrough": true
+      },
+      "fg": "#7a8382",
+      "strikethrough": true
+    },
+    "CmpItemAbbrMatch": {
+      "fg": "#668696"
+    },
+    "CmpItemAbbrMatchFuzzy": {
+      "link": "CmpItemAbbrMatch"
+    },
+    "CmpItemKindClass": {
+      "link": "Type"
+    },
+    "CmpItemKindColor": {
+      "link": "Special"
+    },
+    "CmpItemKindConstant": {
+      "link": "Constant"
+    },
+    "CmpItemKindConstructor": {
+      "link": "@constructor"
+    },
+    "CmpItemKindCopilot": {
+      "link": "String"
+    },
+    "CmpItemKindDefault": {
+      "fg": "#c5c9c5"
+    },
+    "CmpItemKindEnum": {
+      "link": "Type"
+    },
+    "CmpItemKindEnumMember": {
+      "link": "Constant"
+    },
+    "CmpItemKindEvent": {
+      "link": "Type"
+    },
+    "CmpItemKindField": {
+      "link": "@variable.member"
+    },
+    "CmpItemKindFile": {
+      "link": "Directory"
+    },
+    "CmpItemKindFolder": {
+      "link": "Directory"
+    },
+    "CmpItemKindFunction": {
+      "link": "Function"
+    },
+    "CmpItemKindInterface": {
+      "link": "Type"
+    },
+    "CmpItemKindKeyword": {
+      "link": "Keyword"
+    },
+    "CmpItemKindMethod": {
+      "link": "@function.method"
+    },
+    "CmpItemKindModule": {
+      "link": "@module"
+    },
+    "CmpItemKindOperator": {
+      "link": "Operator"
+    },
+    "CmpItemKindProperty": {
+      "link": "@property"
+    },
+    "CmpItemKindReference": {
+      "link": "Special"
+    },
+    "CmpItemKindSnippet": {
+      "link": "Special"
+    },
+    "CmpItemKindStruct": {
+      "link": "Type"
+    },
+    "CmpItemKindText": {
+      "fg": "#c5c9c5"
+    },
+    "CmpItemKindTypeParameter": {
+      "link": "Type"
+    },
+    "CmpItemKindUnit": {
+      "link": "Number"
+    },
+    "CmpItemKindValue": {
+      "link": "String"
+    },
+    "CmpItemKindVariable": {
+      "fg": "#c5c9c5"
+    },
+    "CmpItemMenu": {
+      "fg": "#c5c9c5"
+    },
+    "ColorColumn": {
+      "bg": "#282727"
+    },
+    "Comment": {
+      "cterm": {
+        "italic": true
+      },
+      "fg": "#7a8382",
+      "italic": true
+    },
+    "Conceal": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#7a8382"
+    },
+    "Constant": {
+      "fg": "#9d7257"
+    },
+    "CurSearch": {
+      "bg": "#424f4e",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#c5c9c5"
+    },
+    "Cursor": {
+      "bg": "#c5c9c5",
+      "fg": "#181616"
+    },
+    "CursorColumn": {
+      "link": "CursorLine"
+    },
+    "CursorIM": {
+      "link": "Cursor"
+    },
+    "CursorLine": {
+      "bg": "#393836"
+    },
+    "CursorLineNr": {
+      "bg": "#282727",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#9d7257"
+    },
+    "DapUIBreakpointsCurrentLine": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#ae955e"
+    },
+    "DapUIBreakpointsDisabledLine": {
+      "link": "Comment"
+    },
+    "DapUIBreakpointsInfo": {
+      "fg": "#668696"
+    },
+    "DapUIBreakpointsPath": {
+      "link": "Directory"
+    },
+    "DapUIDecoration": {
+      "fg": "#625e5a"
+    },
+    "DapUIFloatBorder": {
+      "fg": "#625e5a"
+    },
+    "DapUILineNumber": {
+      "fg": "#68738b"
+    },
+    "DapUIModifiedValue": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#68738b"
+    },
+    "DapUIPlayPause": {
+      "fg": "#6e7e60"
+    },
+    "DapUIRestart": {
+      "fg": "#6e7e60"
+    },
+    "DapUIScope": {
+      "link": "Special"
+    },
+    "DapUISource": {
+      "fg": "#ae4e47"
+    },
+    "DapUIStepBack": {
+      "fg": "#68738b"
+    },
+    "DapUIStepInto": {
+      "fg": "#68738b"
+    },
+    "DapUIStepOut": {
+      "fg": "#68738b"
+    },
+    "DapUIStepOver": {
+      "fg": "#68738b"
+    },
+    "DapUIStop": {
+      "fg": "#ae4e47"
+    },
+    "DapUIStoppedThread": {
+      "fg": "#68738b"
+    },
+    "DapUIThread": {
+      "fg": "#ae955e"
+    },
+    "DapUIType": {
+      "link": "Type"
+    },
+    "DapUIUnavailable": {
+      "fg": "#7a8382"
+    },
+    "DapUIWatchesEmpty": {
+      "fg": "#ae4e47"
+    },
+    "DapUIWatchesError": {
+      "fg": "#ae4e47"
+    },
+    "DapUIWatchesValue": {
+      "fg": "#ae955e"
+    },
+    "DashboardCenter": {
+      "fg": "#ae955e"
+    },
+    "DashboardDesc": {
+      "fg": "#ae955e"
+    },
+    "DashboardFooter": {
+      "fg": "#7a8382"
+    },
+    "DashboardHeader": {
+      "fg": "#ae4e47"
+    },
+    "DashboardIcon": {
+      "fg": "#7a8382"
+    },
+    "DashboardKey": {
+      "fg": "#68738b"
+    },
+    "DashboardShortCut": {
+      "fg": "#68738b"
+    },
+    "Delimiter": {
+      "fg": "#9e9b93"
+    },
+    "DiagnosticError": {
+      "fg": "#ae4e47"
+    },
+    "DiagnosticFloatingError": {
+      "fg": "#ae4e47"
+    },
+    "DiagnosticFloatingHint": {
+      "fg": "#6d8885"
+    },
+    "DiagnosticFloatingInfo": {
+      "fg": "#668696"
+    },
+    "DiagnosticFloatingOk": {
+      "fg": "#6e7e60"
+    },
+    "DiagnosticFloatingWarn": {
+      "fg": "#9d7257"
+    },
+    "DiagnosticHint": {
+      "fg": "#6d8885"
+    },
+    "DiagnosticInfo": {
+      "fg": "#668696"
+    },
+    "DiagnosticOk": {
+      "fg": "#6e7e60"
+    },
+    "DiagnosticSignError": {
+      "bg": "#282727",
+      "fg": "#ae4e47"
+    },
+    "DiagnosticSignHint": {
+      "bg": "#282727",
+      "fg": "#6d8885"
+    },
+    "DiagnosticSignInfo": {
+      "bg": "#282727",
+      "fg": "#668696"
+    },
+    "DiagnosticSignWarn": {
+      "bg": "#282727",
+      "fg": "#9d7257"
+    },
+    "DiagnosticUnderlineError": {
+      "cterm": {
+        "undercurl": true
+      },
+      "sp": "#ae4e47",
+      "undercurl": true
+    },
+    "DiagnosticUnderlineHint": {
+      "cterm": {
+        "undercurl": true
+      },
+      "sp": "#6d8885",
+      "undercurl": true
+    },
+    "DiagnosticUnderlineInfo": {
+      "cterm": {
+        "undercurl": true
+      },
+      "sp": "#668696",
+      "undercurl": true
+    },
+    "DiagnosticUnderlineWarn": {
+      "cterm": {
+        "undercurl": true
+      },
+      "sp": "#9d7257",
+      "undercurl": true
+    },
+    "DiagnosticVirtualTextError": {
+      "link": "DiagnosticError"
+    },
+    "DiagnosticVirtualTextHint": {
+      "link": "DiagnosticHint"
+    },
+    "DiagnosticVirtualTextInfo": {
+      "link": "DiagnosticInfo"
+    },
+    "DiagnosticVirtualTextWarn": {
+      "link": "DiagnosticWarn"
+    },
+    "DiagnosticWarn": {
+      "fg": "#9d7257"
+    },
+    "DiffAdd": {
+      "bg": "#434a3b"
+    },
+    "DiffChange": {
+      "bg": "#3f4e56"
+    },
+    "DiffDelete": {
+      "bg": "#63322e",
+      "fg": "#ae4e47"
+    },
+    "DiffText": {
+      "bg": "#63563a"
+    },
+    "Directory": {
+      "fg": "#668696"
+    },
+    "EndOfBuffer": {
+      "fg": "#181616"
+    },
+    "Error": {
+      "fg": "#ae4e47"
+    },
+    "ErrorMsg": {
+      "fg": "#ae4e47"
+    },
+    "Exception": {
+      "fg": "#ae4e47"
+    },
+    "Float": {
+      "link": "Number"
+    },
+    "FloatBorder": {
+      "bg": "#181616",
+      "fg": "#625e5a"
+    },
+    "FloatFooter": {
+      "bg": "#181616",
+      "fg": "#625e5a"
+    },
+    "FloatTitle": {
+      "bg": "#181616",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#7a8382"
+    },
+    "FloatermBorder": {
+      "bg": "#181616",
+      "fg": "#625e5a"
+    },
+    "FoldColumn": {
+      "bg": "#282727",
+      "fg": "#625e5a"
+    },
+    "Folded": {
+      "bg": "#282727",
+      "fg": "#7a8382"
+    },
+    "Function": {
+      "fg": "#668696"
+    },
+    "GitSignsAdd": {
+      "bg": "#282727",
+      "fg": "#6e7e60"
+    },
+    "GitSignsChange": {
+      "bg": "#282727",
+      "fg": "#ae955e"
+    },
+    "GitSignsDelete": {
+      "bg": "#282727",
+      "fg": "#ae4e47"
+    },
+    "IblIndent": {
+      "fg": "#625e5a"
+    },
+    "IblScope": {
+      "fg": "#7a8382"
+    },
+    "IblWhitespace": {
+      "fg": "#625e5a"
+    },
+    "Identifier": {
+      "fg": "#ae955e"
+    },
+    "Ignore": {
+      "link": "NonText"
+    },
+    "IncSearch": {
+      "bg": "#9d7257",
+      "fg": "#3f4e56"
+    },
+    "IndentBlanklineChar": {
+      "fg": "#625e5a"
+    },
+    "IndentBlanklineContextChar": {
+      "fg": "#7a8382"
+    },
+    "IndentBlanklineContextStart": {
+      "cterm": {
+        "underline": true
+      },
+      "sp": "#7a8382",
+      "underline": true
+    },
+    "IndentBlanklineSpaceChar": {
+      "fg": "#625e5a"
+    },
+    "IndentBlanklineSpaceCharBlankline": {
+      "fg": "#625e5a"
+    },
+    "Italic": {
+      "cterm": {
+        "italic": true
+      },
+      "italic": true
+    },
+    "Keyword": {
+      "cterm": {
+        "italic": true
+      },
+      "fg": "#68738b",
+      "italic": true
+    },
+    "LazyProgressTodo": {
+      "fg": "#625e5a"
+    },
+    "LineNr": {
+      "bg": "#282727",
+      "fg": "#625e5a"
+    },
+    "LspCodeLens": {
+      "fg": "#7a8382"
+    },
+    "LspReferenceRead": {
+      "link": "LspReferenceText"
+    },
+    "LspReferenceText": {
+      "bg": "#63563a"
+    },
+    "LspReferenceWrite": {
+      "bg": "#63563a",
+      "cterm": {
+        "underline": true
+      },
+      "underline": true
+    },
+    "LspSignatureActiveParameter": {
+      "fg": "#9d7257"
+    },
+    "MatchParen": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#9d7257"
+    },
+    "MiniAnimateCursor": {
+      "cterm": {
+        "nocombine": true,
+        "reverse": true
+      },
+      "nocombine": true,
+      "reverse": true
+    },
+    "MiniAnimateNormalFloat": {
+      "link": "NormalFloat"
+    },
+    "MiniClueBorder": {
+      "link": "FloatBorder"
+    },
+    "MiniClueDescGroup": {
+      "link": "DiagnosticFloatingWarn"
+    },
+    "MiniClueDescSingle": {
+      "link": "NormalFloat"
+    },
+    "MiniClueNextKey": {
+      "link": "DiagnosticFloatingHint"
+    },
+    "MiniClueNextKeyWithPostkeys": {
+      "link": "DiagnosticFloatingError"
+    },
+    "MiniClueSeparator": {
+      "link": "DiagnosticFloatingInfo"
+    },
+    "MiniClueTitle": {
+      "link": "FloatTitle"
+    },
+    "MiniCompletionActiveParameter": {
+      "cterm": {
+        "underline": true
+      },
+      "underline": true
+    },
+    "MiniCursorword": {
+      "cterm": {
+        "underline": true
+      },
+      "underline": true
+    },
+    "MiniCursorwordCurrent": {
+      "cterm": {
+        "underline": true
+      },
+      "underline": true
+    },
+    "MiniDepsChangeAdded": {
+      "link": "diffAdded"
+    },
+    "MiniDepsChangeRemoved": {
+      "link": "diffRemoved"
+    },
+    "MiniDepsHint": {
+      "fg": "#6d8885"
+    },
+    "MiniDepsInfo": {
+      "fg": "#668696"
+    },
+    "MiniDepsMsgBreaking": {
+      "fg": "#9d7257"
+    },
+    "MiniDepsPlaceholder": {
+      "link": "Comment"
+    },
+    "MiniDepsTitle": {
+      "link": "Title"
+    },
+    "MiniDepsTitleError": {
+      "link": "DiffDelete"
+    },
+    "MiniDepsTitleSame": {
+      "link": "DiffText"
+    },
+    "MiniDepsTitleUpdate": {
+      "link": "DiffAdd"
+    },
+    "MiniDiffOverAdd": {
+      "link": "DiffAdd"
+    },
+    "MiniDiffOverChange": {
+      "link": "DiffText"
+    },
+    "MiniDiffOverContext": {
+      "link": "DiffChange"
+    },
+    "MiniDiffOverDelete": {
+      "link": "DiffDelete"
+    },
+    "MiniDiffSignAdd": {
+      "bg": "#282727",
+      "fg": "#6e7e60"
+    },
+    "MiniDiffSignChange": {
+      "bg": "#282727",
+      "fg": "#ae955e"
+    },
+    "MiniDiffSignDelete": {
+      "bg": "#282727",
+      "fg": "#ae4e47"
+    },
+    "MiniFilesBorder": {
+      "link": "FloatBorder"
+    },
+    "MiniFilesBorderModified": {
+      "link": "DiagnosticFloatingWarn"
+    },
+    "MiniFilesCursorLine": {
+      "link": "CursorLine"
+    },
+    "MiniFilesDirectory": {
+      "link": "Directory"
+    },
+    "MiniFilesFile": {
+      "fg": "#c5c9c5"
+    },
+    "MiniFilesNormal": {
+      "link": "NormalFloat"
+    },
+    "MiniFilesTitle": {
+      "bg": "#181616",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#7a8382"
+    },
+    "MiniFilesTitleFocused": {
+      "bg": "#181616",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#c5c9c5"
+    },
+    "MiniHipatternsFixme": {
+      "bg": "#ae4e47",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#181616"
+    },
+    "MiniHipatternsHack": {
+      "bg": "#9d7257",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#181616"
+    },
+    "MiniHipatternsNote": {
+      "bg": "#668696",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#181616"
+    },
+    "MiniHipatternsTodo": {
+      "bg": "#6d8885",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#181616"
+    },
+    "MiniIconsAzure": {
+      "fg": "#68738b"
+    },
+    "MiniIconsBlue": {
+      "fg": "#668696"
+    },
+    "MiniIconsCyan": {
+      "fg": "#6d8885"
+    },
+    "MiniIconsGreen": {
+      "fg": "#6e7e60"
+    },
+    "MiniIconsGrey": {
+      "fg": "#c5c9c5"
+    },
+    "MiniIconsOrange": {
+      "fg": "#9d7257"
+    },
+    "MiniIconsPurple": {
+      "fg": "#68738b"
+    },
+    "MiniIconsRed": {
+      "fg": "#ae4e47"
+    },
+    "MiniIconsYellow": {
+      "fg": "#ae955e"
+    },
+    "MiniIndentscopePrefix": {
+      "cterm": {
+        "nocombine": true
+      },
+      "nocombine": true
+    },
+    "MiniIndentscopeSymbol": {
+      "fg": "#68738b"
+    },
+    "MiniJump": {
+      "link": "SpellRare"
+    },
+    "MiniJump2dDim": {
+      "link": "Comment"
+    },
+    "MiniJump2dSpot": {
+      "bold": true,
+      "cterm": {
+        "bold": true,
+        "nocombine": true
+      },
+      "fg": "#9d7257",
+      "nocombine": true
+    },
+    "MiniJump2dSpotAhead": {
+      "bg": "#181616",
+      "cterm": {
+        "nocombine": true
+      },
+      "fg": "#6d8885",
+      "nocombine": true
+    },
+    "MiniJump2dSpotUnique": {
+      "bold": true,
+      "cterm": {
+        "bold": true,
+        "nocombine": true
+      },
+      "fg": "#68738b",
+      "nocombine": true
+    },
+    "MiniMapNormal": {
+      "link": "NormalFloat"
+    },
+    "MiniMapSymbolCount": {
+      "link": "Special"
+    },
+    "MiniMapSymbolLine": {
+      "link": "Title"
+    },
+    "MiniMapSymbolView": {
+      "link": "Delimiter"
+    },
+    "MiniNotifyBorder": {
+      "link": "FloatBorder"
+    },
+    "MiniNotifyNormal": {
+      "link": "NormalFloat"
+    },
+    "MiniNotifyTitle": {
+      "link": "FloatTitle"
+    },
+    "MiniOperatorsExchangeFrom": {
+      "link": "IncSearch"
+    },
+    "MiniPickBorder": {
+      "link": "FloatBorder"
+    },
+    "MiniPickBorderBusy": {
+      "link": "DiagnosticFloatingWarn"
+    },
+    "MiniPickBorderText": {
+      "link": "FloatTitle"
+    },
+    "MiniPickHeader": {
+      "link": "DiagnosticFloatingHint"
+    },
+    "MiniPickIconDirectory": {
+      "link": "Directory"
+    },
+    "MiniPickIconFile": {
+      "link": "MiniPickNormal"
+    },
+    "MiniPickMatchCurrent": {
+      "link": "CursorLine"
+    },
+    "MiniPickMatchMarked": {
+      "link": "Visual"
+    },
+    "MiniPickMatchRanges": {
+      "link": "DiagnosticFloatingHint"
+    },
+    "MiniPickNormal": {
+      "link": "NormalFloat"
+    },
+    "MiniPickPreviewLine": {
+      "link": "CursorLine"
+    },
+    "MiniPickPreviewRegion": {
+      "link": "IncSearch"
+    },
+    "MiniPickPrompt": {
+      "bg": "#181616",
+      "fg": "#668696"
+    },
+    "MiniStarterCurrent": {
+      "cterm": {
+        "nocombine": true
+      },
+      "nocombine": true
+    },
+    "MiniStarterFooter": {
+      "fg": "#7a8382"
+    },
+    "MiniStarterHeader": {
+      "link": "Title"
+    },
+    "MiniStarterInactive": {
+      "link": "Comment"
+    },
+    "MiniStarterItem": {
+      "link": "Normal"
+    },
+    "MiniStarterItemBullet": {
+      "link": "Delimiter"
+    },
+    "MiniStarterItemPrefix": {
+      "fg": "#9d7257"
+    },
+    "MiniStarterQuery": {
+      "fg": "#668696"
+    },
+    "MiniStarterSection": {
+      "fg": "#6e7e60"
+    },
+    "MiniStatuslineDevinfo": {
+      "bg": "#282727",
+      "fg": "#c5c9c5"
+    },
+    "MiniStatuslineFileinfo": {
+      "bg": "#282727",
+      "fg": "#c5c9c5"
+    },
+    "MiniStatuslineFilename": {
+      "bg": "#181616",
+      "fg": "#c5c9c5"
+    },
+    "MiniStatuslineInactive": {
+      "link": "StatusLineNC"
+    },
+    "MiniStatuslineModeCommand": {
+      "bg": "#ae4e47",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#181616"
+    },
+    "MiniStatuslineModeInsert": {
+      "bg": "#6e7e60",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#181616"
+    },
+    "MiniStatuslineModeNormal": {
+      "bg": "#668696",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#181616"
+    },
+    "MiniStatuslineModeOther": {
+      "bg": "#6d8885",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#181616"
+    },
+    "MiniStatuslineModeReplace": {
+      "bg": "#9d7257",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#181616"
+    },
+    "MiniStatuslineModeVisual": {
+      "bg": "#68738b",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#181616"
+    },
+    "MiniSurround": {
+      "link": "IncSearch"
+    },
+    "MiniTablineCurrent": {
+      "bg": "#282727",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#c5c9c5"
+    },
+    "MiniTablineFill": {
+      "link": "TabLineFill"
+    },
+    "MiniTablineHidden": {
+      "bg": "#181616",
+      "fg": "#7a8382"
+    },
+    "MiniTablineModifiedCurrent": {
+      "bg": "#c5c9c5",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#282727"
+    },
+    "MiniTablineModifiedHidden": {
+      "bg": "#7a8382",
+      "fg": "#181616"
+    },
+    "MiniTablineModifiedVisible": {
+      "bg": "#7a8382",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#181616"
+    },
+    "MiniTablineTabpagesection": {
+      "bg": "#424f4e",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#c5c9c5"
+    },
+    "MiniTablineVisible": {
+      "bg": "#181616",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#7a8382"
+    },
+    "MiniTestEmphasis": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      }
+    },
+    "MiniTestFail": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#ae4e47"
+    },
+    "MiniTestPass": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#6e7e60"
+    },
+    "MiniTrailspace": {
+      "bg": "#ae4e47"
+    },
+    "ModeMsg": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#9d7257"
+    },
+    "MoreMsg": {
+      "fg": "#668696"
+    },
+    "MsgArea": {
+      "fg": "#c5c9c5"
+    },
+    "MsgSeparator": {
+      "bg": "#181616",
+      "fg": "#181616"
+    },
+    "NavicIconsArray": {
+      "link": "Type"
+    },
+    "NavicIconsBoolean": {
+      "link": "Boolean"
+    },
+    "NavicIconsClass": {
+      "link": "Type"
+    },
+    "NavicIconsConstant": {
+      "link": "Constant"
+    },
+    "NavicIconsConstructor": {
+      "link": "@constructor"
+    },
+    "NavicIconsEnum": {
+      "link": "Type"
+    },
+    "NavicIconsEnumMember": {
+      "link": "Constant"
+    },
+    "NavicIconsEvent": {
+      "link": "Structure"
+    },
+    "NavicIconsField": {
+      "link": "@variable.member"
+    },
+    "NavicIconsFile": {
+      "link": "Directory"
+    },
+    "NavicIconsFunction": {
+      "link": "Function"
+    },
+    "NavicIconsInterface": {
+      "link": "Type"
+    },
+    "NavicIconsKey": {
+      "link": "Identifier"
+    },
+    "NavicIconsMethod": {
+      "link": "@function.method"
+    },
+    "NavicIconsModule": {
+      "link": "@module"
+    },
+    "NavicIconsNamespace": {
+      "link": "@module"
+    },
+    "NavicIconsNull": {
+      "link": "Type"
+    },
+    "NavicIconsNumber": {
+      "link": "Number"
+    },
+    "NavicIconsObject": {
+      "link": "Type"
+    },
+    "NavicIconsOperator": {
+      "link": "Operator"
+    },
+    "NavicIconsPackage": {
+      "link": "@module"
+    },
+    "NavicIconsProperty": {
+      "link": "@property"
+    },
+    "NavicIconsString": {
+      "link": "String"
+    },
+    "NavicIconsStruct": {
+      "link": "Structure"
+    },
+    "NavicIconsTypeParameter": {
+      "link": "Type"
+    },
+    "NavicIconsVariable": {
+      "link": "@variable"
+    },
+    "NavicSeparator": {
+      "fg": "#c5c9c5"
+    },
+    "NavicText": {
+      "fg": "#c5c9c5"
+    },
+    "NeoTreeGitAdded": {
+      "fg": "#6e7e60"
+    },
+    "NeoTreeGitConflict": {
+      "fg": "#ae4e47"
+    },
+    "NeoTreeGitDeleted": {
+      "fg": "#ae4e47"
+    },
+    "NeoTreeGitModified": {
+      "fg": "#ae955e"
+    },
+    "NeoTreeGitStaged": {
+      "fg": "#6e7e60"
+    },
+    "NeoTreeGitUnstaged": {
+      "link": "NeoTreeGitModified"
+    },
+    "NeoTreeGitUntracked": {
+      "link": "NeoTreeGitModified"
+    },
+    "NeoTreeIndentMarker": {
+      "link": "NonText"
+    },
+    "NeoTreeModified": {
+      "link": "String"
+    },
+    "NeoTreeRootName": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#ae955e"
+    },
+    "NeoTreeTabActive": {
+      "link": "TabLineSel"
+    },
+    "NeoTreeTabInactive": {
+      "link": "TabLine"
+    },
+    "NeoTreeTabSeparatorActive": {
+      "link": "NeoTreeTabActive"
+    },
+    "NeoTreeTabSeparatorInactive": {
+      "link": "NeoTreeTabInactive"
+    },
+    "NeogitDiffAddHighlight": {
+      "bg": "#434a3b"
+    },
+    "NeogitDiffContextHighlight": {
+      "bg": "#3f4e56"
+    },
+    "NeogitDiffDeleteHighlight": {
+      "bg": "#63322e"
+    },
+    "NeogitHunkHeader": {
+      "fg": "#668696"
+    },
+    "NeogitHunkHeaderHighlight": {
+      "bg": "#3f4e56",
+      "fg": "#9d7257"
+    },
+    "NeotestAdapterName": {
+      "fg": "#ae4e47"
+    },
+    "NeotestDir": {
+      "fg": "#668696"
+    },
+    "NeotestExpandMarker": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#9e9b93"
+    },
+    "NeotestFailed": {
+      "fg": "#ae4e47"
+    },
+    "NeotestFile": {
+      "fg": "#668696"
+    },
+    "NeotestFocused": {
+      "bold": true,
+      "cterm": {
+        "bold": true,
+        "underline": true
+      },
+      "underline": true
+    },
+    "NeotestIndent": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#7a8382"
+    },
+    "NeotestMarked": {
+      "cterm": {
+        "italic": true
+      },
+      "fg": "#9d7257",
+      "italic": true
+    },
+    "NeotestNamespace": {
+      "fg": "#668696"
+    },
+    "NeotestPassed": {
+      "fg": "#6e7e60"
+    },
+    "NeotestRunning": {
+      "fg": "#ae955e"
+    },
+    "NeotestSkipped": {
+      "fg": "#68738b"
+    },
+    "NeotestTarget": {
+      "fg": "#ae4e47"
+    },
+    "NeotestTest": {
+      "fg": "#c5c9c5"
+    },
+    "NeotestUnknown": {
+      "fg": "#7a8382"
+    },
+    "NeotestWatching": {
+      "fg": "#ae955e"
+    },
+    "NeotestWinSelect": {
+      "fg": "#6d8885"
+    },
+    "NonText": {
+      "fg": "#625e5a"
+    },
+    "Normal": {
+      "fg": "#c5c9c5"
+    },
+    "NormalFloat": {
+      "bg": "#181616",
+      "fg": "#c5c9c5"
+    },
+    "NormalNC": {
+      "link": "Normal"
+    },
+    "NotifyBackground": {
+      "bg": "#181616"
+    },
+    "NotifyDEBUGBorder": {
+      "link": "Debug"
+    },
+    "NotifyDEBUGIcon": {
+      "link": "Debug"
+    },
+    "NotifyDEBUGTitle": {
+      "link": "Debug"
+    },
+    "NotifyERRORBorder": {
+      "link": "DiagnosticError"
+    },
+    "NotifyERRORIcon": {
+      "link": "DiagnosticError"
+    },
+    "NotifyERRORTitle": {
+      "link": "DiagnosticError"
+    },
+    "NotifyHINTBorder": {
+      "link": "DiagnosticHint"
+    },
+    "NotifyHINTIcon": {
+      "link": "DiagnosticHint"
+    },
+    "NotifyHINTTitle": {
+      "link": "DiagnosticHint"
+    },
+    "NotifyINFOBorder": {
+      "link": "DiagnosticInfo"
+    },
+    "NotifyINFOIcon": {
+      "link": "DiagnosticInfo"
+    },
+    "NotifyINFOTitle": {
+      "link": "DiagnosticInfo"
+    },
+    "NotifyTRACEBorder": {
+      "link": "Comment"
+    },
+    "NotifyTRACEIcon": {
+      "link": "Comment"
+    },
+    "NotifyTRACETitle": {
+      "link": "Comment"
+    },
+    "NotifyWARNBorder": {
+      "link": "DiagnosticWarn"
+    },
+    "NotifyWARNIcon": {
+      "link": "DiagnosticWarn"
+    },
+    "NotifyWARNTitle": {
+      "link": "DiagnosticWarn"
+    },
+    "Number": {
+      "fg": "#857186"
+    },
+    "NvimTreeExecFile": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#6e7e60"
+    },
+    "NvimTreeFolderName": {
+      "link": "Directory"
+    },
+    "NvimTreeGitDeleted": {
+      "fg": "#ae4e47"
+    },
+    "NvimTreeGitDirty": {
+      "fg": "#ae955e"
+    },
+    "NvimTreeGitNew": {
+      "fg": "#6e7e60"
+    },
+    "NvimTreeGitStaged": {
+      "fg": "#6e7e60"
+    },
+    "NvimTreeImageFile": {
+      "fg": "#ae4e47"
+    },
+    "NvimTreeNormal": {
+      "link": "Normal"
+    },
+    "NvimTreeNormalNC": {
+      "link": "NvimTreeNormal"
+    },
+    "NvimTreeOpenedFile": {
+      "cterm": {
+        "italic": true
+      },
+      "fg": "#68738b",
+      "italic": true
+    },
+    "NvimTreeRootFolder": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#ae955e"
+    },
+    "NvimTreeSpecialFile": {
+      "fg": "#68738b"
+    },
+    "NvimTreeSymlink": {
+      "link": "Type"
+    },
+    "NvimTreeWinSeparator": {
+      "link": "WinSeparator"
+    },
+    "NvimTreeWindowPicker": {
+      "bg": "#181616",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#68738b"
+    },
+    "Operator": {
+      "fg": "#ae4e47"
+    },
+    "Pmenu": {
+      "bg": "#3f4e56",
+      "fg": "#c5c9c5"
+    },
+    "PmenuBorder": {
+      "link": "FloatBorder"
+    },
+    "PmenuExtra": {
+      "bg": "#3f4e56",
+      "fg": "#7a8382"
+    },
+    "PmenuExtraSel": {
+      "bg": "#424f4e",
+      "fg": "#7a8382"
+    },
+    "PmenuKind": {
+      "bg": "#3f4e56",
+      "fg": "#c5c9c5"
+    },
+    "PmenuKindSel": {
+      "bg": "#424f4e",
+      "fg": "#c5c9c5"
+    },
+    "PmenuSbar": {
+      "bg": "#3f4e56"
+    },
+    "PmenuSel": {
+      "bg": "#424f4e"
+    },
+    "PmenuThumb": {
+      "bg": "#424f4e"
+    },
+    "PreProc": {
+      "fg": "#ae4e47"
+    },
+    "Question": {
+      "link": "MoreMsg"
+    },
+    "QuickFixLine": {
+      "bg": "#282727"
+    },
+    "Search": {
+      "bg": "#424f4e",
+      "fg": "#c5c9c5"
+    },
+    "SignColumn": {
+      "bg": "#282727",
+      "fg": "#7a8382"
+    },
+    "Special": {
+      "fg": "#68738b"
+    },
+    "SpecialKey": {
+      "fg": "#7a8382"
+    },
+    "SpellBad": {
+      "cterm": {
+        "undercurl": true
+      },
+      "sp": "#ae4e47",
+      "undercurl": true
+    },
+    "SpellCap": {
+      "cterm": {
+        "undercurl": true
+      },
+      "sp": "#9d7257",
+      "undercurl": true
+    },
+    "SpellLocal": {
+      "cterm": {
+        "undercurl": true
+      },
+      "sp": "#9d7257",
+      "undercurl": true
+    },
+    "SpellRare": {
+      "cterm": {
+        "undercurl": true
+      },
+      "sp": "#9d7257",
+      "undercurl": true
+    },
+    "Statement": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#68738b"
+    },
+    "StatusLine": {
+      "bg": "#181616",
+      "fg": "#c5c9c5"
+    },
+    "StatusLineNC": {
+      "bg": "#181616",
+      "fg": "#625e5a"
+    },
+    "String": {
+      "fg": "#6e7e60"
+    },
+    "Substitute": {
+      "bg": "#ae4e47",
+      "fg": "#c5c9c5"
+    },
+    "TabLine": {
+      "bg": "#181616",
+      "fg": "#7a8382"
+    },
+    "TabLineFill": {
+      "bg": "#181616"
+    },
+    "TabLineSel": {
+      "bg": "#282727",
+      "fg": "#c5c9c5"
+    },
+    "TelescopeBorder": {
+      "bg": "#181616",
+      "fg": "#625e5a"
+    },
+    "TelescopeResultsClass": {
+      "link": "Structure"
+    },
+    "TelescopeResultsField": {
+      "link": "@field"
+    },
+    "TelescopeResultsMethod": {
+      "link": "Function"
+    },
+    "TelescopeResultsStruct": {
+      "link": "Structure"
+    },
+    "TelescopeResultsVariable": {
+      "link": "@variable"
+    },
+    "TelescopeSelection": {
+      "link": "CursorLine"
+    },
+    "TelescopeSelectionCaret": {
+      "link": "CursorLineNr"
+    },
+    "TelescopeTitle": {
+      "fg": "#7a8382"
+    },
+    "Title": {
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#668696"
+    },
+    "Todo": {
+      "bg": "#668696",
+      "bold": true,
+      "cterm": {
+        "bold": true
+      },
+      "fg": "#3f4e56"
+    },
+    "TreesitterContext": {
+      "link": "Folded"
+    },
+    "TreesitterContextLineNumber": {
+      "bg": "#282727",
+      "fg": "#7a8382"
+    },
+    "TroubleIndent": {
+      "fg": "#625e5a"
+    },
+    "TroublePos": {
+      "fg": "#7a8382"
+    },
+    "Type": {
+      "fg": "#6d8885"
+    },
+    "Underlined": {
+      "cterm": {
+        "underline": true
+      },
+      "fg": "#68738b",
+      "underline": true
+    },
+    "VertSplit": {
+      "link": "WinSeparator"
+    },
+    "Visual": {
+      "bg": "#3f4e56"
+    },
+    "VisualNOS": {
+      "link": "Visual"
+    },
+    "WarningMsg": {
+      "fg": "#9d7257"
+    },
+    "Whitespace": {
+      "fg": "#625e5a"
+    },
+    "WildMenu": {
+      "link": "Pmenu"
+    },
+    "WinBar": {
+      "fg": "#c5c9c5"
+    },
+    "WinBarNC": {
+      "fg": "#c5c9c5"
+    },
+    "WinSeparator": {
+      "fg": "#181616"
+    },
+    "debugBreakpoint": {
+      "bg": "#282727",
+      "fg": "#68738b"
+    },
+    "debugPC": {
+      "bg": "#63322e"
+    },
+    "diffAdded": {
+      "fg": "#6e7e60"
+    },
+    "diffChanged": {
+      "fg": "#ae955e"
+    },
+    "diffDeleted": {
+      "fg": "#ae4e47"
+    },
+    "diffNewFile": {
+      "fg": "#6e7e60"
+    },
+    "diffOldFile": {
+      "fg": "#ae4e47"
+    },
+    "diffRemoved": {
+      "fg": "#ae4e47"
+    },
+    "healthError": {
+      "fg": "#ae4e47"
+    },
+    "healthSuccess": {
+      "fg": "#6e7e60"
+    },
+    "healthWarning": {
+      "fg": "#9d7257"
+    },
+    "lCursor": {
+      "link": "Cursor"
+    },
+    "markdownCode": {
+      "fg": "#6e7e60"
+    },
+    "markdownCodeBlock": {
+      "fg": "#6e7e60"
+    },
+    "markdownEscape": {},
+    "qfFileName": {
+      "link": "Directory"
+    },
+    "qfLineNr": {
+      "link": "LineNr"
+    }
+  }
+}

@@ -1,16 +1,12 @@
--- Load one colorscheme headlessly and dump its state as JSON.
+-- Load the colorscheme headlessly and dump its state as JSON.
 -- Environment:
---   UKIYO_E_SIDE         "seed" (kanagawa-dragon) or "ukiyo_e"
 --   UKIYO_E_ROOT         directory prepended to the runtimepath
 --   UKIYO_E_OPTS         Lua expression for the setup() options
 --   UKIYO_E_PRELUDE      optional Lua chunk run before setup()
 --   UKIYO_E_POSTLUDE     optional Lua chunk run after :colorscheme
 --   UKIYO_E_DUMP_OUT     output file for the JSON result
 
-local SCHEMES = {
-    seed = { module = "kanagawa", scheme = "kanagawa-dragon" },
-    ukiyo_e = { module = "ukiyo_e", scheme = "ukiyo_e" },
-}
+local MODULES = { "editor", "syntax", "treesitter", "lsp", "plugins" }
 
 local function eval_chunk(source)
     if source == nil or source == "" then
@@ -27,23 +23,52 @@ local function terminal_colors()
     return colors
 end
 
-local function load_side(side)
-    local entry = assert(SCHEMES[side], "unknown side")
+local function load()
     vim.opt.rtp:prepend(os.getenv("UKIYO_E_ROOT"))
     eval_chunk(os.getenv("UKIYO_E_PRELUDE"))
     local opts = eval_chunk("return " .. os.getenv("UKIYO_E_OPTS"))
-    require(entry.module).setup(opts)
-    vim.cmd.colorscheme(entry.scheme)
+    require("ukiyo_e").setup(opts)
+    vim.cmd.colorscheme("ukiyo_e")
     eval_chunk(os.getenv("UKIYO_E_POSTLUDE"))
+    return opts
 end
 
-local function snapshot(side)
-    local palette = vim.NIL
-    if side == "ukiyo_e" then
-        palette = require("ukiyo_e").palette()
+-- The colors table the load builds (init.lua build_colors).
+local function build_colors()
+    local rendered = require("ukiyo_e.palette")
+    local palette = vim.deepcopy(rendered.palette)
+    local shades = vim.deepcopy(rendered.shades)
+    local theme = require("ukiyo_e.theme")(palette, shades)
+    return { palette = palette, shades = shades, theme = theme }
+end
+
+-- Group names the highlight modules set for this config (REQ-NVIM-10).
+local function theme_set(opts)
+    local transparent = type(opts) == "table" and opts.transparent
+    local config = { transparent = transparent or false }
+    local colors = build_colors()
+    local found = {}
+    for _, name in ipairs(MODULES) do
+        local module = require("ukiyo_e.highlights." .. name)
+        for group in pairs(module.setup(colors, config)) do
+            found[group] = true
+        end
     end
+    local names = vim.tbl_keys(found)
+    table.sort(names)
+    return names
+end
+
+local function snapshot(opts)
+    local rendered = require("ukiyo_e.palette")
     return {
         groups = vim.api.nvim_get_hl(0, {}),
+        theme_set = theme_set(opts),
+        theme = require("ukiyo_e.theme")(
+            require("ukiyo_e").palette(),
+            vim.deepcopy(rendered.shades)
+        ),
+        shades = rendered.shades,
         terminal = terminal_colors(),
         colors_name = vim.g.colors_name or vim.NIL,
         kanagawa_loaded = package.loaded.kanagawa ~= nil,
@@ -51,14 +76,13 @@ local function snapshot(side)
             "lua/kanagawa/init.lua",
             true
         ),
-        palette = palette,
+        palette = require("ukiyo_e").palette(),
     }
 end
 
 local function main()
-    local side = os.getenv("UKIYO_E_SIDE")
-    local ok, err = pcall(load_side, side)
-    local result = ok and snapshot(side) or { error = tostring(err) }
+    local ok, opts = pcall(load)
+    local result = ok and snapshot(opts) or { error = tostring(opts) }
     local out = assert(io.open(os.getenv("UKIYO_E_DUMP_OUT"), "w"))
     out:write(vim.json.encode(result))
     out:close()

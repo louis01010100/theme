@@ -20,10 +20,13 @@ SYMLINK = "symlink in the source tree (only regular files are installed)"
 
 
 def render_palette_lua(palette: Palette) -> bytes:
-    """lua/ukiyo_e/palette.lua: every palette entry plus `ansi`."""
+    """lua/ukiyo_e/palette.lua: palette entries, shades, `ansi`."""
     lines = [HEADER, "return {", "    palette = {"]
     lines += [f'        {name} = "{value}",'
               for name, value in sorted(palette.colors.items())]
+    lines += ["    },", "    shades = {"]
+    lines += [f'        {name} = "{value}",'
+              for name, value in sorted(palette.shades.items())]
     lines += ["    },", "    ansi = {"]
     lines += [f'        "{value}",' for value in resolve_ansi(palette)]
     lines += ["    },", "}"]

@@ -7,35 +7,38 @@ import unittest
 import support
 from configurator import nvim, palette, terminal_ansi, tmux
 
-NAMES = frozenset(palette.REQUIRED_NAMES)
+NAMES = palette.colour_names(
+    {"palette": dict.fromkeys(palette.SLOTS, "#000000")})
 SPEC_ANSI = (
-    "dragonBlack0", "dragonRed", "dragonGreen2", "dragonYellow",
-    "dragonBlue2", "dragonPink", "dragonAqua", "oldWhite", "dragonGray",
-    "waveRed", "dragonGreen", "carpYellow", "springBlue", "springViolet1",
-    "waveAqua2", "dragonWhite",
+    "base00", "base08", "base0B", "base0A", "base0D", "base0E",
+    "base0C", "base05", "base03", "base08", "base0B", "base0A",
+    "base0D", "base0E", "base0C", "base07",
 )
 SPEC_TERMINAL = {
-    "background": "dragonBlack3", "foreground": "dragonWhite",
-    "cursor_bg": "oldWhite", "cursor_fg": "dragonBlack3",
-    "selection_bg": "waveBlue2", "selection_fg": "oldWhite",
+    "background": "base00", "foreground": "base07",
+    "cursor_bg": "base07", "cursor_fg": "base00",
+    "selection_bg": "shadowAqua", "selection_fg": "base07",
 }
 SPEC_TMUX = {
-    "status_fg": "oldWhite", "status_bg": "dragonBlack0",
-    "accent_fg": "dragonBlack0", "accent_bg": "dragonBlue2",
-    "status_segment_fg": "oldWhite", "status_segment_bg": "dragonBlack4",
-    "window_fg": "dragonGray3", "window_bg": "dragonBlack0",
-    "window_current_fg": "dragonWhite", "window_current_bg": "dragonBlack5",
-    "window_activity_fg": "roninYellow",
-    "window_activity_bg": "dragonBlack0",
-    "window_bell_fg": "samuraiRed", "window_bell_bg": "dragonBlack0",
-    "window_separator_fg": "dragonBlack6", "pane_border_fg": "dragonBlack5",
-    "pane_active_border_fg": "dragonBlue2", "message_fg": "oldWhite",
-    "message_bg": "dragonBlack0", "command_fg": "dragonWhite",
-    "command_bg": "dragonBlack0", "copy_selection_fg": "oldWhite",
-    "copy_selection_bg": "waveBlue2", "clock_fg": "dragonBlue2",
-    "display_panes_fg": "dragonBlack6",
-    "display_panes_active_fg": "roninYellow",
+    "status_fg": "base07", "status_bg": "base00",
+    "accent_fg": "base00", "accent_bg": "base0D",
+    "status_segment_fg": "base07", "status_segment_bg": "base01",
+    "window_fg": "base04", "window_bg": "base00",
+    "window_current_fg": "base07", "window_current_bg": "base02",
+    "window_activity_fg": "base09", "window_activity_bg": "base00",
+    "window_bell_fg": "base08", "window_bell_bg": "base00",
+    "window_separator_fg": "base03", "pane_border_fg": "base02",
+    "pane_active_border_fg": "base0D", "message_fg": "base07",
+    "message_bg": "base00", "command_fg": "base07",
+    "command_bg": "base00", "copy_selection_fg": "base07",
+    "copy_selection_bg": "shadowAqua", "clock_fg": "base0D",
+    "display_panes_fg": "base03", "display_panes_active_fg": "base09",
+    "flat_bar_bg": "base01", "flat_text_fg": "base04",
+    "flat_block_fg": "base04", "flat_block_bg": "base02",
+    "flat_separator_fg": "base02", "flat_current_fg": "base07",
+    "flat_current_bg": "shadowRed",
 }
+NOT_A_NAME = "is not a [palette] name or derived shade"
 ANSI_MODULE = "configurator/terminal_ansi.py"
 PTYXIS_MODULE = "configurator/ptyxis.py"
 SPEC_PTYXIS = {"Background": "background", "Foreground": "foreground",
@@ -76,18 +79,38 @@ class MappingRulesTest(unittest.TestCase):
         ansi[3] = "noSuchColour"
         self.assertEqual(
             texts(terminal_ansi.validate_ansi(NAMES, tuple(ansi))),
-            [f'{ANSI_MODULE}: ANSI[3]: "noSuchColour" is not a '
-             f'[palette] name'])
+            [f'{ANSI_MODULE}: ANSI[3]: "noSuchColour" {NOT_A_NAME}'])
 
     def test_tmux_role_unknown_name(self):
-        roles = dict(SPEC_TMUX, clock_fg="dragonBlu2")
+        cases = (("clock_fg", "base0G"), ("flat_current_bg", "fujiRed"),
+                 ("flat_current_bg", "lavaBlack"),
+                 ("flat_current_bg", "base08_dark"))
+        for role, value in cases:
+            with self.subTest(role=role, value=value):
+                roles = dict(SPEC_TMUX, **{role: value})
+                self.assertEqual(
+                    texts(tmux.validate_roles(NAMES, roles)),
+                    [f'configurator/tmux.py: TMUX_ROLES.{role}: '
+                     f'"{value}" {NOT_A_NAME}'])
+
+    def test_terminal_role_unknown_shade(self):
+        for value in ("shadowGray", "shadowred"):
+            with self.subTest(value=value):
+                roles = dict(SPEC_TERMINAL, selection_bg=value)
+                self.assertEqual(
+                    texts(terminal_ansi.validate_roles(NAMES, roles)),
+                    [f'{ANSI_MODULE}: TERMINAL_ROLES.selection_bg: '
+                     f'"{value}" {NOT_A_NAME}'])
+
+    def test_shade_is_valid_target(self):
+        roles = dict(SPEC_TERMINAL, selection_bg="shadowAqua")
         self.assertEqual(
-            texts(tmux.validate_roles(NAMES, roles)),
-            ['configurator/tmux.py: TMUX_ROLES.clock_fg: "dragonBlu2" '
-             'is not a [palette] name'])
+            texts(terminal_ansi.validate_roles(NAMES, roles)), [])
+        self.assertEqual(NAMES, frozenset(palette.SLOTS)
+                         | frozenset(palette.SHADES))
 
     def test_tmux_role_keys(self):
-        roles = dict(SPEC_TMUX, extra_fg="oldWhite")
+        roles = dict(SPEC_TMUX, extra_fg="base07")
         del roles["clock_fg"]
         self.assertEqual(
             sorted(texts(tmux.validate_roles(NAMES, roles))),
@@ -101,7 +124,7 @@ class MappingRulesTest(unittest.TestCase):
         self.assertEqual(
             sorted(texts(terminal_ansi.validate_roles(NAMES, roles))),
             [f'{ANSI_MODULE}: TERMINAL_ROLES.background: "nope" '
-             'is not a [palette] name',
+             f'{NOT_A_NAME}',
              f"{ANSI_MODULE}: TERMINAL_ROLES.cursor_fg: "
              "missing role"])
 
@@ -142,10 +165,10 @@ class RolesMovedTest(unittest.TestCase):
     def test_broken_role_names_terminal_ansi(self):
         result, env = mutated_run(
             self, "configurator/terminal_ansi.py",
-            '"cursor_bg": "oldWhite"', '"cursor_bg": "oldWhit"', "nvim")
+            '"cursor_bg": "base07"', '"cursor_bg": "base7"', "nvim")
         self.assertEqual(result.code, 3, result.stderr)
         self.assertIn(f'{ANSI_MODULE}: TERMINAL_ROLES.cursor_bg: '
-                      f'"oldWhit" is not a [palette] name',
+                      f'"base7" {NOT_A_NAME}',
                       result.stderr.splitlines())
         self.assertEqual(list(env.data.iterdir()), [])
 

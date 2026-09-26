@@ -26,8 +26,11 @@ local function check(opts)
 end
 
 local function build_colors()
-    local palette = M.palette()
-    return { palette = palette, theme = require("ukiyo_e.theme")(palette) }
+    local rendered = require("ukiyo_e.palette")
+    local palette = vim.deepcopy(rendered.palette)
+    local shades = vim.deepcopy(rendered.shades)
+    local theme = require("ukiyo_e.theme")(palette, shades)
+    return { palette = palette, shades = shades, theme = theme }
 end
 
 local function build_groups(colors)

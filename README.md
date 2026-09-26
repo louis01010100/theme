@@ -8,18 +8,19 @@ Neovim colorscheme (`ukiyo_e`) and the tmux theme into a local install
 directory, updates the "Ukiyo-e" GNOME Terminal profile, writes the
 "Ukiyo-e" Ptyxis palette and updates the "Ukiyo-e" Ptyxis profile, and
 reloads the theme on your running tmux server. `all` configures
-whichever of the two terminals is installed and skips the other. Version 1 of the palette
-reproduces Kanagawa Dragon exactly. The repository holds source only;
+whichever of the two terminals is installed and skips the other. The
+palette is 16 base16 slots derived from Kanagawa Dragon (see Palette).
+The repository holds source only;
 nothing is committed, pushed, or fetched to apply a colour change.
 
 ## Layout
 
 ```text
-palette.toml          # named colours: the only hand-edited colour file
+palette.toml          # the 16 slots: the only hand-edited colour file
 configure.py          # entry point: python3 configure.py [target] [flags]
 configurator/         # validation, role mappings, install, per-tool apply
   cli.py              #   argument parsing, run order, exit codes
-  palette.py          #   palette.toml loading and validation
+  palette.py          #   palette.toml validation, derived shades
   terminal_ansi.py    #   ANSI (16 colours), TERMINAL_ROLES (shared)
   settings.py         #   gsettings access shared by gnome and ptyxis
   gnome.py            #   "Ukiyo-e" GNOME Terminal profile via gsettings
@@ -37,11 +38,14 @@ tmux/                 # tmux theme source
   *.conf.tmpl         #   templates rendered with {{role}} colours
 tests/                # unittest suite (isolated; see Tests below)
   test_ptyxis.py      #   Ptyxis lifecycle, edges, single-schema runs
+  regen_nvim_reference.py  # rewrites the Neovim reference snapshot
+  reference/          #   nvim-highlights.json (verification fixture)
 ```
 
 ## Workflow
 
-1. Edit `palette.toml` (`[palette]`: `name = "#RRGGBB"`). Optionally
+1. Edit `palette.toml` (`[palette]`: `name = "#RRGGBB"`; see Palette
+   below). Optionally
    edit the role mappings in `configurator/` (`ANSI` in
    `terminal_ansi.py`, `TERMINAL_ROLES` in `terminal_ansi.py`,
    `PTYXIS_KEYS` in `ptyxis.py`, `TMUX_ROLES` in `tmux.py`), the Lua under `nvim/`, or the templates under `tmux/`.
@@ -53,6 +57,74 @@ tests/                # unittest suite (isolated; see Tests below)
 Every palette entry, mapping, and template is validated before anything
 changes; any error is printed (file, table or constant, and key) and
 nothing is touched.
+
+## Palette
+
+`palette.toml` has one table, `[palette]`, holding the 16 base16 slots
+`base00`–`base0F` (spelled exactly so). `base00`–`base07` are neutrals
+from dark to light (`base00` the background, `base07` normal text);
+`base08`–`base0F` are the eight accents, each 20 % darker (HSL
+lightness × 0.8) than its Kanagawa origin.
+
+| Slot | Name | Role | Value | Kanagawa origin |
+|---|---|---|---|---|
+| `base00` | lavaBlack | background (darkest neutral) | `#181616` | dragonBlack3 |
+| `base01` | cinderBlack | neutral | `#282727` | dragonBlack4 |
+| `base02` | basaltGray | neutral | `#393836` | dragonBlack5 |
+| `base03` | ashGray | neutral | `#625e5a` | dragonBlack6 |
+| `base04` | mistGray | neutral | `#7a8382` | dragonGray3 |
+| `base05` | hazeGray | neutral | `#9e9b93` | dragonGray2 |
+| `base06` | cloudGray | neutral | `#a6a69c` | dragonGray |
+| `base07` | snowWhite | normal text (lightest neutral) | `#c5c9c5` | dragonWhite |
+| `base08` | fujiRed | red | `#ae4e47` | dragonRed, 20 % darker |
+| `base09` | persimmonOrange | orange | `#9d7257` | dragonOrange, 20 % darker |
+| `base0A` | strawYellow | yellow | `#ae955e` | dragonYellow, 20 % darker |
+| `base0B` | pineGreen | green | `#6e7e60` | dragonGreen2, 20 % darker |
+| `base0C` | lakeAqua | cyan | `#6d8885` | dragonAqua, 20 % darker |
+| `base0D` | ridgeBlue | blue | `#668696` | dragonBlue2, 20 % darker |
+| `base0E` | twilightViolet | violet | `#68738b` | dragonViolet, 20 % darker |
+| `base0F` | blossomPink | pink | `#857186` | dragonPink, 20 % darker |
+
+Each slot line carries a comment with its name, its Kanagawa origin,
+and the removed Kanagawa colours merged into it. The names
+(`lavaBlack` … `snowWhite`, `fujiRed` … `blossomPink`) are
+documentation only: mappings, templates, and Lua refer to slots by
+slot name.
+
+Extra names are allowed (for example a colour added later for tmux).
+By convention they follow the Mount Fuji naming style: a landscape
+image plus a plain English colour word, in camelCase. Some names are
+reserved and rejected in any letter case: a slot name in another case
+(e.g. `base0a`), the eight `shadow*` shade names, and the neutral and
+accent names above.
+
+**Derived shades.** Eight dark shades are computed from the slots on
+every run: `shadowRed`, `shadowOrange`, `shadowYellow`, `shadowGreen`,
+`shadowAqua`, `shadowBlue`, `shadowViolet`, `shadowPink`, each 50 % of
+its accent (`base08` … `base0F`) blended with 50 % `base00` (per
+channel, rounded half to even). They are never stored in
+`palette.toml`; mappings use them by name like a slot. Uses: diff
+backgrounds (`shadowGreen` added, `shadowRed` removed, `shadowBlue`
+changed, `shadowYellow` changed text); `shadowBlue` for the visual
+selection, the completion menu, and Neovim's reverse text;
+`shadowAqua` for search, the completion-menu selection, the terminal
+selection, and the tmux copy-mode selection; `shadowRed` for the
+current window of the flat tmux style. `shadowOrange`, `shadowViolet`,
+and `shadowPink` are not used yet.
+
+**Contrast (accepted 2026-09-26).** Normal text `base07` on the shades
+is at least 5.1:1, except on the yellow shade `shadowYellow` (4.3:1,
+below 4.5:1). As code text on `base00`, the darkened red, violet,
+pink, green, and orange accents are below 4.5:1 (lowest about 3.4:1,
+red). Both are accepted in favour of the darker look and readable
+dark shades; no check enforces a contrast ratio.
+
+**Neovim reference snapshot.** `tests/reference/nvim-highlights.json`
+records the highlight groups the colorscheme sets for the committed
+palette. After a deliberate change to `palette.toml`, the theme layer,
+or the highlight modules, regenerate it with
+`python3 tests/regen_nvim_reference.py`, review its diff, and commit
+it together with the change.
 
 ## Getting the source
 
@@ -145,10 +217,10 @@ Requires Neovim 0.10 or later and a true-colour terminal.
 | `setup` option | Default | Effect |
 |---|---|---|
 | `transparent` | `false` | `true` leaves the `Normal` background unset (`NONE`), so the terminal background shows through. |
-| `overrides` | `nil` | `function(colors) -> table` returning highlight group → spec. `colors` is `{ palette = …, theme = … }`. A returned spec is merged over the built-in one (a non-empty spec drops a built-in `link`). |
+| `overrides` | `nil` | `function(colors) -> table` returning highlight group → spec. `colors` is `{ palette = …, shades = …, theme = … }`. A returned spec is merged over the built-in one (a non-empty spec drops a built-in `link`). |
 
-`require("ukiyo_e").palette()` returns a copy of the palette
-(name → `#rrggbb`); `vim.g.terminal_color_0` … `15` come from the same
+`require("ukiyo_e").palette()` returns a copy of the `[palette]`
+entries (name → `#rrggbb`, without the derived shades); `vim.g.terminal_color_0` … `15` come from the same
 16-colour mapping as the GNOME Terminal palette.
 
 ## tmux
@@ -158,14 +230,18 @@ line:
 
 | Option | Default | Effect |
 |---|---|---|
-| `@ukiyo_e_no_patched_font` | `off` | `on` uses plain separators instead of powerline glyphs. |
+| `@ukiyo_e_no_patched_font` | `off` | `on` selects the flat style instead of the powerline style (no Nerd Font needed). |
 | `@ukiyo_e_show_status_content` | `on` | `off` applies colours only; your `status-left`, `status-right`, and window formats are left alone. |
 | `@ukiyo_e_date_format` | `%Y-%m-%d` | strftime format of the date in `status-right`. |
 
 The time is shown as `%H:%M`, or `%I:%M %p` when `clock-mode-style` is
-`12`. The default status content uses powerline glyphs, which need a
-Nerd Font (or another powerline-patched font); without one, set
-`@ukiyo_e_no_patched_font on`. The theme sets only global style and
+`12`. There are two status styles. The default powerline style uses
+powerline glyphs, which need a Nerd Font (or another
+powerline-patched font). Without one, set `@ukiyo_e_no_patched_font
+on` for the flat style: flat blocks for the session and host, windows
+shown as `#I.#W` separated by `|`, the current window as a block on
+`shadowRed`, and the date and time as plain text; it needs no Nerd
+Font. The theme sets only global style and
 format options; it never changes key bindings, the prefix, hooks, or
 the environment.
 
@@ -236,9 +312,13 @@ the two one-time lines above by hand.
 ## Tests
 
 ```sh
-UKIYO_E_KANAGAWA_SEED=~/.local/share/nvim/lazy/kanagawa.nvim \
-    python3 -m unittest discover -s tests
+python3 -m unittest discover -s tests
 ```
+
+The Neovim checks compare the installed colorscheme with the committed
+reference snapshot (see Palette); regenerate it with
+`python3 tests/regen_nvim_reference.py` only after a deliberate
+colour change.
 
 The suite uses scratch home and data directories, headless Neovim, a
 dedicated tmux server, and an isolated D-Bus session with a scratch

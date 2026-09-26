@@ -21,6 +21,7 @@ VERSION_TREE = sorted([
     "lua/ukiyo_e/highlights/treesitter.lua", "ukiyo_e.tmux",
     "tmux/colors.conf", "tmux/status.conf", "tmux/status-plain.conf",
 ])
+NOT_A_NAME = "is not a [palette] name or derived shade"
 DOTFILES = {".tmux.conf": "set -g mouse on\n",
             ".config/tmux/tmux.conf": "set -g base-index 1\n",
             ".config/nvim/init.lua": "vim.o.number = true\n"}
@@ -150,11 +151,11 @@ def mutate(root, path, old, new):
 
 
 def blue_copy(owner, value="#123456"):
-    """A scratch repository copy with dragonBlue2 changed."""
+    """A scratch repository copy with base0D changed."""
     root = support.copy_repo()
     support.later(owner, support.remove_tree, root)
-    support.replace_line(root / "palette.toml", "dragonBlue2 ",
-                         f'dragonBlue2 = "{value}"')
+    support.replace_line(root / "palette.toml", "base0D ",
+                         f'base0D = "{value}"')
     return root
 
 
@@ -197,14 +198,21 @@ class PaletteRejectTest(FullTestCase):
     CASES = (
         ("[terminal]\nx = 1\n", None,
          "palette.toml: [terminal]: unexpected table"),
-        ("dragonBlue2 ", 'dragonBlue2 = "dragonBlue"',
-         'palette.toml: [palette].dragonBlue2: "dragonBlue" is not '
-         '#RRGGBB'),
-        ("dragonRed ", 'dragonRed = "#12345"',
-         'palette.toml: [palette].dragonRed: "#12345" is not #RRGGBB'),
-        ("waveRed ", "", "palette.toml: [palette].waveRed: missing "
-         "required name"),
-    )
+        ("base0D ", 'base0D = "base0C"',
+         'palette.toml: [palette].base0D: "base0C" is not #RRGGBB'),
+        ("base08 ", 'base08 = "#12345"',
+         'palette.toml: [palette].base08: "#12345" is not #RRGGBB'),
+        ("base0F ", "", "palette.toml: [palette].base0F: missing "
+         "required slot"),
+    ) + tuple(
+        (f'{name} = "#000000"\n', None,
+         f"palette.toml: [palette].{name}: reserved name ({why})")
+        for name, why in (
+            ("shadowRed", "derived shade shadowRed"),
+            ("shadowred", "derived shade shadowRed"),
+            ("base0a", "slot base0A"),
+            ("fujiRed", "accent name fujiRed"),
+            ("lavaBlack", "neutral name lavaBlack")))
 
     def broken_copy(self, prefix, line):
         root = support.copy_repo()
@@ -235,19 +243,44 @@ class PaletteRejectTest(FullTestCase):
         support.configure_ok(self.env, "all")
         self.assert_rejected()
 
+    def test_valid_extra_names(self):
+        for line in ('rust = "#b7410e"\n', 'shadowGray = "#000000"\n'):
+            name = line.split()[0]
+            with self.subTest(name=name):
+                root = self.broken_copy(line, None)
+                support.configure_ok(self.env, "all", root=root)
+                text = (self.env.install
+                        / "lua/ukiyo_e/palette.lua").read_text()
+                body = text.split("    palette = {\n", 1)[1]
+                colours, rest = body.split("    shades = {\n", 1)
+                shades = rest.split("    ansi = {\n", 1)[0]
+                self.assertIn(f"        {name} = ", colours)
+                self.assertNotIn(name, shades)
+
 
 class MappingRejectTest(FullTestCase):
     """V-2: mapping and template errors name module and role."""
 
-    CASES = (
-        ("configurator/tmux.py", '"clock_fg": "dragonBlue2"',
-         '"clock_fg": "dragonBlu2"',
-         'configurator/tmux.py: TMUX_ROLES.clock_fg: "dragonBlu2" is '
-         'not a [palette] name'),
-        ("configurator/terminal_ansi.py", '"dragonGreen2", "dragonYellow"',
-         '"dragonGreen2", "noSuchName"',
-         'configurator/terminal_ansi.py: ANSI[3]: "noSuchName" is not '
-         'a [palette] name'),
+    CASES = tuple(
+        (path, f'"{role}": "{old}"', f'"{role}": "{new}"',
+         f'{path}: {const}.{role}: "{new}" {NOT_A_NAME}')
+        for path, const, role, old, new in (
+            ("configurator/tmux.py", "TMUX_ROLES", "clock_fg",
+             "base0D", "base0G"),
+            ("configurator/tmux.py", "TMUX_ROLES", "flat_current_bg",
+             "shadowRed", "fujiRed"),
+            ("configurator/tmux.py", "TMUX_ROLES", "flat_current_bg",
+             "shadowRed", "lavaBlack"),
+            ("configurator/tmux.py", "TMUX_ROLES", "flat_current_bg",
+             "shadowRed", "base08_dark"),
+            ("configurator/terminal_ansi.py", "TERMINAL_ROLES",
+             "selection_bg", "shadowAqua", "shadowGray"),
+            ("configurator/terminal_ansi.py", "TERMINAL_ROLES",
+             "selection_bg", "shadowAqua", "shadowred"))) + (
+        ("configurator/terminal_ansi.py", '"base0B", "base0A"',
+         '"base0B", "noSuchName"',
+         'configurator/terminal_ansi.py: ANSI[3]: "noSuchName" '
+         f'{NOT_A_NAME}'),
         ("tmux/colors.conf.tmpl", "{{clock_fg}}", "{{no_such_role}}",
          'tmux/colors.conf.tmpl:11: unknown role "{{no_such_role}}"'),
     )
@@ -403,7 +436,7 @@ class DryRunTest(FullTestCase):
             "gnome: would update", "  set palette",
             "ptyxis: would update", "  write palette Ukiyo-e.palette",
             "tmux: would update", "  write tmux/colors.conf",
-            "  write tmux/status-plain.conf", "  write tmux/status.conf",
+            "  write tmux/status.conf",
             "  switch install directory", "  reload tmux server",
             "nvim: would update", "  write lua/ukiyo_e/palette.lua"])
 

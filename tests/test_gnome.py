@@ -235,10 +235,10 @@ class RollbackTest(unittest.TestCase):
         harness.run_installer(self.session, "i", "gnome")
         root = support.copy_repo()
         self.addCleanup(support.remove_tree, root)
-        support.replace_line(root / "palette.toml", "dragonBlack3 ",
-                             'dragonBlack3 = "#010101"')
-        support.replace_line(root / "palette.toml", "dragonRed ",
-                             'dragonRed = "#020202"')
+        support.replace_line(root / "palette.toml", "base00 ",
+                             'base00 = "#010101"')
+        support.replace_line(root / "palette.toml", "base08 ",
+                             'base08 = "#020202"')
         self.assert_rolled_back(root)
 
 

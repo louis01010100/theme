@@ -1,45 +1,47 @@
--- Theme layer: semantic colour roles built from palette names.
--- Transcribed from the kanagawa.nvim "dragon" theme at bb85e4b.
+-- Theme layer: semantic colour roles built from the palette slots
+-- (palette.base00 ... palette.base0F) and the derived shades
+-- (shades.shadowRed ...). Role set of the kanagawa.nvim "dragon"
+-- theme at bb85e4b, without `term`.
 
-local function pmenu_float(palette)
+local function pmenu_float(palette, shades)
     return {
         pmenu = {
-            fg = palette.fujiWhite,
+            fg = palette.base07,
             fg_sel = "none",
-            bg = palette.waveBlue1,
-            bg_sel = palette.waveBlue2,
-            bg_thumb = palette.waveBlue2,
-            bg_sbar = palette.waveBlue1,
+            bg = shades.shadowBlue,
+            bg_sel = shades.shadowAqua,
+            bg_thumb = shades.shadowAqua,
+            bg_sbar = shades.shadowBlue,
         },
         float = {
-            fg = palette.oldWhite,
-            bg = palette.dragonBlack0,
-            fg_border = palette.sumiInk6,
-            bg_border = palette.dragonBlack0,
+            fg = palette.base07,
+            bg = palette.base00,
+            fg_border = palette.base03,
+            bg_border = palette.base00,
         },
     }
 end
 
-local function ui(palette)
+local function ui(palette, shades)
     local roles = {
-        fg = palette.dragonWhite,
-        fg_dim = palette.oldWhite,
-        fg_reverse = palette.waveBlue1,
-        bg_dim = palette.dragonBlack1,
-        bg_gutter = palette.dragonBlack4,
-        bg_m3 = palette.dragonBlack0,
-        bg_m2 = palette.dragonBlack1,
-        bg_m1 = palette.dragonBlack2,
-        bg = palette.dragonBlack3,
-        bg_p1 = palette.dragonBlack4,
-        bg_p2 = palette.dragonBlack5,
-        special = palette.dragonGray3,
-        whitespace = palette.dragonBlack6,
-        nontext = palette.dragonBlack6,
-        bg_visual = palette.waveBlue1,
-        bg_search = palette.waveBlue2,
+        fg = palette.base07,
+        fg_dim = palette.base07,
+        fg_reverse = shades.shadowBlue,
+        bg_dim = palette.base00,
+        bg_gutter = palette.base01,
+        bg_m3 = palette.base00,
+        bg_m2 = palette.base00,
+        bg_m1 = palette.base00,
+        bg = palette.base00,
+        bg_p1 = palette.base01,
+        bg_p2 = palette.base02,
+        special = palette.base04,
+        whitespace = palette.base03,
+        nontext = palette.base03,
+        bg_visual = shades.shadowBlue,
+        bg_search = shades.shadowAqua,
     }
-    for key, value in pairs(pmenu_float(palette)) do
+    for key, value in pairs(pmenu_float(palette, shades)) do
         roles[key] = value
     end
     return roles
@@ -47,56 +49,57 @@ end
 
 local function syn(palette)
     return {
-        string = palette.dragonGreen2,
+        string = palette.base0B,
         variable = "none",
-        number = palette.dragonPink,
-        constant = palette.dragonOrange,
-        identifier = palette.dragonYellow,
-        parameter = palette.dragonGray,
-        fun = palette.dragonBlue2,
-        statement = palette.dragonViolet,
-        keyword = palette.dragonViolet,
-        operator = palette.dragonRed,
-        preproc = palette.dragonRed,
-        type = palette.dragonAqua,
-        regex = palette.dragonRed,
-        deprecated = palette.katanaGray,
-        punct = palette.dragonGray2,
-        comment = palette.dragonAsh,
-        special1 = palette.dragonTeal,
-        special2 = palette.dragonRed,
-        special3 = palette.dragonRed,
+        number = palette.base0F,
+        constant = palette.base09,
+        identifier = palette.base0A,
+        parameter = palette.base06,
+        fun = palette.base0D,
+        statement = palette.base0E,
+        keyword = palette.base0E,
+        operator = palette.base08,
+        preproc = palette.base08,
+        type = palette.base0C,
+        regex = palette.base08,
+        deprecated = palette.base04,
+        punct = palette.base05,
+        comment = palette.base04,
+        special1 = palette.base0E,
+        special2 = palette.base08,
+        special3 = palette.base08,
     }
 end
 
-local function diag_diff_vcs(palette)
+local function diag_diff_vcs(palette, shades)
     return {
         diag = {
-            error = palette.samuraiRed,
-            ok = palette.springGreen,
-            warning = palette.roninYellow,
-            info = palette.dragonBlue,
-            hint = palette.waveAqua1,
+            error = palette.base08,
+            ok = palette.base0B,
+            warning = palette.base09,
+            info = palette.base0D,
+            hint = palette.base0C,
         },
         diff = {
-            add = palette.winterGreen,
-            delete = palette.winterRed,
-            change = palette.winterBlue,
-            text = palette.winterYellow,
+            add = shades.shadowGreen,
+            delete = shades.shadowRed,
+            change = shades.shadowBlue,
+            text = shades.shadowYellow,
         },
         vcs = {
-            added = palette.autumnGreen,
-            removed = palette.autumnRed,
-            changed = palette.autumnYellow,
+            added = palette.base0B,
+            removed = palette.base08,
+            changed = palette.base0A,
         },
     }
 end
 
 ---@param palette table<string, string> palette name -> "#rrggbb"
+---@param shades table<string, string> shade name -> "#rrggbb"
 ---@return table theme layer: ui, syn, diag, diff, vcs
-return function(palette)
-    local theme = diag_diff_vcs(palette)
-    theme.ui = ui(palette)
+return function(palette, shades)
+    local theme = diag_diff_vcs(palette, shades)
+    theme.ui = ui(palette, shades)
     theme.syn = syn(palette)
     return theme
 end

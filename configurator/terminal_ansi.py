@@ -10,18 +10,17 @@ from configurator.palette import (Palette, ValidationError, check_name,
 MODULE = "configurator/terminal_ansi.py"
 COUNT = 16
 ANSI = (
-    "dragonBlack0", "dragonRed", "dragonGreen2", "dragonYellow",
-    "dragonBlue2", "dragonPink", "dragonAqua", "oldWhite",
-    "dragonGray", "waveRed", "dragonGreen", "carpYellow",
-    "springBlue", "springViolet1", "waveAqua2", "dragonWhite",
+    "base00", "base08", "base0B", "base0A", "base0D", "base0E",
+    "base0C", "base05", "base03", "base08", "base0B", "base0A",
+    "base0D", "base0E", "base0C", "base07",
 )
 TERMINAL_ROLES = MappingProxyType({
-    "background": "dragonBlack3",
-    "foreground": "dragonWhite",
-    "cursor_bg": "oldWhite",
-    "cursor_fg": "dragonBlack3",
-    "selection_bg": "waveBlue2",
-    "selection_fg": "oldWhite",
+    "background": "base00",
+    "foreground": "base07",
+    "cursor_bg": "base07",
+    "cursor_fg": "base00",
+    "selection_bg": "shadowAqua",
+    "selection_fg": "base07",
 })
 ROLE_KEYS = (
     "background", "foreground", "cursor_bg", "cursor_fg",

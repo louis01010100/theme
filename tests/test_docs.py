@@ -43,9 +43,25 @@ README_ITEMS = (
     "`opacity`",
     "  ptyxis.py           #",
     "  test_ptyxis.py      #",
+    # REQ-DOC-1, 16-colour revision.
+    "`base00`", "`base07`", "`base0F`",
+    "lavaBlack", "cinderBlack", "basaltGray", "ashGray", "mistGray",
+    "hazeGray", "cloudGray", "snowWhite",
+    "fujiRed", "persimmonOrange", "strawYellow", "pineGreen",
+    "lakeAqua", "ridgeBlue", "twilightViolet", "blossomPink",
+    "20 % darker", "documentation only", "Mount Fuji",
+    "reserved",
+    "shadowRed", "shadowOrange", "shadowYellow", "shadowGreen",
+    "shadowAqua", "shadowBlue", "shadowViolet", "shadowPink",
+    "50 %", "never stored",
+    "4.3:1", "5.1:1", "3.4", "2026-09-26",
+    "python3 tests/regen_nvim_reference.py",
+    "`#I.#W`", "flat",
+    "python3 -m unittest discover -s tests",
 )
 README_ABSENT = ("@plugin", '"louis01010100/theme"', "scripts/generate.py",
-                 "gnome-terminal/install.sh")
+                 "gnome-terminal/install.sh",
+                 "UKIYO_E_KANAGAWA" + "_SEED")
 LICENSE_ITEMS = (
     "MIT License",
     "Permission is hereby granted, free of charge",

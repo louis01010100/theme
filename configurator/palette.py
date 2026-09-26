@@ -10,25 +10,55 @@ from typing import Mapping
 
 SOURCE = "palette.toml"
 TABLE = "palette"
-REQUIRED_NAMES = (
-    "autumnGreen", "autumnRed", "autumnYellow", "carpYellow",
-    "dragonAqua", "dragonAsh", "dragonBlack0", "dragonBlack1",
-    "dragonBlack2", "dragonBlack3", "dragonBlack4", "dragonBlack5",
-    "dragonBlack6", "dragonBlue", "dragonBlue2", "dragonGray",
-    "dragonGray2", "dragonGray3", "dragonGreen", "dragonGreen2",
-    "dragonOrange", "dragonOrange2", "dragonPink", "dragonRed",
-    "dragonTeal", "dragonViolet", "dragonWhite", "dragonYellow",
-    "fujiWhite", "katanaGray", "oldWhite", "roninYellow", "samuraiRed",
-    "springBlue", "springGreen", "springViolet1", "sumiInk6",
-    "waveAqua1", "waveAqua2", "waveBlue1", "waveBlue2", "waveRed",
-    "winterBlue", "winterGreen", "winterRed", "winterYellow",
-)
+SLOTS = tuple(f"base0{digit}" for digit in "0123456789ABCDEF")
+# REQ-PAL-7: documentation names of the slots, reserved-name data only.
+NEUTRAL_NAMES = ("lavaBlack", "cinderBlack", "basaltGray", "ashGray",
+                 "mistGray", "hazeGray", "cloudGray", "snowWhite")
+ACCENT_NAMES = ("fujiRed", "persimmonOrange", "strawYellow",
+                "pineGreen", "lakeAqua", "ridgeBlue", "twilightViolet",
+                "blossomPink")
+COLOUR_NAMES = NEUTRAL_NAMES + ACCENT_NAMES
 NAME_RE = re.compile(r"^[A-Za-z][A-Za-z0-9_]*$")
 HEX_RE = re.compile(r"^#[0-9A-Fa-f]{6}$")
 TOML_TYPES = {
     "dict": "table", "int": "integer", "float": "float",
     "bool": "boolean", "list": "array",
 }
+
+
+@dataclass(frozen=True)
+class Shade:
+    """A derived dark shade: its name and the accent slot it blends."""
+
+    name: str
+    accent: str
+
+
+SHADE_TABLE = tuple(Shade(name, slot) for name, slot in zip(
+    ("shadowRed", "shadowOrange", "shadowYellow", "shadowGreen",
+     "shadowAqua", "shadowBlue", "shadowViolet", "shadowPink"),
+    SLOTS[8:]))
+SHADES = tuple(shade.name for shade in SHADE_TABLE)
+
+
+@dataclass(frozen=True)
+class ReservedName:
+    """A name an extra [palette] entry may not take, in any case."""
+
+    canonical: str
+    kind: str
+
+
+def reserved_table() -> dict:
+    """Lowercased name -> ReservedName (REQ-PAL-4)."""
+    groups = (("slot", SLOTS), ("derived shade", SHADES),
+              ("neutral name", NEUTRAL_NAMES),
+              ("accent name", ACCENT_NAMES))
+    return {name.lower(): ReservedName(name, kind)
+            for kind, names in groups for name in names}
+
+
+RESERVED = MappingProxyType(reserved_table())
 
 
 class InputError(Exception):
@@ -48,9 +78,10 @@ class ValidationError:
 
 @dataclass(frozen=True)
 class Palette:
-    """Palette names mapped to lowercase `#rrggbb`."""
+    """[palette] names and derived shades -> lowercase `#rrggbb`."""
 
     colors: Mapping[str, str]
+    shades: Mapping[str, str]
 
 
 def pal_addr(name: str) -> str:
@@ -115,17 +146,25 @@ def entry_reason(name: str, value) -> str | None:
     return None
 
 
+def reserved_reason(name: str) -> str | None:
+    """REQ-PAL-4: why an entry name is reserved, or None."""
+    reserved = RESERVED.get(name.lower())
+    if name in SLOTS or reserved is None:
+        return None
+    return f"reserved name ({reserved.kind} {reserved.canonical})"
+
+
 def validate_entries(table: dict) -> list:
-    """REQ-PAL-2 and REQ-PAL-3 over the [palette] table."""
+    """REQ-PAL-2, REQ-PAL-3 and REQ-PAL-4 over the [palette] table."""
     errors = []
     for name, value in table.items():
-        reason = entry_reason(name, value)
-        if reason:
-            errors.append(ValidationError(pal_addr(name), reason))
-    for name in REQUIRED_NAMES:
+        for reason in (entry_reason(name, value), reserved_reason(name)):
+            if reason:
+                errors.append(ValidationError(pal_addr(name), reason))
+    for name in SLOTS:
         if name not in table:
             errors.append(ValidationError(pal_addr(name),
-                                          "missing required name"))
+                                          "missing required slot"))
     return errors
 
 
@@ -143,23 +182,47 @@ def palette_names(raw: dict) -> frozenset:
     return frozenset(table) if isinstance(table, dict) else frozenset()
 
 
+def colour_names(raw: dict) -> frozenset:
+    """Names a mapping may use: [palette] names and the shades."""
+    return palette_names(raw) | frozenset(SHADES)
+
+
+def blend(accent: str, base: str) -> str:
+    """REQ-SHADE-2: channel-wise mean, ties to even, `#rrggbb`."""
+    a, b = int(accent[1:], 16), int(base[1:], 16)
+    channels = (round((((a >> s) & 255) + ((b >> s) & 255)) / 2)
+                for s in (16, 8, 0))
+    return "#" + "".join(f"{c:02x}" for c in channels)
+
+
+def derive_shades(colors: Mapping[str, str]) -> Mapping[str, str]:
+    """The 8 shades: each accent slot blended with base00."""
+    base = colors["base00"].lower()
+    return MappingProxyType({
+        shade.name: blend(colors[shade.accent].lower(), base)
+        for shade in SHADE_TABLE})
+
+
 def make_palette(raw: dict) -> Palette:
-    """The validated [palette] table with lowercase values."""
+    """The validated [palette] table (lowercase) and its shades."""
     colors = {k: v.lower() for k, v in raw[TABLE].items()}
-    return Palette(MappingProxyType(colors))
+    return Palette(MappingProxyType(colors), derive_shades(colors))
 
 
 def resolve(palette: Palette, name: str) -> str:
-    return palette.colors[name]
+    """REQ-SHADE-3: a [palette] entry or a derived shade."""
+    if name in palette.colors:
+        return palette.colors[name]
+    return palette.shades[name]
 
 
 def check_name(address: str, value, names) -> list:
-    """A mapping value must be the name of a [palette] entry."""
+    """A mapping value must be a [palette] name or a shade name."""
     if not isinstance(value, str):
         return [ValidationError(address, "expected a [palette] name")]
     if value not in names:
-        return [ValidationError(address,
-                                f'"{value}" is not a [palette] name')]
+        reason = f'"{value}" is not a [palette] name or derived shade'
+        return [ValidationError(address, reason)]
     return []
 
 

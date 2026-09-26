@@ -153,7 +153,7 @@ class LiveActionTest(FailTestCase):
             lines)
         self.assertEqual(lines[3], "nvim: updated")
         palette = self.env.install / "lua/ukiyo_e/palette.lua"
-        self.assertIn('dragonBlue2 = "#123456"', palette.read_text())
+        self.assertIn('base0D = "#123456"', palette.read_text())
         reset = support.run_configure(failing, "tmux", "--uninstall")
         self.assertEqual(reset.code, 4, reset.stderr)
         self.assertEqual(reset.stdout,

@@ -106,17 +106,19 @@ class RenderTest(unittest.TestCase):
                                              for i in range(16)])
         self.assertEqual(parser["Palette"]["Name"], "Ukiyo-e")
 
-    def test_one_colour_changes_one_line(self):
+    def test_one_colour_changes_two_lines(self):
         root = support.copy_repo()
         self.addCleanup(support.remove_tree, root)
-        support.replace_line(root / "palette.toml", "dragonBlue2 ",
-                             'dragonBlue2 = "#123456"')
+        support.replace_line(root / "palette.toml", "base0D ",
+                             'base0D = "#123456"')
         old = ptyxis.render_palette(support.repo_palette()).split(b"\n")
         new = ptyxis.render_palette(support.repo_palette(root))
         new = new.split(b"\n")
         differ = [(a, b) for a, b in zip(old, new) if a != b]
         self.assertEqual(len(old), len(new))
-        self.assertEqual(differ, [(b"Color4=#8ba4b0", b"Color4=#123456")])
+        self.assertEqual(differ, [(b"Color4=#668696", b"Color4=#123456"),
+                                  (b"Color12=#668696",
+                                   b"Color12=#123456")])
 
 
 class ParseTest(unittest.TestCase):

@@ -187,7 +187,7 @@ def parse(argv) -> RunOptions | HelpRequest:
 
 def validation_errors(raw, templates) -> list:
     """Every palette, mapping, template and source-tree error."""
-    names = palette.palette_names(raw)
+    names = palette.colour_names(raw)
     return (palette.validate_palette(raw) + validate_ansi(names)
             + validate_roles(names) + ptyxis.validate_keys()
             + tmux.validate_roles(names)

@@ -13,7 +13,6 @@ sys.dont_write_bytecode = True
 
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO))
-SEED_HASH = "bb85e4bfc8d89b0e62c8fa53ccdd13d12e2f77b3"
 IGNORED_COPY = shutil.ignore_patterns(".git", "__pycache__")
 
 
@@ -239,8 +238,11 @@ def repo_palette(root=REPO):
 
 def resolved_roles(roles, root=REPO):
     """A role mapping resolved against a tree's palette."""
-    colours = repo_palette(root).colors
-    return {role: colours[name] for role, name in roles.items()}
+    from configurator import palette
+
+    colours = repo_palette(root)
+    return {role: palette.resolve(colours, name)
+            for role, name in roles.items()}
 
 
 def tree_snapshot(root, skip=("runtime",)):
