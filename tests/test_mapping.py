@@ -15,7 +15,7 @@ SPEC_ANSI = (
     "base0D", "base0E", "base0C", "base07",
 )
 SPEC_TERMINAL = {
-    "background": "base00", "foreground": "base07",
+    "background": "base00", "foreground": "base06",
     "cursor_bg": "base07", "cursor_fg": "base00",
     "selection_bg": "shadowAqua", "selection_fg": "base07",
 }

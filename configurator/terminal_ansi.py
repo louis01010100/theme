@@ -16,7 +16,7 @@ ANSI = (
 )
 TERMINAL_ROLES = MappingProxyType({
     "background": "base00",
-    "foreground": "base07",
+    "foreground": "base06",
     "cursor_bg": "base07",
     "cursor_fg": "base00",
     "selection_bg": "shadowAqua",
