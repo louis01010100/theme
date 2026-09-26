@@ -19,8 +19,8 @@ TERMINAL_ROLES = MappingProxyType({
     "foreground": "base06",
     "cursor_bg": "base07",
     "cursor_fg": "base00",
-    "selection_bg": "shadowAqua",
-    "selection_fg": "base07",
+    "selection_bg": "base01",
+    "selection_fg": "base06",
 })
 ROLE_KEYS = (
     "background", "foreground", "cursor_bg", "cursor_fg",

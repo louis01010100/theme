@@ -5,7 +5,7 @@
       "link": "Constant"
     },
     "@comment.error": {
-      "bg": "#ae4e47",
+      "bg": "#9c5e59",
       "bold": true,
       "cterm": {
         "bold": true
@@ -13,35 +13,35 @@
       "fg": "#b2b4b2"
     },
     "@comment.note": {
-      "bg": "#6d8885",
+      "bg": "#728381",
       "bold": true,
       "cterm": {
         "bold": true
       },
-      "fg": "#3f4e56"
+      "fg": "#444c52"
     },
     "@comment.warning": {
-      "bg": "#9d7257",
+      "bg": "#907564",
       "bold": true,
       "cterm": {
         "bold": true
       },
-      "fg": "#3f4e56"
+      "fg": "#444c52"
     },
     "@constructor": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "@constructor.lua": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "@diff.delta": {
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "@diff.minus": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "@diff.plus": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "@function.macro": {
       "link": "Macro"
@@ -51,7 +51,7 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "@keyword.import": {
       "link": "PreProc"
@@ -64,13 +64,13 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "@keyword.return": {
       "cterm": {
         "italic": true
       },
-      "fg": "#ae4e47",
+      "fg": "#9c5e59",
       "italic": true
     },
     "@lsp.mod.readonly": {
@@ -133,7 +133,7 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "@lsp.typemod.keyword.documentation": {
       "link": "Special"
@@ -208,30 +208,30 @@
       "fg": "#868785"
     },
     "@punctuation.special": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "@string.escape": {
       "bold": true,
       "cterm": {
         "bold": true
       },
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "@string.regexp": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "@string.special.symbol": {
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "@string.special.url": {
       "cterm": {
         "undercurl": true
       },
-      "fg": "#68738b",
+      "fg": "#6f7584",
       "undercurl": true
     },
     "@tag.attribute": {
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "@tag.delimiter": {
       "fg": "#868785"
@@ -243,11 +243,11 @@
       "cterm": {
         "italic": true
       },
-      "fg": "#ae4e47",
+      "fg": "#9c5e59",
       "italic": true
     },
     "@variable.member": {
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "@variable.parameter": {
       "fg": "#9c9d9c"
@@ -437,14 +437,14 @@
       "fg": "#70706f"
     },
     "BlinkCmpLabelMatch": {
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "BlinkCmpMenu": {
       "link": "Pmenu"
     },
     "BlinkCmpMenuBorder": {
-      "bg": "#3f4e56",
-      "fg": "#424f4e"
+      "bg": "#444c52",
+      "fg": "#454c4c"
     },
     "BlinkCmpMenuSelection": {
       "link": "PmenuSel"
@@ -475,7 +475,7 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#9d7257"
+      "fg": "#907564"
     },
     "Character": {
       "link": "String"
@@ -484,8 +484,8 @@
       "link": "Pmenu"
     },
     "CmpCompletionBorder": {
-      "bg": "#3f4e56",
-      "fg": "#424f4e"
+      "bg": "#444c52",
+      "fg": "#454c4c"
     },
     "CmpCompletionSbar": {
       "link": "PmenuSbar"
@@ -516,7 +516,7 @@
       "strikethrough": true
     },
     "CmpItemAbbrMatch": {
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "CmpItemAbbrMatchFuzzy": {
       "link": "CmpItemAbbrMatch"
@@ -623,10 +623,10 @@
       "fg": "#70706f"
     },
     "Constant": {
-      "fg": "#9d7257"
+      "fg": "#907564"
     },
     "CurSearch": {
-      "bg": "#424f4e",
+      "bg": "#454c4c",
       "bold": true,
       "cterm": {
         "bold": true
@@ -652,20 +652,20 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#9d7257"
+      "fg": "#907564"
     },
     "DapUIBreakpointsCurrentLine": {
       "bold": true,
       "cterm": {
         "bold": true
       },
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "DapUIBreakpointsDisabledLine": {
       "link": "Comment"
     },
     "DapUIBreakpointsInfo": {
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "DapUIBreakpointsPath": {
       "link": "Directory"
@@ -677,47 +677,47 @@
       "fg": "#5a5a59"
     },
     "DapUILineNumber": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "DapUIModifiedValue": {
       "bold": true,
       "cterm": {
         "bold": true
       },
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "DapUIPlayPause": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "DapUIRestart": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "DapUIScope": {
       "link": "Special"
     },
     "DapUISource": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "DapUIStepBack": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "DapUIStepInto": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "DapUIStepOut": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "DapUIStepOver": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "DapUIStop": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "DapUIStoppedThread": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "DapUIThread": {
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "DapUIType": {
       "link": "Type"
@@ -726,107 +726,107 @@
       "fg": "#70706f"
     },
     "DapUIWatchesEmpty": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "DapUIWatchesError": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "DapUIWatchesValue": {
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "DashboardCenter": {
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "DashboardDesc": {
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "DashboardFooter": {
       "fg": "#70706f"
     },
     "DashboardHeader": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "DashboardIcon": {
       "fg": "#70706f"
     },
     "DashboardKey": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "DashboardShortCut": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "Delimiter": {
       "fg": "#868785"
     },
     "DiagnosticError": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "DiagnosticFloatingError": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "DiagnosticFloatingHint": {
-      "fg": "#6d8885"
+      "fg": "#728381"
     },
     "DiagnosticFloatingInfo": {
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "DiagnosticFloatingOk": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "DiagnosticFloatingWarn": {
-      "fg": "#9d7257"
+      "fg": "#907564"
     },
     "DiagnosticHint": {
-      "fg": "#6d8885"
+      "fg": "#728381"
     },
     "DiagnosticInfo": {
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "DiagnosticOk": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "DiagnosticSignError": {
       "bg": "#2e2d2c",
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "DiagnosticSignHint": {
       "bg": "#2e2d2c",
-      "fg": "#6d8885"
+      "fg": "#728381"
     },
     "DiagnosticSignInfo": {
       "bg": "#2e2d2c",
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "DiagnosticSignWarn": {
       "bg": "#2e2d2c",
-      "fg": "#9d7257"
+      "fg": "#907564"
     },
     "DiagnosticUnderlineError": {
       "cterm": {
         "undercurl": true
       },
-      "sp": "#ae4e47",
+      "sp": "#9c5e59",
       "undercurl": true
     },
     "DiagnosticUnderlineHint": {
       "cterm": {
         "undercurl": true
       },
-      "sp": "#6d8885",
+      "sp": "#728381",
       "undercurl": true
     },
     "DiagnosticUnderlineInfo": {
       "cterm": {
         "undercurl": true
       },
-      "sp": "#668696",
+      "sp": "#6f838d",
       "undercurl": true
     },
     "DiagnosticUnderlineWarn": {
       "cterm": {
         "undercurl": true
       },
-      "sp": "#9d7257",
+      "sp": "#907564",
       "undercurl": true
     },
     "DiagnosticVirtualTextError": {
@@ -842,35 +842,35 @@
       "link": "DiagnosticWarn"
     },
     "DiagnosticWarn": {
-      "fg": "#9d7257"
+      "fg": "#907564"
     },
     "DiffAdd": {
-      "bg": "#434a3b"
+      "bg": "#43483e"
     },
     "DiffChange": {
-      "bg": "#3f4e56"
+      "bg": "#444c52"
     },
     "DiffDelete": {
-      "bg": "#63322e",
-      "fg": "#ae4e47"
+      "bg": "#5a3a38",
+      "fg": "#9c5e59"
     },
     "DiffText": {
-      "bg": "#63563a"
+      "bg": "#5c5341"
     },
     "Directory": {
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "EndOfBuffer": {
       "fg": "#181616"
     },
     "Error": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "ErrorMsg": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "Exception": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "Float": {
       "link": "Number"
@@ -904,19 +904,19 @@
       "fg": "#70706f"
     },
     "Function": {
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "GitSignsAdd": {
       "bg": "#2e2d2c",
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "GitSignsChange": {
       "bg": "#2e2d2c",
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "GitSignsDelete": {
       "bg": "#2e2d2c",
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "IblIndent": {
       "fg": "#5a5a59"
@@ -928,14 +928,14 @@
       "fg": "#5a5a59"
     },
     "Identifier": {
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "Ignore": {
       "link": "NonText"
     },
     "IncSearch": {
-      "bg": "#9d7257",
-      "fg": "#3f4e56"
+      "bg": "#907564",
+      "fg": "#444c52"
     },
     "IndentBlanklineChar": {
       "fg": "#5a5a59"
@@ -966,7 +966,7 @@
       "cterm": {
         "italic": true
       },
-      "fg": "#68738b",
+      "fg": "#6f7584",
       "italic": true
     },
     "LazyProgressTodo": {
@@ -983,24 +983,24 @@
       "link": "LspReferenceText"
     },
     "LspReferenceText": {
-      "bg": "#63563a"
+      "bg": "#5c5341"
     },
     "LspReferenceWrite": {
-      "bg": "#63563a",
+      "bg": "#5c5341",
       "cterm": {
         "underline": true
       },
       "underline": true
     },
     "LspSignatureActiveParameter": {
-      "fg": "#9d7257"
+      "fg": "#907564"
     },
     "MatchParen": {
       "bold": true,
       "cterm": {
         "bold": true
       },
-      "fg": "#9d7257"
+      "fg": "#907564"
     },
     "MiniAnimateCursor": {
       "cterm": {
@@ -1059,13 +1059,13 @@
       "link": "diffRemoved"
     },
     "MiniDepsHint": {
-      "fg": "#6d8885"
+      "fg": "#728381"
     },
     "MiniDepsInfo": {
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "MiniDepsMsgBreaking": {
-      "fg": "#9d7257"
+      "fg": "#907564"
     },
     "MiniDepsPlaceholder": {
       "link": "Comment"
@@ -1096,15 +1096,15 @@
     },
     "MiniDiffSignAdd": {
       "bg": "#2e2d2c",
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "MiniDiffSignChange": {
       "bg": "#2e2d2c",
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "MiniDiffSignDelete": {
       "bg": "#2e2d2c",
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "MiniFilesBorder": {
       "link": "FloatBorder"
@@ -1141,7 +1141,7 @@
       "fg": "#b2b4b2"
     },
     "MiniHipatternsFixme": {
-      "bg": "#ae4e47",
+      "bg": "#9c5e59",
       "bold": true,
       "cterm": {
         "bold": true
@@ -1149,7 +1149,7 @@
       "fg": "#181616"
     },
     "MiniHipatternsHack": {
-      "bg": "#9d7257",
+      "bg": "#907564",
       "bold": true,
       "cterm": {
         "bold": true
@@ -1157,7 +1157,7 @@
       "fg": "#181616"
     },
     "MiniHipatternsNote": {
-      "bg": "#668696",
+      "bg": "#6f838d",
       "bold": true,
       "cterm": {
         "bold": true
@@ -1165,7 +1165,7 @@
       "fg": "#181616"
     },
     "MiniHipatternsTodo": {
-      "bg": "#6d8885",
+      "bg": "#728381",
       "bold": true,
       "cterm": {
         "bold": true
@@ -1173,31 +1173,31 @@
       "fg": "#181616"
     },
     "MiniIconsAzure": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "MiniIconsBlue": {
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "MiniIconsCyan": {
-      "fg": "#6d8885"
+      "fg": "#728381"
     },
     "MiniIconsGreen": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "MiniIconsGrey": {
       "fg": "#b2b4b2"
     },
     "MiniIconsOrange": {
-      "fg": "#9d7257"
+      "fg": "#907564"
     },
     "MiniIconsPurple": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "MiniIconsRed": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "MiniIconsYellow": {
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "MiniIndentscopePrefix": {
       "cterm": {
@@ -1206,7 +1206,7 @@
       "nocombine": true
     },
     "MiniIndentscopeSymbol": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "MiniJump": {
       "link": "SpellRare"
@@ -1220,7 +1220,7 @@
         "bold": true,
         "nocombine": true
       },
-      "fg": "#9d7257",
+      "fg": "#907564",
       "nocombine": true
     },
     "MiniJump2dSpotAhead": {
@@ -1228,7 +1228,7 @@
       "cterm": {
         "nocombine": true
       },
-      "fg": "#6d8885",
+      "fg": "#728381",
       "nocombine": true
     },
     "MiniJump2dSpotUnique": {
@@ -1237,7 +1237,7 @@
         "bold": true,
         "nocombine": true
       },
-      "fg": "#68738b",
+      "fg": "#6f7584",
       "nocombine": true
     },
     "MiniMapNormal": {
@@ -1302,7 +1302,7 @@
     },
     "MiniPickPrompt": {
       "bg": "#181616",
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "MiniStarterCurrent": {
       "cterm": {
@@ -1326,13 +1326,13 @@
       "link": "Delimiter"
     },
     "MiniStarterItemPrefix": {
-      "fg": "#9d7257"
+      "fg": "#907564"
     },
     "MiniStarterQuery": {
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "MiniStarterSection": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "MiniStatuslineDevinfo": {
       "bg": "#2e2d2c",
@@ -1350,7 +1350,7 @@
       "link": "StatusLineNC"
     },
     "MiniStatuslineModeCommand": {
-      "bg": "#ae4e47",
+      "bg": "#9c5e59",
       "bold": true,
       "cterm": {
         "bold": true
@@ -1358,7 +1358,7 @@
       "fg": "#181616"
     },
     "MiniStatuslineModeInsert": {
-      "bg": "#6e7e60",
+      "bg": "#6e7965",
       "bold": true,
       "cterm": {
         "bold": true
@@ -1366,7 +1366,7 @@
       "fg": "#181616"
     },
     "MiniStatuslineModeNormal": {
-      "bg": "#668696",
+      "bg": "#6f838d",
       "bold": true,
       "cterm": {
         "bold": true
@@ -1374,7 +1374,7 @@
       "fg": "#181616"
     },
     "MiniStatuslineModeOther": {
-      "bg": "#6d8885",
+      "bg": "#728381",
       "bold": true,
       "cterm": {
         "bold": true
@@ -1382,7 +1382,7 @@
       "fg": "#181616"
     },
     "MiniStatuslineModeReplace": {
-      "bg": "#9d7257",
+      "bg": "#907564",
       "bold": true,
       "cterm": {
         "bold": true
@@ -1390,7 +1390,7 @@
       "fg": "#181616"
     },
     "MiniStatuslineModeVisual": {
-      "bg": "#68738b",
+      "bg": "#6f7584",
       "bold": true,
       "cterm": {
         "bold": true
@@ -1436,7 +1436,7 @@
       "fg": "#181616"
     },
     "MiniTablineTabpagesection": {
-      "bg": "#424f4e",
+      "bg": "#454c4c",
       "bold": true,
       "cterm": {
         "bold": true
@@ -1462,27 +1462,27 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "MiniTestPass": {
       "bold": true,
       "cterm": {
         "bold": true
       },
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "MiniTrailspace": {
-      "bg": "#ae4e47"
+      "bg": "#9c5e59"
     },
     "ModeMsg": {
       "bold": true,
       "cterm": {
         "bold": true
       },
-      "fg": "#9d7257"
+      "fg": "#907564"
     },
     "MoreMsg": {
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "MsgArea": {
       "fg": "#b2b4b2"
@@ -1576,19 +1576,19 @@
       "fg": "#b2b4b2"
     },
     "NeoTreeGitAdded": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "NeoTreeGitConflict": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "NeoTreeGitDeleted": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "NeoTreeGitModified": {
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "NeoTreeGitStaged": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "NeoTreeGitUnstaged": {
       "link": "NeoTreeGitModified"
@@ -1607,7 +1607,7 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "NeoTreeTabActive": {
       "link": "TabLineSel"
@@ -1622,26 +1622,26 @@
       "link": "NeoTreeTabInactive"
     },
     "NeogitDiffAddHighlight": {
-      "bg": "#434a3b"
+      "bg": "#43483e"
     },
     "NeogitDiffContextHighlight": {
-      "bg": "#3f4e56"
+      "bg": "#444c52"
     },
     "NeogitDiffDeleteHighlight": {
-      "bg": "#63322e"
+      "bg": "#5a3a38"
     },
     "NeogitHunkHeader": {
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "NeogitHunkHeaderHighlight": {
-      "bg": "#3f4e56",
-      "fg": "#9d7257"
+      "bg": "#444c52",
+      "fg": "#907564"
     },
     "NeotestAdapterName": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "NeotestDir": {
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "NeotestExpandMarker": {
       "bold": true,
@@ -1651,10 +1651,10 @@
       "fg": "#868785"
     },
     "NeotestFailed": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "NeotestFile": {
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "NeotestFocused": {
       "bold": true,
@@ -1675,23 +1675,23 @@
       "cterm": {
         "italic": true
       },
-      "fg": "#9d7257",
+      "fg": "#907564",
       "italic": true
     },
     "NeotestNamespace": {
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "NeotestPassed": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "NeotestRunning": {
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "NeotestSkipped": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "NeotestTarget": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "NeotestTest": {
       "fg": "#b2b4b2"
@@ -1700,10 +1700,10 @@
       "fg": "#70706f"
     },
     "NeotestWatching": {
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "NeotestWinSelect": {
-      "fg": "#6d8885"
+      "fg": "#728381"
     },
     "NonText": {
       "fg": "#5a5a59"
@@ -1777,32 +1777,32 @@
       "link": "DiagnosticWarn"
     },
     "Number": {
-      "fg": "#857186"
+      "fg": "#827582"
     },
     "NvimTreeExecFile": {
       "bold": true,
       "cterm": {
         "bold": true
       },
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "NvimTreeFolderName": {
       "link": "Directory"
     },
     "NvimTreeGitDeleted": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "NvimTreeGitDirty": {
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "NvimTreeGitNew": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "NvimTreeGitStaged": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "NvimTreeImageFile": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "NvimTreeNormal": {
       "link": "Normal"
@@ -1814,7 +1814,7 @@
       "cterm": {
         "italic": true
       },
-      "fg": "#68738b",
+      "fg": "#6f7584",
       "italic": true
     },
     "NvimTreeRootFolder": {
@@ -1822,10 +1822,10 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "NvimTreeSpecialFile": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "NvimTreeSymlink": {
       "link": "Type"
@@ -1839,45 +1839,45 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "Operator": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "Pmenu": {
-      "bg": "#3f4e56",
+      "bg": "#444c52",
       "fg": "#b2b4b2"
     },
     "PmenuBorder": {
       "link": "FloatBorder"
     },
     "PmenuExtra": {
-      "bg": "#3f4e56",
+      "bg": "#444c52",
       "fg": "#70706f"
     },
     "PmenuExtraSel": {
-      "bg": "#424f4e",
+      "bg": "#454c4c",
       "fg": "#70706f"
     },
     "PmenuKind": {
-      "bg": "#3f4e56",
+      "bg": "#444c52",
       "fg": "#b2b4b2"
     },
     "PmenuKindSel": {
-      "bg": "#424f4e",
+      "bg": "#454c4c",
       "fg": "#b2b4b2"
     },
     "PmenuSbar": {
-      "bg": "#3f4e56"
+      "bg": "#444c52"
     },
     "PmenuSel": {
-      "bg": "#424f4e"
+      "bg": "#454c4c"
     },
     "PmenuThumb": {
-      "bg": "#424f4e"
+      "bg": "#454c4c"
     },
     "PreProc": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "Question": {
       "link": "MoreMsg"
@@ -1886,7 +1886,7 @@
       "bg": "#2e2d2c"
     },
     "Search": {
-      "bg": "#424f4e",
+      "bg": "#454c4c",
       "fg": "#b2b4b2"
     },
     "SignColumn": {
@@ -1894,7 +1894,7 @@
       "fg": "#70706f"
     },
     "Special": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "SpecialKey": {
       "fg": "#70706f"
@@ -1903,28 +1903,28 @@
       "cterm": {
         "undercurl": true
       },
-      "sp": "#ae4e47",
+      "sp": "#9c5e59",
       "undercurl": true
     },
     "SpellCap": {
       "cterm": {
         "undercurl": true
       },
-      "sp": "#9d7257",
+      "sp": "#907564",
       "undercurl": true
     },
     "SpellLocal": {
       "cterm": {
         "undercurl": true
       },
-      "sp": "#9d7257",
+      "sp": "#907564",
       "undercurl": true
     },
     "SpellRare": {
       "cterm": {
         "undercurl": true
       },
-      "sp": "#9d7257",
+      "sp": "#907564",
       "undercurl": true
     },
     "Statement": {
@@ -1932,7 +1932,7 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "StatusLine": {
       "bg": "#181616",
@@ -1943,10 +1943,10 @@
       "fg": "#5a5a59"
     },
     "String": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "Substitute": {
-      "bg": "#ae4e47",
+      "bg": "#9c5e59",
       "fg": "#b2b4b2"
     },
     "TabLine": {
@@ -1993,15 +1993,15 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "Todo": {
-      "bg": "#668696",
+      "bg": "#6f838d",
       "bold": true,
       "cterm": {
         "bold": true
       },
-      "fg": "#3f4e56"
+      "fg": "#444c52"
     },
     "TreesitterContext": {
       "link": "Folded"
@@ -2017,26 +2017,26 @@
       "fg": "#70706f"
     },
     "Type": {
-      "fg": "#6d8885"
+      "fg": "#728381"
     },
     "Underlined": {
       "cterm": {
         "underline": true
       },
-      "fg": "#68738b",
+      "fg": "#6f7584",
       "underline": true
     },
     "VertSplit": {
       "link": "WinSeparator"
     },
     "Visual": {
-      "bg": "#3f4e56"
+      "bg": "#444c52"
     },
     "VisualNOS": {
       "link": "Visual"
     },
     "WarningMsg": {
-      "fg": "#9d7257"
+      "fg": "#907564"
     },
     "Whitespace": {
       "fg": "#5a5a59"
@@ -2055,46 +2055,46 @@
     },
     "debugBreakpoint": {
       "bg": "#2e2d2c",
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "debugPC": {
-      "bg": "#63322e"
+      "bg": "#5a3a38"
     },
     "diffAdded": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "diffChanged": {
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "diffDeleted": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "diffNewFile": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "diffOldFile": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "diffRemoved": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "healthError": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "healthSuccess": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "healthWarning": {
-      "fg": "#9d7257"
+      "fg": "#907564"
     },
     "lCursor": {
       "link": "Cursor"
     },
     "markdownCode": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "markdownCodeBlock": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "markdownEscape": {},
     "qfFileName": {
@@ -2104,13 +2104,13 @@
       "link": "LineNr"
     }
   },
-  "palette_sha256": "85458f203097189e3dd3f7958d58521776e758b2ea2b2af7bb1a1ac94124351d",
+  "palette_sha256": "c6c87468f5680720d921160834286358d714fa9b324fd970e39c36e8f540a2ce",
   "transparent": {
     "@attribute": {
       "link": "Constant"
     },
     "@comment.error": {
-      "bg": "#ae4e47",
+      "bg": "#9c5e59",
       "bold": true,
       "cterm": {
         "bold": true
@@ -2118,35 +2118,35 @@
       "fg": "#b2b4b2"
     },
     "@comment.note": {
-      "bg": "#6d8885",
+      "bg": "#728381",
       "bold": true,
       "cterm": {
         "bold": true
       },
-      "fg": "#3f4e56"
+      "fg": "#444c52"
     },
     "@comment.warning": {
-      "bg": "#9d7257",
+      "bg": "#907564",
       "bold": true,
       "cterm": {
         "bold": true
       },
-      "fg": "#3f4e56"
+      "fg": "#444c52"
     },
     "@constructor": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "@constructor.lua": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "@diff.delta": {
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "@diff.minus": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "@diff.plus": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "@function.macro": {
       "link": "Macro"
@@ -2156,7 +2156,7 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "@keyword.import": {
       "link": "PreProc"
@@ -2169,13 +2169,13 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "@keyword.return": {
       "cterm": {
         "italic": true
       },
-      "fg": "#ae4e47",
+      "fg": "#9c5e59",
       "italic": true
     },
     "@lsp.mod.readonly": {
@@ -2238,7 +2238,7 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "@lsp.typemod.keyword.documentation": {
       "link": "Special"
@@ -2313,30 +2313,30 @@
       "fg": "#868785"
     },
     "@punctuation.special": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "@string.escape": {
       "bold": true,
       "cterm": {
         "bold": true
       },
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "@string.regexp": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "@string.special.symbol": {
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "@string.special.url": {
       "cterm": {
         "undercurl": true
       },
-      "fg": "#68738b",
+      "fg": "#6f7584",
       "undercurl": true
     },
     "@tag.attribute": {
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "@tag.delimiter": {
       "fg": "#868785"
@@ -2348,11 +2348,11 @@
       "cterm": {
         "italic": true
       },
-      "fg": "#ae4e47",
+      "fg": "#9c5e59",
       "italic": true
     },
     "@variable.member": {
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "@variable.parameter": {
       "fg": "#9c9d9c"
@@ -2542,14 +2542,14 @@
       "fg": "#70706f"
     },
     "BlinkCmpLabelMatch": {
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "BlinkCmpMenu": {
       "link": "Pmenu"
     },
     "BlinkCmpMenuBorder": {
-      "bg": "#3f4e56",
-      "fg": "#424f4e"
+      "bg": "#444c52",
+      "fg": "#454c4c"
     },
     "BlinkCmpMenuSelection": {
       "link": "PmenuSel"
@@ -2580,7 +2580,7 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#9d7257"
+      "fg": "#907564"
     },
     "Character": {
       "link": "String"
@@ -2589,8 +2589,8 @@
       "link": "Pmenu"
     },
     "CmpCompletionBorder": {
-      "bg": "#3f4e56",
-      "fg": "#424f4e"
+      "bg": "#444c52",
+      "fg": "#454c4c"
     },
     "CmpCompletionSbar": {
       "link": "PmenuSbar"
@@ -2621,7 +2621,7 @@
       "strikethrough": true
     },
     "CmpItemAbbrMatch": {
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "CmpItemAbbrMatchFuzzy": {
       "link": "CmpItemAbbrMatch"
@@ -2728,10 +2728,10 @@
       "fg": "#70706f"
     },
     "Constant": {
-      "fg": "#9d7257"
+      "fg": "#907564"
     },
     "CurSearch": {
-      "bg": "#424f4e",
+      "bg": "#454c4c",
       "bold": true,
       "cterm": {
         "bold": true
@@ -2757,20 +2757,20 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#9d7257"
+      "fg": "#907564"
     },
     "DapUIBreakpointsCurrentLine": {
       "bold": true,
       "cterm": {
         "bold": true
       },
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "DapUIBreakpointsDisabledLine": {
       "link": "Comment"
     },
     "DapUIBreakpointsInfo": {
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "DapUIBreakpointsPath": {
       "link": "Directory"
@@ -2782,47 +2782,47 @@
       "fg": "#5a5a59"
     },
     "DapUILineNumber": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "DapUIModifiedValue": {
       "bold": true,
       "cterm": {
         "bold": true
       },
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "DapUIPlayPause": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "DapUIRestart": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "DapUIScope": {
       "link": "Special"
     },
     "DapUISource": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "DapUIStepBack": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "DapUIStepInto": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "DapUIStepOut": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "DapUIStepOver": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "DapUIStop": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "DapUIStoppedThread": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "DapUIThread": {
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "DapUIType": {
       "link": "Type"
@@ -2831,107 +2831,107 @@
       "fg": "#70706f"
     },
     "DapUIWatchesEmpty": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "DapUIWatchesError": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "DapUIWatchesValue": {
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "DashboardCenter": {
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "DashboardDesc": {
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "DashboardFooter": {
       "fg": "#70706f"
     },
     "DashboardHeader": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "DashboardIcon": {
       "fg": "#70706f"
     },
     "DashboardKey": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "DashboardShortCut": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "Delimiter": {
       "fg": "#868785"
     },
     "DiagnosticError": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "DiagnosticFloatingError": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "DiagnosticFloatingHint": {
-      "fg": "#6d8885"
+      "fg": "#728381"
     },
     "DiagnosticFloatingInfo": {
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "DiagnosticFloatingOk": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "DiagnosticFloatingWarn": {
-      "fg": "#9d7257"
+      "fg": "#907564"
     },
     "DiagnosticHint": {
-      "fg": "#6d8885"
+      "fg": "#728381"
     },
     "DiagnosticInfo": {
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "DiagnosticOk": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "DiagnosticSignError": {
       "bg": "#2e2d2c",
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "DiagnosticSignHint": {
       "bg": "#2e2d2c",
-      "fg": "#6d8885"
+      "fg": "#728381"
     },
     "DiagnosticSignInfo": {
       "bg": "#2e2d2c",
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "DiagnosticSignWarn": {
       "bg": "#2e2d2c",
-      "fg": "#9d7257"
+      "fg": "#907564"
     },
     "DiagnosticUnderlineError": {
       "cterm": {
         "undercurl": true
       },
-      "sp": "#ae4e47",
+      "sp": "#9c5e59",
       "undercurl": true
     },
     "DiagnosticUnderlineHint": {
       "cterm": {
         "undercurl": true
       },
-      "sp": "#6d8885",
+      "sp": "#728381",
       "undercurl": true
     },
     "DiagnosticUnderlineInfo": {
       "cterm": {
         "undercurl": true
       },
-      "sp": "#668696",
+      "sp": "#6f838d",
       "undercurl": true
     },
     "DiagnosticUnderlineWarn": {
       "cterm": {
         "undercurl": true
       },
-      "sp": "#9d7257",
+      "sp": "#907564",
       "undercurl": true
     },
     "DiagnosticVirtualTextError": {
@@ -2947,35 +2947,35 @@
       "link": "DiagnosticWarn"
     },
     "DiagnosticWarn": {
-      "fg": "#9d7257"
+      "fg": "#907564"
     },
     "DiffAdd": {
-      "bg": "#434a3b"
+      "bg": "#43483e"
     },
     "DiffChange": {
-      "bg": "#3f4e56"
+      "bg": "#444c52"
     },
     "DiffDelete": {
-      "bg": "#63322e",
-      "fg": "#ae4e47"
+      "bg": "#5a3a38",
+      "fg": "#9c5e59"
     },
     "DiffText": {
-      "bg": "#63563a"
+      "bg": "#5c5341"
     },
     "Directory": {
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "EndOfBuffer": {
       "fg": "#181616"
     },
     "Error": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "ErrorMsg": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "Exception": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "Float": {
       "link": "Number"
@@ -3009,19 +3009,19 @@
       "fg": "#70706f"
     },
     "Function": {
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "GitSignsAdd": {
       "bg": "#2e2d2c",
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "GitSignsChange": {
       "bg": "#2e2d2c",
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "GitSignsDelete": {
       "bg": "#2e2d2c",
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "IblIndent": {
       "fg": "#5a5a59"
@@ -3033,14 +3033,14 @@
       "fg": "#5a5a59"
     },
     "Identifier": {
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "Ignore": {
       "link": "NonText"
     },
     "IncSearch": {
-      "bg": "#9d7257",
-      "fg": "#3f4e56"
+      "bg": "#907564",
+      "fg": "#444c52"
     },
     "IndentBlanklineChar": {
       "fg": "#5a5a59"
@@ -3071,7 +3071,7 @@
       "cterm": {
         "italic": true
       },
-      "fg": "#68738b",
+      "fg": "#6f7584",
       "italic": true
     },
     "LazyProgressTodo": {
@@ -3088,24 +3088,24 @@
       "link": "LspReferenceText"
     },
     "LspReferenceText": {
-      "bg": "#63563a"
+      "bg": "#5c5341"
     },
     "LspReferenceWrite": {
-      "bg": "#63563a",
+      "bg": "#5c5341",
       "cterm": {
         "underline": true
       },
       "underline": true
     },
     "LspSignatureActiveParameter": {
-      "fg": "#9d7257"
+      "fg": "#907564"
     },
     "MatchParen": {
       "bold": true,
       "cterm": {
         "bold": true
       },
-      "fg": "#9d7257"
+      "fg": "#907564"
     },
     "MiniAnimateCursor": {
       "cterm": {
@@ -3164,13 +3164,13 @@
       "link": "diffRemoved"
     },
     "MiniDepsHint": {
-      "fg": "#6d8885"
+      "fg": "#728381"
     },
     "MiniDepsInfo": {
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "MiniDepsMsgBreaking": {
-      "fg": "#9d7257"
+      "fg": "#907564"
     },
     "MiniDepsPlaceholder": {
       "link": "Comment"
@@ -3201,15 +3201,15 @@
     },
     "MiniDiffSignAdd": {
       "bg": "#2e2d2c",
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "MiniDiffSignChange": {
       "bg": "#2e2d2c",
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "MiniDiffSignDelete": {
       "bg": "#2e2d2c",
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "MiniFilesBorder": {
       "link": "FloatBorder"
@@ -3246,7 +3246,7 @@
       "fg": "#b2b4b2"
     },
     "MiniHipatternsFixme": {
-      "bg": "#ae4e47",
+      "bg": "#9c5e59",
       "bold": true,
       "cterm": {
         "bold": true
@@ -3254,7 +3254,7 @@
       "fg": "#181616"
     },
     "MiniHipatternsHack": {
-      "bg": "#9d7257",
+      "bg": "#907564",
       "bold": true,
       "cterm": {
         "bold": true
@@ -3262,7 +3262,7 @@
       "fg": "#181616"
     },
     "MiniHipatternsNote": {
-      "bg": "#668696",
+      "bg": "#6f838d",
       "bold": true,
       "cterm": {
         "bold": true
@@ -3270,7 +3270,7 @@
       "fg": "#181616"
     },
     "MiniHipatternsTodo": {
-      "bg": "#6d8885",
+      "bg": "#728381",
       "bold": true,
       "cterm": {
         "bold": true
@@ -3278,31 +3278,31 @@
       "fg": "#181616"
     },
     "MiniIconsAzure": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "MiniIconsBlue": {
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "MiniIconsCyan": {
-      "fg": "#6d8885"
+      "fg": "#728381"
     },
     "MiniIconsGreen": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "MiniIconsGrey": {
       "fg": "#b2b4b2"
     },
     "MiniIconsOrange": {
-      "fg": "#9d7257"
+      "fg": "#907564"
     },
     "MiniIconsPurple": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "MiniIconsRed": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "MiniIconsYellow": {
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "MiniIndentscopePrefix": {
       "cterm": {
@@ -3311,7 +3311,7 @@
       "nocombine": true
     },
     "MiniIndentscopeSymbol": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "MiniJump": {
       "link": "SpellRare"
@@ -3325,7 +3325,7 @@
         "bold": true,
         "nocombine": true
       },
-      "fg": "#9d7257",
+      "fg": "#907564",
       "nocombine": true
     },
     "MiniJump2dSpotAhead": {
@@ -3333,7 +3333,7 @@
       "cterm": {
         "nocombine": true
       },
-      "fg": "#6d8885",
+      "fg": "#728381",
       "nocombine": true
     },
     "MiniJump2dSpotUnique": {
@@ -3342,7 +3342,7 @@
         "bold": true,
         "nocombine": true
       },
-      "fg": "#68738b",
+      "fg": "#6f7584",
       "nocombine": true
     },
     "MiniMapNormal": {
@@ -3407,7 +3407,7 @@
     },
     "MiniPickPrompt": {
       "bg": "#181616",
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "MiniStarterCurrent": {
       "cterm": {
@@ -3431,13 +3431,13 @@
       "link": "Delimiter"
     },
     "MiniStarterItemPrefix": {
-      "fg": "#9d7257"
+      "fg": "#907564"
     },
     "MiniStarterQuery": {
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "MiniStarterSection": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "MiniStatuslineDevinfo": {
       "bg": "#2e2d2c",
@@ -3455,7 +3455,7 @@
       "link": "StatusLineNC"
     },
     "MiniStatuslineModeCommand": {
-      "bg": "#ae4e47",
+      "bg": "#9c5e59",
       "bold": true,
       "cterm": {
         "bold": true
@@ -3463,7 +3463,7 @@
       "fg": "#181616"
     },
     "MiniStatuslineModeInsert": {
-      "bg": "#6e7e60",
+      "bg": "#6e7965",
       "bold": true,
       "cterm": {
         "bold": true
@@ -3471,7 +3471,7 @@
       "fg": "#181616"
     },
     "MiniStatuslineModeNormal": {
-      "bg": "#668696",
+      "bg": "#6f838d",
       "bold": true,
       "cterm": {
         "bold": true
@@ -3479,7 +3479,7 @@
       "fg": "#181616"
     },
     "MiniStatuslineModeOther": {
-      "bg": "#6d8885",
+      "bg": "#728381",
       "bold": true,
       "cterm": {
         "bold": true
@@ -3487,7 +3487,7 @@
       "fg": "#181616"
     },
     "MiniStatuslineModeReplace": {
-      "bg": "#9d7257",
+      "bg": "#907564",
       "bold": true,
       "cterm": {
         "bold": true
@@ -3495,7 +3495,7 @@
       "fg": "#181616"
     },
     "MiniStatuslineModeVisual": {
-      "bg": "#68738b",
+      "bg": "#6f7584",
       "bold": true,
       "cterm": {
         "bold": true
@@ -3541,7 +3541,7 @@
       "fg": "#181616"
     },
     "MiniTablineTabpagesection": {
-      "bg": "#424f4e",
+      "bg": "#454c4c",
       "bold": true,
       "cterm": {
         "bold": true
@@ -3567,27 +3567,27 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "MiniTestPass": {
       "bold": true,
       "cterm": {
         "bold": true
       },
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "MiniTrailspace": {
-      "bg": "#ae4e47"
+      "bg": "#9c5e59"
     },
     "ModeMsg": {
       "bold": true,
       "cterm": {
         "bold": true
       },
-      "fg": "#9d7257"
+      "fg": "#907564"
     },
     "MoreMsg": {
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "MsgArea": {
       "fg": "#b2b4b2"
@@ -3681,19 +3681,19 @@
       "fg": "#b2b4b2"
     },
     "NeoTreeGitAdded": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "NeoTreeGitConflict": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "NeoTreeGitDeleted": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "NeoTreeGitModified": {
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "NeoTreeGitStaged": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "NeoTreeGitUnstaged": {
       "link": "NeoTreeGitModified"
@@ -3712,7 +3712,7 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "NeoTreeTabActive": {
       "link": "TabLineSel"
@@ -3727,26 +3727,26 @@
       "link": "NeoTreeTabInactive"
     },
     "NeogitDiffAddHighlight": {
-      "bg": "#434a3b"
+      "bg": "#43483e"
     },
     "NeogitDiffContextHighlight": {
-      "bg": "#3f4e56"
+      "bg": "#444c52"
     },
     "NeogitDiffDeleteHighlight": {
-      "bg": "#63322e"
+      "bg": "#5a3a38"
     },
     "NeogitHunkHeader": {
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "NeogitHunkHeaderHighlight": {
-      "bg": "#3f4e56",
-      "fg": "#9d7257"
+      "bg": "#444c52",
+      "fg": "#907564"
     },
     "NeotestAdapterName": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "NeotestDir": {
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "NeotestExpandMarker": {
       "bold": true,
@@ -3756,10 +3756,10 @@
       "fg": "#868785"
     },
     "NeotestFailed": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "NeotestFile": {
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "NeotestFocused": {
       "bold": true,
@@ -3780,23 +3780,23 @@
       "cterm": {
         "italic": true
       },
-      "fg": "#9d7257",
+      "fg": "#907564",
       "italic": true
     },
     "NeotestNamespace": {
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "NeotestPassed": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "NeotestRunning": {
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "NeotestSkipped": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "NeotestTarget": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "NeotestTest": {
       "fg": "#b2b4b2"
@@ -3805,10 +3805,10 @@
       "fg": "#70706f"
     },
     "NeotestWatching": {
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "NeotestWinSelect": {
-      "fg": "#6d8885"
+      "fg": "#728381"
     },
     "NonText": {
       "fg": "#5a5a59"
@@ -3881,32 +3881,32 @@
       "link": "DiagnosticWarn"
     },
     "Number": {
-      "fg": "#857186"
+      "fg": "#827582"
     },
     "NvimTreeExecFile": {
       "bold": true,
       "cterm": {
         "bold": true
       },
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "NvimTreeFolderName": {
       "link": "Directory"
     },
     "NvimTreeGitDeleted": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "NvimTreeGitDirty": {
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "NvimTreeGitNew": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "NvimTreeGitStaged": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "NvimTreeImageFile": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "NvimTreeNormal": {
       "link": "Normal"
@@ -3918,7 +3918,7 @@
       "cterm": {
         "italic": true
       },
-      "fg": "#68738b",
+      "fg": "#6f7584",
       "italic": true
     },
     "NvimTreeRootFolder": {
@@ -3926,10 +3926,10 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "NvimTreeSpecialFile": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "NvimTreeSymlink": {
       "link": "Type"
@@ -3943,45 +3943,45 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "Operator": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "Pmenu": {
-      "bg": "#3f4e56",
+      "bg": "#444c52",
       "fg": "#b2b4b2"
     },
     "PmenuBorder": {
       "link": "FloatBorder"
     },
     "PmenuExtra": {
-      "bg": "#3f4e56",
+      "bg": "#444c52",
       "fg": "#70706f"
     },
     "PmenuExtraSel": {
-      "bg": "#424f4e",
+      "bg": "#454c4c",
       "fg": "#70706f"
     },
     "PmenuKind": {
-      "bg": "#3f4e56",
+      "bg": "#444c52",
       "fg": "#b2b4b2"
     },
     "PmenuKindSel": {
-      "bg": "#424f4e",
+      "bg": "#454c4c",
       "fg": "#b2b4b2"
     },
     "PmenuSbar": {
-      "bg": "#3f4e56"
+      "bg": "#444c52"
     },
     "PmenuSel": {
-      "bg": "#424f4e"
+      "bg": "#454c4c"
     },
     "PmenuThumb": {
-      "bg": "#424f4e"
+      "bg": "#454c4c"
     },
     "PreProc": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "Question": {
       "link": "MoreMsg"
@@ -3990,7 +3990,7 @@
       "bg": "#2e2d2c"
     },
     "Search": {
-      "bg": "#424f4e",
+      "bg": "#454c4c",
       "fg": "#b2b4b2"
     },
     "SignColumn": {
@@ -3998,7 +3998,7 @@
       "fg": "#70706f"
     },
     "Special": {
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "SpecialKey": {
       "fg": "#70706f"
@@ -4007,28 +4007,28 @@
       "cterm": {
         "undercurl": true
       },
-      "sp": "#ae4e47",
+      "sp": "#9c5e59",
       "undercurl": true
     },
     "SpellCap": {
       "cterm": {
         "undercurl": true
       },
-      "sp": "#9d7257",
+      "sp": "#907564",
       "undercurl": true
     },
     "SpellLocal": {
       "cterm": {
         "undercurl": true
       },
-      "sp": "#9d7257",
+      "sp": "#907564",
       "undercurl": true
     },
     "SpellRare": {
       "cterm": {
         "undercurl": true
       },
-      "sp": "#9d7257",
+      "sp": "#907564",
       "undercurl": true
     },
     "Statement": {
@@ -4036,7 +4036,7 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "StatusLine": {
       "bg": "#181616",
@@ -4047,10 +4047,10 @@
       "fg": "#5a5a59"
     },
     "String": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "Substitute": {
-      "bg": "#ae4e47",
+      "bg": "#9c5e59",
       "fg": "#b2b4b2"
     },
     "TabLine": {
@@ -4097,15 +4097,15 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#668696"
+      "fg": "#6f838d"
     },
     "Todo": {
-      "bg": "#668696",
+      "bg": "#6f838d",
       "bold": true,
       "cterm": {
         "bold": true
       },
-      "fg": "#3f4e56"
+      "fg": "#444c52"
     },
     "TreesitterContext": {
       "link": "Folded"
@@ -4121,26 +4121,26 @@
       "fg": "#70706f"
     },
     "Type": {
-      "fg": "#6d8885"
+      "fg": "#728381"
     },
     "Underlined": {
       "cterm": {
         "underline": true
       },
-      "fg": "#68738b",
+      "fg": "#6f7584",
       "underline": true
     },
     "VertSplit": {
       "link": "WinSeparator"
     },
     "Visual": {
-      "bg": "#3f4e56"
+      "bg": "#444c52"
     },
     "VisualNOS": {
       "link": "Visual"
     },
     "WarningMsg": {
-      "fg": "#9d7257"
+      "fg": "#907564"
     },
     "Whitespace": {
       "fg": "#5a5a59"
@@ -4159,46 +4159,46 @@
     },
     "debugBreakpoint": {
       "bg": "#2e2d2c",
-      "fg": "#68738b"
+      "fg": "#6f7584"
     },
     "debugPC": {
-      "bg": "#63322e"
+      "bg": "#5a3a38"
     },
     "diffAdded": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "diffChanged": {
-      "fg": "#ae955e"
+      "fg": "#a0906c"
     },
     "diffDeleted": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "diffNewFile": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "diffOldFile": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "diffRemoved": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "healthError": {
-      "fg": "#ae4e47"
+      "fg": "#9c5e59"
     },
     "healthSuccess": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "healthWarning": {
-      "fg": "#9d7257"
+      "fg": "#907564"
     },
     "lCursor": {
       "link": "Cursor"
     },
     "markdownCode": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "markdownCodeBlock": {
-      "fg": "#6e7e60"
+      "fg": "#6e7965"
     },
     "markdownEscape": {},
     "qfFileName": {

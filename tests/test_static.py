@@ -31,21 +31,21 @@ SLOT_DATA = (
     ("base06", "cloudGray", "#9c9d9c", "dragonGray", ""),
     ("base07", "snowWhite", "#b2b4b2", "dragonWhite",
      "oldWhite, fujiWhite"),
-    ("base08", "fujiRed", "#ae4e47", "dragonRed",
+    ("base08", "fujiRed", "#9c5e59", "dragonRed",
      "samuraiRed, autumnRed, waveRed, winterRed"),
-    ("base09", "persimmonOrange", "#9d7257", "dragonOrange",
+    ("base09", "persimmonOrange", "#907564", "dragonOrange",
      "dragonOrange2, roninYellow"),
-    ("base0A", "strawYellow", "#ae955e", "dragonYellow",
+    ("base0A", "strawYellow", "#a0906c", "dragonYellow",
      "carpYellow, autumnYellow, winterYellow"),
-    ("base0B", "pineGreen", "#6e7e60", "dragonGreen2",
+    ("base0B", "pineGreen", "#6e7965", "dragonGreen2",
      "dragonGreen, autumnGreen, springGreen, winterGreen"),
-    ("base0C", "lakeAqua", "#6d8885", "dragonAqua",
+    ("base0C", "lakeAqua", "#728381", "dragonAqua",
      "waveAqua1, waveAqua2"),
-    ("base0D", "ridgeBlue", "#668696", "dragonBlue2",
+    ("base0D", "ridgeBlue", "#6f838d", "dragonBlue2",
      "dragonBlue, springBlue, waveBlue1, waveBlue2, winterBlue"),
-    ("base0E", "twilightViolet", "#68738b", "dragonViolet",
+    ("base0E", "twilightViolet", "#6f7584", "dragonViolet",
      "dragonTeal, springViolet1"),
-    ("base0F", "blossomPink", "#857186", "dragonPink", ""),
+    ("base0F", "blossomPink", "#827582", "dragonPink", ""),
 )
 FORMER_SHADE = re.compile(r"^base0[89A-F]_dark$")
 PRIVATE_USE = re.compile("[\ue000-\uf8ff\U000f0000-\U0010fffd]")
@@ -114,7 +114,7 @@ def assigned(tree):
 def slot_line(slot, name, value, origin, merged):
     """The REQ-PAL-6 line of one slot."""
     if slot >= "base08":
-        darker = " 20 % darker"
+        darker = " 20 % darker, 36 % less saturated"
     elif slot == "base07":
         darker = " 10 % darker, saturation -2 points"
     elif slot > "base00":

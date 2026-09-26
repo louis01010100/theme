@@ -69,7 +69,8 @@ same value), and `base01`–`base06`
 are spaced linearly between `base00` and `base07` (per RGB channel,
 step 1/7, rounded half to even);
 `base08`–`base0F` are the eight accents, each 20 % darker (HSL
-lightness × 0.8) than its Kanagawa origin.
+lightness × 0.8) and 36 % less saturated (HSL saturation × 0.8,
+applied twice) than its Kanagawa origin.
 
 | Slot | Name | Role | Value | Kanagawa origin |
 |---|---|---|---|---|
@@ -81,14 +82,14 @@ lightness × 0.8) than its Kanagawa origin.
 | `base05` | hazeGray | neutral | `#868785` | dragonGray2, linear 5/7 |
 | `base06` | cloudGray | neutral | `#9c9d9c` | dragonGray, linear 6/7 |
 | `base07` | snowWhite | normal text (lightest neutral) | `#b2b4b2` | dragonWhite, 10 % darker, saturation −2 points |
-| `base08` | fujiRed | red | `#ae4e47` | dragonRed, 20 % darker |
-| `base09` | persimmonOrange | orange | `#9d7257` | dragonOrange, 20 % darker |
-| `base0A` | strawYellow | yellow | `#ae955e` | dragonYellow, 20 % darker |
-| `base0B` | pineGreen | green | `#6e7e60` | dragonGreen2, 20 % darker |
-| `base0C` | lakeAqua | cyan | `#6d8885` | dragonAqua, 20 % darker |
-| `base0D` | ridgeBlue | blue | `#668696` | dragonBlue2, 20 % darker |
-| `base0E` | twilightViolet | violet | `#68738b` | dragonViolet, 20 % darker |
-| `base0F` | blossomPink | pink | `#857186` | dragonPink, 20 % darker |
+| `base08` | fujiRed | red | `#9c5e59` | dragonRed, 20 % darker, 36 % less saturated |
+| `base09` | persimmonOrange | orange | `#907564` | dragonOrange, 20 % darker, 36 % less saturated |
+| `base0A` | strawYellow | yellow | `#a0906c` | dragonYellow, 20 % darker, 36 % less saturated |
+| `base0B` | pineGreen | green | `#6e7965` | dragonGreen2, 20 % darker, 36 % less saturated |
+| `base0C` | lakeAqua | cyan | `#728381` | dragonAqua, 20 % darker, 36 % less saturated |
+| `base0D` | ridgeBlue | blue | `#6f838d` | dragonBlue2, 20 % darker, 36 % less saturated |
+| `base0E` | twilightViolet | violet | `#6f7584` | dragonViolet, 20 % darker, 36 % less saturated |
+| `base0F` | blossomPink | pink | `#827582` | dragonPink, 20 % darker, 36 % less saturated |
 
 Each slot line carries a comment with its name, its Kanagawa origin,
 and the removed Kanagawa colours merged into it. The names
@@ -100,28 +101,28 @@ Extra names are allowed (for example a colour added later for tmux).
 By convention they follow the Mount Fuji naming style: a landscape
 image plus a plain English colour word, in camelCase. Some names are
 reserved and rejected in any letter case: a slot name in another case
-(e.g. `base0a`), the eight `shadow*` shade names, and the neutral and
+(e.g. `base0a`), the eight `dark*` shade names, and the neutral and
 accent names above.
 
 **Derived shades.** Eight dark shades are computed from the slots on
-every run: `shadowRed`, `shadowOrange`, `shadowYellow`, `shadowGreen`,
-`shadowAqua`, `shadowBlue`, `shadowViolet`, `shadowPink`, each 50 % of
+every run: `darkRed`, `darkOrange`, `darkYellow`, `darkGreen`,
+`darkAqua`, `darkBlue`, `darkViolet`, `darkPink`, each 50 % of
 its accent (`base08` … `base0F`) blended with 50 % `base00` (per
 channel, rounded half to even). They are never stored in
 `palette.toml`; mappings use them by name like a slot. Uses: diff
-backgrounds (`shadowGreen` added, `shadowRed` removed, `shadowBlue`
-changed, `shadowYellow` changed text); `shadowBlue` for the visual
+backgrounds (`darkGreen` added, `darkRed` removed, `darkBlue`
+changed, `darkYellow` changed text); `darkBlue` for the visual
 selection, the completion menu, and Neovim's reverse text;
-`shadowAqua` for search, the completion-menu selection, the terminal
-selection, and the tmux copy-mode selection; `shadowRed` for the
-current window of the tmux status bar. `shadowOrange`, `shadowViolet`,
-and `shadowPink` are not used yet.
+`darkAqua` for search, the completion-menu selection, and the tmux
+copy-mode selection; `darkRed` for the
+current window of the tmux status bar. `darkOrange`, `darkViolet`,
+and `darkPink` are not used yet.
 
 **Contrast (accepted 2026-09-26).** Normal text `base07` on the shades
-is 3.4:1 to 5.0:1, below 4.5:1 on the yellow, aqua, blue, orange,
-green, and pink shades (lowest 3.4:1 on `shadowYellow`); on `base00` it
-is 8.6:1. As code text on `base00`, the darkened red, violet,
-pink, green, and orange accents are below 4.5:1 (lowest about 3.4:1,
+is 3.6:1 to 4.8:1, below 4.5:1 on the yellow, aqua, blue, orange,
+and pink shades (lowest 3.6:1 on `darkYellow`); on `base00` it is
+8.6:1. As code text on `base00`, the darkened red, violet,
+pink, green, and orange accents are below 4.5:1 (lowest about 3.6:1,
 red). Both are accepted in favour of the darker look and readable
 dark shades; no check enforces a contrast ratio.
 
@@ -244,13 +245,13 @@ The time is shown as `%H:%M`, or `%I:%M %p` when `clock-mode-style` is
 
 The status bar has one layout: the `nord-dark-tmux` layout drawn in
 Ukiyo-e colours. From left to right: the session block (`#S`,
-`base04` on `base02`), a `|` separator, the windows as `#I.#W`
-(index and name, no flags) in `base04` on `base01`, separated by `|`
+`base05` on `base02`), a `|` separator, the windows as `#I.#W`
+(index and name, no flags) in `base05` on `base01`, separated by `|`
 (every `|` is `base02` on `base01`), the current window as a block in
-`base06` on `shadowRed`, the empty rest of the bar in `base01`
+`base06` on `darkRed`, the empty rest of the bar in `base01`
 (`cinderBlack`, the segment colour, so the bar reads as one strip),
 and on the right a `|` separator followed by the date and the time as
-two segments (`base04` on `base01`); the host is not shown. It
+two segments (`base05` on `base01`); the host is not shown. It
 uses no powerline or other private-use glyphs, so no Nerd Font is needed. The window formats carry their
 colours inline, so activity and bell flags are not marked in the bar.
 

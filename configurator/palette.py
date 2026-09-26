@@ -35,8 +35,8 @@ class Shade:
 
 
 SHADE_TABLE = tuple(Shade(name, slot) for name, slot in zip(
-    ("shadowRed", "shadowOrange", "shadowYellow", "shadowGreen",
-     "shadowAqua", "shadowBlue", "shadowViolet", "shadowPink"),
+    ("darkRed", "darkOrange", "darkYellow", "darkGreen",
+     "darkAqua", "darkBlue", "darkViolet", "darkPink"),
     SLOTS[8:]))
 SHADES = tuple(shade.name for shade in SHADE_TABLE)
 

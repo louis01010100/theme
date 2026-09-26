@@ -17,16 +17,16 @@ MISMATCH = ("tests/reference/nvim-highlights.json: generated from a "
 # Data Model Theme-layer table (REQ-NVIM-3).
 THEME_LAYER = {
     "ui": {
-        "fg": "base07", "fg_dim": "base07", "fg_reverse": "shadowBlue",
+        "fg": "base07", "fg_dim": "base07", "fg_reverse": "darkBlue",
         "bg_dim": "base00", "bg_gutter": "base01", "bg_m3": "base00",
         "bg_m2": "base00", "bg_m1": "base00", "bg": "base00",
         "bg_p1": "base01", "bg_p2": "base02", "special": "base04",
         "whitespace": "base03", "nontext": "base03",
-        "bg_visual": "shadowBlue", "bg_search": "shadowAqua",
+        "bg_visual": "darkBlue", "bg_search": "darkAqua",
         "pmenu": {
-            "fg": "base07", "fg_sel": "none", "bg": "shadowBlue",
-            "bg_sel": "shadowAqua", "bg_thumb": "shadowAqua",
-            "bg_sbar": "shadowBlue",
+            "fg": "base07", "fg_sel": "none", "bg": "darkBlue",
+            "bg_sel": "darkAqua", "bg_thumb": "darkAqua",
+            "bg_sbar": "darkBlue",
         },
         "float": {
             "fg": "base07", "bg": "base00", "fg_border": "base03",
@@ -47,8 +47,8 @@ THEME_LAYER = {
         "info": "base0D", "hint": "base0C",
     },
     "diff": {
-        "add": "shadowGreen", "delete": "shadowRed",
-        "change": "shadowBlue", "text": "shadowYellow",
+        "add": "darkGreen", "delete": "darkRed",
+        "change": "darkBlue", "text": "darkYellow",
     },
     "vcs": {"added": "base0B", "removed": "base08", "changed": "base0A"},
 }
@@ -208,7 +208,7 @@ class LoadTest(InstalledTestCase):
         postlude = (
             'local p = vim.api.nvim_get_runtime_file('
             '"lua/ukiyo_e/palette.lua", false)[1] '
-            'local t = io.open(p):read("a"):gsub("#668696", "#123456") '
+            'local t = io.open(p):read("a"):gsub("#6f838d", "#123456") '
             'os.remove(p) local f = io.open(p, "w") f:write(t) f:close() '
             'vim.cmd.colorscheme("ukiyo_e")')
         env = install_nvim(self)
@@ -220,7 +220,7 @@ class LoadTest(InstalledTestCase):
         fgs = {s.get("fg") for s in dump["groups"].values()
                if isinstance(s, dict)}
         self.assertIn(0x123456, fgs)
-        self.assertNotIn(0x668696, fgs)
+        self.assertNotIn(0x6f838d, fgs)
 
 
 class SetupContractTest(InstalledTestCase):
@@ -256,14 +256,14 @@ class SetupContractTest(InstalledTestCase):
                 '{ fg = colors.palette.base08 } } end }')
         spec = self.ukiyo(opts)["groups"]["NormalNC"]
         self.assertNotIn("link", spec)
-        self.assertEqual(spec["fg"], 0xAE4E47)
+        self.assertEqual(spec["fg"], 0x9C5E59)
 
     def test_overrides_receive_shades(self):
         opts = ('{ overrides = function(colors) return { NormalNC = '
-                '{ fg = colors.shades.shadowBlue, '
+                '{ fg = colors.shades.darkBlue, '
                 'bg = colors.theme.ui.bg_p2 } } end }')
         spec = self.ukiyo(opts)["groups"]["NormalNC"]
-        self.assertEqual((spec["fg"], spec["bg"]), (0x3F4E56, 0x444343))
+        self.assertEqual((spec["fg"], spec["bg"]), (0x444C52, 0x444343))
 
     def test_override_nil_is_noop(self):
         opts = "{ overrides = function() return nil end }"

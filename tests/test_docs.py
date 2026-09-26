@@ -51,10 +51,10 @@ README_ITEMS = (
     "lakeAqua", "ridgeBlue", "twilightViolet", "blossomPink",
     "20 % darker", "documentation only", "Mount Fuji",
     "reserved",
-    "shadowRed", "shadowOrange", "shadowYellow", "shadowGreen",
-    "shadowAqua", "shadowBlue", "shadowViolet", "shadowPink",
+    "darkRed", "darkOrange", "darkYellow", "darkGreen",
+    "darkAqua", "darkBlue", "darkViolet", "darkPink",
     "50 %", "never stored",
-    "3.4:1", "5.0:1", "3.4", "2026-09-26",
+    "3.6:1", "4.8:1", "3.6", "2026-09-26",
     "python3 tests/regen_nvim_reference.py",
     # REQ-DOC-1, single tmux layout (2026-09-27).
     "`#I.#W`", "one layout", "2026-09-27", "powerline layout",

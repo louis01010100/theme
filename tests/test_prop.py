@@ -10,12 +10,12 @@ from test_cli import blue_copy
 from nvim_baseline import NeovimRun, nvim_dump
 from configurator import tmux
 
-OLD_BLUE = 0x668696
+OLD_BLUE = 0x6f838d
 NEW_BLUE = 0x123456
-# base0D -> #123456 moves its shade shadowBlue #3f4e56 -> #152536.
-BLUE_CHANGE = {OLD_BLUE: NEW_BLUE, 0x3F4E56: 0x152536}
-# base0C -> #123456 moves its shade shadowAqua #424f4e -> #152536.
-AQUA_CHANGE = {0x6D8885: 0x123456, 0x424F4E: 0x152536}
+# base0D -> #123456 moves its shade darkBlue #444c52 -> #152536.
+BLUE_CHANGE = {OLD_BLUE: NEW_BLUE, 0x444C52: 0x152536}
+# base0C -> #123456 moves its shade darkAqua #454c4c -> #152536.
+AQUA_CHANGE = {0x728381: 0x123456, 0x454C4C: 0x152536}
 COLOUR_ATTRIBUTES = ("fg", "bg", "sp")
 UUID = "5a1c0e9b-7d3f-4b6a-8e2d-4f0a9c6b1e37"
 PROFILE = f"{harness.PROFILE_SCHEMA}:{harness.PROFILE_ROOT}:{UUID}/"
@@ -112,8 +112,8 @@ class PropagationTest(unittest.TestCase):
         """V-5: only Color4/Color12 change; no Ptyxis key is written."""
         self.assertEqual(
             changed_lines(self.old_palette, self.palette_file.read_bytes()),
-            [(b"Color4=#668696", b"Color4=#123456"),
-             (b"Color12=#668696", b"Color12=#123456")])
+            [(b"Color4=#6f838d", b"Color4=#123456"),
+             (b"Color12=#6f838d", b"Color12=#123456")])
         self.assertEqual(harness.dump_ptyxis(self.env.vars),
                          self.ptyxis_dump)
 
@@ -203,18 +203,14 @@ class ShadePropagationTest(unittest.TestCase):
         palette = gnome_palette(self.env)
         self.assertEqual((palette[6], palette[14]),
                          ("#123456", "#123456"))
-        key = harness.gsettings(self.env.vars, "get", PROFILE,
-                                "highlight-background-color")
-        self.assertEqual(key, "'#152536'")
         changes = dconf_changes(self.gnome, harness.dump(self.env.vars))
-        self.assertEqual(list(changes.values()),
-                         [["highlight-background-color", "palette"]])
+        self.assertEqual(list(changes.values()), [["palette"]])
 
     def test_ptyxis_file(self):
         self.assertEqual(
             changed_lines(self.old_palette, self.palette_file.read_bytes()),
-            [(b"Color6=#6d8885", b"Color6=#123456"),
-             (b"Color14=#6d8885", b"Color14=#123456")])
+            [(b"Color6=#728381", b"Color6=#123456"),
+             (b"Color14=#728381", b"Color14=#123456")])
 
     def test_tmux(self):
         after = self.server.snapshot()

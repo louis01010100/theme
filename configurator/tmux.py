@@ -31,16 +31,16 @@ TMUX_ROLES = MappingProxyType({
     "command_fg": "base07",
     "command_bg": "base00",
     "copy_selection_fg": "base07",
-    "copy_selection_bg": "shadowAqua",
+    "copy_selection_bg": "darkAqua",
     "clock_fg": "base0D",
     "display_panes_fg": "base03",
     "display_panes_active_fg": "base09",
-    "status_text_fg": "base04",
+    "status_text_fg": "base05",
     "status_segment_bg": "base01",
     "status_block_bg": "base02",
     "status_separator_fg": "base02",
     "status_current_fg": "base06",
-    "status_current_bg": "shadowRed",
+    "status_current_bg": "darkRed",
 })
 ROLE_KEYS = tuple(TMUX_ROLES)
 STYLE_OPTIONS = (

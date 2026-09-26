@@ -208,8 +208,8 @@ class PaletteRejectTest(FullTestCase):
         (f'{name} = "#000000"\n', None,
          f"palette.toml: [palette].{name}: reserved name ({why})")
         for name, why in (
-            ("shadowRed", "derived shade shadowRed"),
-            ("shadowred", "derived shade shadowRed"),
+            ("darkRed", "derived shade darkRed"),
+            ("darkred", "derived shade darkRed"),
             ("base0a", "slot base0A"),
             ("fujiRed", "accent name fujiRed"),
             ("lavaBlack", "neutral name lavaBlack")))
@@ -244,7 +244,7 @@ class PaletteRejectTest(FullTestCase):
         self.assert_rejected()
 
     def test_valid_extra_names(self):
-        for line in ('rust = "#b7410e"\n', 'shadowGray = "#000000"\n'):
+        for line in ('rust = "#b7410e"\n', 'darkGray = "#000000"\n'):
             name = line.split()[0]
             with self.subTest(name=name):
                 root = self.broken_copy(line, None)
@@ -268,15 +268,15 @@ class MappingRejectTest(FullTestCase):
             ("configurator/tmux.py", "TMUX_ROLES", "clock_fg",
              "base0D", "base0G"),
             ("configurator/tmux.py", "TMUX_ROLES", "status_current_bg",
-             "shadowRed", "fujiRed"),
+             "darkRed", "fujiRed"),
             ("configurator/tmux.py", "TMUX_ROLES", "status_current_bg",
-             "shadowRed", "lavaBlack"),
+             "darkRed", "lavaBlack"),
             ("configurator/tmux.py", "TMUX_ROLES", "status_current_bg",
-             "shadowRed", "base08_dark"),
+             "darkRed", "base08_dark"),
             ("configurator/terminal_ansi.py", "TERMINAL_ROLES",
-             "selection_bg", "shadowAqua", "shadowGray"),
+             "selection_bg", "base01", "darkGray"),
             ("configurator/terminal_ansi.py", "TERMINAL_ROLES",
-             "selection_bg", "shadowAqua", "shadowred"))) + (
+             "selection_bg", "base01", "darkred"))) + (
         ("configurator/terminal_ansi.py", '"base0B", "base0A"',
          '"base0B", "noSuchName"',
          'configurator/terminal_ansi.py: ANSI[3]: "noSuchName" '

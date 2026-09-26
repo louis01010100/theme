@@ -19,32 +19,32 @@ GOLDEN_COLORS = (
     "\n"
     "set -g window-status-current-style 'fg=#b2b4b2,bg="
     "#444343'\n"
-    "set -g window-status-activity-style 'fg=#9d7257,bg"
+    "set -g window-status-activity-style 'fg=#907564,bg"
     "=#181616'\n"
-    "set -g window-status-bell-style 'fg=#ae4e47,bg=#18"
+    "set -g window-status-bell-style 'fg=#9c5e59,bg=#18"
     "1616'\n"
     "set -g pane-border-style 'fg=#444343'\n"
-    "set -g pane-active-border-style 'fg=#668696'\n"
+    "set -g pane-active-border-style 'fg=#6f838d'\n"
     "set -g message-style 'fg=#b2b4b2,bg=#181616'\n"
     "set -g message-command-style 'fg=#b2b4b2,bg=#18161"
     "6'\n"
-    "set -g mode-style 'fg=#b2b4b2,bg=#424f4e'\n"
-    "set -g clock-mode-colour '#668696'\n"
+    "set -g mode-style 'fg=#b2b4b2,bg=#454c4c'\n"
+    "set -g clock-mode-colour '#6f838d'\n"
     "set -g display-panes-colour '#5a5a59'\n"
-    "set -g display-panes-active-colour '#9d7257'\n"
+    "set -g display-panes-active-colour '#907564'\n"
 )
 GOLDEN_STATUS = (
     "set -g status-style 'fg=#b2b4b2,bg=#2e2d2c'\n"
-    'set -g status-left "#[fg=#70706f,bg=#444343] #S '
+    'set -g status-left "#[fg=#868785,bg=#444343] #S '
     '#[fg=#444343,bg=#2e2d2c]|"\n'
     'set -g status-right "#[fg=#444343,bg=#2e2d2c]|'
-    '#[fg=#70706f,bg=#2e2d2c] '
-    "#{T:@ukiyo_e_status_date} #[fg=#70706f,bg=#2e2d2c]"
+    '#[fg=#868785,bg=#2e2d2c] '
+    "#{T:@ukiyo_e_status_date} #[fg=#868785,bg=#2e2d2c]"
     '#{T:@ukiyo_e_status_time} "\n'
-    'set -g window-status-format "#[fg=#70706f,bg=#2e2d2c] '
+    'set -g window-status-format "#[fg=#868785,bg=#2e2d2c] '
     '#I.#W "\n'
     'set -g window-status-current-format "#[fg=#9c9d9c,'
-    'bg=#63322e] #I.#W "\n'
+    'bg=#5a3a38] #I.#W "\n'
     'set -g window-status-separator "#[fg=#444343,'
     'bg=#2e2d2c]|"\n'
 )
@@ -90,11 +90,11 @@ class PaletteModuleTest(unittest.TestCase):
     def test_palette_module_shades(self):
         expected = "".join(
             f'        {name} = "{value}",\n' for name, value in (
-                ("shadowAqua", "#424f4e"), ("shadowBlue", "#3f4e56"),
-                ("shadowGreen", "#434a3b"), ("shadowOrange", "#5a4436"),
-                ("shadowPink", "#4e444e"), ("shadowRed", "#63322e"),
-                ("shadowViolet", "#404450"),
-                ("shadowYellow", "#63563a")))
+                ("darkAqua", "#454c4c"), ("darkBlue", "#444c52"),
+                ("darkGreen", "#43483e"), ("darkOrange", "#54463d"),
+                ("darkPink", "#4d464c"), ("darkRed", "#5a3a38"),
+                ("darkViolet", "#44464d"),
+                ("darkYellow", "#5c5341")))
         self.assertEqual(self.block("shades"), expected)
         order = [self.text.index(f"    {k} = {{") for k in
                  ("palette", "shades", "ansi")]

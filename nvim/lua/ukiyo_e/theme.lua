@@ -1,6 +1,6 @@
 -- Theme layer: semantic colour roles built from the palette slots
 -- (palette.base00 ... palette.base0F) and the derived shades
--- (shades.shadowRed ...). Role set of the kanagawa.nvim "dragon"
+-- (shades.darkRed ...). Role set of the kanagawa.nvim "dragon"
 -- theme at bb85e4b, without `term`.
 
 local function pmenu_float(palette, shades)
@@ -8,10 +8,10 @@ local function pmenu_float(palette, shades)
         pmenu = {
             fg = palette.base07,
             fg_sel = "none",
-            bg = shades.shadowBlue,
-            bg_sel = shades.shadowAqua,
-            bg_thumb = shades.shadowAqua,
-            bg_sbar = shades.shadowBlue,
+            bg = shades.darkBlue,
+            bg_sel = shades.darkAqua,
+            bg_thumb = shades.darkAqua,
+            bg_sbar = shades.darkBlue,
         },
         float = {
             fg = palette.base07,
@@ -26,7 +26,7 @@ local function ui(palette, shades)
     local roles = {
         fg = palette.base07,
         fg_dim = palette.base07,
-        fg_reverse = shades.shadowBlue,
+        fg_reverse = shades.darkBlue,
         bg_dim = palette.base00,
         bg_gutter = palette.base01,
         bg_m3 = palette.base00,
@@ -38,8 +38,8 @@ local function ui(palette, shades)
         special = palette.base04,
         whitespace = palette.base03,
         nontext = palette.base03,
-        bg_visual = shades.shadowBlue,
-        bg_search = shades.shadowAqua,
+        bg_visual = shades.darkBlue,
+        bg_search = shades.darkAqua,
     }
     for key, value in pairs(pmenu_float(palette, shades)) do
         roles[key] = value
@@ -81,10 +81,10 @@ local function diag_diff_vcs(palette, shades)
             hint = palette.base0C,
         },
         diff = {
-            add = shades.shadowGreen,
-            delete = shades.shadowRed,
-            change = shades.shadowBlue,
-            text = shades.shadowYellow,
+            add = shades.darkGreen,
+            delete = shades.darkRed,
+            change = shades.darkBlue,
+            text = shades.darkYellow,
         },
         vcs = {
             added = palette.base0B,

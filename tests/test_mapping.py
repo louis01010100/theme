@@ -17,7 +17,7 @@ SPEC_ANSI = (
 SPEC_TERMINAL = {
     "background": "base00", "foreground": "base06",
     "cursor_bg": "base07", "cursor_fg": "base00",
-    "selection_bg": "shadowAqua", "selection_fg": "base07",
+    "selection_bg": "base01", "selection_fg": "base06",
 }
 SPEC_TMUX = {
     "status_fg": "base07", "status_bg": "base01",
@@ -28,12 +28,12 @@ SPEC_TMUX = {
     "pane_border_fg": "base02", "pane_active_border_fg": "base0D",
     "message_fg": "base07", "message_bg": "base00",
     "command_fg": "base07", "command_bg": "base00",
-    "copy_selection_fg": "base07", "copy_selection_bg": "shadowAqua",
+    "copy_selection_fg": "base07", "copy_selection_bg": "darkAqua",
     "clock_fg": "base0D", "display_panes_fg": "base03",
     "display_panes_active_fg": "base09",
-    "status_text_fg": "base04", "status_segment_bg": "base01",
+    "status_text_fg": "base05", "status_segment_bg": "base01",
     "status_block_bg": "base02", "status_separator_fg": "base02",
-    "status_current_fg": "base06", "status_current_bg": "shadowRed",
+    "status_current_fg": "base06", "status_current_bg": "darkRed",
 }
 NOT_A_NAME = "is not a [palette] name or derived shade"
 ANSI_MODULE = "configurator/terminal_ansi.py"
@@ -91,7 +91,7 @@ class MappingRulesTest(unittest.TestCase):
                      f'"{value}" {NOT_A_NAME}'])
 
     def test_terminal_role_unknown_shade(self):
-        for value in ("shadowGray", "shadowred"):
+        for value in ("darkGray", "darkred"):
             with self.subTest(value=value):
                 roles = dict(SPEC_TERMINAL, selection_bg=value)
                 self.assertEqual(
@@ -100,7 +100,7 @@ class MappingRulesTest(unittest.TestCase):
                      f'"{value}" {NOT_A_NAME}'])
 
     def test_shade_is_valid_target(self):
-        roles = dict(SPEC_TERMINAL, selection_bg="shadowAqua")
+        roles = dict(SPEC_TERMINAL, selection_bg="darkAqua")
         self.assertEqual(
             texts(terminal_ansi.validate_roles(NAMES, roles)), [])
         self.assertEqual(NAMES, frozenset(palette.SLOTS)

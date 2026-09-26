@@ -6,18 +6,18 @@ import support
 from configurator import palette as pal
 
 V1 = ("#181616", "#2e2d2c", "#444343", "#5a5a59", "#70706f",
-      "#868785", "#9c9d9c", "#b2b4b2", "#ae4e47", "#9d7257",
-      "#ae955e", "#6e7e60", "#6d8885", "#668696", "#68738b",
-      "#857186")
+      "#868785", "#9c9d9c", "#b2b4b2", "#9c5e59", "#907564",
+      "#a0906c", "#6e7965", "#728381", "#6f838d", "#6f7584",
+      "#827582")
 GOOD = dict(zip(pal.SLOTS, V1))
 SLOTS = ("base00", "base01", "base02", "base03", "base04", "base05",
          "base06", "base07", "base08", "base09", "base0A", "base0B",
          "base0C", "base0D", "base0E", "base0F")
 SHADES = {
-    "shadowRed": "#63322e", "shadowOrange": "#5a4436",
-    "shadowYellow": "#63563a", "shadowGreen": "#434a3b",
-    "shadowAqua": "#424f4e", "shadowBlue": "#3f4e56",
-    "shadowViolet": "#404450", "shadowPink": "#4e444e",
+    "darkRed": "#5a3a38", "darkOrange": "#54463d",
+    "darkYellow": "#5c5341", "darkGreen": "#43483e",
+    "darkAqua": "#454c4c", "darkBlue": "#444c52",
+    "darkViolet": "#44464d", "darkPink": "#4d464c",
 }
 
 
@@ -111,9 +111,9 @@ class PaletteRulesTest(unittest.TestCase):
 
     def test_reserved_names(self):
         cases = (
-            ("shadowRed", "derived shade shadowRed"),
-            ("shadowred", "derived shade shadowRed"),
-            ("SHADOWRED", "derived shade shadowRed"),
+            ("darkRed", "derived shade darkRed"),
+            ("darkred", "derived shade darkRed"),
+            ("DARKRED", "derived shade darkRed"),
             ("base0a", "slot base0A"),
             ("fujiRed", "accent name fujiRed"),
             ("fujired", "accent name fujiRed"),
@@ -137,7 +137,7 @@ class PaletteRulesTest(unittest.TestCase):
             "reserved name (slot base0A)"])
 
     def test_valid_extra_names(self):
-        for name in ("rust", "shadowGray", "shadowBrown", "base08_dark"):
+        for name in ("rust", "darkGray", "darkBrown", "base08_dark"):
             with self.subTest(name=name):
                 self.assertEqual(
                     messages(with_entry(name, "#b7410e")), [])
@@ -155,11 +155,11 @@ class PaletteRulesTest(unittest.TestCase):
         colours = pal.make_palette(with_entry("base08", "#ABCDEF"))
         self.assertEqual(colours.colors["base08"], "#abcdef")
         self.assertEqual(pal.resolve(colours, "base08"), "#abcdef")
-        self.assertEqual(colours.shades["shadowRed"], "#627282")
+        self.assertEqual(colours.shades["darkRed"], "#627282")
 
     def test_resolve_shade(self):
         colours = pal.make_palette({"palette": dict(GOOD)})
-        self.assertEqual(pal.resolve(colours, "shadowAqua"), "#424f4e")
+        self.assertEqual(pal.resolve(colours, "darkAqua"), "#454c4c")
 
 
 class DeriveShadesTest(unittest.TestCase):
@@ -170,7 +170,7 @@ class DeriveShadesTest(unittest.TestCase):
     def test_ties_round_to_even(self):
         colours = dict(GOOD, base00="#181616",
                        base08="#8b7b95", base09="#010101")
-        self.assertEqual(pal.derive_shades(colours)["shadowRed"],
+        self.assertEqual(pal.derive_shades(colours)["darkRed"],
                          "#524856")
 
     def test_case_insensitive(self):
