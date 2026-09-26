@@ -49,6 +49,12 @@ SLOT_DATA = (
 )
 FORMER_SHADE = re.compile(r"^base0[89A-F]_dark$")
 PRIVATE_USE = re.compile("[\ue000-\uf8ff\U000f0000-\U0010fffd]")
+LAYOUT_ROLES = {"status_text_fg", "status_segment_bg", "status_block_bg",
+                "status_separator_fg", "status_current_fg",
+                "status_current_bg"}
+REMOVED_TMUX = re.compile(
+    r"@ukiyo_e_no_patched_font|status-plain|\bflat_\w+"
+    r"|\b(accent_fg|accent_bg|status_segment_fg|window_separator_fg)\b")
 
 
 def repository_files():
@@ -256,29 +262,32 @@ class SafetyTest(unittest.TestCase):
     def test_mapping_shapes(self):
         """INV-3 (values are checked by test_mapping)."""
         self.assertEqual(len(terminal_ansi.ANSI), 16)
-        self.assertEqual(len(tmux.TMUX_ROLES), 33)
+        self.assertEqual(len(tmux.TMUX_ROLES), 27)
         self.assertEqual(len(terminal_ansi.TERMINAL_ROLES), 6)
 
-    def test_flat_roles_confined(self):
-        """INV-14: flat_* roles only in the flat template."""
-        for rel in runtime_files():
-            if not rel.endswith(".tmpl"):
-                continue
-            flat = {r for r in template_roles(rel)
-                    if r.startswith("flat_")}
-            if rel == "tmux/status-plain.conf.tmpl":
-                self.assertEqual(flat, template_roles(rel))
-                self.assertTrue(flat)
-            else:
-                self.assertEqual(flat, set(), rel)
+    def test_two_templates(self):
+        """INV-14: exactly the colours and status templates."""
+        templates = [r for r in runtime_files() if r.endswith(".tmpl")]
+        self.assertEqual(templates, ["tmux/colors.conf.tmpl",
+                                     "tmux/status.conf.tmpl"])
 
-    def test_private_use_confined(self):
-        """INV-14: only status.conf.tmpl has Private Use code points."""
+    def test_layout_roles_confined(self):
+        """INV-14: the 6 layout roles only in the status template."""
+        status = template_roles("tmux/status.conf.tmpl")
+        self.assertEqual(status, LAYOUT_ROLES | {"status_fg", "status_bg"})
+        colours = template_roles("tmux/colors.conf.tmpl")
+        self.assertEqual(colours & LAYOUT_ROLES, set())
+
+    def test_no_private_use_in_templates(self):
+        """INV-14: no tmux template has a Private Use code point."""
         for rel in runtime_files():
             if rel.endswith(".tmpl"):
-                found = PRIVATE_USE.search(text(rel))
-                self.assertEqual(bool(found),
-                                 rel == "tmux/status.conf.tmpl", rel)
+                self.assertIsNone(PRIVATE_USE.search(text(rel)), rel)
+
+    def test_no_removed_tmux_names(self):
+        """INV-14: no removed option, template, or role is named."""
+        for rel in runtime_files():
+            self.assertIsNone(REMOVED_TMUX.search(text(rel)), rel)
 
     def test_no_neutral_accent_or_former_shade_refs(self):
         """INV-14 for mapping values, template roles, and Lua refs."""

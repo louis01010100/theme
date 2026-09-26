@@ -21,22 +21,19 @@ SPEC_TERMINAL = {
 }
 SPEC_TMUX = {
     "status_fg": "base07", "status_bg": "base00",
-    "accent_fg": "base00", "accent_bg": "base0D",
-    "status_segment_fg": "base07", "status_segment_bg": "base01",
     "window_fg": "base04", "window_bg": "base00",
     "window_current_fg": "base07", "window_current_bg": "base02",
     "window_activity_fg": "base09", "window_activity_bg": "base00",
     "window_bell_fg": "base08", "window_bell_bg": "base00",
-    "window_separator_fg": "base03", "pane_border_fg": "base02",
-    "pane_active_border_fg": "base0D", "message_fg": "base07",
-    "message_bg": "base00", "command_fg": "base07",
-    "command_bg": "base00", "copy_selection_fg": "base07",
-    "copy_selection_bg": "shadowAqua", "clock_fg": "base0D",
-    "display_panes_fg": "base03", "display_panes_active_fg": "base09",
-    "flat_bar_bg": "base01", "flat_text_fg": "base04",
-    "flat_block_fg": "base04", "flat_block_bg": "base02",
-    "flat_separator_fg": "base02", "flat_current_fg": "base07",
-    "flat_current_bg": "shadowRed",
+    "pane_border_fg": "base02", "pane_active_border_fg": "base0D",
+    "message_fg": "base07", "message_bg": "base00",
+    "command_fg": "base07", "command_bg": "base00",
+    "copy_selection_fg": "base07", "copy_selection_bg": "shadowAqua",
+    "clock_fg": "base0D", "display_panes_fg": "base03",
+    "display_panes_active_fg": "base09",
+    "status_text_fg": "base04", "status_segment_bg": "base01",
+    "status_block_bg": "base02", "status_separator_fg": "base02",
+    "status_current_fg": "base07", "status_current_bg": "shadowRed",
 }
 NOT_A_NAME = "is not a [palette] name or derived shade"
 ANSI_MODULE = "configurator/terminal_ansi.py"
@@ -82,9 +79,9 @@ class MappingRulesTest(unittest.TestCase):
             [f'{ANSI_MODULE}: ANSI[3]: "noSuchColour" {NOT_A_NAME}'])
 
     def test_tmux_role_unknown_name(self):
-        cases = (("clock_fg", "base0G"), ("flat_current_bg", "fujiRed"),
-                 ("flat_current_bg", "lavaBlack"),
-                 ("flat_current_bg", "base08_dark"))
+        cases = (("clock_fg", "base0G"), ("status_current_bg", "fujiRed"),
+                 ("status_current_bg", "lavaBlack"),
+                 ("status_current_bg", "base08_dark"))
         for role, value in cases:
             with self.subTest(role=role, value=value):
                 roles = dict(SPEC_TMUX, **{role: value})
@@ -228,8 +225,7 @@ class TemplateRulesTest(unittest.TestCase):
     def test_repository_templates(self):
         templates = tmux.load_templates(support.REPO)
         self.assertEqual([t.name for t in templates],
-                         ["colors.conf.tmpl", "status.conf.tmpl",
-                          "status-plain.conf.tmpl"])
+                         ["colors.conf.tmpl", "status.conf.tmpl"])
         self.assertEqual(texts(tmux.validate_templates(templates)), [])
 
 

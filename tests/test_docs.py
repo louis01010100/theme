@@ -56,7 +56,9 @@ README_ITEMS = (
     "50 %", "never stored",
     "4.3:1", "5.1:1", "3.4", "2026-09-26",
     "python3 tests/regen_nvim_reference.py",
-    "`#I.#W`", "flat",
+    # REQ-DOC-1, single tmux layout (2026-09-27).
+    "`#I.#W`", "one layout", "2026-09-27", "powerline layout",
+    "has no effect", "activity and bell", "two segments",
     "python3 -m unittest discover -s tests",
 )
 README_ABSENT = ("@plugin", '"louis01010100/theme"', "scripts/generate.py",

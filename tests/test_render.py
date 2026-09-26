@@ -34,18 +34,19 @@ GOLDEN_COLORS = (
     "set -g display-panes-active-colour '#9d7257'\n"
 )
 GOLDEN_STATUS = (
-    "set -g status-left '#[fg=#181616,bg=#668696,bold] "
-    "#S #[fg=#668696,bg=#181616,nobold]\ue0b0'\n"
-    "set -g status-right '#[fg=#282727,bg=#181616]\ue0b2#[fg"
-    "=#c5c9c5,bg=#282727] #{T:@ukiyo_e_status_date} \ue0b3 #"
-    "{T:@ukiyo_e_status_time} #[fg=#668696,bg=#282727]\ue0b2"
-    "#[fg=#181616,bg=#668696,bold] #H '\n"
-    "set -g window-status-format ' #I #W#F '\n"
-    "set -g window-status-current-format '#[fg=#181616,"
-    "bg=#393836]\ue0b0#[default] #I #W#F #[fg=#393836,bg=#18"
-    "1616]\ue0b0'\n"
-    "set -g window-status-separator '#[fg=#625e5a,bg=#1"
-    "81616]\ue0b1'\n"
+    "set -g status-style 'fg=#c5c9c5,bg=#181616'\n"
+    'set -g status-left "#[fg=#7a8382,bg=#393836] #S '
+    '#[fg=#393836,bg=#282727]|"\n'
+    'set -g status-right "#[fg=#7a8382,bg=#282727] '
+    "#{T:@ukiyo_e_status_date} #[fg=#7a8382,bg=#282727] "
+    "#{T:@ukiyo_e_status_time} #[fg=#7a8382,bg=#393836] #H "
+    '"\n'
+    'set -g window-status-format "#[fg=#7a8382,bg=#282727] '
+    '#I.#W "\n'
+    'set -g window-status-current-format "#[fg=#c5c9c5,'
+    'bg=#63322e] #I.#W "\n'
+    'set -g window-status-separator "#[fg=#393836,'
+    'bg=#282727]|"\n'
 )
 
 
@@ -123,8 +124,7 @@ class TmuxRenderTest(unittest.TestCase):
 
     def test_paths_and_modes(self):
         self.assertEqual(sorted(self.files), [
-            "tmux/colors.conf", "tmux/status-plain.conf",
-            "tmux/status.conf"])
+            "tmux/colors.conf", "tmux/status.conf"])
         for spec in self.files.values():
             self.assertEqual(spec.mode, 0o644)
 
@@ -135,14 +135,15 @@ class TmuxRenderTest(unittest.TestCase):
 
     def test_status_equal_v1(self):
         self.assertEqual(self.body("tmux/status.conf"), GOLDEN_STATUS)
-        self.assertTrue(private_use(GOLDEN_STATUS))
+        self.assertEqual(private_use(GOLDEN_STATUS), [])
 
     def test_deterministic(self):
         self.assertEqual(rendered_tmux(), self.files)
 
     def test_single_trailing_newline(self):
         for spec in self.files.values():
-            self.assertTrue(spec.data.endswith(b"'\n"))
+            self.assertTrue(spec.data.endswith(b"\n"))
+            self.assertFalse(spec.data.endswith(b"\n\n"))
             self.assertNotIn(b"\r", spec.data)
 
 

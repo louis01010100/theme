@@ -19,7 +19,7 @@ VERSION_TREE = sorted([
     "lua/ukiyo_e/highlights/lsp.lua", "lua/ukiyo_e/highlights/plugins.lua",
     "lua/ukiyo_e/highlights/syntax.lua",
     "lua/ukiyo_e/highlights/treesitter.lua", "ukiyo_e.tmux",
-    "tmux/colors.conf", "tmux/status.conf", "tmux/status-plain.conf",
+    "tmux/colors.conf", "tmux/status.conf",
 ])
 NOT_A_NAME = "is not a [palette] name or derived shade"
 DOTFILES = {".tmux.conf": "set -g mouse on\n",
@@ -267,11 +267,11 @@ class MappingRejectTest(FullTestCase):
         for path, const, role, old, new in (
             ("configurator/tmux.py", "TMUX_ROLES", "clock_fg",
              "base0D", "base0G"),
-            ("configurator/tmux.py", "TMUX_ROLES", "flat_current_bg",
+            ("configurator/tmux.py", "TMUX_ROLES", "status_current_bg",
              "shadowRed", "fujiRed"),
-            ("configurator/tmux.py", "TMUX_ROLES", "flat_current_bg",
+            ("configurator/tmux.py", "TMUX_ROLES", "status_current_bg",
              "shadowRed", "lavaBlack"),
-            ("configurator/tmux.py", "TMUX_ROLES", "flat_current_bg",
+            ("configurator/tmux.py", "TMUX_ROLES", "status_current_bg",
              "shadowRed", "base08_dark"),
             ("configurator/terminal_ansi.py", "TERMINAL_ROLES",
              "selection_bg", "shadowAqua", "shadowGray"),
@@ -436,7 +436,6 @@ class DryRunTest(FullTestCase):
             "gnome: would update", "  set palette",
             "ptyxis: would update", "  write palette Ukiyo-e.palette",
             "tmux: would update", "  write tmux/colors.conf",
-            "  write tmux/status.conf",
             "  switch install directory", "  reload tmux server",
             "nvim: would update", "  write lua/ukiyo_e/palette.lua"])
 

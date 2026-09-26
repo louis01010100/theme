@@ -8,6 +8,7 @@ import support
 from nvim_live import NvimServer
 from test_cli import blue_copy
 from nvim_baseline import NeovimRun, nvim_dump
+from configurator import tmux
 
 OLD_BLUE = 0x668696
 NEW_BLUE = 0x123456
@@ -18,8 +19,7 @@ AQUA_CHANGE = {0x6D8885: 0x123456, 0x424F4E: 0x152536}
 COLOUR_ATTRIBUTES = ("fg", "bg", "sp")
 UUID = "5a1c0e9b-7d3f-4b6a-8e2d-4f0a9c6b1e37"
 PROFILE = f"{harness.PROFILE_SCHEMA}:{harness.PROFILE_ROOT}:{UUID}/"
-RENDERED = ["lua/ukiyo_e/palette.lua", "tmux/colors.conf",
-            "tmux/status.conf"]
+RENDERED = ["lua/ukiyo_e/palette.lua", "tmux/colors.conf"]
 
 
 def setUpModule():
@@ -55,6 +55,10 @@ def gnome_palette(env):
     return [c.strip(" '") for c in text.strip("[]").split(",")]
 
 
+def status_formats(server) -> dict:
+    return {o: server.value(o) for o in tmux.STATUS_OPTIONS}
+
+
 def changed_lines(old: bytes, new: bytes) -> list:
     old, new = old.split(b"\n"), new.split(b"\n")
     if len(old) != len(new):
@@ -71,6 +75,7 @@ class PropagationTest(unittest.TestCase):
         cls.env = cls.server.attach(session)
         support.configure_ok(cls.env, "all")
         cls.pid = cls.server.pid()
+        cls.old_status = status_formats(cls.server)
         cls.old_dir = cls.env.install.resolve()
         cls.old_tree = support.tree_snapshot(cls.old_dir)
         cls.base = fresh_dump(cls.env.install)
@@ -125,8 +130,7 @@ class PropagationTest(unittest.TestCase):
         self.assertEqual(self.server.value("clock-mode-colour"), "#123456")
         self.assertEqual(self.server.value("pane-active-border-style"),
                          "fg=#123456")
-        for option in ("status-left", "status-right"):
-            self.assertIn("bg=#123456", self.server.value(option))
+        self.assertEqual(status_formats(self.server), self.old_status)
 
     def test_fresh_neovim(self):
         new = fresh_dump(self.env.install)
@@ -227,6 +231,50 @@ class ShadePropagationTest(unittest.TestCase):
         self.assertEqual(new["groups"],
                          recoloured(self.base["groups"], AQUA_CHANGE))
         self.assertEqual(new["groups"]["Search"]["bg"], 0x152536)
+
+
+def segment_copy(owner):
+    """A scratch repository copy with base01 changed to #123456."""
+    root = support.copy_repo()
+    support.later(owner, support.remove_tree, root)
+    support.replace_line(root / "palette.toml", "base01 ",
+                         'base01 = "#123456"')
+    return root
+
+
+class StatusBarPropagationTest(unittest.TestCase):
+    """V-5 (c): a status-layout colour reaches the running bar."""
+
+    @classmethod
+    def setUpClass(cls):
+        env = support.scratch_env(cls)
+        cls.server = support.TmuxServer.start(cls, env)
+        cls.env = cls.server.attach(env)
+        support.configure_ok(cls.env, "tmux")
+        cls.pid = cls.server.pid()
+        cls.old_status = status_formats(cls.server)
+        cls.tmux = cls.server.snapshot()
+        cls.old_tree = support.tree_snapshot(cls.env.install.resolve())
+        support.configure_ok(cls.env, "tmux", root=segment_copy(cls))
+
+    def test_formats(self):
+        self.assertEqual(self.server.pid(), self.pid)
+        expected = {o: v.replace("bg=#282727", "bg=#123456")
+                    for o, v in self.old_status.items()}
+        self.assertNotEqual(expected, self.old_status)
+        self.assertEqual(status_formats(self.server), expected)
+
+    def test_no_style_changed(self):
+        changed = support.changed_options(self.tmux,
+                                          self.server.snapshot())
+        self.assertEqual(changed & set(tmux.STYLE_OPTIONS), set())
+
+    def test_only_status_file_differs(self):
+        new_tree = support.tree_snapshot(self.env.install.resolve())
+        self.assertEqual(sorted(new_tree), sorted(self.old_tree))
+        differ = sorted(k for k in new_tree
+                        if new_tree[k][3] != self.old_tree[k][3])
+        self.assertEqual(differ, ["tmux/status.conf"])
 
 
 if __name__ == "__main__":

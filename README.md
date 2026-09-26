@@ -109,7 +109,7 @@ changed, `shadowYellow` changed text); `shadowBlue` for the visual
 selection, the completion menu, and Neovim's reverse text;
 `shadowAqua` for search, the completion-menu selection, the terminal
 selection, and the tmux copy-mode selection; `shadowRed` for the
-current window of the flat tmux style. `shadowOrange`, `shadowViolet`,
+current window of the tmux status bar. `shadowOrange`, `shadowViolet`,
 and `shadowPink` are not used yet.
 
 **Contrast (accepted 2026-09-26).** Normal text `base07` on the shades
@@ -230,20 +230,30 @@ line:
 
 | Option | Default | Effect |
 |---|---|---|
-| `@ukiyo_e_no_patched_font` | `off` | `on` selects the flat style instead of the powerline style (no Nerd Font needed). |
 | `@ukiyo_e_show_status_content` | `on` | `off` applies colours only; your `status-left`, `status-right`, and window formats are left alone. |
 | `@ukiyo_e_date_format` | `%Y-%m-%d` | strftime format of the date in `status-right`. |
 
 The time is shown as `%H:%M`, or `%I:%M %p` when `clock-mode-style` is
-`12`. There are two status styles. The default powerline style uses
-powerline glyphs, which need a Nerd Font (or another
-powerline-patched font). Without one, set `@ukiyo_e_no_patched_font
-on` for the flat style: flat blocks for the session and host, windows
-shown as `#I.#W` separated by `|`, the current window as a block on
-`shadowRed`, and the date and time as plain text; it needs no Nerd
-Font. The theme sets only global style and
-format options; it never changes key bindings, the prefix, hooks, or
-the environment.
+`12`.
+
+The status bar has one layout: the `nord-dark-tmux` layout drawn in
+Ukiyo-e colours. From left to right: the session block (`#S`,
+`base04` on `base02`), a `|` separator, the windows as `#I.#W`
+(index and name, no flags) in `base04` on `base01`, separated by `|`
+(every `|` is `base02` on `base01`), the current window as a block in
+`base07` on `shadowRed`, the empty rest of the bar in the terminal
+background `base00`, and on the right the date and the time as
+two segments (`base04` on `base01`) followed by the host block
+(`#H`, `base04` on `base02`). It uses no powerline or other private-use
+glyphs, so no Nerd Font is needed. The window formats carry their
+colours inline, so activity and bell flags are not marked in the bar.
+
+The powerline layout and the `@ukiyo_e_no_patched_font` option were
+removed on 2026-09-27. A leftover `set -g @ukiyo_e_no_patched_font`
+line has no effect and can be deleted.
+
+The theme sets only global style and format options; it never changes
+key bindings, the prefix, hooks, or the environment.
 
 **Switching from nord-dark-tmux:** only one theme may own the status
 bar. Remove the `nord-dark-tmux` plugin line from your tmux
