@@ -20,7 +20,7 @@ SPEC_TERMINAL = {
     "selection_bg": "shadowAqua", "selection_fg": "base07",
 }
 SPEC_TMUX = {
-    "status_fg": "base07", "status_bg": "base00",
+    "status_fg": "base07", "status_bg": "base01",
     "window_fg": "base04", "window_bg": "base00",
     "window_current_fg": "base07", "window_current_bg": "base02",
     "window_activity_fg": "base09", "window_activity_bg": "base00",

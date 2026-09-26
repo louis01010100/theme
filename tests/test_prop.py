@@ -264,17 +264,21 @@ class StatusBarPropagationTest(unittest.TestCase):
         self.assertNotEqual(expected, self.old_status)
         self.assertEqual(status_formats(self.server), expected)
 
-    def test_no_style_changed(self):
+    def test_only_bar_style_changed(self):
         changed = support.changed_options(self.tmux,
                                           self.server.snapshot())
-        self.assertEqual(changed & set(tmux.STYLE_OPTIONS), set())
+        self.assertEqual(changed & set(tmux.STYLE_OPTIONS),
+                         {"status-style"})
+        self.assertEqual(self.server.value("status-style"),
+                         "fg=#c5c9c5,bg=#123456")
 
-    def test_only_status_file_differs(self):
+    def test_only_tmux_conf_files_differ(self):
         new_tree = support.tree_snapshot(self.env.install.resolve())
         self.assertEqual(sorted(new_tree), sorted(self.old_tree))
         differ = sorted(k for k in new_tree
                         if new_tree[k][3] != self.old_tree[k][3])
-        self.assertEqual(differ, ["tmux/status.conf"])
+        self.assertEqual(differ, ["tmux/colors.conf",
+                                  "tmux/status.conf"])
 
 
 if __name__ == "__main__":

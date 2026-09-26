@@ -241,11 +241,11 @@ Ukiyo-e colours. From left to right: the session block (`#S`,
 `base04` on `base02`), a `|` separator, the windows as `#I.#W`
 (index and name, no flags) in `base04` on `base01`, separated by `|`
 (every `|` is `base02` on `base01`), the current window as a block in
-`base07` on `shadowRed`, the empty rest of the bar in the terminal
-background `base00`, and on the right the date and the time as
-two segments (`base04` on `base01`) followed by the host block
-(`#H`, `base04` on `base02`). It uses no powerline or other private-use
-glyphs, so no Nerd Font is needed. The window formats carry their
+`base07` on `shadowRed`, the empty rest of the bar in `base01`
+(`cinderBlack`, the segment colour, so the bar reads as one strip),
+and on the right the date and the time as two segments (`base04` on
+`base01`) followed by the host block (`#H`, `base04` on `base02`). It
+uses no powerline or other private-use glyphs, so no Nerd Font is needed. The window formats carry their
 colours inline, so activity and bell flags are not marked in the bar.
 
 The powerline layout and the `@ukiyo_e_no_patched_font` option were

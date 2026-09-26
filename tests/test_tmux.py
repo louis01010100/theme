@@ -50,7 +50,7 @@ STATUS_TEMPLATE = (
 )
 # PRD R6 minimum code, the fixture of V-15 (b).
 PRD_MINIMUM = """\
-set -g status-style 'fg=#c5c9c5,bg=#181616'
+set -g status-style 'fg=#c5c9c5,bg=#282727'
 set -g status-left "#[fg=#7a8382,bg=#393836] #S #[fg=#393836,bg=#282727]|"
 set -g status-right "#[fg=#7a8382,bg=#282727] %Y-%m-%d \
 #[fg=#7a8382,bg=#282727] %H:%M #[fg=#7a8382,bg=#393836] #H "
@@ -217,7 +217,7 @@ class StatusLayoutLiveTest(TmuxTestCase):
                          "%H:%M")
         self.assertEqual(self.status_values(), rendered_formats())
         self.assertEqual(attribute_map(self.server.value("status-style")),
-                         {"fg": "#c5c9c5", "bg": "#181616"})
+                         {"fg": "#c5c9c5", "bg": "#282727"})
         text = "".join(self.status_values().values())
         self.assertFalse([c for c in text if is_private_use(c)])
         for option in ("window-status-format",

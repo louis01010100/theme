@@ -15,7 +15,7 @@ from configurator.palette import (InputError, Palette, ValidationError,
 MODULE = "configurator/tmux.py"
 TMUX_ROLES = MappingProxyType({
     "status_fg": "base07",
-    "status_bg": "base00",
+    "status_bg": "base01",
     "window_fg": "base04",
     "window_bg": "base00",
     "window_current_fg": "base07",
