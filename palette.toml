@@ -4,13 +4,13 @@
 
 [palette]                          # name -> "#RRGGBB" only; derived shades are not stored here
 base00 = "#181616"  # lavaBlack: dragonBlack3; merged: dragonBlack0, dragonBlack1, dragonBlack2
-base01 = "#282727"  # cinderBlack: dragonBlack4
-base02 = "#393836"  # basaltGray: dragonBlack5
-base03 = "#625e5a"  # ashGray: dragonBlack6; merged: sumiInk6
-base04 = "#7a8382"  # mistGray: dragonGray3; merged: dragonAsh, katanaGray
-base05 = "#9e9b93"  # hazeGray: dragonGray2
-base06 = "#a6a69c"  # cloudGray: dragonGray
-base07 = "#c5c9c5"  # snowWhite: dragonWhite; merged: oldWhite, fujiWhite
+base01 = "#2e2d2c"  # cinderBlack: dragonBlack4, linear 1/7 from base00 to base07
+base02 = "#444343"  # basaltGray: dragonBlack5, linear 2/7 from base00 to base07
+base03 = "#5a5a59"  # ashGray: dragonBlack6, linear 3/7 from base00 to base07; merged: sumiInk6
+base04 = "#70706f"  # mistGray: dragonGray3, linear 4/7 from base00 to base07; merged: dragonAsh, katanaGray
+base05 = "#868785"  # hazeGray: dragonGray2, linear 5/7 from base00 to base07
+base06 = "#9c9d9c"  # cloudGray: dragonGray, linear 6/7 from base00 to base07
+base07 = "#b2b4b2"  # snowWhite: dragonWhite 10 % darker, saturation -2 points; merged: oldWhite, fujiWhite
 base08 = "#ae4e47"  # fujiRed: dragonRed 20 % darker; merged: samuraiRed, autumnRed, waveRed, winterRed
 base09 = "#9d7257"  # persimmonOrange: dragonOrange 20 % darker; merged: dragonOrange2, roninYellow
 base0A = "#ae955e"  # strawYellow: dragonYellow 20 % darker; merged: carpYellow, autumnYellow, winterYellow

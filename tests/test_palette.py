@@ -5,8 +5,8 @@ import unittest
 import support
 from configurator import palette as pal
 
-V1 = ("#181616", "#282727", "#393836", "#625e5a", "#7a8382",
-      "#9e9b93", "#a6a69c", "#c5c9c5", "#ae4e47", "#9d7257",
+V1 = ("#181616", "#2e2d2c", "#444343", "#5a5a59", "#70706f",
+      "#868785", "#9c9d9c", "#b2b4b2", "#ae4e47", "#9d7257",
       "#ae955e", "#6e7e60", "#6d8885", "#668696", "#68738b",
       "#857186")
 GOOD = dict(zip(pal.SLOTS, V1))

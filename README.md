@@ -62,20 +62,25 @@ nothing is touched.
 
 `palette.toml` has one table, `[palette]`, holding the 16 base16 slots
 `base00`–`base0F` (spelled exactly so). `base00`–`base07` are neutrals
-from dark to light (`base00` the background, `base07` normal text);
+from dark to light (`base00` the background, `base07` normal text):
+`base07` is its Kanagawa origin 10 % darker with HSL saturation
+2 points lower (`base00` likewise loses 2 points, which rounds to the
+same value), and `base01`–`base06`
+are spaced linearly between `base00` and `base07` (per RGB channel,
+step 1/7, rounded half to even);
 `base08`–`base0F` are the eight accents, each 20 % darker (HSL
 lightness × 0.8) than its Kanagawa origin.
 
 | Slot | Name | Role | Value | Kanagawa origin |
 |---|---|---|---|---|
 | `base00` | lavaBlack | background (darkest neutral) | `#181616` | dragonBlack3 |
-| `base01` | cinderBlack | neutral | `#282727` | dragonBlack4 |
-| `base02` | basaltGray | neutral | `#393836` | dragonBlack5 |
-| `base03` | ashGray | neutral | `#625e5a` | dragonBlack6 |
-| `base04` | mistGray | neutral | `#7a8382` | dragonGray3 |
-| `base05` | hazeGray | neutral | `#9e9b93` | dragonGray2 |
-| `base06` | cloudGray | neutral | `#a6a69c` | dragonGray |
-| `base07` | snowWhite | normal text (lightest neutral) | `#c5c9c5` | dragonWhite |
+| `base01` | cinderBlack | neutral | `#2e2d2c` | dragonBlack4, linear 1/7 |
+| `base02` | basaltGray | neutral | `#444343` | dragonBlack5, linear 2/7 |
+| `base03` | ashGray | neutral | `#5a5a59` | dragonBlack6, linear 3/7 |
+| `base04` | mistGray | neutral | `#70706f` | dragonGray3, linear 4/7 |
+| `base05` | hazeGray | neutral | `#868785` | dragonGray2, linear 5/7 |
+| `base06` | cloudGray | neutral | `#9c9d9c` | dragonGray, linear 6/7 |
+| `base07` | snowWhite | normal text (lightest neutral) | `#b2b4b2` | dragonWhite, 10 % darker, saturation −2 points |
 | `base08` | fujiRed | red | `#ae4e47` | dragonRed, 20 % darker |
 | `base09` | persimmonOrange | orange | `#9d7257` | dragonOrange, 20 % darker |
 | `base0A` | strawYellow | yellow | `#ae955e` | dragonYellow, 20 % darker |
@@ -113,8 +118,9 @@ current window of the tmux status bar. `shadowOrange`, `shadowViolet`,
 and `shadowPink` are not used yet.
 
 **Contrast (accepted 2026-09-26).** Normal text `base07` on the shades
-is at least 5.1:1, except on the yellow shade `shadowYellow` (4.3:1,
-below 4.5:1). As code text on `base00`, the darkened red, violet,
+is 3.4:1 to 5.0:1, below 4.5:1 on the yellow, aqua, blue, orange,
+green, and pink shades (lowest 3.4:1 on `shadowYellow`); on `base00` it
+is 8.6:1. As code text on `base00`, the darkened red, violet,
 pink, green, and orange accents are below 4.5:1 (lowest about 3.4:1,
 red). Both are accepted in favour of the darker look and readable
 dark shades; no check enforces a contrast ratio.

@@ -221,7 +221,7 @@ class ShadePropagationTest(unittest.TestCase):
         self.assertEqual(support.changed_options(self.tmux, after),
                          {"mode-style"})
         self.assertEqual(self.server.value("mode-style"),
-                         "fg=#c5c9c5,bg=#152536")
+                         "fg=#b2b4b2,bg=#152536")
 
     def test_fresh_neovim(self):
         new = fresh_dump(self.env.install)
@@ -259,7 +259,7 @@ class StatusBarPropagationTest(unittest.TestCase):
 
     def test_formats(self):
         self.assertEqual(self.server.pid(), self.pid)
-        expected = {o: v.replace("bg=#282727", "bg=#123456")
+        expected = {o: v.replace("bg=#2e2d2c", "bg=#123456")
                     for o, v in self.old_status.items()}
         self.assertNotEqual(expected, self.old_status)
         self.assertEqual(status_formats(self.server), expected)
@@ -270,7 +270,7 @@ class StatusBarPropagationTest(unittest.TestCase):
         self.assertEqual(changed & set(tmux.STYLE_OPTIONS),
                          {"status-style"})
         self.assertEqual(self.server.value("status-style"),
-                         "fg=#c5c9c5,bg=#123456")
+                         "fg=#b2b4b2,bg=#123456")
 
     def test_only_tmux_conf_files_differ(self):
         new_tree = support.tree_snapshot(self.env.install.resolve())

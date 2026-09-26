@@ -263,7 +263,7 @@ class SetupContractTest(InstalledTestCase):
                 '{ fg = colors.shades.shadowBlue, '
                 'bg = colors.theme.ui.bg_p2 } } end }')
         spec = self.ukiyo(opts)["groups"]["NormalNC"]
-        self.assertEqual((spec["fg"], spec["bg"]), (0x3F4E56, 0x393836))
+        self.assertEqual((spec["fg"], spec["bg"]), (0x3F4E56, 0x444343))
 
     def test_override_nil_is_noop(self):
         opts = "{ overrides = function() return nil end }"

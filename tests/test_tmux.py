@@ -50,13 +50,13 @@ STATUS_TEMPLATE = (
 )
 # PRD R6 minimum code, the fixture of V-15 (b).
 PRD_MINIMUM = """\
-set -g status-style 'fg=#c5c9c5,bg=#282727'
-set -g status-left "#[fg=#7a8382,bg=#393836] #S #[fg=#393836,bg=#282727]|"
-set -g status-right "#[fg=#393836,bg=#282727]|#[fg=#7a8382,bg=#282727] \
-%Y-%m-%d #[fg=#7a8382,bg=#282727]%H:%M "
-set -g window-status-format "#[fg=#7a8382,bg=#282727] #I.#W "
-set -g window-status-current-format "#[fg=#a6a69c,bg=#63322e] #I.#W "
-set -g window-status-separator "#[fg=#393836,bg=#282727]|"
+set -g status-style 'fg=#b2b4b2,bg=#2e2d2c'
+set -g status-left "#[fg=#70706f,bg=#444343] #S #[fg=#444343,bg=#2e2d2c]|"
+set -g status-right "#[fg=#444343,bg=#2e2d2c]|#[fg=#70706f,bg=#2e2d2c] \
+%Y-%m-%d #[fg=#70706f,bg=#2e2d2c]%H:%M "
+set -g window-status-format "#[fg=#70706f,bg=#2e2d2c] #I.#W "
+set -g window-status-current-format "#[fg=#9c9d9c,bg=#63322e] #I.#W "
+set -g window-status-separator "#[fg=#444343,bg=#2e2d2c]|"
 """
 STATUS_RENDERED = tmux.HEADER + "\n" + GOLDEN_STATUS
 COLOURS_SINCE = "68eaef3"
@@ -216,7 +216,7 @@ class StatusLayoutLiveTest(TmuxTestCase):
                          "%H:%M")
         self.assertEqual(self.status_values(), rendered_formats())
         self.assertEqual(attribute_map(self.server.value("status-style")),
-                         {"fg": "#c5c9c5", "bg": "#282727"})
+                         {"fg": "#b2b4b2", "bg": "#2e2d2c"})
         text = "".join(self.status_values().values())
         self.assertFalse([c for c in text if is_private_use(c)])
         for option in ("window-status-format",

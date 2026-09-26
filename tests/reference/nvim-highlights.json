@@ -10,7 +10,7 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "@comment.note": {
       "bg": "#6d8885",
@@ -202,10 +202,10 @@
       "link": "Operator"
     },
     "@punctuation.bracket": {
-      "fg": "#9e9b93"
+      "fg": "#868785"
     },
     "@punctuation.delimiter": {
-      "fg": "#9e9b93"
+      "fg": "#868785"
     },
     "@punctuation.special": {
       "fg": "#68738b"
@@ -234,10 +234,10 @@
       "fg": "#ae955e"
     },
     "@tag.delimiter": {
-      "fg": "#9e9b93"
+      "fg": "#868785"
     },
     "@variable": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "@variable.builtin": {
       "cterm": {
@@ -250,7 +250,7 @@
       "fg": "#ae955e"
     },
     "@variable.parameter": {
-      "fg": "#a6a69c"
+      "fg": "#9c9d9c"
     },
     "AerialArrayIcon": {
       "link": "Type"
@@ -340,10 +340,10 @@
       "link": "Visual"
     },
     "BlinkCmpGhostText": {
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "BlinkCmpKind": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "BlinkCmpKindClass": {
       "link": "Type"
@@ -409,7 +409,7 @@
       "link": "Type"
     },
     "BlinkCmpKindText": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "BlinkCmpKindTypeParameter": {
       "link": "Type"
@@ -421,20 +421,20 @@
       "link": "String"
     },
     "BlinkCmpKindVariable": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "BlinkCmpLabel": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "BlinkCmpLabelDeprecated": {
       "cterm": {
         "strikethrough": true
       },
-      "fg": "#7a8382",
+      "fg": "#70706f",
       "strikethrough": true
     },
     "BlinkCmpLabelDetails": {
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "BlinkCmpLabelMatch": {
       "fg": "#668696"
@@ -503,16 +503,16 @@
       "link": "FloatBorder"
     },
     "CmpGhostText": {
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "CmpItemAbbr": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "CmpItemAbbrDeprecated": {
       "cterm": {
         "strikethrough": true
       },
-      "fg": "#7a8382",
+      "fg": "#70706f",
       "strikethrough": true
     },
     "CmpItemAbbrMatch": {
@@ -537,7 +537,7 @@
       "link": "String"
     },
     "CmpItemKindDefault": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "CmpItemKindEnum": {
       "link": "Type"
@@ -588,7 +588,7 @@
       "link": "Type"
     },
     "CmpItemKindText": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "CmpItemKindTypeParameter": {
       "link": "Type"
@@ -600,19 +600,19 @@
       "link": "String"
     },
     "CmpItemKindVariable": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "CmpItemMenu": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "ColorColumn": {
-      "bg": "#282727"
+      "bg": "#2e2d2c"
     },
     "Comment": {
       "cterm": {
         "italic": true
       },
-      "fg": "#7a8382",
+      "fg": "#70706f",
       "italic": true
     },
     "Conceal": {
@@ -620,7 +620,7 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "Constant": {
       "fg": "#9d7257"
@@ -631,10 +631,10 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "Cursor": {
-      "bg": "#c5c9c5",
+      "bg": "#b2b4b2",
       "fg": "#181616"
     },
     "CursorColumn": {
@@ -644,10 +644,10 @@
       "link": "Cursor"
     },
     "CursorLine": {
-      "bg": "#393836"
+      "bg": "#444343"
     },
     "CursorLineNr": {
-      "bg": "#282727",
+      "bg": "#2e2d2c",
       "bold": true,
       "cterm": {
         "bold": true
@@ -671,10 +671,10 @@
       "link": "Directory"
     },
     "DapUIDecoration": {
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "DapUIFloatBorder": {
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "DapUILineNumber": {
       "fg": "#68738b"
@@ -723,7 +723,7 @@
       "link": "Type"
     },
     "DapUIUnavailable": {
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "DapUIWatchesEmpty": {
       "fg": "#ae4e47"
@@ -741,13 +741,13 @@
       "fg": "#ae955e"
     },
     "DashboardFooter": {
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "DashboardHeader": {
       "fg": "#ae4e47"
     },
     "DashboardIcon": {
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "DashboardKey": {
       "fg": "#68738b"
@@ -756,7 +756,7 @@
       "fg": "#68738b"
     },
     "Delimiter": {
-      "fg": "#9e9b93"
+      "fg": "#868785"
     },
     "DiagnosticError": {
       "fg": "#ae4e47"
@@ -786,19 +786,19 @@
       "fg": "#6e7e60"
     },
     "DiagnosticSignError": {
-      "bg": "#282727",
+      "bg": "#2e2d2c",
       "fg": "#ae4e47"
     },
     "DiagnosticSignHint": {
-      "bg": "#282727",
+      "bg": "#2e2d2c",
       "fg": "#6d8885"
     },
     "DiagnosticSignInfo": {
-      "bg": "#282727",
+      "bg": "#2e2d2c",
       "fg": "#668696"
     },
     "DiagnosticSignWarn": {
-      "bg": "#282727",
+      "bg": "#2e2d2c",
       "fg": "#9d7257"
     },
     "DiagnosticUnderlineError": {
@@ -877,11 +877,11 @@
     },
     "FloatBorder": {
       "bg": "#181616",
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "FloatFooter": {
       "bg": "#181616",
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "FloatTitle": {
       "bg": "#181616",
@@ -889,43 +889,43 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "FloatermBorder": {
       "bg": "#181616",
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "FoldColumn": {
-      "bg": "#282727",
-      "fg": "#625e5a"
+      "bg": "#2e2d2c",
+      "fg": "#5a5a59"
     },
     "Folded": {
-      "bg": "#282727",
-      "fg": "#7a8382"
+      "bg": "#2e2d2c",
+      "fg": "#70706f"
     },
     "Function": {
       "fg": "#668696"
     },
     "GitSignsAdd": {
-      "bg": "#282727",
+      "bg": "#2e2d2c",
       "fg": "#6e7e60"
     },
     "GitSignsChange": {
-      "bg": "#282727",
+      "bg": "#2e2d2c",
       "fg": "#ae955e"
     },
     "GitSignsDelete": {
-      "bg": "#282727",
+      "bg": "#2e2d2c",
       "fg": "#ae4e47"
     },
     "IblIndent": {
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "IblScope": {
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "IblWhitespace": {
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "Identifier": {
       "fg": "#ae955e"
@@ -938,23 +938,23 @@
       "fg": "#3f4e56"
     },
     "IndentBlanklineChar": {
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "IndentBlanklineContextChar": {
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "IndentBlanklineContextStart": {
       "cterm": {
         "underline": true
       },
-      "sp": "#7a8382",
+      "sp": "#70706f",
       "underline": true
     },
     "IndentBlanklineSpaceChar": {
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "IndentBlanklineSpaceCharBlankline": {
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "Italic": {
       "cterm": {
@@ -970,14 +970,14 @@
       "italic": true
     },
     "LazyProgressTodo": {
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "LineNr": {
-      "bg": "#282727",
-      "fg": "#625e5a"
+      "bg": "#2e2d2c",
+      "fg": "#5a5a59"
     },
     "LspCodeLens": {
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "LspReferenceRead": {
       "link": "LspReferenceText"
@@ -1095,15 +1095,15 @@
       "link": "DiffDelete"
     },
     "MiniDiffSignAdd": {
-      "bg": "#282727",
+      "bg": "#2e2d2c",
       "fg": "#6e7e60"
     },
     "MiniDiffSignChange": {
-      "bg": "#282727",
+      "bg": "#2e2d2c",
       "fg": "#ae955e"
     },
     "MiniDiffSignDelete": {
-      "bg": "#282727",
+      "bg": "#2e2d2c",
       "fg": "#ae4e47"
     },
     "MiniFilesBorder": {
@@ -1119,7 +1119,7 @@
       "link": "Directory"
     },
     "MiniFilesFile": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "MiniFilesNormal": {
       "link": "NormalFloat"
@@ -1130,7 +1130,7 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "MiniFilesTitleFocused": {
       "bg": "#181616",
@@ -1138,7 +1138,7 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "MiniHipatternsFixme": {
       "bg": "#ae4e47",
@@ -1185,7 +1185,7 @@
       "fg": "#6e7e60"
     },
     "MiniIconsGrey": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "MiniIconsOrange": {
       "fg": "#9d7257"
@@ -1311,7 +1311,7 @@
       "nocombine": true
     },
     "MiniStarterFooter": {
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "MiniStarterHeader": {
       "link": "Title"
@@ -1335,16 +1335,16 @@
       "fg": "#6e7e60"
     },
     "MiniStatuslineDevinfo": {
-      "bg": "#282727",
-      "fg": "#c5c9c5"
+      "bg": "#2e2d2c",
+      "fg": "#b2b4b2"
     },
     "MiniStatuslineFileinfo": {
-      "bg": "#282727",
-      "fg": "#c5c9c5"
+      "bg": "#2e2d2c",
+      "fg": "#b2b4b2"
     },
     "MiniStatuslineFilename": {
       "bg": "#181616",
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "MiniStatuslineInactive": {
       "link": "StatusLineNC"
@@ -1401,34 +1401,34 @@
       "link": "IncSearch"
     },
     "MiniTablineCurrent": {
-      "bg": "#282727",
+      "bg": "#2e2d2c",
       "bold": true,
       "cterm": {
         "bold": true
       },
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "MiniTablineFill": {
       "link": "TabLineFill"
     },
     "MiniTablineHidden": {
       "bg": "#181616",
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "MiniTablineModifiedCurrent": {
-      "bg": "#c5c9c5",
+      "bg": "#b2b4b2",
       "bold": true,
       "cterm": {
         "bold": true
       },
-      "fg": "#282727"
+      "fg": "#2e2d2c"
     },
     "MiniTablineModifiedHidden": {
-      "bg": "#7a8382",
+      "bg": "#70706f",
       "fg": "#181616"
     },
     "MiniTablineModifiedVisible": {
-      "bg": "#7a8382",
+      "bg": "#70706f",
       "bold": true,
       "cterm": {
         "bold": true
@@ -1441,7 +1441,7 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "MiniTablineVisible": {
       "bg": "#181616",
@@ -1449,7 +1449,7 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "MiniTestEmphasis": {
       "bold": true,
@@ -1485,7 +1485,7 @@
       "fg": "#668696"
     },
     "MsgArea": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "MsgSeparator": {
       "bg": "#181616",
@@ -1570,10 +1570,10 @@
       "link": "@variable"
     },
     "NavicSeparator": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "NavicText": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "NeoTreeGitAdded": {
       "fg": "#6e7e60"
@@ -1648,7 +1648,7 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#9e9b93"
+      "fg": "#868785"
     },
     "NeotestFailed": {
       "fg": "#ae4e47"
@@ -1669,7 +1669,7 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "NeotestMarked": {
       "cterm": {
@@ -1694,10 +1694,10 @@
       "fg": "#ae4e47"
     },
     "NeotestTest": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "NeotestUnknown": {
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "NeotestWatching": {
       "fg": "#ae955e"
@@ -1706,15 +1706,15 @@
       "fg": "#6d8885"
     },
     "NonText": {
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "Normal": {
       "bg": "#181616",
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "NormalFloat": {
       "bg": "#181616",
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "NormalNC": {
       "link": "Normal"
@@ -1846,26 +1846,26 @@
     },
     "Pmenu": {
       "bg": "#3f4e56",
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "PmenuBorder": {
       "link": "FloatBorder"
     },
     "PmenuExtra": {
       "bg": "#3f4e56",
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "PmenuExtraSel": {
       "bg": "#424f4e",
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "PmenuKind": {
       "bg": "#3f4e56",
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "PmenuKindSel": {
       "bg": "#424f4e",
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "PmenuSbar": {
       "bg": "#3f4e56"
@@ -1883,21 +1883,21 @@
       "link": "MoreMsg"
     },
     "QuickFixLine": {
-      "bg": "#282727"
+      "bg": "#2e2d2c"
     },
     "Search": {
       "bg": "#424f4e",
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "SignColumn": {
-      "bg": "#282727",
-      "fg": "#7a8382"
+      "bg": "#2e2d2c",
+      "fg": "#70706f"
     },
     "Special": {
       "fg": "#68738b"
     },
     "SpecialKey": {
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "SpellBad": {
       "cterm": {
@@ -1936,33 +1936,33 @@
     },
     "StatusLine": {
       "bg": "#181616",
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "StatusLineNC": {
       "bg": "#181616",
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "String": {
       "fg": "#6e7e60"
     },
     "Substitute": {
       "bg": "#ae4e47",
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "TabLine": {
       "bg": "#181616",
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "TabLineFill": {
       "bg": "#181616"
     },
     "TabLineSel": {
-      "bg": "#282727",
-      "fg": "#c5c9c5"
+      "bg": "#2e2d2c",
+      "fg": "#b2b4b2"
     },
     "TelescopeBorder": {
       "bg": "#181616",
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "TelescopeResultsClass": {
       "link": "Structure"
@@ -1986,7 +1986,7 @@
       "link": "CursorLineNr"
     },
     "TelescopeTitle": {
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "Title": {
       "bold": true,
@@ -2007,14 +2007,14 @@
       "link": "Folded"
     },
     "TreesitterContextLineNumber": {
-      "bg": "#282727",
-      "fg": "#7a8382"
+      "bg": "#2e2d2c",
+      "fg": "#70706f"
     },
     "TroubleIndent": {
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "TroublePos": {
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "Type": {
       "fg": "#6d8885"
@@ -2039,22 +2039,22 @@
       "fg": "#9d7257"
     },
     "Whitespace": {
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "WildMenu": {
       "link": "Pmenu"
     },
     "WinBar": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "WinBarNC": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "WinSeparator": {
       "fg": "#181616"
     },
     "debugBreakpoint": {
-      "bg": "#282727",
+      "bg": "#2e2d2c",
       "fg": "#68738b"
     },
     "debugPC": {
@@ -2104,7 +2104,7 @@
       "link": "LineNr"
     }
   },
-  "palette_sha256": "ba47c4de3533e48edf14862b354e52ab467c8a631de05e79e3d57c4b96fe985d",
+  "palette_sha256": "85458f203097189e3dd3f7958d58521776e758b2ea2b2af7bb1a1ac94124351d",
   "transparent": {
     "@attribute": {
       "link": "Constant"
@@ -2115,7 +2115,7 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "@comment.note": {
       "bg": "#6d8885",
@@ -2307,10 +2307,10 @@
       "link": "Operator"
     },
     "@punctuation.bracket": {
-      "fg": "#9e9b93"
+      "fg": "#868785"
     },
     "@punctuation.delimiter": {
-      "fg": "#9e9b93"
+      "fg": "#868785"
     },
     "@punctuation.special": {
       "fg": "#68738b"
@@ -2339,10 +2339,10 @@
       "fg": "#ae955e"
     },
     "@tag.delimiter": {
-      "fg": "#9e9b93"
+      "fg": "#868785"
     },
     "@variable": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "@variable.builtin": {
       "cterm": {
@@ -2355,7 +2355,7 @@
       "fg": "#ae955e"
     },
     "@variable.parameter": {
-      "fg": "#a6a69c"
+      "fg": "#9c9d9c"
     },
     "AerialArrayIcon": {
       "link": "Type"
@@ -2445,10 +2445,10 @@
       "link": "Visual"
     },
     "BlinkCmpGhostText": {
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "BlinkCmpKind": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "BlinkCmpKindClass": {
       "link": "Type"
@@ -2514,7 +2514,7 @@
       "link": "Type"
     },
     "BlinkCmpKindText": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "BlinkCmpKindTypeParameter": {
       "link": "Type"
@@ -2526,20 +2526,20 @@
       "link": "String"
     },
     "BlinkCmpKindVariable": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "BlinkCmpLabel": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "BlinkCmpLabelDeprecated": {
       "cterm": {
         "strikethrough": true
       },
-      "fg": "#7a8382",
+      "fg": "#70706f",
       "strikethrough": true
     },
     "BlinkCmpLabelDetails": {
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "BlinkCmpLabelMatch": {
       "fg": "#668696"
@@ -2608,16 +2608,16 @@
       "link": "FloatBorder"
     },
     "CmpGhostText": {
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "CmpItemAbbr": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "CmpItemAbbrDeprecated": {
       "cterm": {
         "strikethrough": true
       },
-      "fg": "#7a8382",
+      "fg": "#70706f",
       "strikethrough": true
     },
     "CmpItemAbbrMatch": {
@@ -2642,7 +2642,7 @@
       "link": "String"
     },
     "CmpItemKindDefault": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "CmpItemKindEnum": {
       "link": "Type"
@@ -2693,7 +2693,7 @@
       "link": "Type"
     },
     "CmpItemKindText": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "CmpItemKindTypeParameter": {
       "link": "Type"
@@ -2705,19 +2705,19 @@
       "link": "String"
     },
     "CmpItemKindVariable": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "CmpItemMenu": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "ColorColumn": {
-      "bg": "#282727"
+      "bg": "#2e2d2c"
     },
     "Comment": {
       "cterm": {
         "italic": true
       },
-      "fg": "#7a8382",
+      "fg": "#70706f",
       "italic": true
     },
     "Conceal": {
@@ -2725,7 +2725,7 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "Constant": {
       "fg": "#9d7257"
@@ -2736,10 +2736,10 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "Cursor": {
-      "bg": "#c5c9c5",
+      "bg": "#b2b4b2",
       "fg": "#181616"
     },
     "CursorColumn": {
@@ -2749,10 +2749,10 @@
       "link": "Cursor"
     },
     "CursorLine": {
-      "bg": "#393836"
+      "bg": "#444343"
     },
     "CursorLineNr": {
-      "bg": "#282727",
+      "bg": "#2e2d2c",
       "bold": true,
       "cterm": {
         "bold": true
@@ -2776,10 +2776,10 @@
       "link": "Directory"
     },
     "DapUIDecoration": {
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "DapUIFloatBorder": {
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "DapUILineNumber": {
       "fg": "#68738b"
@@ -2828,7 +2828,7 @@
       "link": "Type"
     },
     "DapUIUnavailable": {
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "DapUIWatchesEmpty": {
       "fg": "#ae4e47"
@@ -2846,13 +2846,13 @@
       "fg": "#ae955e"
     },
     "DashboardFooter": {
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "DashboardHeader": {
       "fg": "#ae4e47"
     },
     "DashboardIcon": {
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "DashboardKey": {
       "fg": "#68738b"
@@ -2861,7 +2861,7 @@
       "fg": "#68738b"
     },
     "Delimiter": {
-      "fg": "#9e9b93"
+      "fg": "#868785"
     },
     "DiagnosticError": {
       "fg": "#ae4e47"
@@ -2891,19 +2891,19 @@
       "fg": "#6e7e60"
     },
     "DiagnosticSignError": {
-      "bg": "#282727",
+      "bg": "#2e2d2c",
       "fg": "#ae4e47"
     },
     "DiagnosticSignHint": {
-      "bg": "#282727",
+      "bg": "#2e2d2c",
       "fg": "#6d8885"
     },
     "DiagnosticSignInfo": {
-      "bg": "#282727",
+      "bg": "#2e2d2c",
       "fg": "#668696"
     },
     "DiagnosticSignWarn": {
-      "bg": "#282727",
+      "bg": "#2e2d2c",
       "fg": "#9d7257"
     },
     "DiagnosticUnderlineError": {
@@ -2982,11 +2982,11 @@
     },
     "FloatBorder": {
       "bg": "#181616",
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "FloatFooter": {
       "bg": "#181616",
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "FloatTitle": {
       "bg": "#181616",
@@ -2994,43 +2994,43 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "FloatermBorder": {
       "bg": "#181616",
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "FoldColumn": {
-      "bg": "#282727",
-      "fg": "#625e5a"
+      "bg": "#2e2d2c",
+      "fg": "#5a5a59"
     },
     "Folded": {
-      "bg": "#282727",
-      "fg": "#7a8382"
+      "bg": "#2e2d2c",
+      "fg": "#70706f"
     },
     "Function": {
       "fg": "#668696"
     },
     "GitSignsAdd": {
-      "bg": "#282727",
+      "bg": "#2e2d2c",
       "fg": "#6e7e60"
     },
     "GitSignsChange": {
-      "bg": "#282727",
+      "bg": "#2e2d2c",
       "fg": "#ae955e"
     },
     "GitSignsDelete": {
-      "bg": "#282727",
+      "bg": "#2e2d2c",
       "fg": "#ae4e47"
     },
     "IblIndent": {
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "IblScope": {
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "IblWhitespace": {
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "Identifier": {
       "fg": "#ae955e"
@@ -3043,23 +3043,23 @@
       "fg": "#3f4e56"
     },
     "IndentBlanklineChar": {
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "IndentBlanklineContextChar": {
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "IndentBlanklineContextStart": {
       "cterm": {
         "underline": true
       },
-      "sp": "#7a8382",
+      "sp": "#70706f",
       "underline": true
     },
     "IndentBlanklineSpaceChar": {
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "IndentBlanklineSpaceCharBlankline": {
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "Italic": {
       "cterm": {
@@ -3075,14 +3075,14 @@
       "italic": true
     },
     "LazyProgressTodo": {
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "LineNr": {
-      "bg": "#282727",
-      "fg": "#625e5a"
+      "bg": "#2e2d2c",
+      "fg": "#5a5a59"
     },
     "LspCodeLens": {
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "LspReferenceRead": {
       "link": "LspReferenceText"
@@ -3200,15 +3200,15 @@
       "link": "DiffDelete"
     },
     "MiniDiffSignAdd": {
-      "bg": "#282727",
+      "bg": "#2e2d2c",
       "fg": "#6e7e60"
     },
     "MiniDiffSignChange": {
-      "bg": "#282727",
+      "bg": "#2e2d2c",
       "fg": "#ae955e"
     },
     "MiniDiffSignDelete": {
-      "bg": "#282727",
+      "bg": "#2e2d2c",
       "fg": "#ae4e47"
     },
     "MiniFilesBorder": {
@@ -3224,7 +3224,7 @@
       "link": "Directory"
     },
     "MiniFilesFile": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "MiniFilesNormal": {
       "link": "NormalFloat"
@@ -3235,7 +3235,7 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "MiniFilesTitleFocused": {
       "bg": "#181616",
@@ -3243,7 +3243,7 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "MiniHipatternsFixme": {
       "bg": "#ae4e47",
@@ -3290,7 +3290,7 @@
       "fg": "#6e7e60"
     },
     "MiniIconsGrey": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "MiniIconsOrange": {
       "fg": "#9d7257"
@@ -3416,7 +3416,7 @@
       "nocombine": true
     },
     "MiniStarterFooter": {
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "MiniStarterHeader": {
       "link": "Title"
@@ -3440,16 +3440,16 @@
       "fg": "#6e7e60"
     },
     "MiniStatuslineDevinfo": {
-      "bg": "#282727",
-      "fg": "#c5c9c5"
+      "bg": "#2e2d2c",
+      "fg": "#b2b4b2"
     },
     "MiniStatuslineFileinfo": {
-      "bg": "#282727",
-      "fg": "#c5c9c5"
+      "bg": "#2e2d2c",
+      "fg": "#b2b4b2"
     },
     "MiniStatuslineFilename": {
       "bg": "#181616",
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "MiniStatuslineInactive": {
       "link": "StatusLineNC"
@@ -3506,34 +3506,34 @@
       "link": "IncSearch"
     },
     "MiniTablineCurrent": {
-      "bg": "#282727",
+      "bg": "#2e2d2c",
       "bold": true,
       "cterm": {
         "bold": true
       },
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "MiniTablineFill": {
       "link": "TabLineFill"
     },
     "MiniTablineHidden": {
       "bg": "#181616",
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "MiniTablineModifiedCurrent": {
-      "bg": "#c5c9c5",
+      "bg": "#b2b4b2",
       "bold": true,
       "cterm": {
         "bold": true
       },
-      "fg": "#282727"
+      "fg": "#2e2d2c"
     },
     "MiniTablineModifiedHidden": {
-      "bg": "#7a8382",
+      "bg": "#70706f",
       "fg": "#181616"
     },
     "MiniTablineModifiedVisible": {
-      "bg": "#7a8382",
+      "bg": "#70706f",
       "bold": true,
       "cterm": {
         "bold": true
@@ -3546,7 +3546,7 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "MiniTablineVisible": {
       "bg": "#181616",
@@ -3554,7 +3554,7 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "MiniTestEmphasis": {
       "bold": true,
@@ -3590,7 +3590,7 @@
       "fg": "#668696"
     },
     "MsgArea": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "MsgSeparator": {
       "bg": "#181616",
@@ -3675,10 +3675,10 @@
       "link": "@variable"
     },
     "NavicSeparator": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "NavicText": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "NeoTreeGitAdded": {
       "fg": "#6e7e60"
@@ -3753,7 +3753,7 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#9e9b93"
+      "fg": "#868785"
     },
     "NeotestFailed": {
       "fg": "#ae4e47"
@@ -3774,7 +3774,7 @@
       "cterm": {
         "bold": true
       },
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "NeotestMarked": {
       "cterm": {
@@ -3799,10 +3799,10 @@
       "fg": "#ae4e47"
     },
     "NeotestTest": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "NeotestUnknown": {
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "NeotestWatching": {
       "fg": "#ae955e"
@@ -3811,14 +3811,14 @@
       "fg": "#6d8885"
     },
     "NonText": {
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "Normal": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "NormalFloat": {
       "bg": "#181616",
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "NormalNC": {
       "link": "Normal"
@@ -3950,26 +3950,26 @@
     },
     "Pmenu": {
       "bg": "#3f4e56",
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "PmenuBorder": {
       "link": "FloatBorder"
     },
     "PmenuExtra": {
       "bg": "#3f4e56",
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "PmenuExtraSel": {
       "bg": "#424f4e",
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "PmenuKind": {
       "bg": "#3f4e56",
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "PmenuKindSel": {
       "bg": "#424f4e",
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "PmenuSbar": {
       "bg": "#3f4e56"
@@ -3987,21 +3987,21 @@
       "link": "MoreMsg"
     },
     "QuickFixLine": {
-      "bg": "#282727"
+      "bg": "#2e2d2c"
     },
     "Search": {
       "bg": "#424f4e",
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "SignColumn": {
-      "bg": "#282727",
-      "fg": "#7a8382"
+      "bg": "#2e2d2c",
+      "fg": "#70706f"
     },
     "Special": {
       "fg": "#68738b"
     },
     "SpecialKey": {
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "SpellBad": {
       "cterm": {
@@ -4040,33 +4040,33 @@
     },
     "StatusLine": {
       "bg": "#181616",
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "StatusLineNC": {
       "bg": "#181616",
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "String": {
       "fg": "#6e7e60"
     },
     "Substitute": {
       "bg": "#ae4e47",
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "TabLine": {
       "bg": "#181616",
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "TabLineFill": {
       "bg": "#181616"
     },
     "TabLineSel": {
-      "bg": "#282727",
-      "fg": "#c5c9c5"
+      "bg": "#2e2d2c",
+      "fg": "#b2b4b2"
     },
     "TelescopeBorder": {
       "bg": "#181616",
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "TelescopeResultsClass": {
       "link": "Structure"
@@ -4090,7 +4090,7 @@
       "link": "CursorLineNr"
     },
     "TelescopeTitle": {
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "Title": {
       "bold": true,
@@ -4111,14 +4111,14 @@
       "link": "Folded"
     },
     "TreesitterContextLineNumber": {
-      "bg": "#282727",
-      "fg": "#7a8382"
+      "bg": "#2e2d2c",
+      "fg": "#70706f"
     },
     "TroubleIndent": {
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "TroublePos": {
-      "fg": "#7a8382"
+      "fg": "#70706f"
     },
     "Type": {
       "fg": "#6d8885"
@@ -4143,22 +4143,22 @@
       "fg": "#9d7257"
     },
     "Whitespace": {
-      "fg": "#625e5a"
+      "fg": "#5a5a59"
     },
     "WildMenu": {
       "link": "Pmenu"
     },
     "WinBar": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "WinBarNC": {
-      "fg": "#c5c9c5"
+      "fg": "#b2b4b2"
     },
     "WinSeparator": {
       "fg": "#181616"
     },
     "debugBreakpoint": {
-      "bg": "#282727",
+      "bg": "#2e2d2c",
       "fg": "#68738b"
     },
     "debugPC": {

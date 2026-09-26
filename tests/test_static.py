@@ -22,14 +22,14 @@ GSETTINGS_VERBS = {"set", "reset", "reset-recursively"}
 SLOT_DATA = (
     ("base00", "lavaBlack", "#181616", "dragonBlack3",
      "dragonBlack0, dragonBlack1, dragonBlack2"),
-    ("base01", "cinderBlack", "#282727", "dragonBlack4", ""),
-    ("base02", "basaltGray", "#393836", "dragonBlack5", ""),
-    ("base03", "ashGray", "#625e5a", "dragonBlack6", "sumiInk6"),
-    ("base04", "mistGray", "#7a8382", "dragonGray3",
+    ("base01", "cinderBlack", "#2e2d2c", "dragonBlack4", ""),
+    ("base02", "basaltGray", "#444343", "dragonBlack5", ""),
+    ("base03", "ashGray", "#5a5a59", "dragonBlack6", "sumiInk6"),
+    ("base04", "mistGray", "#70706f", "dragonGray3",
      "dragonAsh, katanaGray"),
-    ("base05", "hazeGray", "#9e9b93", "dragonGray2", ""),
-    ("base06", "cloudGray", "#a6a69c", "dragonGray", ""),
-    ("base07", "snowWhite", "#c5c9c5", "dragonWhite",
+    ("base05", "hazeGray", "#868785", "dragonGray2", ""),
+    ("base06", "cloudGray", "#9c9d9c", "dragonGray", ""),
+    ("base07", "snowWhite", "#b2b4b2", "dragonWhite",
      "oldWhite, fujiWhite"),
     ("base08", "fujiRed", "#ae4e47", "dragonRed",
      "samuraiRed, autumnRed, waveRed, winterRed"),
@@ -113,7 +113,14 @@ def assigned(tree):
 
 def slot_line(slot, name, value, origin, merged):
     """The REQ-PAL-6 line of one slot."""
-    darker = " 20 % darker" if slot >= "base08" else ""
+    if slot >= "base08":
+        darker = " 20 % darker"
+    elif slot == "base07":
+        darker = " 10 % darker, saturation -2 points"
+    elif slot > "base00":
+        darker = f", linear {slot[-1]}/7 from base00 to base07"
+    else:
+        darker = ""
     tail = f"; merged: {merged}" if merged else ""
     return f'{slot} = "{value}"  # {name}: {origin}{darker}{tail}'
 
