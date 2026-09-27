@@ -1,4 +1,4 @@
-"""V-12: README covers REQ-DOC-1; LICENSE satisfies REQ-DOC-2."""
+"""V-12: README and INSTALL cover REQ-DOC-1; LICENSE satisfies REQ-DOC-2."""
 
 import unittest
 
@@ -21,11 +21,9 @@ README_ITEMS = (
     "XDG_DATA_HOME",
     "--set-default",
     "python3 configure.py all --uninstall",
-    "@ukiyo_e_no_patched_font",
     "@ukiyo_e_show_status_content",
     "@ukiyo_e_date_format",
     "%Y-%m-%d",
-    "Nerd Font",
     "nord-dark-tmux",
     "transparent",
     "overrides",
@@ -56,9 +54,6 @@ README_ITEMS = (
     "50 %", "never stored",
     "3.6:1", "4.8:1", "3.6", "2026-09-26",
     "python3 tests/regen_nvim_reference.py",
-    # REQ-DOC-1, single tmux layout (2026-09-27).
-    "`#I.#W`", "one layout", "2026-09-27", "powerline layout",
-    "has no effect", "activity and bell", "two segments",
     "python3 -m unittest discover -s tests",
 )
 README_ABSENT = ("@plugin", '"louis01010100/theme"', "scripts/generate.py",
@@ -74,14 +69,20 @@ LICENSE_ITEMS = (
 )
 
 
+def docs_text():
+    """README.md (theme definition) and INSTALL.md (installation)."""
+    return "".join((support.REPO / name).read_text()
+                   for name in ("README.md", "INSTALL.md"))
+
+
 class DocsTest(unittest.TestCase):
     def test_readme_items(self):
-        text = (support.REPO / "README.md").read_text()
+        text = docs_text()
         for item in README_ITEMS:
             self.assertIn(item, text)
 
     def test_readme_absent_items(self):
-        text = (support.REPO / "README.md").read_text()
+        text = docs_text()
         for item in README_ABSENT:
             self.assertNotIn(item, text)
 

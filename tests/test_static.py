@@ -169,7 +169,7 @@ class RepositoryTest(unittest.TestCase):
         self.assertEqual([n for n in root if n.endswith(".tmux")], [])
 
     def test_readme_has_no_plugin_install(self):
-        readme = text("README.md")
+        readme = text("README.md") + text("INSTALL.md")
         self.assertNotIn("@plugin", readme)
         self.assertNotIn('"louis01010100/theme"', readme)
 
@@ -201,7 +201,8 @@ class RepositoryTest(unittest.TestCase):
         """REQ-REPO-6: the kanagawa seed side is gone."""
         words = ("SEED" + "_HASH", "UKIYO_E_KANAGAWA" + "_SEED")
         for rel in repository_files():
-            if rel.startswith("tests/") or rel == "README.md":
+            if rel.startswith("tests/") or rel in ("README.md",
+                                                   "INSTALL.md"):
                 for word in words:
                     self.assertNotIn(word, text(rel), rel)
 
