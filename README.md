@@ -296,7 +296,7 @@ on the terminal's 16-colour palette and can use the derived shades.
 | setuid | `SETUID` | `base07` on `darkRed` |
 | setgid | `SETGID` | `base00` on `base0A` |
 | sticky directory | `STICKY` | `base07` on `darkBlue` |
-| other-writable directory (777) | `OTHER_WRITABLE` | `base07` on `darkGreen` |
+| other-writable directory (777) | `OTHER_WRITABLE` | `base06` on `darkBlue` |
 | sticky and other-writable (1777) | `STICKY_OTHER_WRITABLE` | `base00` on `base0B` |
 
 `RESET`, `MULTIHARDLINK`, `CAPABILITY`, and `MISSING` are left

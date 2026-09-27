@@ -22,8 +22,8 @@ DIRCOLORS_ROLES = MappingProxyType({
     "setgid_bg": "base0A",
     "sticky_fg": "base07",
     "sticky_bg": "darkBlue",
-    "other_writable_fg": "base07",
-    "other_writable_bg": "darkGreen",
+    "other_writable_fg": "base06",
+    "other_writable_bg": "darkBlue",
     "sticky_other_writable_fg": "base00",
     "sticky_other_writable_bg": "base0B",
 })
