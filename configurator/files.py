@@ -18,7 +18,8 @@ EXEC_MODE = 0o755
 DIR_MODE = 0o755
 LINK_PREFIX = "ukiyo_e.versions/"
 TEMP_PREFIX = ".ukiyo_e.new-"
-OWNERS = {"nvim": ("colors/", "lua/"), "tmux": ("ukiyo_e.tmux", "tmux/")}
+OWNERS = {"nvim": ("colors/", "lua/"), "tmux": ("ukiyo_e.tmux", "tmux/"),
+          "dircolors": ("ukiyo_e.dircolors",)}
 
 
 class Interrupted(Exception):

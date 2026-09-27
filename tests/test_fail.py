@@ -81,6 +81,7 @@ class BeforeSwitchTest(FailTestCase):
         self.assertEqual(lines[:2], ["gnome: updated", "ptyxis: updated"])
         self.assertTrue(lines[2].startswith("tmux: failed ("), lines)
         self.assertTrue(lines[3].startswith("nvim: failed ("), lines)
+        self.assertTrue(lines[4].startswith("dircolors: failed ("), lines)
         self.assertEqual(os.readlink(self.env.install), target)
         self.assertEqual(through_install(self.env), tree)
         self.assertEqual(support.tree_snapshot(self.env.data,
@@ -90,11 +91,11 @@ class BeforeSwitchTest(FailTestCase):
         again = support.configure_ok(self.env, "all", root=root)
         self.assertEqual(status_lines(again), [
             "gnome: unchanged", "ptyxis: unchanged", "tmux: updated",
-            "nvim: updated"])
+            "nvim: updated", "dircolors: updated"])
         last = support.configure_ok(self.env, "all", root=root)
         self.assertEqual(status_lines(last), [
             "gnome: unchanged", "ptyxis: unchanged", "tmux: unchanged",
-            "nvim: unchanged"])
+            "nvim: unchanged", "dircolors: unchanged"])
 
 
 class LeftoverTest(FailTestCase):
@@ -117,7 +118,7 @@ class LeftoverTest(FailTestCase):
         dry = support.configure_ok(self.env, "all", "--dry-run")
         self.assertEqual(status_lines(dry), [
             "gnome: unchanged", "ptyxis: unchanged", "tmux: unchanged",
-            "nvim: unchanged"])
+            "nvim: unchanged", "dircolors: unchanged"])
         self.assertEqual(support.tree_snapshot(self.env.root), before)
         real = support.configure_ok(self.env, "all")
         self.assertEqual(status_lines(real), status_lines(dry))
@@ -134,7 +135,8 @@ class LeftoverTest(FailTestCase):
             "gnome: unchanged (not installed)",
             "ptyxis: unchanged (not installed)",
             "tmux: unchanged (not installed)",
-            "nvim: unchanged (not installed)"])
+            "nvim: unchanged (not installed)",
+            "dircolors: unchanged (not installed)"])
         self.assertFalse(os.path.lexists(self.env.versions))
 
 
@@ -193,7 +195,8 @@ class PtyxisFailTest(FailTestCase):
         self.assertTrue(lines[1].startswith("ptyxis: failed ("), lines)
         self.assertEqual(lines[2:], [
             "tmux: not run (earlier target failed)",
-            "nvim: not run (earlier target failed)"])
+            "nvim: not run (earlier target failed)",
+            "dircolors: not run (earlier target failed)"])
         self.assertEqual(self.ptx_state(), before)
         self.assertEqual(list(folder.glob(".Ukiyo-e.palette.new-*")), [])
 

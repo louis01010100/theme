@@ -224,7 +224,8 @@ class RollbackTest(unittest.TestCase):
             "gnome: failed (set palette: wrapper: palette refused)",
             "ptyxis: not run (earlier target failed)",
             "tmux: not run (earlier target failed)",
-            "nvim: not run (earlier target failed)"])
+            "nvim: not run (earlier target failed)",
+            "dircolors: not run (earlier target failed)"])
         self.assertEqual(step.dump, before)
         self.assertFalse(os.path.lexists(self.session.install))
 

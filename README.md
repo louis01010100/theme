@@ -27,6 +27,7 @@ configurator/         # validation, role mappings, install, per-tool apply
   ptyxis.py           #   PTYXIS_KEYS, Ptyxis palette file and profile
   tmux.py             #   TMUX_ROLES, template rendering, server reload
   nvim.py             #   rendered Neovim palette module
+  dircolors.py        #   DIRCOLORS_ROLES, rendered ls colour database
   install_dir.py      #   $XDG_DATA_HOME/ukiyo_e resolution
   files.py            #   version build, atomic symlink switch, cleanup
   report.py           #   per-target report lines
@@ -48,7 +49,8 @@ tests/                # unittest suite (isolated; see Tests below)
    below). Optionally
    edit the role mappings in `configurator/` (`ANSI` in
    `terminal_ansi.py`, `TERMINAL_ROLES` in `terminal_ansi.py`,
-   `PTYXIS_KEYS` in `ptyxis.py`, `TMUX_ROLES` in `tmux.py`), the Lua under `nvim/`, or the templates under `tmux/`.
+   `PTYXIS_KEYS` in `ptyxis.py`, `TMUX_ROLES` in `tmux.py`,
+   `DIRCOLORS_ROLES` in `dircolors.py`), the Lua under `nvim/`, or the templates under `tmux/`.
 2. Run `python3 configure.py` (Python 3.11 or later, standard library
    only; no root).
 3. Check the report: one line per target (`updated`, `unchanged`, ...)
@@ -145,16 +147,17 @@ python3 configure.py
 ## Command line
 
 ```text
-python3 configure.py [all|gnome|ptyxis|tmux|nvim] [--dry-run] [--uninstall] [--set-default] [-h|--help]
+python3 configure.py [all|gnome|ptyxis|tmux|nvim|dircolors] [--dry-run] [--uninstall] [--set-default] [-h|--help]
 ```
 
 | Target | Effect |
 |---|---|
-| `all` (default) | `gnome`, then `ptyxis`, then `tmux`, then `nvim` |
+| `all` (default) | `gnome`, then `ptyxis`, then `tmux`, then `nvim`, then `dircolors` |
 | `gnome` | the "Ukiyo-e" GNOME Terminal profile |
 | `ptyxis` | the "Ukiyo-e" Ptyxis palette file and profile |
 | `tmux` | the tmux theme files, then a reload of the running server |
 | `nvim` | the Neovim colorscheme files |
+| `dircolors` | the `ls` colour database |
 
 | Flag | Effect |
 |---|---|
@@ -186,8 +189,8 @@ edit files there by hand; they are overwritten.
 
 ## One-time configuration
 
-Add these two lines by hand once (the configurator never edits your
-dotfiles). If `XDG_DATA_HOME` is set, adjust `~/.local/share` in both.
+Add these lines by hand once (the configurator never edits your
+dotfiles). If `XDG_DATA_HOME` is set, adjust `~/.local/share` in each.
 
 Neovim, as a lazy.nvim spec:
 
@@ -201,6 +204,12 @@ tmux, in `~/.tmux.conf` (after any `@ukiyo_e_*` options):
 run-shell ~/.local/share/ukiyo_e/ukiyo_e.tmux
 ```
 
+`ls` colours, in `~/.bashrc` (in place of any other `dircolors` line):
+
+```sh
+eval "$(dircolors -b ~/.local/share/ukiyo_e/ukiyo_e.dircolors)"
+```
+
 ## Live effect
 
 - GNOME Terminal: open windows change immediately.
@@ -212,6 +221,8 @@ run-shell ~/.local/share/ukiyo_e/ukiyo_e.tmux
   `ukiyo_e.tmux` on the server your `tmux` command would reach; no
   restart. Without a running server (or without `tmux`) the reload is
   skipped and reported.
+- dircolors: new shells use the new colours; an open shell keeps
+  its `LS_COLORS` until it re-runs the `eval` line.
 - Neovim: running instances keep their colours until the next
   `:colorscheme ukiyo_e` (or a restart), which loads the new version.
 
@@ -264,6 +275,37 @@ key bindings, the prefix, hooks, or the environment.
 **Switching from nord-dark-tmux:** only one theme may own the status
 bar. Remove the `nord-dark-tmux` plugin line from your tmux
 configuration.
+
+## dircolors
+
+`python3 configure.py dircolors` installs `ukiyo_e.dircolors`, a
+`dircolors` database that colours `ls` by file type only (no
+per-extension colours). Every colour is written as a true-colour
+escape (`38;2;r;g;b`, `48;2;r;g;b`), so `ls` output does not depend
+on the terminal's 16-colour palette and can use the derived shades.
+
+| Type | Keyword | Colour |
+|---|---|---|
+| directory | `DIR` | `base0D` |
+| symlink | `LINK` | `base0C` |
+| executable | `EXEC` | `base0B` |
+| named pipe | `FIFO` | `base09` |
+| socket, door | `SOCK`, `DOOR` | `base0F` |
+| block, character device | `BLK`, `CHR` | `base0A` |
+| broken symlink | `ORPHAN` | `base08` |
+| setuid | `SETUID` | `base07` on `darkRed` |
+| setgid | `SETGID` | `base00` on `base0A` |
+| sticky directory | `STICKY` | `base07` on `darkBlue` |
+| other-writable directory (777) | `OTHER_WRITABLE` | `base07` on `darkGreen` |
+| sticky and other-writable (1777) | `STICKY_OTHER_WRITABLE` | `base00` on `base0B` |
+
+`RESET`, `MULTIHARDLINK`, `CAPABILITY`, and `MISSING` are left
+uncoloured. Regular files use the terminal foreground. Needs GNU
+`dircolors` and a true-colour terminal.
+
+Do not pass the resulting `LS_COLORS` through a `sed 's/01;/00;/g'`
+(a common bold-stripping line): it also rewrites colour components
+such as `101;`. The database sets no bold attribute to begin with.
 
 ## GNOME Terminal
 
@@ -321,9 +363,9 @@ python3 configure.py all --uninstall
 This removes the GNOME profile (making the first remaining profile the
 default if it was the default), the Ptyxis profile and its palette file
 (likewise for `default-profile-uuid`; the palettes directory stays),
-the install directory, and resets the
+the install directory (including the `dircolors` database), and resets the
 theme's tmux options on the running server to tmux defaults. Then remove
-the two one-time lines above by hand.
+the one-time lines above by hand.
 
 ## Tests
 

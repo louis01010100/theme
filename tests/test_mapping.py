@@ -28,7 +28,7 @@ SPEC_TMUX = {
     "pane_border_fg": "base02", "pane_active_border_fg": "base0D",
     "message_fg": "base07", "message_bg": "base00",
     "command_fg": "base07", "command_bg": "base00",
-    "copy_selection_fg": "base07", "copy_selection_bg": "darkAqua",
+    "copy_selection_fg": "base06", "copy_selection_bg": "base01",
     "clock_fg": "base0D", "display_panes_fg": "base03",
     "display_panes_active_fg": "base09",
     "status_text_fg": "base05", "status_segment_bg": "base01",

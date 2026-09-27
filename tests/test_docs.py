@@ -14,8 +14,8 @@ README_ITEMS = (
     LAZY_LINE,
     TMUX_LINE,
     "python3 configure.py",
-    "python3 configure.py [all|gnome|ptyxis|tmux|nvim] [--dry-run] "
-    "[--uninstall] [--set-default] [-h|--help]",
+    "python3 configure.py [all|gnome|ptyxis|tmux|nvim|dircolors] "
+    "[--dry-run] [--uninstall] [--set-default] [-h|--help]",
     "--dry-run",
     "| `0` |", "| `2` |", "| `3` |", "| `4` |",
     "XDG_DATA_HOME",

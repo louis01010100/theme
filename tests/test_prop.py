@@ -19,7 +19,8 @@ AQUA_CHANGE = {0x728381: 0x123456, 0x454C4C: 0x152536}
 COLOUR_ATTRIBUTES = ("fg", "bg", "sp")
 UUID = "5a1c0e9b-7d3f-4b6a-8e2d-4f0a9c6b1e37"
 PROFILE = f"{harness.PROFILE_SCHEMA}:{harness.PROFILE_ROOT}:{UUID}/"
-RENDERED = ["lua/ukiyo_e/palette.lua", "tmux/colors.conf"]
+RENDERED = ["lua/ukiyo_e/palette.lua", "tmux/colors.conf",
+            "ukiyo_e.dircolors"]
 
 
 def setUpModule():
@@ -103,7 +104,8 @@ class PropagationTest(unittest.TestCase):
         lines = self.result.stdout.splitlines()
         self.assertEqual([ln for ln in lines if not ln.startswith(" ")],
                          ["gnome: updated", "ptyxis: updated",
-                          "tmux: updated", "nvim: updated"])
+                          "tmux: updated", "nvim: updated",
+                          "dircolors: updated"])
         at = lines.index("ptyxis: updated")
         self.assertEqual(lines[at + 1:at + 3], [
             "  write palette Ukiyo-e.palette", "tmux: updated"])

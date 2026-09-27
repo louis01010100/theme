@@ -12,16 +12,16 @@ from pathlib import Path
 from types import MappingProxyType
 from typing import Mapping
 
-from configurator import (files, gnome, install_dir, nvim, palette,
-                          ptyxis, tmux)
+from configurator import (dircolors, files, gnome, install_dir, nvim,
+                          palette, ptyxis, tmux)
 from configurator.files import CurrentState, Interrupted, Layout
 from configurator.palette import InputError
 from configurator.report import Status, TargetResult, emit, err, warn
 from configurator.terminal_ansi import validate_ansi, validate_roles
 
 REPO = Path(__file__).resolve().parent.parent
-USAGE = ("usage: configure.py [all|gnome|ptyxis|tmux|nvim] [--dry-run] "
-         "[--uninstall] [--set-default] [-h|--help]")
+USAGE = ("usage: configure.py [all|gnome|ptyxis|tmux|nvim|dircolors] "
+         "[--dry-run] [--uninstall] [--set-default] [-h|--help]")
 EXIT_OK, EXIT_USAGE, EXIT_INPUT, EXIT_APPLY = 0, 2, 3, 4
 FLAGS = ("--dry-run", "--uninstall", "--set-default")
 NOT_RUN = "earlier target failed"
@@ -32,9 +32,11 @@ class Target(Enum):
     PTYXIS = "ptyxis"
     TMUX = "tmux"
     NVIM = "nvim"
+    DIRCOLORS = "dircolors"
 
 
-ORDER = (Target.GNOME, Target.PTYXIS, Target.TMUX, Target.NVIM)
+ORDER = (Target.GNOME, Target.PTYXIS, Target.TMUX, Target.NVIM,
+         Target.DIRCOLORS)
 TERMINALS = (Target.GNOME, Target.PTYXIS)
 NAMES = ("all",) + tuple(t.value for t in ORDER)
 
@@ -192,6 +194,7 @@ def validation_errors(raw, templates) -> list:
             + validate_roles(names) + ptyxis.validate_keys()
             + tmux.validate_roles(names)
             + tmux.validate_templates(templates)
+            + dircolors.validate_roles(names)
             + nvim.validate_sources(REPO))
 
 
@@ -202,6 +205,8 @@ def render(opts: RunOptions, colours, templates) -> Inputs:
         trees["tmux"] = tmux.file_set(REPO, colours, templates)
     if "nvim" in opts.file_targets:
         trees["nvim"] = nvim.file_set(REPO, colours)
+    if "dircolors" in opts.file_targets:
+        trees["dircolors"] = dircolors.file_set(colours)
     keys, wanted = (), None
     if Target.GNOME in opts.targets:
         keys = gnome.desired_keys(colours)
