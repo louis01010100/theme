@@ -214,10 +214,7 @@ class ShadePropagationTest(unittest.TestCase):
 
     def test_tmux(self):
         after = self.server.snapshot()
-        self.assertEqual(support.changed_options(self.tmux, after),
-                         {"mode-style"})
-        self.assertEqual(self.server.value("mode-style"),
-                         "fg=#b2b4b2,bg=#152536")
+        self.assertEqual(support.changed_options(self.tmux, after), set())
 
     def test_fresh_neovim(self):
         new = fresh_dump(self.env.install)
@@ -264,7 +261,7 @@ class StatusBarPropagationTest(unittest.TestCase):
         changed = support.changed_options(self.tmux,
                                           self.server.snapshot())
         self.assertEqual(changed & set(tmux.STYLE_OPTIONS),
-                         {"status-style"})
+                         {"status-style", "mode-style"})
         self.assertEqual(self.server.value("status-style"),
                          "fg=#b2b4b2,bg=#123456")
 

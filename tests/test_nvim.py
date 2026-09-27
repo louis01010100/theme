@@ -22,7 +22,8 @@ THEME_LAYER = {
         "bg_m2": "base00", "bg_m1": "base00", "bg": "base00",
         "bg_p1": "base01", "bg_p2": "base02", "special": "base04",
         "whitespace": "base03", "nontext": "base03",
-        "bg_visual": "darkBlue", "bg_search": "darkAqua",
+        "fg_visual": "base06", "bg_visual": "base01",
+        "bg_search": "darkAqua",
         "pmenu": {
             "fg": "base07", "fg_sel": "none", "bg": "darkBlue",
             "bg_sel": "darkAqua", "bg_thumb": "darkAqua",

@@ -111,10 +111,9 @@ its accent (`base08` … `base0F`) blended with 50 % `base00` (per
 channel, rounded half to even). They are never stored in
 `palette.toml`; mappings use them by name like a slot. Uses: diff
 backgrounds (`darkGreen` added, `darkRed` removed, `darkBlue`
-changed, `darkYellow` changed text); `darkBlue` for the visual
-selection, the completion menu, and Neovim's reverse text;
-`darkAqua` for search, the completion-menu selection, and the tmux
-copy-mode selection; `darkRed` for the
+changed, `darkYellow` changed text); `darkBlue` for the completion
+menu and Neovim's reverse text; `darkAqua` for search and the
+completion-menu selection; `darkRed` for the
 current window of the tmux status bar. `darkOrange`, `darkViolet`,
 and `darkPink` are not used yet.
 

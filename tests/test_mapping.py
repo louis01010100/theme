@@ -39,7 +39,7 @@ NOT_A_NAME = "is not a [palette] name or derived shade"
 ANSI_MODULE = "configurator/terminal_ansi.py"
 PTYXIS_MODULE = "configurator/ptyxis.py"
 SPEC_PTYXIS = {"Background": "background", "Foreground": "foreground",
-               "Cursor": "cursor_bg"}
+               "Cursor": "cursor_bg", "CursorForeground": "cursor_fg"}
 
 
 def texts(errors):

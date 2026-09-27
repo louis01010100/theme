@@ -38,7 +38,8 @@ local function ui(palette, shades)
         special = palette.base04,
         whitespace = palette.base03,
         nontext = palette.base03,
-        bg_visual = shades.darkBlue,
+        fg_visual = palette.base06,
+        bg_visual = palette.base01,
         bg_search = shades.darkAqua,
     }
     for key, value in pairs(pmenu_float(palette, shades)) do

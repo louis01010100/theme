@@ -122,7 +122,7 @@ local function part_3(theme)
         TabLineSel = { fg = ui.fg_dim, bg = ui.bg_p1 },
         Title = { fg = theme.syn.fun, bold = true },
         -- Visual		Visual mode selection.
-        Visual = { bg = ui.bg_visual },
+        Visual = { fg = ui.fg_visual, bg = ui.bg_visual },
         VisualNOS = { link = "Visual" },
     }
 end

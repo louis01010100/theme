@@ -2030,7 +2030,8 @@
       "link": "WinSeparator"
     },
     "Visual": {
-      "bg": "#444c52"
+      "bg": "#2e2d2c",
+      "fg": "#9c9d9c"
     },
     "VisualNOS": {
       "link": "Visual"
@@ -4134,7 +4135,8 @@
       "link": "WinSeparator"
     },
     "Visual": {
-      "bg": "#444c52"
+      "bg": "#2e2d2c",
+      "fg": "#9c9d9c"
     },
     "VisualNOS": {
       "link": "Visual"

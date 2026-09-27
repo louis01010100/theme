@@ -29,7 +29,8 @@ def expected_palette(root=support.REPO):
     lines = [HEADER, "[Palette]", "Name=Ukiyo-e",
              f"Background={roles['background']}",
              f"Foreground={roles['foreground']}",
-             f"Cursor={roles['cursor_bg']}"]
+             f"Cursor={roles['cursor_bg']}",
+             f"CursorForeground={roles['cursor_fg']}"]
     lines += [f"Color{i}={c}"
               for i, c in enumerate(support.resolved_ansi(root))]
     return ("\n".join(lines) + "\n").encode()
@@ -102,8 +103,8 @@ class RenderTest(unittest.TestCase):
         self.assertEqual(parser.sections(), ["Palette"])
         keys = list(parser["Palette"])
         self.assertEqual(keys, ["Name", "Background", "Foreground",
-                                "Cursor"] + [f"Color{i}"
-                                             for i in range(16)])
+                                "Cursor", "CursorForeground"]
+                         + [f"Color{i}" for i in range(16)])
         self.assertEqual(parser["Palette"]["Name"], "Ukiyo-e")
 
     def test_one_colour_changes_two_lines(self):

@@ -28,7 +28,7 @@ GOLDEN_COLORS = (
     "set -g message-style 'fg=#b2b4b2,bg=#181616'\n"
     "set -g message-command-style 'fg=#b2b4b2,bg=#18161"
     "6'\n"
-    "set -g mode-style 'fg=#b2b4b2,bg=#454c4c'\n"
+    "set -g mode-style 'fg=#9c9d9c,bg=#2e2d2c'\n"
     "set -g clock-mode-colour '#6f838d'\n"
     "set -g display-panes-colour '#5a5a59'\n"
     "set -g display-panes-active-colour '#907564'\n"
