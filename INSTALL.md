@@ -26,13 +26,18 @@ to apply a colour change.
 
 ## Getting the source
 
-On another machine, clone the repository and run the configurator:
+On a production machine, clone the repository into
+`~/.local/src/theme` and run the configurator from there:
 
 ```sh
-git clone https://github.com/louis01010100/theme.git
-cd theme
+mkdir -p ~/.local/src
+git clone https://github.com/louis01010100/theme.git ~/.local/src/theme
+cd ~/.local/src/theme
 python3 configure.py
 ```
+
+To update later, run `git -C ~/.local/src/theme pull`, then
+`python3 configure.py` again.
 
 ## Workflow
 
