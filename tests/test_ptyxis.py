@@ -464,7 +464,8 @@ class SingleSchemaTest(unittest.TestCase):
         self.assertEqual([ln for ln in step.lines[7:]
                           if not ln.startswith(" ")],
                          ["tmux: updated", "nvim: updated",
-                          "dircolors: updated"])
+                          "dircolors: updated",
+            "bash: updated"])
         self.assertEqual(step.terminal, "")
         before = self.snapshots(env)
         refused = run_step(env, "gnome")
@@ -476,7 +477,8 @@ class SingleSchemaTest(unittest.TestCase):
         self.assertEqual([ln for ln in step.lines[2:]
                           if not ln.startswith(" ")],
                          ["ptyxis: removed", "tmux: removed",
-                          "nvim: removed", "dircolors: removed"])
+                          "nvim: removed", "dircolors: removed",
+            "bash: removed"])
         self.assertEqual(step.lines[:2], skipped)
 
     def assert_set_default(self, env, skipped):
@@ -486,7 +488,8 @@ class SingleSchemaTest(unittest.TestCase):
         self.assertEqual(step.code, 0, step.stderr)
         self.assertEqual(step.lines, skipped + [
             "ptyxis: updated", f"  default {UUID}", "tmux: unchanged",
-            "nvim: unchanged", "dircolors: unchanged"])
+            "nvim: unchanged", "dircolors: unchanged",
+            "bash: unchanged"])
         before["org/gnome/Ptyxis"]["default-profile-uuid"] = f"'{UUID}'"
         self.assertEqual(support.parse_dump(harness.dump(env.vars, "/")),
                          before)
@@ -499,7 +502,8 @@ class SingleSchemaTest(unittest.TestCase):
         self.assertEqual([ln for ln in step.lines
                           if not ln.startswith(" ")], [
             "gnome: updated", "ptyxis: skipped (not installed)",
-            "tmux: updated", "nvim: updated", "dircolors: updated"])
+            "tmux: updated", "nvim: updated", "dircolors: updated",
+            "bash: updated"])
         at = step.lines.index("ptyxis: skipped (not installed)")
         self.assertEqual(step.lines[at + 1], f"  {NO_PTYXIS}")
         self.assertIsNone(step.files)

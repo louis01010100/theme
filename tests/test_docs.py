@@ -14,7 +14,7 @@ README_ITEMS = (
     LAZY_LINE,
     TMUX_LINE,
     "python3 configure.py",
-    "python3 configure.py [all|gnome|ptyxis|tmux|nvim|dircolors] "
+    "python3 configure.py [all|gnome|ptyxis|tmux|nvim|dircolors|bash] "
     "[--dry-run] [--uninstall] [--set-default] [-h|--help]",
     "--dry-run",
     "| `0` |", "| `2` |", "| `3` |", "| `4` |",

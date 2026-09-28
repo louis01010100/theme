@@ -91,11 +91,13 @@ class BeforeSwitchTest(FailTestCase):
         again = support.configure_ok(self.env, "all", root=root)
         self.assertEqual(status_lines(again), [
             "gnome: unchanged", "ptyxis: unchanged", "tmux: updated",
-            "nvim: updated", "dircolors: updated"])
+            "nvim: updated", "dircolors: updated",
+            "bash: unchanged"])
         last = support.configure_ok(self.env, "all", root=root)
         self.assertEqual(status_lines(last), [
             "gnome: unchanged", "ptyxis: unchanged", "tmux: unchanged",
-            "nvim: unchanged", "dircolors: unchanged"])
+            "nvim: unchanged", "dircolors: unchanged",
+            "bash: unchanged"])
 
 
 class LeftoverTest(FailTestCase):
@@ -118,7 +120,8 @@ class LeftoverTest(FailTestCase):
         dry = support.configure_ok(self.env, "all", "--dry-run")
         self.assertEqual(status_lines(dry), [
             "gnome: unchanged", "ptyxis: unchanged", "tmux: unchanged",
-            "nvim: unchanged", "dircolors: unchanged"])
+            "nvim: unchanged", "dircolors: unchanged",
+            "bash: unchanged"])
         self.assertEqual(support.tree_snapshot(self.env.root), before)
         real = support.configure_ok(self.env, "all")
         self.assertEqual(status_lines(real), status_lines(dry))
@@ -136,7 +139,8 @@ class LeftoverTest(FailTestCase):
             "ptyxis: unchanged (not installed)",
             "tmux: unchanged (not installed)",
             "nvim: unchanged (not installed)",
-            "dircolors: unchanged (not installed)"])
+            "dircolors: unchanged (not installed)",
+            "bash: unchanged (not installed)"])
         self.assertFalse(os.path.lexists(self.env.versions))
 
 
@@ -196,7 +200,8 @@ class PtyxisFailTest(FailTestCase):
         self.assertEqual(lines[2:], [
             "tmux: not run (earlier target failed)",
             "nvim: not run (earlier target failed)",
-            "dircolors: not run (earlier target failed)"])
+            "dircolors: not run (earlier target failed)",
+            "bash: not run (earlier target failed)"])
         self.assertEqual(self.ptx_state(), before)
         self.assertEqual(list(folder.glob(".Ukiyo-e.palette.new-*")), [])
 

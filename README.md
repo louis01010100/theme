@@ -1,8 +1,8 @@
 # Ukiyo-e
 
-One palette for GNOME Terminal, Ptyxis, tmux, Neovim, and `ls`
-(`dircolors`). This document defines the theme: the palette, the derived
-shades, and how each tool uses them. To install or apply it, see
+One palette for GNOME Terminal, Ptyxis, tmux, Neovim, `ls`
+(`dircolors`), and the bash prompt. This document defines the theme: the
+palette, the dark shades, and how each tool uses them. To install or apply it, see
 [INSTALL.md](INSTALL.md).
 
 `palette.toml` is the only hand-edited colour file. The palette is 16
@@ -25,6 +25,7 @@ configurator/         # validation, role mappings, install, per-tool apply
   tmux.py             #   TMUX_ROLES, template rendering, server reload
   nvim.py             #   rendered Neovim palette module
   dircolors.py        #   DIRCOLORS_ROLES, rendered ls colour database
+  bash.py             #   BASH_ROLES, rendered bash prompt
   install_dir.py      #   $XDG_DATA_HOME/ukiyo_e resolution
   files.py            #   version build, atomic symlink switch, cleanup
   report.py           #   per-target report lines
@@ -128,7 +129,9 @@ values: `ANSI` and `TERMINAL_ROLES` in `configurator/terminal_ansi.py`
 and selection colours shared by GNOME Terminal and Ptyxis),
 `PTYXIS_KEYS` in `configurator/ptyxis.py`, `TMUX_ROLES` in
 `configurator/tmux.py`, `DIRCOLORS_ROLES` in
-`configurator/dircolors.py`, and the theme layer in
+`configurator/dircolors.py`, `BASH_ROLES` in `configurator/bash.py`
+(the prompt: name, host, `@`, `:`, and `$` `base03`, path
+`base04`), and the theme layer in
 `nvim/lua/ukiyo_e/theme.lua`. `vim.g.terminal_color_0` … `15` come
 from the same 16-colour mapping as the terminal palette.
 

@@ -6,8 +6,8 @@ How to install, apply, and remove the Ukiyo-e theme. The theme itself
 
 `configure.py` validates `palette.toml`, then applies the theme to this
 machine: it installs the Neovim colorscheme (`ukiyo_e`), the tmux theme,
-and the `ls` colour database (`ukiyo_e.dircolors`) into a local install
-directory, updates the "Ukiyo-e" GNOME Terminal profile, writes the
+the `ls` colour database (`ukiyo_e.dircolors`), and the bash prompt
+(`ukiyo_e.bash`) into a local install directory, updates the "Ukiyo-e" GNOME Terminal profile, writes the
 "Ukiyo-e" Ptyxis palette and updates the "Ukiyo-e" Ptyxis profile, and
 reloads the theme on your running tmux server. `all` configures
 whichever of the two terminals is installed and skips the other. The
@@ -46,7 +46,7 @@ To update later, run `git -C ~/.local/src/theme pull`, then
    edit the role mappings in `configurator/` (`ANSI` in
    `terminal_ansi.py`, `TERMINAL_ROLES` in `terminal_ansi.py`,
    `PTYXIS_KEYS` in `ptyxis.py`, `TMUX_ROLES` in `tmux.py`,
-   `DIRCOLORS_ROLES` in `dircolors.py`), the Lua under `nvim/`, or the templates under `tmux/`.
+   `DIRCOLORS_ROLES` in `dircolors.py`, `BASH_ROLES` in `bash.py`), the Lua under `nvim/`, or the templates under `tmux/`.
 2. Run `python3 configure.py` (Python 3.11 or later, standard library
    only; no root).
 3. Check the report: one line per target (`updated`, `unchanged`, ...)
@@ -59,17 +59,18 @@ nothing is touched.
 ## Command line
 
 ```text
-python3 configure.py [all|gnome|ptyxis|tmux|nvim|dircolors] [--dry-run] [--uninstall] [--set-default] [-h|--help]
+python3 configure.py [all|gnome|ptyxis|tmux|nvim|dircolors|bash] [--dry-run] [--uninstall] [--set-default] [-h|--help]
 ```
 
 | Target | Effect |
 |---|---|
-| `all` (default) | `gnome`, then `ptyxis`, then `tmux`, then `nvim`, then `dircolors` |
+| `all` (default) | `gnome`, then `ptyxis`, then `tmux`, then `nvim`, then `dircolors`, then `bash` |
 | `gnome` | the "Ukiyo-e" GNOME Terminal profile |
 | `ptyxis` | the "Ukiyo-e" Ptyxis palette file and profile |
 | `tmux` | the tmux theme files, then a reload of the running server |
 | `nvim` | the Neovim colorscheme files |
 | `dircolors` | the `ls` colour database |
+| `bash` | the bash prompt |
 
 | Flag | Effect |
 |---|---|
@@ -128,6 +129,17 @@ In `~/.bashrc` (in place of any other `dircolors` line):
 eval "$(dircolors -b ~/.local/share/ukiyo_e/ukiyo_e.dircolors)"
 ```
 
+### bash prompt
+
+In `~/.bashrc`, after any other `PS1` line:
+
+```sh
+source ~/.local/share/ukiyo_e/ukiyo_e.bash
+```
+
+It sets `PS1` to `user@host:path$` in theme colours, with the terminal
+window title set to `user@host: path`.
+
 ### GNOME Terminal
 
 Nothing to add. Select the "Ukiyo-e" profile, or run
@@ -151,6 +163,8 @@ Nothing to add. Select the "Ukiyo-e" profile, or run
   skipped and reported.
 - dircolors: new shells use the new colours; an open shell keeps
   its `LS_COLORS` until it re-runs the `eval` line.
+- bash prompt: new shells use the new colours; an open shell keeps
+  its prompt until it re-runs the `source` line.
 - Neovim: running instances keep their colours until the next
   `:colorscheme ukiyo_e` (or a restart), which loads the new version.
 
@@ -264,7 +278,8 @@ python3 configure.py all --uninstall
 This removes the GNOME profile (making the first remaining profile the
 default if it was the default), the Ptyxis profile and its palette file
 (likewise for `default-profile-uuid`; the palettes directory stays),
-the install directory (including the `dircolors` database), and resets the
+the install directory (including the `dircolors` database and the bash
+prompt), and resets the
 theme's tmux options on the running server to tmux defaults. Then remove
 the one-time lines above by hand.
 

@@ -12,15 +12,15 @@ from pathlib import Path
 from types import MappingProxyType
 from typing import Mapping
 
-from configurator import (dircolors, files, gnome, install_dir, nvim,
-                          palette, ptyxis, tmux)
+from configurator import (bash, dircolors, files, gnome, install_dir,
+                          nvim, palette, ptyxis, tmux)
 from configurator.files import CurrentState, Interrupted, Layout
 from configurator.palette import InputError
 from configurator.report import Status, TargetResult, emit, err, warn
 from configurator.terminal_ansi import validate_ansi, validate_roles
 
 REPO = Path(__file__).resolve().parent.parent
-USAGE = ("usage: configure.py [all|gnome|ptyxis|tmux|nvim|dircolors] "
+USAGE = ("usage: configure.py [all|gnome|ptyxis|tmux|nvim|dircolors|bash] "
          "[--dry-run] [--uninstall] [--set-default] [-h|--help]")
 EXIT_OK, EXIT_USAGE, EXIT_INPUT, EXIT_APPLY = 0, 2, 3, 4
 FLAGS = ("--dry-run", "--uninstall", "--set-default")
@@ -33,10 +33,11 @@ class Target(Enum):
     TMUX = "tmux"
     NVIM = "nvim"
     DIRCOLORS = "dircolors"
+    BASH = "bash"
 
 
 ORDER = (Target.GNOME, Target.PTYXIS, Target.TMUX, Target.NVIM,
-         Target.DIRCOLORS)
+         Target.DIRCOLORS, Target.BASH)
 TERMINALS = (Target.GNOME, Target.PTYXIS)
 NAMES = ("all",) + tuple(t.value for t in ORDER)
 
@@ -195,6 +196,7 @@ def validation_errors(raw, templates) -> list:
             + tmux.validate_roles(names)
             + tmux.validate_templates(templates)
             + dircolors.validate_roles(names)
+            + bash.validate_roles(names)
             + nvim.validate_sources(REPO))
 
 
@@ -207,6 +209,8 @@ def render(opts: RunOptions, colours, templates) -> Inputs:
         trees["nvim"] = nvim.file_set(REPO, colours)
     if "dircolors" in opts.file_targets:
         trees["dircolors"] = dircolors.file_set(colours)
+    if "bash" in opts.file_targets:
+        trees["bash"] = bash.file_set(colours)
     keys, wanted = (), None
     if Target.GNOME in opts.targets:
         keys = gnome.desired_keys(colours)

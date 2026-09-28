@@ -225,7 +225,8 @@ class RollbackTest(unittest.TestCase):
             "ptyxis: not run (earlier target failed)",
             "tmux: not run (earlier target failed)",
             "nvim: not run (earlier target failed)",
-            "dircolors: not run (earlier target failed)"])
+            "dircolors: not run (earlier target failed)",
+            "bash: not run (earlier target failed)"])
         self.assertEqual(step.dump, before)
         self.assertFalse(os.path.lexists(self.session.install))
 

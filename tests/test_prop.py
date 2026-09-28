@@ -105,7 +105,7 @@ class PropagationTest(unittest.TestCase):
         self.assertEqual([ln for ln in lines if not ln.startswith(" ")],
                          ["gnome: updated", "ptyxis: updated",
                           "tmux: updated", "nvim: updated",
-                          "dircolors: updated"])
+                          "dircolors: updated", "bash: unchanged"])
         at = lines.index("ptyxis: updated")
         self.assertEqual(lines[at + 1:at + 3], [
             "  write palette Ukiyo-e.palette", "tmux: updated"])
