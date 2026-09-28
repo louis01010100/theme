@@ -209,8 +209,7 @@ class PaletteRejectTest(FullTestCase):
         (f'{name} = "#000000"\n', None,
          f"palette.toml: [palette].{name}: reserved name ({why})")
         for name, why in (
-            ("darkRed", "derived shade darkRed"),
-            ("darkred", "derived shade darkRed"),
+            ("darkred", "shade darkRed"),
             ("base0a", "slot base0A"),
             ("fujiRed", "accent name fujiRed"),
             ("lavaBlack", "neutral name lavaBlack")))

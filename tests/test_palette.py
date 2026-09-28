@@ -6,19 +6,19 @@ import support
 from configurator import palette as pal
 
 V1 = ("#181616", "#2e2d2c", "#444343", "#5a5a59", "#70706f",
-      "#868785", "#9c9d9c", "#b2b4b2", "#9c5e59", "#907564",
-      "#a0906c", "#6e7965", "#728381", "#6f838d", "#6f7584",
-      "#827582")
-GOOD = dict(zip(pal.SLOTS, V1))
+      "#868785", "#9c9d9c", "#b2b4b2", "#a67e7a", "#a1826a",
+      "#938966", "#799174", "#659390", "#6d8ea5", "#8884a6",
+      "#9f7d93")
 SLOTS = ("base00", "base01", "base02", "base03", "base04", "base05",
          "base06", "base07", "base08", "base09", "base0A", "base0B",
          "base0C", "base0D", "base0E", "base0F")
 SHADES = {
-    "darkRed": "#5a3a38", "darkOrange": "#54463d",
-    "darkYellow": "#5c5341", "darkGreen": "#43483e",
-    "darkAqua": "#454c4c", "darkBlue": "#444c52",
-    "darkViolet": "#44464d", "darkPink": "#4d464c",
+    "darkRed": "#684642", "darkOrange": "#644a34",
+    "darkYellow": "#585030", "darkGreen": "#42563d",
+    "darkAqua": "#2c5855", "darkBlue": "#385367",
+    "darkViolet": "#504b68", "darkPink": "#624658",
 }
+GOOD = dict(zip(pal.SLOTS, V1), **SHADES)
 
 
 def messages(raw):
@@ -111,9 +111,8 @@ class PaletteRulesTest(unittest.TestCase):
 
     def test_reserved_names(self):
         cases = (
-            ("darkRed", "derived shade darkRed"),
-            ("darkred", "derived shade darkRed"),
-            ("DARKRED", "derived shade darkRed"),
+            ("darkred", "shade darkRed"),
+            ("DARKRED", "shade darkRed"),
             ("base0a", "slot base0A"),
             ("fujiRed", "accent name fujiRed"),
             ("fujired", "accent name fujiRed"),
@@ -155,27 +154,30 @@ class PaletteRulesTest(unittest.TestCase):
         colours = pal.make_palette(with_entry("base08", "#ABCDEF"))
         self.assertEqual(colours.colors["base08"], "#abcdef")
         self.assertEqual(pal.resolve(colours, "base08"), "#abcdef")
-        self.assertEqual(colours.shades["darkRed"], "#627282")
+        shaded = pal.make_palette(with_entry("darkRed", "#ABCDEF"))
+        self.assertEqual(shaded.shades["darkRed"], "#abcdef")
+        self.assertNotIn("darkRed", shaded.colors)
 
     def test_resolve_shade(self):
         colours = pal.make_palette({"palette": dict(GOOD)})
-        self.assertEqual(pal.resolve(colours, "darkAqua"), "#454c4c")
+        self.assertEqual(pal.resolve(colours, "darkAqua"), "#2c5855")
 
 
-class DeriveShadesTest(unittest.TestCase):
+class StoredShadesTest(unittest.TestCase):
     def test_v1(self):
-        shades = pal.derive_shades(GOOD)
+        shades = pal.make_palette({"palette": GOOD}).shades
         self.assertEqual(list(shades.items()), list(SHADES.items()))
 
-    def test_ties_round_to_even(self):
-        colours = dict(GOOD, base00="#181616",
-                       base08="#8b7b95", base09="#010101")
-        self.assertEqual(pal.derive_shades(colours)["darkRed"],
-                         "#524856")
+    def test_independent_of_accents(self):
+        colours = pal.make_palette(with_entry("base08", "#010101"))
+        self.assertEqual(colours.shades["darkRed"], SHADES["darkRed"])
 
-    def test_case_insensitive(self):
-        upper = {k: v.upper() for k, v in GOOD.items()}
-        self.assertEqual(dict(pal.derive_shades(upper)), SHADES)
+    def test_missing_shade(self):
+        table = dict(GOOD)
+        del table["darkAqua"]
+        self.assertEqual(
+            messages({"palette": table}),
+            ["palette.toml: [palette].darkAqua: missing required shade"])
 
     def test_toml_syntax_error(self):
         folder = support.scratch_dir()

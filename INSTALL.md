@@ -164,7 +164,7 @@ Nothing to add. Select the "Ukiyo-e" profile, or run
 | `overrides` | `nil` | `function(colors) -> table` returning highlight group → spec. `colors` is `{ palette = …, shades = …, theme = … }`. A returned spec is merged over the built-in one (a non-empty spec drops a built-in `link`). |
 
 `require("ukiyo_e").palette()` returns a copy of the `[palette]`
-entries (name → `#rrggbb`, without the derived shades); `vim.g.terminal_color_0` … `15` come from the same
+entries (name → `#rrggbb`, without the dark shades); `vim.g.terminal_color_0` … `15` come from the same
 16-colour mapping as the GNOME Terminal palette.
 
 ## tmux

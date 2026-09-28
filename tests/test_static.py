@@ -31,22 +31,31 @@ SLOT_DATA = (
     ("base06", "cloudGray", "#9c9d9c", "dragonGray", ""),
     ("base07", "snowWhite", "#b2b4b2", "dragonWhite",
      "oldWhite, fujiWhite"),
-    ("base08", "fujiRed", "#9c5e59", "dragonRed",
+    ("base08", "fujiRed", "#a67e7a", "dragonRed",
      "samuraiRed, autumnRed, waveRed, winterRed"),
-    ("base09", "persimmonOrange", "#907564", "dragonOrange",
+    ("base09", "persimmonOrange", "#a1826a", "dragonOrange",
      "dragonOrange2, roninYellow"),
-    ("base0A", "strawYellow", "#a0906c", "dragonYellow",
+    ("base0A", "strawYellow", "#938966", "dragonYellow",
      "carpYellow, autumnYellow, winterYellow"),
-    ("base0B", "pineGreen", "#6e7965", "dragonGreen2",
+    ("base0B", "pineGreen", "#799174", "dragonGreen2",
      "dragonGreen, autumnGreen, springGreen, winterGreen"),
-    ("base0C", "lakeAqua", "#728381", "dragonAqua",
+    ("base0C", "lakeAqua", "#659390", "dragonAqua",
      "waveAqua1, waveAqua2"),
-    ("base0D", "ridgeBlue", "#6f838d", "dragonBlue2",
+    ("base0D", "ridgeBlue", "#6d8ea5", "dragonBlue2",
      "dragonBlue, springBlue, waveBlue1, waveBlue2, winterBlue"),
-    ("base0E", "twilightViolet", "#6f7584", "dragonViolet",
+    ("base0E", "twilightViolet", "#8884a6", "dragonViolet",
      "dragonTeal, springViolet1"),
-    ("base0F", "blossomPink", "#827582", "dragonPink", ""),
+    ("base0F", "blossomPink", "#9f7d93", "dragonPink", ""),
 )
+ACCENT_HUES = {"base08": 25, "base09": 60, "base0A": 95, "base0B": 140,
+               "base0C": 190, "base0D": 240, "base0E": 290, "base0F": 340}
+# Data Model Shades: stored, the C 0.085 accent hue blended with base00.
+SHADE_DATA = {
+    "darkRed": "#684642", "darkOrange": "#644a34",
+    "darkYellow": "#585030", "darkGreen": "#42563d",
+    "darkAqua": "#2c5855", "darkBlue": "#385367",
+    "darkViolet": "#504b68", "darkPink": "#624658",
+}
 FORMER_SHADE = re.compile(r"^base0[89A-F]_dark$")
 PRIVATE_USE = re.compile("[\ue000-\uf8ff\U000f0000-\U0010fffd]")
 LAYOUT_ROLES = {"status_text_fg", "status_segment_bg", "status_block_bg",
@@ -114,7 +123,8 @@ def assigned(tree):
 def slot_line(slot, name, value, origin, merged):
     """The REQ-PAL-6 line of one slot."""
     if slot >= "base08":
-        darker = " 20 % darker, 36 % less saturated"
+        darker = (", re-toned to OKLCH L 0.63, C 0.051,"
+                  f" h {ACCENT_HUES[slot]}°")
     elif slot == "base07":
         darker = " 10 % darker, saturation -2 points"
     elif slot > "base00":
@@ -213,19 +223,20 @@ class PaletteTomlTest(unittest.TestCase):
     def test_slots_and_values(self):
         raw = palette.read_toml(support.REPO / "palette.toml")
         expected = {slot: value for slot, _n, value, _o, _m in SLOT_DATA}
-        self.assertEqual(raw["palette"], expected)
         self.assertEqual(tuple(expected), palette.SLOTS)
+        expected.update(SHADE_DATA)
+        self.assertEqual(raw["palette"], expected)
 
     def test_slot_comments(self):
         lines = [line for line in text("palette.toml").splitlines()
                  if line.startswith("base")]
         self.assertEqual(lines, [slot_line(*row) for row in SLOT_DATA])
 
-    def test_header_says_shades_not_stored(self):
+    def test_header_says_shades_stored(self):
         header = [line for line in text("palette.toml").splitlines()
                   if line.startswith("[palette]")]
         self.assertEqual(len(header), 1)
-        self.assertIn("derived shades are not stored here", header[0])
+        self.assertIn("the dark shades are stored here too", header[0])
 
 
 class SafetyTest(unittest.TestCase):

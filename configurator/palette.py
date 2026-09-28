@@ -26,19 +26,9 @@ TOML_TYPES = {
 }
 
 
-@dataclass(frozen=True)
-class Shade:
-    """A derived dark shade: its name and the accent slot it blends."""
-
-    name: str
-    accent: str
-
-
-SHADE_TABLE = tuple(Shade(name, slot) for name, slot in zip(
-    ("darkRed", "darkOrange", "darkYellow", "darkGreen",
-     "darkAqua", "darkBlue", "darkViolet", "darkPink"),
-    SLOTS[8:]))
-SHADES = tuple(shade.name for shade in SHADE_TABLE)
+# REQ-SHADE-1: the eight dark shades, required [palette] entries.
+SHADES = ("darkRed", "darkOrange", "darkYellow", "darkGreen",
+          "darkAqua", "darkBlue", "darkViolet", "darkPink")
 
 
 @dataclass(frozen=True)
@@ -51,7 +41,7 @@ class ReservedName:
 
 def reserved_table() -> dict:
     """Lowercased name -> ReservedName (REQ-PAL-4)."""
-    groups = (("slot", SLOTS), ("derived shade", SHADES),
+    groups = (("slot", SLOTS), ("shade", SHADES),
               ("neutral name", NEUTRAL_NAMES),
               ("accent name", ACCENT_NAMES))
     return {name.lower(): ReservedName(name, kind)
@@ -78,7 +68,7 @@ class ValidationError:
 
 @dataclass(frozen=True)
 class Palette:
-    """[palette] names and derived shades -> lowercase `#rrggbb`."""
+    """[palette] names and the dark shades -> lowercase `#rrggbb`."""
 
     colors: Mapping[str, str]
     shades: Mapping[str, str]
@@ -149,7 +139,7 @@ def entry_reason(name: str, value) -> str | None:
 def reserved_reason(name: str) -> str | None:
     """REQ-PAL-4: why an entry name is reserved, or None."""
     reserved = RESERVED.get(name.lower())
-    if name in SLOTS or reserved is None:
+    if name in SLOTS or name in SHADES or reserved is None:
         return None
     return f"reserved name ({reserved.kind} {reserved.canonical})"
 
@@ -165,6 +155,10 @@ def validate_entries(table: dict) -> list:
         if name not in table:
             errors.append(ValidationError(pal_addr(name),
                                           "missing required slot"))
+    for name in SHADES:
+        if name not in table:
+            errors.append(ValidationError(pal_addr(name),
+                                          "missing required shade"))
     return errors
 
 
@@ -187,30 +181,16 @@ def colour_names(raw: dict) -> frozenset:
     return palette_names(raw) | frozenset(SHADES)
 
 
-def blend(accent: str, base: str) -> str:
-    """REQ-SHADE-2: channel-wise mean, ties to even, `#rrggbb`."""
-    a, b = int(accent[1:], 16), int(base[1:], 16)
-    channels = (round((((a >> s) & 255) + ((b >> s) & 255)) / 2)
-                for s in (16, 8, 0))
-    return "#" + "".join(f"{c:02x}" for c in channels)
-
-
-def derive_shades(colors: Mapping[str, str]) -> Mapping[str, str]:
-    """The 8 shades: each accent slot blended with base00."""
-    base = colors["base00"].lower()
-    return MappingProxyType({
-        shade.name: blend(colors[shade.accent].lower(), base)
-        for shade in SHADE_TABLE})
-
-
 def make_palette(raw: dict) -> Palette:
-    """The validated [palette] table (lowercase) and its shades."""
-    colors = {k: v.lower() for k, v in raw[TABLE].items()}
-    return Palette(MappingProxyType(colors), derive_shades(colors))
+    """The validated [palette] table (lowercase), shades split out."""
+    table = {k: v.lower() for k, v in raw[TABLE].items()}
+    colors = {k: v for k, v in table.items() if k not in SHADES}
+    shades = {name: table[name] for name in SHADES}
+    return Palette(MappingProxyType(colors), MappingProxyType(shades))
 
 
 def resolve(palette: Palette, name: str) -> str:
-    """REQ-SHADE-3: a [palette] entry or a derived shade."""
+    """REQ-SHADE-3: a [palette] entry or a dark shade."""
     if name in palette.colors:
         return palette.colors[name]
     return palette.shades[name]

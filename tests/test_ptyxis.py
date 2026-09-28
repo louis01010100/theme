@@ -117,8 +117,8 @@ class RenderTest(unittest.TestCase):
         new = new.split(b"\n")
         differ = [(a, b) for a, b in zip(old, new) if a != b]
         self.assertEqual(len(old), len(new))
-        self.assertEqual(differ, [(b"Color4=#6f838d", b"Color4=#123456"),
-                                  (b"Color12=#6f838d",
+        self.assertEqual(differ, [(b"Color4=#6d8ea5", b"Color4=#123456"),
+                                  (b"Color12=#6d8ea5",
                                    b"Color12=#123456")])
 
 

@@ -209,7 +209,7 @@ class LoadTest(InstalledTestCase):
         postlude = (
             'local p = vim.api.nvim_get_runtime_file('
             '"lua/ukiyo_e/palette.lua", false)[1] '
-            'local t = io.open(p):read("a"):gsub("#6f838d", "#123456") '
+            'local t = io.open(p):read("a"):gsub("#6d8ea5", "#123456") '
             'os.remove(p) local f = io.open(p, "w") f:write(t) f:close() '
             'vim.cmd.colorscheme("ukiyo_e")')
         env = install_nvim(self)
@@ -221,7 +221,7 @@ class LoadTest(InstalledTestCase):
         fgs = {s.get("fg") for s in dump["groups"].values()
                if isinstance(s, dict)}
         self.assertIn(0x123456, fgs)
-        self.assertNotIn(0x6f838d, fgs)
+        self.assertNotIn(0x6d8ea5, fgs)
 
 
 class SetupContractTest(InstalledTestCase):
@@ -257,14 +257,14 @@ class SetupContractTest(InstalledTestCase):
                 '{ fg = colors.palette.base08 } } end }')
         spec = self.ukiyo(opts)["groups"]["NormalNC"]
         self.assertNotIn("link", spec)
-        self.assertEqual(spec["fg"], 0x9C5E59)
+        self.assertEqual(spec["fg"], 0xa67e7a)
 
     def test_overrides_receive_shades(self):
         opts = ('{ overrides = function(colors) return { NormalNC = '
                 '{ fg = colors.shades.darkBlue, '
                 'bg = colors.theme.ui.bg_p2 } } end }')
         spec = self.ukiyo(opts)["groups"]["NormalNC"]
-        self.assertEqual((spec["fg"], spec["bg"]), (0x444C52, 0x444343))
+        self.assertEqual((spec["fg"], spec["bg"]), (0x385367, 0x444343))
 
     def test_override_nil_is_noop(self):
         opts = "{ overrides = function() return nil end }"

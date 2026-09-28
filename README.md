@@ -17,7 +17,7 @@ README.md             # the theme definition (this file)
 INSTALL.md            # installation, command line, one-time configuration
 configurator/         # validation, role mappings, install, per-tool apply
   cli.py              #   argument parsing, run order, exit codes
-  palette.py          #   palette.toml validation, derived shades
+  palette.py          #   palette.toml validation, slots and shades
   terminal_ansi.py    #   ANSI (16 colours), TERMINAL_ROLES (shared)
   settings.py         #   gsettings access shared by gnome and ptyxis
   gnome.py            #   "Ukiyo-e" GNOME Terminal profile via gsettings
@@ -50,9 +50,12 @@ from dark to light (`base00` the background, `base07` normal text):
 same value), and `base01`–`base06`
 are spaced linearly between `base00` and `base07` (per RGB channel,
 step 1/7, rounded half to even);
-`base08`–`base0F` are the eight accents, each 20 % darker (HSL
-lightness × 0.8) and 36 % less saturated (HSL saturation × 0.8,
-applied twice) than its Kanagawa origin.
+`base08`–`base0F` are the eight accents, adopted 2026-09-28: all
+share one OKLCH lightness (L 0.63) and chroma (C 0.051), so they read
+as one family, and only the hue differs, spread around the wheel
+(25°, 60°, 95°, 140°, 190°, 240°, 290°, 340°) so they are easy to tell
+apart. Each keeps the role of its Kanagawa origin. The chroma is
+40 % below the first OKLCH set (C 0.085), for a more muted look.
 
 | Slot | Name | Role | Value | Kanagawa origin |
 |---|---|---|---|---|
@@ -64,14 +67,14 @@ applied twice) than its Kanagawa origin.
 | `base05` | hazeGray | neutral | `#868785` | dragonGray2, linear 5/7 |
 | `base06` | cloudGray | neutral | `#9c9d9c` | dragonGray, linear 6/7 |
 | `base07` | snowWhite | normal text (lightest neutral) | `#b2b4b2` | dragonWhite, 10 % darker, saturation −2 points |
-| `base08` | fujiRed | red | `#9c5e59` | dragonRed, 20 % darker, 36 % less saturated |
-| `base09` | persimmonOrange | orange | `#907564` | dragonOrange, 20 % darker, 36 % less saturated |
-| `base0A` | strawYellow | yellow | `#a0906c` | dragonYellow, 20 % darker, 36 % less saturated |
-| `base0B` | pineGreen | green | `#6e7965` | dragonGreen2, 20 % darker, 36 % less saturated |
-| `base0C` | lakeAqua | cyan | `#728381` | dragonAqua, 20 % darker, 36 % less saturated |
-| `base0D` | ridgeBlue | blue | `#6f838d` | dragonBlue2, 20 % darker, 36 % less saturated |
-| `base0E` | twilightViolet | violet | `#6f7584` | dragonViolet, 20 % darker, 36 % less saturated |
-| `base0F` | blossomPink | pink | `#827582` | dragonPink, 20 % darker, 36 % less saturated |
+| `base08` | fujiRed | red | `#a67e7a` | dragonRed, re-toned (OKLCH L 0.63, C 0.051) |
+| `base09` | persimmonOrange | orange | `#a1826a` | dragonOrange, re-toned (OKLCH L 0.63, C 0.051) |
+| `base0A` | strawYellow | yellow | `#938966` | dragonYellow, re-toned (OKLCH L 0.63, C 0.051) |
+| `base0B` | pineGreen | green | `#799174` | dragonGreen2, re-toned (OKLCH L 0.63, C 0.051) |
+| `base0C` | lakeAqua | cyan | `#659390` | dragonAqua, re-toned (OKLCH L 0.63, C 0.051) |
+| `base0D` | ridgeBlue | blue | `#6d8ea5` | dragonBlue2, re-toned (OKLCH L 0.63, C 0.051) |
+| `base0E` | twilightViolet | violet | `#8884a6` | dragonViolet, re-toned (OKLCH L 0.63, C 0.051) |
+| `base0F` | blossomPink | pink | `#9f7d93` | dragonPink, re-toned (OKLCH L 0.63, C 0.051) |
 
 Each slot line carries a comment with its name, its Kanagawa origin,
 and the removed Kanagawa colours merged into it. The names
@@ -83,15 +86,18 @@ Extra names are allowed (for example a colour added later for tmux).
 By convention they follow the Mount Fuji naming style: a landscape
 image plus a plain English colour word, in camelCase. Some names are
 reserved and rejected in any letter case: a slot name in another case
-(e.g. `base0a`), the eight `dark*` shade names, and the neutral and
+(e.g. `base0a`), a `dark*` shade name in another case (e.g.
+`darkred`), and the neutral and
 accent names above.
 
-**Derived shades.** Eight dark shades are computed from the slots on
-every run: `darkRed`, `darkOrange`, `darkYellow`, `darkGreen`,
-`darkAqua`, `darkBlue`, `darkViolet`, `darkPink`, each 50 % of
-its accent (`base08` … `base0F`) blended with 50 % `base00` (per
-channel, rounded half to even). They are never stored in
-`palette.toml`; mappings use them by name like a slot. Uses: diff
+**Dark shades.** Eight dark shades are required entries of
+`palette.toml`, next to the 16 slots: `darkRed`, `darkOrange`,
+`darkYellow`, `darkGreen`, `darkAqua`, `darkBlue`, `darkViolet`,
+`darkPink`. They are stored, not computed, so they no longer follow
+the accents: each is its accent's hue at the first OKLCH chroma
+(C 0.085), blended 50 % with `base00`, kept when the accents were
+muted to C 0.051 on 2026-09-28. Mappings use them by name like a
+slot. Uses: diff
 backgrounds (`darkGreen` added, `darkRed` removed, `darkBlue`
 changed, `darkYellow` changed text); `darkBlue` for the completion
 menu and Neovim's reverse text; `darkAqua` for search and the
@@ -101,13 +107,11 @@ sticky and other-writable directories and `darkRed` behind setuid
 files. `darkOrange`, `darkViolet`,
 and `darkPink` are not used yet.
 
-**Contrast (accepted 2026-09-26).** Normal text `base07` on the shades
-is 3.6:1 to 4.8:1, below 4.5:1 on the yellow, aqua, blue, orange,
-and pink shades (lowest 3.6:1 on `darkYellow`); on `base00` it is
-8.6:1. As code text on `base00`, the darkened red, violet,
-pink, green, and orange accents are below 4.5:1 (lowest about 3.6:1,
-red). Both are accepted in favour of the darker look and readable
-dark shades; no check enforces a contrast ratio.
+**Contrast (2026-09-28).** Every accent is 5.0:1 to 5.3:1 on
+`base00`. Normal text `base07` on the shades is 3.8:1 to 4.0:1, below
+4.5:1 on all of them; on `base00` it is 8.6:1. The shade contrast is
+accepted in favour of dark, readable shades; no check enforces a
+contrast ratio.
 
 **Neovim reference snapshot.** `tests/reference/nvim-highlights.json`
 records the highlight groups the colorscheme sets for the committed

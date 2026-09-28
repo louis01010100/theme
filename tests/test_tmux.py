@@ -55,7 +55,7 @@ set -g status-left "#[fg=#868785,bg=#444343] #S #[fg=#444343,bg=#2e2d2c]|"
 set -g status-right "#[fg=#444343,bg=#2e2d2c]|#[fg=#868785,bg=#2e2d2c] \
 %Y-%m-%d #[fg=#868785,bg=#2e2d2c]%H:%M "
 set -g window-status-format "#[fg=#868785,bg=#2e2d2c] #I.#W "
-set -g window-status-current-format "#[fg=#9c9d9c,bg=#5a3a38] #I.#W "
+set -g window-status-current-format "#[fg=#9c9d9c,bg=#684642] #I.#W "
 set -g window-status-separator "#[fg=#444343,bg=#2e2d2c]|"
 """
 STATUS_RENDERED = tmux.HEADER + "\n" + GOLDEN_STATUS

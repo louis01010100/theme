@@ -10,12 +10,12 @@ from test_cli import blue_copy
 from nvim_baseline import NeovimRun, nvim_dump
 from configurator import tmux
 
-OLD_BLUE = 0x6f838d
+OLD_BLUE = 0x6d8ea5
 NEW_BLUE = 0x123456
-# base0D -> #123456 moves its shade darkBlue #444c52 -> #152536.
-BLUE_CHANGE = {OLD_BLUE: NEW_BLUE, 0x444C52: 0x152536}
-# base0C -> #123456 moves its shade darkAqua #454c4c -> #152536.
-AQUA_CHANGE = {0x728381: 0x123456, 0x454C4C: 0x152536}
+# base0D -> #123456; the stored shade darkBlue stays #385367.
+BLUE_CHANGE = {OLD_BLUE: NEW_BLUE}
+# base0C -> #123456 and its stored shade darkAqua #2c5855 -> #152536.
+AQUA_CHANGE = {0x659390: 0x123456, 0x2C5855: 0x152536}
 COLOUR_ATTRIBUTES = ("fg", "bg", "sp")
 UUID = "5a1c0e9b-7d3f-4b6a-8e2d-4f0a9c6b1e37"
 PROFILE = f"{harness.PROFILE_SCHEMA}:{harness.PROFILE_ROOT}:{UUID}/"
@@ -114,8 +114,8 @@ class PropagationTest(unittest.TestCase):
         """V-5: only Color4/Color12 change; no Ptyxis key is written."""
         self.assertEqual(
             changed_lines(self.old_palette, self.palette_file.read_bytes()),
-            [(b"Color4=#6f838d", b"Color4=#123456"),
-             (b"Color12=#6f838d", b"Color12=#123456")])
+            [(b"Color4=#6d8ea5", b"Color4=#123456"),
+             (b"Color12=#6d8ea5", b"Color12=#123456")])
         self.assertEqual(harness.dump_ptyxis(self.env.vars),
                          self.ptyxis_dump)
 
@@ -164,11 +164,13 @@ class PropagationTest(unittest.TestCase):
 
 
 def aqua_copy(owner):
-    """A scratch repository copy with base0C changed to #123456."""
+    """A scratch repository copy with base0C and darkAqua changed."""
     root = support.copy_repo()
     support.later(owner, support.remove_tree, root)
     support.replace_line(root / "palette.toml", "base0C ",
                          'base0C = "#123456"')
+    support.replace_line(root / "palette.toml", "darkAqua ",
+                         'darkAqua = "#152536"')
     return root
 
 
@@ -185,7 +187,7 @@ def dconf_changes(before: str, after: str) -> dict:
 
 
 class ShadePropagationTest(unittest.TestCase):
-    """V-5 (b): a slot change reaches its derived shade everywhere."""
+    """V-5 (b): a slot and a stored shade change reach everywhere."""
 
     @classmethod
     def setUpClass(cls):
@@ -211,8 +213,8 @@ class ShadePropagationTest(unittest.TestCase):
     def test_ptyxis_file(self):
         self.assertEqual(
             changed_lines(self.old_palette, self.palette_file.read_bytes()),
-            [(b"Color6=#728381", b"Color6=#123456"),
-             (b"Color14=#728381", b"Color14=#123456")])
+            [(b"Color6=#659390", b"Color6=#123456"),
+             (b"Color14=#659390", b"Color14=#123456")])
 
     def test_tmux(self):
         after = self.server.snapshot()

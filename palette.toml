@@ -2,7 +2,7 @@
 # After editing, run: python3 configure.py
 # [palette]: name = "#RRGGBB" (hex only).
 
-[palette]                          # name -> "#RRGGBB" only; derived shades are not stored here
+[palette]                          # name -> "#RRGGBB" only; the dark shades are stored here too
 base00 = "#181616"  # lavaBlack: dragonBlack3; merged: dragonBlack0, dragonBlack1, dragonBlack2
 base01 = "#2e2d2c"  # cinderBlack: dragonBlack4, linear 1/7 from base00 to base07
 base02 = "#444343"  # basaltGray: dragonBlack5, linear 2/7 from base00 to base07
@@ -11,11 +11,21 @@ base04 = "#70706f"  # mistGray: dragonGray3, linear 4/7 from base00 to base07; m
 base05 = "#868785"  # hazeGray: dragonGray2, linear 5/7 from base00 to base07
 base06 = "#9c9d9c"  # cloudGray: dragonGray, linear 6/7 from base00 to base07
 base07 = "#b2b4b2"  # snowWhite: dragonWhite 10 % darker, saturation -2 points; merged: oldWhite, fujiWhite
-base08 = "#9c5e59"  # fujiRed: dragonRed 20 % darker, 36 % less saturated; merged: samuraiRed, autumnRed, waveRed, winterRed
-base09 = "#907564"  # persimmonOrange: dragonOrange 20 % darker, 36 % less saturated; merged: dragonOrange2, roninYellow
-base0A = "#a0906c"  # strawYellow: dragonYellow 20 % darker, 36 % less saturated; merged: carpYellow, autumnYellow, winterYellow
-base0B = "#6e7965"  # pineGreen: dragonGreen2 20 % darker, 36 % less saturated; merged: dragonGreen, autumnGreen, springGreen, winterGreen
-base0C = "#728381"  # lakeAqua: dragonAqua 20 % darker, 36 % less saturated; merged: waveAqua1, waveAqua2
-base0D = "#6f838d"  # ridgeBlue: dragonBlue2 20 % darker, 36 % less saturated; merged: dragonBlue, springBlue, waveBlue1, waveBlue2, winterBlue
-base0E = "#6f7584"  # twilightViolet: dragonViolet 20 % darker, 36 % less saturated; merged: dragonTeal, springViolet1
-base0F = "#827582"  # blossomPink: dragonPink 20 % darker, 36 % less saturated
+base08 = "#a67e7a"  # fujiRed: dragonRed, re-toned to OKLCH L 0.63, C 0.051, h 25°; merged: samuraiRed, autumnRed, waveRed, winterRed
+base09 = "#a1826a"  # persimmonOrange: dragonOrange, re-toned to OKLCH L 0.63, C 0.051, h 60°; merged: dragonOrange2, roninYellow
+base0A = "#938966"  # strawYellow: dragonYellow, re-toned to OKLCH L 0.63, C 0.051, h 95°; merged: carpYellow, autumnYellow, winterYellow
+base0B = "#799174"  # pineGreen: dragonGreen2, re-toned to OKLCH L 0.63, C 0.051, h 140°; merged: dragonGreen, autumnGreen, springGreen, winterGreen
+base0C = "#659390"  # lakeAqua: dragonAqua, re-toned to OKLCH L 0.63, C 0.051, h 190°; merged: waveAqua1, waveAqua2
+base0D = "#6d8ea5"  # ridgeBlue: dragonBlue2, re-toned to OKLCH L 0.63, C 0.051, h 240°; merged: dragonBlue, springBlue, waveBlue1, waveBlue2, winterBlue
+base0E = "#8884a6"  # twilightViolet: dragonViolet, re-toned to OKLCH L 0.63, C 0.051, h 290°; merged: dragonTeal, springViolet1
+base0F = "#9f7d93"  # blossomPink: dragonPink, re-toned to OKLCH L 0.63, C 0.051, h 340°
+
+# Dark shades: the base08-base0F hue at OKLCH C 0.085, blended 50 % with base00.
+darkRed = "#684642"
+darkOrange = "#644a34"
+darkYellow = "#585030"
+darkGreen = "#42563d"
+darkAqua = "#2c5855"
+darkBlue = "#385367"
+darkViolet = "#504b68"
+darkPink = "#624658"
