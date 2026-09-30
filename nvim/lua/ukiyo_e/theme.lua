@@ -28,7 +28,7 @@ local function ui(palette, shades)
         fg_dim = palette.base07,
         fg_reverse = shades.darkBlue,
         bg_dim = palette.base00,
-        bg_gutter = palette.base01,
+        bg_gutter = "none",
         bg_m3 = palette.base00,
         bg_m2 = palette.base00,
         bg_m1 = palette.base00,

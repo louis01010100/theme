@@ -18,7 +18,7 @@ MISMATCH = ("tests/reference/nvim-highlights.json: generated from a "
 THEME_LAYER = {
     "ui": {
         "fg": "base07", "fg_dim": "base07", "fg_reverse": "darkBlue",
-        "bg_dim": "base00", "bg_gutter": "base01", "bg_m3": "base00",
+        "bg_dim": "base00", "bg_gutter": "none", "bg_m3": "base00",
         "bg_m2": "base00", "bg_m1": "base00", "bg": "base00",
         "bg_p1": "base01", "bg_p2": "base02", "special": "base04",
         "whitespace": "base03", "nontext": "base03",

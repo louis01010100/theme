@@ -647,7 +647,6 @@
       "bg": "#444343"
     },
     "CursorLineNr": {
-      "bg": "#2e2d2c",
       "bold": true,
       "cterm": {
         "bold": true
@@ -786,19 +785,15 @@
       "fg": "#799174"
     },
     "DiagnosticSignError": {
-      "bg": "#2e2d2c",
       "fg": "#a67e7a"
     },
     "DiagnosticSignHint": {
-      "bg": "#2e2d2c",
       "fg": "#659390"
     },
     "DiagnosticSignInfo": {
-      "bg": "#2e2d2c",
       "fg": "#6d8ea5"
     },
     "DiagnosticSignWarn": {
-      "bg": "#2e2d2c",
       "fg": "#a1826a"
     },
     "DiagnosticUnderlineError": {
@@ -896,7 +891,6 @@
       "fg": "#5a5a59"
     },
     "FoldColumn": {
-      "bg": "#2e2d2c",
       "fg": "#5a5a59"
     },
     "Folded": {
@@ -907,15 +901,12 @@
       "fg": "#6d8ea5"
     },
     "GitSignsAdd": {
-      "bg": "#2e2d2c",
       "fg": "#799174"
     },
     "GitSignsChange": {
-      "bg": "#2e2d2c",
       "fg": "#938966"
     },
     "GitSignsDelete": {
-      "bg": "#2e2d2c",
       "fg": "#a67e7a"
     },
     "IblIndent": {
@@ -973,7 +964,6 @@
       "fg": "#5a5a59"
     },
     "LineNr": {
-      "bg": "#2e2d2c",
       "fg": "#5a5a59"
     },
     "LspCodeLens": {
@@ -1095,15 +1085,12 @@
       "link": "DiffDelete"
     },
     "MiniDiffSignAdd": {
-      "bg": "#2e2d2c",
       "fg": "#799174"
     },
     "MiniDiffSignChange": {
-      "bg": "#2e2d2c",
       "fg": "#938966"
     },
     "MiniDiffSignDelete": {
-      "bg": "#2e2d2c",
       "fg": "#a67e7a"
     },
     "MiniFilesBorder": {
@@ -1890,7 +1877,6 @@
       "fg": "#b2b4b2"
     },
     "SignColumn": {
-      "bg": "#2e2d2c",
       "fg": "#70706f"
     },
     "Special": {
@@ -2007,7 +1993,6 @@
       "link": "Folded"
     },
     "TreesitterContextLineNumber": {
-      "bg": "#2e2d2c",
       "fg": "#70706f"
     },
     "TroubleIndent": {
@@ -2055,7 +2040,6 @@
       "fg": "#181616"
     },
     "debugBreakpoint": {
-      "bg": "#2e2d2c",
       "fg": "#8884a6"
     },
     "debugPC": {
@@ -2753,7 +2737,6 @@
       "bg": "#444343"
     },
     "CursorLineNr": {
-      "bg": "#2e2d2c",
       "bold": true,
       "cterm": {
         "bold": true
@@ -2892,19 +2875,15 @@
       "fg": "#799174"
     },
     "DiagnosticSignError": {
-      "bg": "#2e2d2c",
       "fg": "#a67e7a"
     },
     "DiagnosticSignHint": {
-      "bg": "#2e2d2c",
       "fg": "#659390"
     },
     "DiagnosticSignInfo": {
-      "bg": "#2e2d2c",
       "fg": "#6d8ea5"
     },
     "DiagnosticSignWarn": {
-      "bg": "#2e2d2c",
       "fg": "#a1826a"
     },
     "DiagnosticUnderlineError": {
@@ -3002,7 +2981,6 @@
       "fg": "#5a5a59"
     },
     "FoldColumn": {
-      "bg": "#2e2d2c",
       "fg": "#5a5a59"
     },
     "Folded": {
@@ -3013,15 +2991,12 @@
       "fg": "#6d8ea5"
     },
     "GitSignsAdd": {
-      "bg": "#2e2d2c",
       "fg": "#799174"
     },
     "GitSignsChange": {
-      "bg": "#2e2d2c",
       "fg": "#938966"
     },
     "GitSignsDelete": {
-      "bg": "#2e2d2c",
       "fg": "#a67e7a"
     },
     "IblIndent": {
@@ -3079,7 +3054,6 @@
       "fg": "#5a5a59"
     },
     "LineNr": {
-      "bg": "#2e2d2c",
       "fg": "#5a5a59"
     },
     "LspCodeLens": {
@@ -3201,15 +3175,12 @@
       "link": "DiffDelete"
     },
     "MiniDiffSignAdd": {
-      "bg": "#2e2d2c",
       "fg": "#799174"
     },
     "MiniDiffSignChange": {
-      "bg": "#2e2d2c",
       "fg": "#938966"
     },
     "MiniDiffSignDelete": {
-      "bg": "#2e2d2c",
       "fg": "#a67e7a"
     },
     "MiniFilesBorder": {
@@ -3995,7 +3966,6 @@
       "fg": "#b2b4b2"
     },
     "SignColumn": {
-      "bg": "#2e2d2c",
       "fg": "#70706f"
     },
     "Special": {
@@ -4112,7 +4082,6 @@
       "link": "Folded"
     },
     "TreesitterContextLineNumber": {
-      "bg": "#2e2d2c",
       "fg": "#70706f"
     },
     "TroubleIndent": {
@@ -4160,7 +4129,6 @@
       "fg": "#181616"
     },
     "debugBreakpoint": {
-      "bg": "#2e2d2c",
       "fg": "#8884a6"
     },
     "debugPC": {
